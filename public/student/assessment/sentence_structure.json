@@ -1,0 +1,98 @@
+[
+  {
+    "wrongSentence": "Si Nanay kumain ng mansanas.",
+    "wrongWord": "Si Nanay",
+    "options": [
+      "Kumain si Nanay ng mansanas.",
+      "Si Nanay ay kumain ng mansanas.",
+      "Kinain ni Nanay ang mansanas.",
+      "Kumain ang mansanas si Nanay."
+    ],
+    "correctOption": "Kumain si Nanay ng mansanas.",
+    "explanation": "Tamang ayos sa Filipino ay VSO: Kumain (V) + si Nanay (S) + ng mansanas (O)."
+  },
+  {
+    "wrongSentence": "Ang bata naglalaro sa parke.",
+    "wrongWord": "Ang bata",
+    "options": [
+      "Naglalaro ang bata sa parke.",
+      "Ang bata ay naglalaro sa parke.",
+      "Naglaro bata sa parke ang.",
+      "Sa parke naglalaro ang parke."
+    ],
+    "correctOption": "Naglalaro ang bata sa parke.",
+    "explanation": "Dapat mauna ang pandiwa: Naglalaro (V) + ang bata (S) + sa parke (O)."
+  },
+  {
+    "wrongSentence": "Gulay bumili si Nanay.",
+    "wrongWord": "Gulay",
+    "options": [
+      "Bumili si Nanay ng gulay.",
+      "Si Nanay bumili gulay ng.",
+      "Bumili ng si Nanay gulay.",
+      "Gulay bumili ng si Nanay."
+    ],
+    "correctOption": "Bumili si Nanay ng gulay.",
+    "explanation": "Tamang ayos: Verb (Bumili) + Subject (si Nanay) + Object (ng gulay)."
+  },
+  {
+    "wrongSentence": "Pinggan naghugas si Juan.",
+    "wrongWord": "Pinggan",
+    "options": [
+      "Naghugas si Juan ng pinggan.",
+      "Si Juan naghugas pinggan.",
+      "Pinggan si Juan naghugas ng.",
+      "Si Juan ay pinggan naghugas."
+    ],
+    "correctOption": "Naghugas si Juan ng pinggan.",
+    "explanation": "Dapat mauna ang pandiwa: Naghugas si Juan ng pinggan."
+  },
+  {
+    "wrongSentence": "Si Maria sumayaw sa salo-salo.",
+    "wrongWord": "Si Maria",
+    "options": [
+      "Sumayaw si Maria sa salo-salo.",
+      "Sumayaw sa salo-salo Maria si.",
+      "Si Maria ay sumayaw sa salo-salo.",
+      "Sumayaw ay si Maria sa salo-salo."
+    ],
+    "correctOption": "Sumayaw si Maria sa salo-salo.",
+    "explanation": "Tamang VSO: Sumayaw (V) + si Maria (S) + sa salo-salo (O)."
+  },
+  {
+    "wrongSentence": "Ang guro magtuturo bukas ng aralin.",
+    "wrongWord": "Ang guro",
+    "options": [
+      "Magtuturo ang guro ng aralin bukas.",
+      "Ang guro ay magtuturo bukas ng aralin.",
+      "Ang magtuturo guro bukas ng aralin.",
+      "Magtuturo bukas guro ang aralin."
+    ],
+    "correctOption": "Magtuturo ang guro ng aralin bukas.",
+    "explanation": "Verb (Magtuturo) + Subject (ang guro) + Object (ng aralin) + Time (bukas)."
+  },
+  {
+    "wrongSentence": "Si Lito binasa ang libro.",
+    "wrongWord": "Si Lito",
+    "options": [
+      "Binasa ni Lito ang libro.",
+      "Si Lito ay binasa ang libro.",
+      "Ang libro binasa ni Lito.",
+      "Binasa ang libro ni Lito."
+    ],
+    "correctOption": "Binasa ni Lito ang libro.",
+    "explanation": "Tamang object-focus VSO: Binasa (V) + ni Lito (S) + ang libro (O)."
+  },
+  {
+    "wrongSentence": "Ang bata tumakbo sa eskwelahan.",
+    "wrongWord": "Ang bata",
+    "options": [
+      "Tumakbo ang bata sa eskwelahan.",
+      "Ang bata ay tumakbo sa eskwelahan.",
+      "Tumakbo sa eskwelahan ang bata.",
+      "Sa eskwelahan tumakbo ang bata."
+    ],
+    "correctOption": "Tumakbo ang bata sa eskwelahan.",
+    "explanation": "Tamang ayos VSO: Tumakbo (V) + ang bata (S) + sa eskwelahan (O)."
+  }
+]

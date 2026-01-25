@@ -1,0 +1,249 @@
+[
+  {
+    "id": 1,
+    "wrongSentence": "Ako ay nagbigay siya ng regalo.",
+    "wrongWord": "siya",
+    "options": [
+      "Ako ay nagbigay sa kanya ng regalo.",
+      "Ako ay nagbigay siya ng regalo.",
+      "Nagbigay ako siya ng regalo.",
+      "Siya ay nagbigay ako ng regalo."
+    ],
+    "correctOption": "Ako ay nagbigay sa kanya ng regalo.",
+    "explanation": "Tamang gamit ng pronoun: dapat 'kanya' para sa layon, hindi 'siya'."
+  },
+  {
+    "id": 2,
+    "wrongSentence": "nagluto ako ng pagkain.",
+    "wrongWord": "Siya",
+    "options": [
+      "Ako ay nagluto ng pagkain.",
+      "niluto ako ng pagkain.",
+      "Ako nagluto siya ng pagkain.",
+      "Nagluto siya ako ng pagkain."
+    ],
+    "correctOption": "Ako ay nagluto ng pagkain.",
+    "explanation": "'Ako' ang tamang simuno; 'siya' ay mali sa konteksto."
+  },
+  {
+    "id": 3,
+    "wrongSentence": "Ipinadala niya sa kanya akin ang liham.",
+    "wrongWord": "ako",
+    "options": [
+      "Ipinadala niya sa kanya ang liham.",
+      "Ako ipinadala niya sa kanya ang liham.",
+      "Ipinadala sa kanya niya ako ang liham.",
+      "Ipinadala niya ako sa kanya ang liham."
+    ],
+    "correctOption": "Ipinadala niya sa kanya ang liham.",
+    "explanation": "'Ako' ay hindi tamang panghalip sa layon; dapat 'ang liham'."
+  },
+  {
+    "id": 4,
+    "wrongSentence": "Binigyan ko siya ang libro ko.",
+    "wrongWord": "siya",
+    "options": [
+      "Binigyan ko siya ng libro ko.",
+      "Binigyan ko siya ang libro ko.",
+      "Binigyan ko ang libro ko siya.",
+      "Binigyan ko libro ko siya."
+    ],
+    "correctOption": "Binigyan ko siya ng libro ko.",
+    "explanation": "Dapat gumamit ng 'ng' sa layon: 'ng libro ko'."
+  },
+  {
+    "id": 5,
+    "wrongSentence": "Siya ay tinulungan ko aking kaibigan.",
+    "wrongWord": "Siya",
+    "options": [
+      "Tinulungan ko siya ng aking kaibigan.",
+      "Siya ay tinulungan ko ng aking kaibigan.",
+      "Tinulungan siya ang aking kaibigan.",
+      "Ako ay tinulungan niya ng kaibigan."
+    ],
+    "correctOption": "Tinulungan ko ang aking kaibigan.",
+    "explanation": "Simuno ay 'ako', layon ay 'siya'; sundin ang tamang aktibong ayos."
+  },
+  {
+    "id": 6,
+    "wrongSentence": "Ipinakita ko niya sa akin ang larawan.",
+    "wrongWord": "niya",
+    "options": [
+      "Ipinakita niya sa akin ang larawan.",
+      "Ipinakita ko niya sa akin ang larawan.",
+      "Niya ipinakita ko sa akin ang larawan.",
+      "Ipinakita sa akin niya ko ang larawan."
+    ],
+    "correctOption": "Ipinakita niya sa akin ang larawan.",
+    "explanation": "'Ni' o 'niya' ay tamang panghalip para sa simuno."
+  },
+  {
+    "id": 7,
+    "wrongSentence": "Ako ay tinanong niya sa tanong.",
+    "wrongWord": "Ako",
+    "options": [
+      "Tinanong niya ako sa tanong.",
+      "Ako ay tinanong niya sa tanong.",
+      "Siya ay tinanong ako sa tanong.",
+      "Tinanong ako niya sa tanong."
+    ],
+    "correctOption": "Tinanong niya ako sa tanong.",
+    "explanation": "Dapat ang simuno ay 'siya' at layon ay 'ako'."
+  },
+  {
+    "id": 8,
+    "wrongSentence": "Siya ay binigyan ko ng pera.",
+    "wrongWord": "Siya",
+    "options": [
+      "Binigyan ko siya ng pera.",
+      "Siya ay binigyan ko ng pera.",
+      "Binigyan siya ng pera ko.",
+      "Ako ay binigyan siya ng pera."
+    ],
+    "correctOption": "Binigyan ko siya ng pera.",
+    "explanation": "Ang simuno ay 'ako', layon ay 'siya'."
+  },
+  {
+    "id": 9,
+    "wrongSentence": "Ipinadala ko niya ang liham.",
+    "wrongWord": "niya",
+    "options": [
+      "Ipinadala niya ang liham.",
+      "Ipinadala ko niya ang liham.",
+      "Niya ipinadala ko ang liham.",
+      "Ipinadala ang liham niya ko."
+    ],
+    "correctOption": "Ipinadala niya ang liham.",
+    "explanation": "Simuno ay 'niya', hindi 'ko'."
+  },
+  {
+    "id": 10,
+    "wrongSentence": "Ako ay inutusan siya ng guro.",
+    "wrongWord": "siya",
+    "options": [
+      "Inutusan siya ng guro.",
+      "Ako ay inutusan siya ng guro.",
+      "Siya ay inutusan ako ng guro.",
+      "Inutusan ko siya ng guro."
+    ],
+    "correctOption": "Inutusan siya ng guro.",
+    "explanation": "Layunin ng guro: simuno ay guro (implicit), layon ay 'siya'."
+  },
+  {
+    "id": 11,
+    "wrongSentence": "Siya ay tinawag ko sa telepono.",
+    "wrongWord": "Siya",
+    "options": [
+      "Tinawag ko siya sa telepono.",
+      "Siya ay tinawag ko sa telepono.",
+      "Tinawag siya ko sa telepono.",
+      "Tinawag ko sa telepono siya."
+    ],
+    "correctOption": "Tinawag ko siya sa telepono.",
+    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+  },
+  {
+    "id": 12,
+    "wrongSentence": "Ako ay ipinakita niya ang aklat.",
+    "wrongWord": "Ako",
+    "options": [
+      "Ipinakita niya sa akin ang aklat.",
+      "Ako ay ipinakita niya ang aklat.",
+      "Niya ipinakita ako ang aklat.",
+      "Ipinakita ko siya ang aklat."
+    ],
+    "correctOption": "Ipinakita niya sa akin ang aklat.",
+    "explanation": "'Ako' bilang layon, simuno ay 'niya'."
+  },
+  {
+    "id": 13,
+    "wrongSentence": "Siya ay pinuntahan ko sa bahay.",
+    "wrongWord": "Siya",
+    "options": [
+      "Pinuntahan ko siya sa bahay.",
+      "Siya ay pinuntahan ko sa bahay.",
+      "Pinuntahan siya ko sa bahay.",
+      "Ako ay pinuntahan siya sa bahay."
+    ],
+    "correctOption": "Pinuntahan ko siya sa bahay.",
+    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+  },
+  {
+    "id": 14,
+    "wrongSentence": "Ako ay tinulungan niya sa proyekto.",
+    "wrongWord": "Ako",
+    "options": [
+      "Tinulungan niya ako sa proyekto.",
+      "Ako ay tinulungan niya sa proyekto.",
+      "Niya tinulungan ako sa proyekto.",
+      "Tinulungan ko siya sa proyekto."
+    ],
+    "correctOption": "Tinulungan niya ako sa proyekto.",
+    "explanation": "Simuno ay 'niya', layon ay 'ako'."
+  },
+  {
+    "id": 15,
+    "wrongSentence": "Siya ay ipinakita ko ang larawan.",
+    "wrongWord": "Siya",
+    "options": [
+      "Ipinakita ko siya ang larawan.",
+      "Siya ay ipinakita ko ang larawan.",
+      "Ipinakita siya ko ang larawan.",
+      "Ipinakita ko sa kanya ang larawan."
+    ],
+    "correctOption": "Ipinakita ko siya ang larawan.",
+    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+  },
+  {
+    "id": 16,
+    "wrongSentence": "Ako ay tinanong niya tungkol sa proyekto.",
+    "wrongWord": "Ako",
+    "options": [
+      "Tinanong niya ako tungkol sa proyekto.",
+      "Ako ay tinanong niya tungkol sa proyekto.",
+      "Niya tinanong ako tungkol sa proyekto.",
+      "Tinanong ko siya tungkol sa proyekto."
+    ],
+    "correctOption": "Tinanong niya ako tungkol sa proyekto.",
+    "explanation": "Simuno ay 'niya', layon ay 'ako'."
+  },
+  {
+    "id": 17,
+    "wrongSentence": "Siya ay pinadala ko sa opisina.",
+    "wrongWord": "Siya",
+    "options": [
+      "Pinadala ko siya sa opisina.",
+      "Siya ay pinadala ko sa opisina.",
+      "Pinadala siya ko sa opisina.",
+      "Ako ay pinadala siya sa opisina."
+    ],
+    "correctOption": "Pinadala ko siya sa opisina.",
+    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+  },
+  {
+    "id": 18,
+    "wrongSentence": "Ako ay binigyan niya ng regalo.",
+    "wrongWord": "Ako",
+    "options": [
+      "Binigyan niya ako ng regalo.",
+      "Ako ay binigyan niya ng regalo.",
+      "Niya binigyan ako ng regalo.",
+      "Binigyan ko siya ng regalo."
+    ],
+    "correctOption": "Binigyan niya ako ng regalo.",
+    "explanation": "Simuno ay 'niya', layon ay 'ako'."
+  },
+  {
+    "id": 19,
+    "wrongSentence": "Siya ay tinuruan ko ng bagong salita.",
+    "wrongWord": "Siya",
+    "options": [
+      "Tinuruan ko siya ng bagong salita.",
+      "Siya ay tinuruan ko ng bagong salita.",
+      "Tinuruan siya ko ng bagong salita.",
+      "Ako ay tinuruan siya ng bagong salita."
+    ],
+    "correctOption": "Tinuruan ko siya ng bagong salita.",
+    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+  }
+]

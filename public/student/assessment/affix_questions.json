@@ -1,0 +1,583 @@
+[
+  {
+    "wrongSentence": "Naglalakad si Liza sa parke kahapon.",
+    "wrongWord": "Naglakad",
+    "options": ["Naglakad", "Naglalakad", "Maglalakad"],
+    "correctOption": "Naglakad",
+    "explanation": "The correct word is 'Naglakad' because the action already happened in the past (kahapon). 'Nag-' marks completed aspect (past tense)."
+  },
+  {
+    "wrongSentence": "basa si Carlo ng komiks kaninang umaga.",
+    "wrongWord": "basa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbasa",
+    "explanation": "We use 'Nagbasa' because reading occurred in the past (kaninang umaga). 'Nag-' indicates completed (past) action."
+  },
+  {
+    "wrongSentence": "Naglilinis si Ana ng silid-aralan bago klase.",
+    "wrongWord": "Naglilinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Naglinis",
+    "explanation": "'Naglinis' is correct because the cleaning happened in the past (bago klase). 'Nag-' shows completed aspect (past)."
+  },
+  {
+    "wrongSentence": "Naglalaro ang mga bata ng habulan sa bakuran.",
+    "wrongWord": "Naglalaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglaro",
+    "explanation": "'Naglaro' is correct because the children played in the past (completed action). 'Nag-' is past tense, actor-focused."
+  },
+  {
+    "wrongSentence": "Kakain si Miguel ng tanghalian sa kantina.",
+    "wrongWord": "kakain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumain",
+    "explanation": "'Kumain' is correct because the eating happened in the past (sa kantina). 'Ku-' prefix indicates completed (past) action, actor-focused."
+  },
+  {
+    "wrongSentence": "Umiinom si Ana ng tubig kanina.",
+    "wrongWord": "Umiinom",
+    "options": ["Uminom", "Umiinom", "Iinom"],
+    "correctOption": "Uminom",
+    "explanation": "'Uminom' is used because the action happened in the past (kanina). 'Umi-' is present, 'Ii-' is future; we need the past form."
+  },
+  {
+    "wrongSentence": "Mag-aaral si Pedro ng matematika kagabi.",
+    "wrongWord": "Mag-aaral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Nag-aral",
+    "explanation": "'Nag-aral' is correct because the study happened in the past (kagabi). 'Nag-' is past, 'Nag-aaral' is present, 'Mag-aaral' is future."
+  },
+  {
+    "wrongSentence": "luto si Maria ng hapunan noong gabi.",
+    "wrongWord": "luto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Nagluto",
+    "explanation": "'Nagluto' is correct because cooking already happened (noong gabi). 'Nag-' is past, 'Nagluluto' is present, 'Magluluto' is future."
+  },
+  {
+    "wrongSentence": "Naglilinis si Juan ng sasakyan kanina.",
+    "wrongWord": "Naglinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Naglinis",
+    "explanation": "'Naglinis' is correct because the cleaning was completed in the past (kanina). 'Nag-' is past tense; 'Naglilinis' is present; 'Maglilinis' is future."
+  },
+  {
+    "wrongSentence": "Nagbasa si Ella ng libro kagabi.",
+    "wrongWord": "Nagbasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbasa",
+    "explanation": "'Nagbasa' is correct because the reading happened in the past (kagabi). 'Nagbabasa' is present, 'Magbabasa' is future."
+  },
+  {
+    "wrongSentence": "Lumakad si Pedro sa paaralan kanina.",
+    "wrongWord": "Lumakad",
+    "options": ["Lumakad", "Lumalakad", "Lalakad"],
+    "correctOption": "Lumakad",
+    "explanation": "'Lumakad' is correct because walking occurred in the past (kanina). 'Lumalakad' is present, 'Lalakad' is future."
+  },
+  {
+    "wrongSentence": "Naglaro ang mga bata ng bola sa hapon.",
+    "wrongWord": "Naglaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglaro",
+    "explanation": "'Naglaro' is past tense because the playing already happened (sa hapon)."
+  },
+  {
+    "wrongSentence": "Kumain si Ana ng prutas kaninang umaga.",
+    "wrongWord": "Kumain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumain",
+    "explanation": "'Kumain' is past tense because the eating was completed (kaninang umaga). 'Kumakain' is present; 'Kakain' is future."
+  },
+  {
+    "wrongSentence": "Naglinis si Carla ng banyo kanina.",
+    "wrongWord": "Naglinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Naglinis",
+    "explanation": "'Naglinis' is correct because cleaning happened in the past (kanina). 'Naglilinis' is present, 'Maglilinis' is future."
+  },
+  {
+    "wrongSentence": "Naglakad si Marco sa merkado kagabi.",
+    "wrongWord": "Naglakad",
+    "options": ["Naglakad", "Naglalakad", "Maglalakad"],
+    "correctOption": "Naglakad",
+    "explanation": "'Naglakad' is correct because walking occurred in the past (kagabi). 'Naglalakad' is present, 'Maglalakad' is future."
+  },
+  {
+    "wrongSentence": "Kumain si Rosa ng almusal ngayong umaga.",
+    "wrongWord": "Kumain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumain",
+    "explanation": "'Kumain' is correct because the eating was completed in the past (ngayong umaga). 'Kumakain' is present, 'Kakain' is future."
+  },
+  {
+    "wrongSentence": "Uminom si John ng gatas kahapon.",
+    "wrongWord": "Uminom",
+    "options": ["Uminom", "Umiinom", "Iinom"],
+    "correctOption": "Uminom",
+    "explanation": "'Uminom' is correct because drinking happened in the past (kahapon). 'Umiinom' is present, 'Iinom' is future."
+  },
+  {
+    "wrongSentence": "Nag-aral si Tina ng agham kaninang umaga.",
+    "wrongWord": "Nag-aral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Nag-aral",
+    "explanation": "'Nag-aral' is correct because studying happened in the past (kaninang umaga). 'Nag-aaral' is present, 'Mag-aaral' is future."
+  },
+  {
+    "wrongSentence": "Nagluto si Maria ng merienda kagabi.",
+    "wrongWord": "Nagluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Nagluto",
+    "explanation": "'Nagluto' is correct because cooking occurred in the past (kagabi). 'Nagluluto' is present, 'Magluluto' is future."
+  },
+  {
+    "wrongSentence": "Naglaro si Paolo ng basketball kanina.",
+    "wrongWord": "Naglaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglaro",
+    "explanation": "'Naglaro' is correct because playing happened in the past (kanina). 'Naglalaro' is present, 'Maglalaro' is future."
+  },
+  {
+    "wrongSentence": "Lumangoy si Anna sa pool kahapon.",
+    "wrongWord": "Lumangoy",
+    "options": ["Lumangoy", "Lumalangoy", "Lalangoy"],
+    "correctOption": "Lumangoy",
+    "explanation": "'Lumangoy' is correct because swimming happened in the past (kahapon). 'Lumalangoy' is present, 'Lalangoy' is future."
+  },
+  {
+    "wrongSentence": "Nagbasa si Carl ng dyaryo kanina.",
+    "wrongWord": "Nagbasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbasa",
+    "explanation": "'Nagbasa' is correct because reading happened in the past (kanina). 'Nagbabasa' is present, 'Magbabasa' is future."
+  },
+  {
+    "wrongSentence": "Nag-ehersisyo si Lea sa gym kagabi.",
+    "wrongWord": "Nag-ehersisyo",
+    "options": ["Nag-ehersisyo", "Nag-eehersisyo", "Mag-eehersisyo"],
+    "correctOption": "Nag-ehersisyo",
+    "explanation": "'Nag-ehersisyo' is correct because exercising happened in the past (kagabi). 'Nag-eehersisyo' is present, 'Mag-eehersisyo' is future."
+  },
+   {
+    "wrongSentence": "Maglilinis si Lito ng kanyang kwarto bukas.",
+    "wrongWord": "Maglilinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Maglilinis",
+    "explanation": "'Maglilinis' is correct because the cleaning will happen in the future (bukas). 'Naglinis' is past, 'Naglilinis' is present."
+  },
+  {
+    "wrongSentence": "Naglalaro si Ana ng tennis ngayon.",
+    "wrongWord": "Naglalaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglalaro",
+    "explanation": "'Naglalaro' is correct because the action is happening in the present (ngayon). 'Naglaro' is past, 'Maglalaro' is future."
+  },
+  {
+    "wrongSentence": "Kakain si Miguel ng hapunan mamaya.",
+    "wrongWord": "Kakain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kakain",
+    "explanation": "'Kakain' is correct because eating will happen in the future (mamaya). 'Kumain' is past, 'Kumakain' is present."
+  },
+  {
+    "wrongSentence": "Nag-eehersisyo si Carlo sa gym ngayon.",
+    "wrongWord": "Nag-eehersisyo",
+    "options": ["Nag-ehersisyo", "Nag-eehersisyo", "Mag-eehersisyo"],
+    "correctOption": "Nag-eehersisyo",
+    "explanation": "'Nag-eehersisyo' is correct because exercising is happening in the present (ngayon). 'Nag-ehersisyo' is past, 'Mag-eehersisyo' is future."
+  },
+  {
+    "wrongSentence": "Magbabasa si Lea ng libro bukas.",
+    "wrongWord": "Magbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Magbabasa",
+    "explanation": "'Magbabasa' is correct because reading will happen in the future (bukas). 'Nagbasa' is past, 'Nagbabasa' is present."
+  },
+  {
+    "wrongSentence": "Lumalangoy si Paolo sa pool ngayon.",
+    "wrongWord": "Lumalangoy",
+    "options": ["Lumangoy", "Lumalangoy", "Lalangoy"],
+    "correctOption": "Lumalangoy",
+    "explanation": "'Lumalangoy' is correct because swimming is happening now (ngayon). 'Lumangoy' is past, 'Lalangoy' is future."
+  },
+  {
+    "wrongSentence": "Magluluto si Maria ng almusal bukas.",
+    "wrongWord": "Magluluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Magluluto",
+    "explanation": "'Magluluto' is correct because cooking will happen in the future (bukas). 'Nagluto' is past, 'Nagluluto' is present."
+  },
+  {
+    "wrongSentence": "Nagbabasa si Carlo ng dyaryo ngayon.",
+    "wrongWord": "Nagbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbabasa",
+    "explanation": "'Nagbabasa' is correct because the action is happening in the present (ngayon). 'Nagbasa' is past, 'Magbabasa' is future."
+  },
+  {
+    "wrongSentence": "Mag-aaral si Tina ng agham bukas.",
+    "wrongWord": "Mag-aaral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Mag-aaral",
+    "explanation": "'Mag-aaral' is correct because studying will happen in the future (bukas). 'Nag-aral' is past, 'Nag-aaral' is present."
+  },
+  {
+    "wrongSentence": "Naglalaro ang mga bata ng habulan ngayon.",
+    "wrongWord": "Naglalaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglalaro",
+    "explanation": "'Naglalaro' is correct because playing is ongoing (ngayon). 'Naglaro' is past, 'Maglalaro' is future."
+  },
+  {
+    "wrongSentence": "Kumakain si Ana ng prutas ngayon.",
+    "wrongWord": "Kumakain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumakain",
+    "explanation": "'Kumakain' is correct because eating is happening now (ngayon). 'Kumain' is past, 'Kakain' is future."
+  },
+  {
+    "wrongSentence": "Umiinom si Miguel ng gatas ngayon.",
+    "wrongWord": "Umiinom",
+    "options": ["Uminom", "Umiinom", "Iinom"],
+    "correctOption": "Umiinom",
+    "explanation": "'Umiinom' is correct because the action is ongoing (ngayon). 'Uminom' is past, 'Iinom' is future."
+  },
+  {
+    "wrongSentence": "Maglalaro si Paolo ng basketball bukas.",
+    "wrongWord": "Maglalaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Maglalaro",
+    "explanation": "'Maglalaro' is correct because playing will happen in the future (bukas). 'Naglaro' is past, 'Naglalaro' is present."
+  },
+  {
+    "wrongSentence": "Mag-eehersisyo si John sa gym bukas.",
+    "wrongWord": "Mag-eehersisyo",
+    "options": ["Nag-eehersisyo", "Nag-ehersisyo", "Mag-eehersisyo"],
+    "correctOption": "Mag-eehersisyo",
+    "explanation": "'Mag-eehersisyo' is correct because exercising will happen in the future (bukas). 'Nag-eehersisyo' is present, 'Nag-ehersisyo' is past."
+  },
+  {
+    "wrongSentence": "Maglilinis si Carla ng kotse bukas.",
+    "wrongWord": "Maglilinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Maglilinis",
+    "explanation": "'Maglilinis' is correct because cleaning will happen in the future (bukas). 'Naglinis' is past, 'Naglilinis' is present."
+  },
+  {
+    "wrongSentence": "Nag-eehersisyo si Lea sa gym ngayon.",
+    "wrongWord": "Nag-eehersisyo",
+    "options": ["Nag-ehersisyo", "Nag-eehersisyo", "Mag-eehersisyo"],
+    "correctOption": "Nag-eehersisyo",
+    "explanation": "'Nag-eehersisyo' is correct because the exercising is happening now (ngayon). 'Nag-ehersisyo' is past, 'Mag-eehersisyo' is future."
+  },
+  {
+    "wrongSentence": "Magluluto si Maria ng tanghalian bukas.",
+    "wrongWord": "Magluluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Magluluto",
+    "explanation": "'Magluluto' is correct because cooking will happen in the future (bukas). 'Nagluto' is past, 'Nagluluto' is present."
+  },
+  {
+    "wrongSentence": "Lumalangoy si Paolo sa dagat bukas.",
+    "wrongWord": "Lalalangoy",
+    "options": ["Lumangoy", "Lumalangoy", "Lalangoy"],
+    "correctOption": "Lalangoy",
+    "explanation": "'Lalangoy' is correct because swimming will happen in the future (bukas). 'Lumangoy' is past, 'Lumalangoy' is present."
+  },
+  {
+    "wrongSentence": "Nagbabasa si Carlo ng libro ngayon.",
+    "wrongWord": "Nagbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbabasa",
+    "explanation": "'Nagbabasa' is correct because reading is happening now (ngayon). 'Nagbasa' is past, 'Magbabasa' is future."
+  },
+  {
+    "wrongSentence": "Mag-aaral si Tina ng musika bukas.",
+    "wrongWord": "Mag-aaral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Mag-aaral",
+    "explanation": "'Mag-aaral' is correct because studying will happen in the future (bukas). 'Nag-aral' is past, 'Nag-aaral' is present."
+  },
+  {
+    "wrongSentence": "Magbabasa si Lito ng dyaryo bukas.",
+    "wrongWord": "Magbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Magbabasa",
+    "explanation": "'Magbabasa' is future tense because the reading will happen (bukás). 'Nagbasa' is past, 'Nagbabasa' is present."
+},
+{
+    "wrongSentence": "Nag-eehersisyo si Ana sa gym ngayon.",
+    "wrongWord": "Nag-eehersisyo",
+    "options": ["Nag-ehersisyo", "Nag-eehersisyo", "Mag-eehersisyo"],
+    "correctOption": "Nag-eehersisyo",
+    "explanation": "'Nag-eehersisyo' is present tense because the action is happening now (ngayon). 'Nag-ehersisyo' is past, 'Mag-eehersisyo' is future."
+},
+{
+    "wrongSentence": "Magluluto si Maria ng tanghalian bukas.",
+    "wrongWord": "Magluluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Magluluto",
+    "explanation": "'Magluluto' is future tense because cooking will happen (bukás). 'Nagluto' is past, 'Nagluluto' is present."
+},
+{
+    "wrongSentence": "Nagbabasa si Carlo ng libro ngayon.",
+    "wrongWord": "Nagbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbabasa",
+    "explanation": "'Nagbabasa' is present tense because the reading is happening now (ngayon). 'Nagbasa' is past, 'Magbabasa' is future."
+},
+{
+    "wrongSentence": "Maglalaro si Paolo ng basketball bukas.",
+    "wrongWord": "Maglalaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Maglalaro",
+    "explanation": "'Maglalaro' is future tense because playing will happen (bukás). 'Naglaro' is past, 'Naglalaro' is present."
+},
+{
+    "wrongSentence": "Naglinis si Tina ng silid-aralan ngayon.",
+    "wrongWord": "Naglinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Naglilinis",
+    "explanation": "'Naglilinis' is present tense because cleaning is happening now (ngayon). 'Naglinis' is past, 'Maglilinis' is future."
+},
+{
+    "wrongSentence": "Kumain si Miguel ng almusal kaninang umaga.",
+    "wrongWord": "Kumain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumain",
+    "explanation": "'Kumain' is past tense because eating already happened (kaninang umaga). 'Kumakain' is present, 'Kakain' is future."
+},
+{
+    "wrongSentence": "Umiinom si Ana ng tubig ngayon.",
+    "wrongWord": "Umiinom",
+    "options": ["Uminom", "Umiinom", "Iinom"],
+    "correctOption": "Umiinom",
+    "explanation": "'Umiinom' is present tense because the action is happening now (ngayon). 'Uminom' is past, 'Iinom' is future."
+},
+{
+    "wrongSentence": "Lumakad si Pedro sa paaralan bukas.",
+    "wrongWord": "Lumakad",
+    "options": ["Lumakad", "Lumalakad", "Lalakad"],
+    "correctOption": "Lalakad",
+    "explanation": "'Lalakad' is future tense because walking will happen (bukás). 'Lumakad' is past, 'Lumalakad' is present."
+},
+{
+    "wrongSentence": "Nagluto si Maria ng hapunan kanina.",
+    "wrongWord": "Nagluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Nagluluto",
+    "explanation": "'Nagluluto' is present tense because cooking is ongoing (ngayon). 'Nagluto' is past, 'Magluluto' is future."
+},
+{
+    "wrongSentence": "Mag-aaral si Tina ng agham bukas.",
+    "wrongWord": "Mag-aaral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Mag-aaral",
+    "explanation": "'Mag-aaral' is future tense because studying will happen (bukás). 'Nag-aral' is past, 'Nag-aaral' is present."
+},
+{
+    "wrongSentence": "Naglaro ang mga bata ng bola ngayon.",
+    "wrongWord": "Naglaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglalaro",
+    "explanation": "'Naglalaro' is present tense because the playing is happening now (ngayon). 'Naglaro' is past, 'Maglalaro' is future."
+},
+{
+    "wrongSentence": "Kumakain si Ana ng prutas ngayon.",
+    "wrongWord": "Kumakain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumakain",
+    "explanation": "'Kumakain' is present tense because eating is happening now (ngayon). 'Kumain' is past, 'Kakain' is future."
+},
+{
+    "wrongSentence": "Uminom si Miguel ng gatas bukas.",
+    "wrongWord": "Iinom",
+    "options": ["Uminom", "Umiinom", "Iinom"],
+    "correctOption": "Iinom",
+    "explanation": "'Iinom' is future tense because drinking will happen (bukás). 'Uminom' is past, 'Umiinom' is present."
+},
+{
+    "wrongSentence": "Maglilinis si Carla ng kotse bukas.",
+    "wrongWord": "Maglilinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Maglilinis",
+    "explanation": "'Maglilinis' is future tense because cleaning will happen (bukás). 'Naglinis' is past, 'Naglilinis' is present."
+},
+{
+    "wrongSentence": "Nag-eehersisyo si Lea sa gym ngayon.",
+    "wrongWord": "Nag-eehersisyo",
+    "options": ["Nag-ehersisyo", "Nag-eehersisyo", "Mag-eehersisyo"],
+    "correctOption": "Nag-eehersisyo",
+    "explanation": "'Nag-eehersisyo' is present tense because exercising is happening now (ngayon). 'Nag-ehersisyo' is past, 'Mag-eehersisyo' is future."
+},
+{
+    "wrongSentence": "Magluluto si Maria ng tanghalian bukas.",
+    "wrongWord": "Magluluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Magluluto",
+    "explanation": "'Magluluto' is future tense because cooking will happen (bukás). 'Nagluto' is past, 'Nagluluto' is present."
+},
+{
+    "wrongSentence": "Lumalangoy si Paolo sa dagat bukas.",
+    "wrongWord": "Lalalangoy",
+    "options": ["Lumangoy", "Lumalangoy", "Lalangoy"],
+    "correctOption": "Lalangoy",
+    "explanation": "'Lalangoy' is future tense because swimming will happen (bukás). 'Lumangoy' is past, 'Lumalangoy' is present."
+},
+{
+    "wrongSentence": "Nagbabasa si Carlo ng libro ngayon.",
+    "wrongWord": "Nagbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbabasa",
+    "explanation": "'Nagbabasa' is present tense because reading is happening now (ngayon). 'Nagbasa' is past, 'Magbabasa' is future."
+},
+{
+    "wrongSentence": "Mag-aaral si Tina ng musika bukas.",
+    "wrongWord": "Mag-aaral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Mag-aaral",
+    "explanation": "'Mag-aaral' is future tense because studying will happen (bukás). 'Nag-aral' is past, 'Nag-aaral' is present."
+},
+{
+    "wrongSentence": "Naglakad si Ella sa parke kanina.",
+    "wrongWord": "Naglakad",
+    "options": ["Naglakad", "Naglalakad", "Maglalakad"],
+    "correctOption": "Naglakad",
+    "explanation": "'Naglakad' is past tense because the walking already happened (kanina). 'Naglalakad' is present, 'Maglalakad' is future."
+},
+{
+    "wrongSentence": "Magbabasa si Leo ng libro bukas.",
+    "wrongWord": "Magbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Magbabasa",
+    "explanation": "'Magbabasa' is future tense because reading will happen (bukás). 'Nagbasa' is past, 'Nagbabasa' is present."
+},
+{
+    "wrongSentence": "Naglinis si Carla ng kusina kanina.",
+    "wrongWord": "Naglinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Naglinis",
+    "explanation": "'Naglinis' is past tense because the cleaning already happened (kanina). 'Naglilinis' is present, 'Maglilinis' is future."
+},
+{
+    "wrongSentence": "Naglalaro ang mga bata sa bakuran ngayon.",
+    "wrongWord": "Naglalaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglalaro",
+    "explanation": "'Naglalaro' is present tense because the playing is happening now (ngayon). 'Naglaro' is past, 'Maglalaro' is future."
+},
+{
+    "wrongSentence": "Kumain si Juan ng tanghalian kaninang umaga.",
+    "wrongWord": "Kumain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumain",
+    "explanation": "'Kumain' is past tense because eating already happened (kaninang umaga). 'Kumakain' is present, 'Kakain' is future."
+},
+{
+    "wrongSentence": "Umiinom si Ana ng gatas ngayon.",
+    "wrongWord": "Umiinom",
+    "options": ["Uminom", "Umiinom", "Iinom"],
+    "correctOption": "Umiinom",
+    "explanation": "'Umiinom' is present tense because drinking is happening now (ngayon). 'Uminom' is past, 'Iinom' is future."
+},
+{
+    "wrongSentence": "Magluluto si Maria ng hapunan bukas.",
+    "wrongWord": "Magluluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Magluluto",
+    "explanation": "'Magluluto' is future tense because cooking will happen (bukás). 'Nagluto' is past, 'Nagluluto' is present."
+},
+{
+    "wrongSentence": "Nag-aaral si Pedro ng matematika ngayon.",
+    "wrongWord": "Nag-aaral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Nag-aaral",
+    "explanation": "'Nag-aaral' is present tense because studying is happening now (ngayon). 'Nag-aral' is past, 'Mag-aaral' is future."
+},
+{
+    "wrongSentence": "Maglalaro si Carlo ng football bukas.",
+    "wrongWord": "Maglalaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Maglalaro",
+    "explanation": "'Maglalaro' is future tense because playing will happen (bukás). 'Naglaro' is past, 'Naglalaro' is present."
+},
+{
+    "wrongSentence": "Naglinis si Tina ng silid-aralan ngayon.",
+    "wrongWord": "Naglinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Naglilinis",
+    "explanation": "'Naglilinis' is present tense because cleaning is happening now (ngayon). 'Naglinis' is past, 'Maglilinis' is future."
+},
+{
+    "wrongSentence": "Kumakain si Miguel ng almusal ngayon.",
+    "wrongWord": "Kumakain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kumakain",
+    "explanation": "'Kumakain' is present tense because eating is happening now (ngayon). 'Kumain' is past, 'Kakain' is future."
+},
+{
+    "wrongSentence": "Uminom si Lea ng tubig bukas.",
+    "wrongWord": "Iinom",
+    "options": ["Uminom", "Umiinom", "Iinom"],
+    "correctOption": "Iinom",
+    "explanation": "'Iinom' is future tense because drinking will happen (bukás). 'Uminom' is past, 'Umiinom' is present."
+},
+{
+    "wrongSentence": "Mag-aaral si Carla ng agham bukas.",
+    "wrongWord": "Mag-aaral",
+    "options": ["Nag-aral", "Nag-aaral", "Mag-aaral"],
+    "correctOption": "Mag-aaral",
+    "explanation": "'Mag-aaral' is future tense because studying will happen (bukás). 'Nag-aral' is past, 'Nag-aaral' is present."
+},
+{
+    "wrongSentence": "Nagbabasa si Tina ng libro ngayon.",
+    "wrongWord": "Nagbabasa",
+    "options": ["Nagbasa", "Nagbabasa", "Magbabasa"],
+    "correctOption": "Nagbabasa",
+    "explanation": "'Nagbabasa' is present tense because reading is happening now (ngayon). 'Nagbasa' is past, 'Magbabasa' is future."
+},
+{
+    "wrongSentence": "Magluluto si Lea ng tanghalian bukas.",
+    "wrongWord": "Magluluto",
+    "options": ["Nagluto", "Nagluluto", "Magluluto"],
+    "correctOption": "Magluluto",
+    "explanation": "'Magluluto' is future tense because cooking will happen (bukás). 'Nagluto' is past, 'Nagluluto' is present."
+},
+{
+    "wrongSentence": "Lumalangoy si Paolo sa dagat ngayon.",
+    "wrongWord": "Lumalangoy",
+    "options": ["Lumangoy", "Lumalangoy", "Lalangoy"],
+    "correctOption": "Lumalangoy",
+    "explanation": "'Lumalangoy' is present tense because swimming is happening now (ngayon). 'Lumangoy' is past, 'Lalangoy' is future."
+},
+{
+    "wrongSentence": "Nag-eehersisyo si Carlo sa gym ngayon.",
+    "wrongWord": "Nag-eehersisyo",
+    "options": ["Nag-ehersisyo", "Nag-eehersisyo", "Mag-eehersisyo"],
+    "correctOption": "Nag-eehersisyo",
+    "explanation": "'Nag-eehersisyo' is present tense because exercising is happening now (ngayon). 'Nag-ehersisyo' is past, 'Mag-eehersisyo' is future."
+},
+{
+    "wrongSentence": "Maglilinis si Tina ng kotse bukas.",
+    "wrongWord": "Maglilinis",
+    "options": ["Naglinis", "Naglilinis", "Maglilinis"],
+    "correctOption": "Maglilinis",
+    "explanation": "'Maglilinis' is future tense because cleaning will happen (bukás). 'Naglinis' is past, 'Naglilinis' is present."
+},
+{
+    "wrongSentence": "Naglaro ang mga bata ng habulan ngayon.",
+    "wrongWord": "Naglaro",
+    "options": ["Naglaro", "Naglalaro", "Maglalaro"],
+    "correctOption": "Naglalaro",
+    "explanation": "'Naglalaro' is present tense because playing is happening now (ngayon). 'Naglaro' is past, 'Maglalaro' is future."
+},
+{
+    "wrongSentence": "Kumain si Ana ng prutas bukas.",
+    "wrongWord": "Kumain",
+    "options": ["Kumain", "Kumakain", "Kakain"],
+    "correctOption": "Kakain",
+    "explanation": "'Kakain' is future tense because eating will happen (bukás). 'Kumain' is past, 'Kumakain' is present."
+}
+]
