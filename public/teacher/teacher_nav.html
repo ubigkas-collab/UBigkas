@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        nav {
+            width: 100%;
+            height: 80px;
+            background: var(--card-bg, #ffffff);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 3px solid #7a0c0c;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #7a0c0c;
+            text-decoration: none;
+        }
+        .logo span {
+            color: #d4af37;
+        }
+        body.dark-mode .logo {
+            color: #ffffff;
+        }
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        #darkModeBtn {
+            background: transparent;
+            border: 2px solid #ddd;
+            color: #222222;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        #darkModeBtn:hover {
+            border-color: #7a0c0c;
+            background: rgba(122, 12, 12, 0.05);
+        }
+        body.dark-mode #darkModeBtn {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+        #logoutBtn {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        #logoutBtn:hover {
+            background-color: #c9302c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(217, 83, 79, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">UB<span>igkas</span></a>
+        <div class="nav-actions">
+            <button id="darkModeBtn">🌙</button>
+            <button id="logoutBtn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Optional: Add dark mode toggle logic inside iframe if needed -->
+    <script>
+        // This is optional - if dark mode toggle needs to affect main page, move to main file
+        const darkModeBtn = document.getElementById("darkModeBtn");
+        darkModeBtn.addEventListener('click', () => {
+            document.body.classList.toggle("dark-mode");
+            darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+        });
+    </script>
+</body>
+</html>

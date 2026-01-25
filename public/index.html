@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome | UBigkas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* --- ACCESSIBLE COLOR SYSTEM --- */
+:root {
+    --maroon: #7a0c0c;
+    --gold: #b38f00; 
+    --bg: #fdfdfd;
+    --card-bg: #ffffff;
+    --text-main: #1a1a1a;
+    --text-muted: #555555;
+    --input-border: #d1d1d1;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --info: #1b2e4b;
+    --shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* --- DARK MODE OPTIMIZATION --- */
+body.dark-mode {
+    --bg: #121212;
+    --card-bg: #1e1e1e;
+    --text-main: #f1f1f1;
+    --text-muted: #b0b0b0;
+    --input-border: #444444;
+    --maroon: #ff4d4d; 
+    --gold: #ffd700;
+    --shadow: rgba(0, 0, 0, 0.4);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    margin: 0;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+/* --- SWOOSH EFFECT --- */
+#swoosh-container {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    overflow: hidden;
+}
+.swoosh-bg {
+    position: absolute;
+    inset: -100%; 
+    background: radial-gradient(circle, var(--maroon) 0%, #3a0000 100%);
+    transform: scale(0);
+    opacity: 0;
+}
+.swoosh-img {
+    position: relative;
+    width: 300px;
+    height: auto;
+    transform: scale(0);
+    z-index: 10002;
+}
+@keyframes bgZoom {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(2); opacity: 1; }
+}
+@keyframes imgPop {
+    0% { transform: scale(0) translateY(50px); opacity: 0; }
+    70% { transform: scale(1.1) translateY(-10px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.active-swoosh .swoosh-bg { animation: bgZoom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.active-swoosh .swoosh-img { animation: imgPop 0.7s 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.28) forwards; }
+
+/* --- TOAST NOTIFICATIONS --- */
+#toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; }
+.toast {
+    min-width: 280px;
+    padding: 16px 24px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    border-left: 5px solid var(--gold);
+}
+.toast.success { background-color: var(--maroon); } 
+.toast.info { background-color: var(--info); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeOut { to { transform: translateX(100%); opacity: 0; } }
+
+/* --- NAV BAR --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 80px;
+    background: var(--card-bg);
+    border-bottom: 3px solid var(--maroon);
+    box-shadow: 0 2px 10px var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.logo { font-size: 1.8rem; font-weight: 800; color: var(--maroon); text-decoration: none; }
+.logo span { color: var(--gold); }
+.nav-btns { display: flex; gap: 10px; align-items: center; }
+
+/* --- LAYOUT SECTIONS --- */
+.content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.about-section {
+    text-align: center;
+    margin-bottom: 80px;
+}
+.about-section h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    color: var(--maroon);
+    margin-bottom: 20px;
+}
+.about-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+#featureDeck { position: relative; width: 100%; max-width: 800px; min-height: 250px; }
+.feature-card {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+.feature-card.active { display: flex; animation: fadeInHero 0.8s ease; }
+.feature-card h2 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 15px; }
+.feature-card p { font-size: 1.1rem; max-width: 600px; color: var(--text-muted); }
+@keyframes fadeInHero { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- TEAM SECTION --- */
+.team-section {
+    text-align: center;
+    padding: 60px 0;
+}
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+.team-item {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: var(--transition);
+}
+.team-item:hover { transform: translateY(-10px); }
+.team-img {
+    width: 100px;
+    height: 100px;
+    background: var(--input-border);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+}
+
+/* --- MODALS FIXED --- */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    backdrop-filter: blur(6px);
+    overflow-y: auto; /* Enable scroll if content is long */
+    padding: 20px;
+}
+.modal-content {
+    background: var(--card-bg);
+    max-width: 420px;
+    width: 100%;
+    margin: 20px auto; /* Margin for spacing on mobile */
+    padding: 40px 30px;
+    border-radius: 20px;
+    position: relative;
+    border-top: 10px solid var(--maroon);
+    box-shadow: 0 20px 40px var(--shadow);
+    box-sizing: border-box;
+}
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-muted);
+}
+.close:hover { transform: rotate(90deg); color: var(--maroon); }
+
+/* --- FORM STYLING --- */
+.form-group { text-align: left; margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 2px solid var(--input-border);
+    background: var(--bg);
+    color: var(--text-main);
+    box-sizing: border-box;
+}
+.login-btn {
+    background: var(--maroon);
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+    transition: var(--transition);
+}
+.google-btn {
+    background: #fff;
+    color: #444;
+    border: 2px solid var(--input-border);
+    padding: 12px 20px;
+    border-radius: 50px;
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.footer-credit { text-align: center; padding: 40px 0; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--input-border); }
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 600px) {
+    .nav-btns #openLoginModal { padding: 8px 15px !important; }
+    .hero-section { margin-bottom: 50px; }
+    #featureDeck { height: 350px; } /* taller for wrapped text */
+    .feature-card h2 { line-height: 1.2; }
+    .hero-section div[style*="flex"] { flex-direction: column; width: 100%; }
+    .hero-section .login-btn { width: 100% !important; }
+    .modal-content { padding: 30px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="swoosh-container">
+    <div class="swoosh-bg"></div>
+    <img src="./brahmmy-img/brahmmy-clapping.png" class="swoosh-img" id="swooshImg">
+</div>
+
+<div id="toast-container"></div>
+
+<nav>
+    <a href="#" class="logo">UB<span>igkas</span></a>
+    <div class="nav-btns">
+        <button id="darkModeBtn" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌙</button>
+        <button id="openLoginModal" class="login-btn" style="padding: 8px 25px; width: auto; font-size: 0.9rem;">Login</button>
+    </div>
+</nav>
+
+<div class="content-wrapper">
+    <section class="about-section">
+        <h1>What is UBigkas?</h1>
+        <p>
+            <strong>UBigkas</strong> is an innovative Filipino language learning platform designed to bridge the gap between traditional grammar and modern communication.
+        </p>
+    </section>
+
+    <main class="hero-section">
+        <div id="featureDeck">
+            <div class="feature-card active">
+                <h2 style="color:var(--maroon)">Interactive Quizzes</h2>
+                <p>Test your knowledge with sentence structure, verbs, pronouns, and more!</p>
+            </div>
+            <div class="feature-card">
+                <h2 style="color:var(--maroon)">Grammar Correction</h2>
+                <p>Automatically check and correct your Filipino sentences using our AI tool.</p>
+            </div>
+            <div class="feature-card">
+                <h2 style="color:var(--maroon)">Student Dashboard</h2>
+                <p>Track your progress, see scores, and improve continuously.</p>
+            </div>
+        </div>
+        <div style="margin-top:40px; text-align:center; display: flex; gap: 20px;">
+            <button id="prevFeature" class="login-btn" style="background:var(--text-muted); width: 140px;">← Previous</button>
+            <button id="nextFeature" class="login-btn" style="width: 140px;">Next →</button>
+        </div>
+    </main>
+
+    <section class="team-section">
+        <h2 style="color:var(--maroon); font-size: 2.5rem;">The Team</h2>
+        <div class="team-grid">
+            <div class="team-item">
+                <div class="team-img"></div>
+                <h4>Back End Developer</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Architecture & AI</p>
+            </div>
+            <div class="team-item">
+                <div class="team-img"></div>
+                <h4>UI/UX Designer</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Creative Design</p>
+            </div>
+            <div class="team-item">
+                <div class="team-img"></div>
+                <h4>AI Developer</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Content & Linguistics</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeLoginModal">&times;</span>
+        <h1 style="color: var(--maroon); text-align: center; margin-top: 0;">Welcome</h1>
+        <p style="color: var(--text-muted); text-align: center; margin-bottom: 25px;">Log in to your UBigkas Account</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="text" id="email" placeholder="admin / user@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        
+        <button type="button" class="google-btn" id="googleLoginBtn">
+            <img src="../public/brahmmy-img/brahmmy-email.png" alt="Google" style="width:20px">
+            Login with UBMail
+        </button>
+
+        <div style="margin-top: 25px; text-align: center;" class="extra-links">
+            <p><a href="#" id="openTeacherModal" style="color: var(--maroon); font-weight:600; text-decoration:none;">Create account as teacher</a></p>
+        </div>
+    </div>
+</div>
+
+<div id="teacherModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeTeacherModal">&times;</span>
+        <h2 style="text-align: center; color: var(--maroon); margin-top: 0;">Teacher Registration</h2>
+        <form id="teacherSignupForm">
+            <div class="form-group"><input type="email" id="teacherEmail" placeholder="Institutional Email (@ub.edu.ph)" required></div>
+            <div class="form-group"><input type="text" id="teacherId" placeholder="Teacher ID" required></div>
+            <div class="form-group"><input type="password" id="teacherPassword" placeholder="Password" required></div>
+            <div class="form-group"><input type="password" id="teacherConfirmPassword" placeholder="Confirm Password" required></div>
+            <button type="submit" class="login-btn">Create Account</button>
+        </form>
+    </div>
+</div>
+
+<div class="footer-credit">© 2026 University of Batangas – Lipa City</div>
+
+<script type="module">
+import { auth, db } from "./firebase.js";
+import { 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider, 
+    signInWithPopup 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+function playSwoosh(callback) {
+    const container = document.getElementById("swoosh-container");
+    container.style.display = "flex";
+    container.classList.add("active-swoosh");
+    setTimeout(callback, 2000); 
+}
+
+function showToast(message, type = "info") {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.animation = "fadeOut 0.5s ease forwards";
+        setTimeout(() => toast.remove(), 500);
+    }, 4000);
+}
+
+const darkModeBtn = document.getElementById("darkModeBtn");
+darkModeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+});
+
+document.getElementById("loginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    showToast("Verifying credentials...", "info");
+
+    if (email === "admin" && password === "admin123") {
+        sessionStorage.setItem("role", "admin");
+        showToast("Access granted.", "success");
+        playSwoosh(() => { window.location.href = "admin/admin_dashboard.html"; });
+        return;
+    }
+
+    try {
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+        handleUserRedirect(cred.user.uid);
+    } catch (err) {
+        showToast("Sign-in failed. Please check credentials.", "info");
+    }
+});
+
+const googleProvider = new GoogleAuthProvider();
+document.getElementById("googleLoginBtn").addEventListener("click", async () => {
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        if (!user.email.endsWith("@ub.edu.ph")) {
+            showToast("Only @ub.edu.ph accounts allowed.", "info");
+            await auth.signOut();
+            return;
+        }
+        handleUserRedirect(user.uid);
+    } catch (error) { showToast("Google Login failed.", "info"); }
+});
+
+async function handleUserRedirect(uid) {
+    const studentSnap = await getDoc(doc(db, "students", uid));
+    if (studentSnap.exists()) {
+        const student = studentSnap.data();
+        sessionStorage.setItem("role", "student");
+        sessionStorage.setItem("studentUID", uid);
+        sessionStorage.setItem("studentName", student.name);
+        playSwoosh(() => { window.location.href = "student/student_dashboard.html"; });
+        return;
+    }
+    const teacherSnap = await getDoc(doc(db, "teacher_accounts", uid));
+    if (teacherSnap.exists()) {
+        const teacher = teacherSnap.data();
+        sessionStorage.setItem("role", "teacher");
+        sessionStorage.setItem("teacherId", teacher.teacherId);
+        playSwoosh(() => { window.location.href = "teacher/teacher_panel.html"; });
+        return;
+    }
+    showToast("Profile not found.", "info");
+}
+
+document.getElementById("teacherSignupForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("teacherEmail").value.trim();
+    const tid = document.getElementById("teacherId").value.trim();
+    const pass = document.getElementById("teacherPassword").value;
+    const confirmPass = document.getElementById("teacherConfirmPassword").value;
+
+    if (!email.endsWith("@ub.edu.ph")) { showToast("Use @ub.edu.ph email.", "info"); return; }
+    if (pass !== confirmPass) { showToast("Passwords do not match.", "info"); return; }
+
+    try {
+        const cred = await createUserWithEmailAndPassword(auth, email, pass);
+        await setDoc(doc(db, "teacher_accounts", cred.user.uid), { email, teacherId: tid, role: "teacher" });
+        showToast("Registration successful!", "success");
+        teacherModal.style.display = "none";
+    } catch (err) { showToast("Registration failed.", "info"); }
+});
+
+const loginModal = document.getElementById("loginModal");
+const teacherModal = document.getElementById("teacherModal");
+const cards = document.querySelectorAll(".feature-card");
+let currentIndex = 0;
+
+function showCard(index) { 
+    cards.forEach((card, i) => card.classList.toggle("active", i === index)); 
+}
+
+document.getElementById("openLoginModal").onclick = () => loginModal.style.display = "block";
+document.getElementById("closeLoginModal").onclick = () => loginModal.style.display = "none";
+document.getElementById("openTeacherModal").onclick = e => { 
+    e.preventDefault(); 
+    loginModal.style.display = "none";
+    teacherModal.style.display = "block"; 
+};
+document.getElementById("closeTeacherModal").onclick = () => teacherModal.style.display = "none";
+
+document.getElementById("nextFeature").onclick = () => { 
+    currentIndex = (currentIndex + 1) % cards.length; 
+    showCard(currentIndex); 
+};
+document.getElementById("prevFeature").onclick = () => { 
+    currentIndex = (currentIndex - 1 + cards.length) % cards.length; 
+    showCard(currentIndex); 
+};
+
+setInterval(() => {
+    currentIndex = (currentIndex + 1) % cards.length;
+    showCard(currentIndex);
+}, 5000);
+
+window.onclick = e => {
+    if(e.target === loginModal) loginModal.style.display = "none";
+    if(e.target === teacherModal) teacherModal.style.display = "none";
+};
+</script>
+</body>
+</html>

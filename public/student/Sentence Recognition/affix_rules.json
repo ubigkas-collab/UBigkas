@@ -1,0 +1,34 @@
+{
+    "mag": {
+        "explanation": "Actor-focus; future/habitual action. Used for activities that will happen or repeat.",
+        "note": "Used for actions that will happen or are habitual. 'nag-' would indicate past/completed."
+    },
+    "nag": {
+        "explanation": "Actor-focus; completed/past action. Used for activities that have already occurred.",
+        "note": "Used for actions already completed. 'mag-' would indicate future/habitual."
+    },
+    "um": {
+        "explanation": "Actor-focus; completed/past action (infix). Often used for spontaneous or immediate actions.",
+        "note": "Infix 'um' indicates completed/past action. 'mag-' indicates future/habitual."
+    },
+    "in": {
+        "explanation": "Object-focus; completed or imperative action.",
+        "note": "Used when the object of the verb is the focus. 'i-' is used for directive actions."
+    },
+    "an": {
+        "explanation": "Locative-focus; the action affects a location or goal.",
+        "note": "Often used when the action is directed toward a location or recipient."
+    },
+    "i": {
+        "explanation": "Object-focus; directive or imperative action.",
+        "note": "Used for giving commands or emphasizing the object."
+    },
+    "ma": {
+        "explanation": "Stative verbs or adjectives.",
+        "note": "Used for describing a state or condition."
+    },
+    "ka": {
+        "explanation": "Reciprocal or paired action.",
+        "note": "Used for actions done together or reciprocally."
+    }
+}

@@ -1,0 +1,260 @@
+/* =========================================
+   UBigkas Unified Stylesheet 
+   Final Correction: Ultra-Wide & Proper Quiz Layout
+   ========================================= */
+
+:root {
+    --maroon: #7a0c0c;
+    --maroon-dark: #5c0808;
+    --gold: #d4af37;
+    --gold-light: #f5e7b2;
+    --white-bg: #f8f9fa; 
+    --card-bg: #ffffff;
+    --text-dark: #222222;
+    --text-muted: #666666;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ===== Global Reset & Body ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--white-bg);
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.6;
+}
+
+/* ===== NAVIGATION BAR (Full Width) ===== */
+nav {
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    padding: 0 4%;
+    height: 80px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 3px solid var(--maroon);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--maroon);
+    text-decoration: none;
+    margin-right: 50px; 
+}
+
+.logo span { color: var(--gold); }
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--maroon);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+nav ul li a:hover { color: var(--gold); }
+
+/* ===== DASHBOARD GRID LAYOUT (Ultra-Wide Fix) ===== */
+.dashboard-container {
+    width: 96%; /* Sinagad sa gilid para mawala ang sobrang puti */
+    max-width: 1800px; 
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; 
+    gap: 25px;
+    padding: 20px 0;
+    flex: 1;
+}
+
+/* Welcome Card (Full Width) */
+.dashboard-card.full-width {
+    grid-column: span 2;
+    text-align: center;
+}
+
+.dashboard-card, 
+.assessment-section, 
+.grammar-cards-section,
+.login-card {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-top: 8px solid var(--maroon);
+    text-align: center;
+}
+
+/* Analytics Chart Fix - Prevent Stretching Downwards */
+.assessment-section {
+    max-height: 500px; 
+    display: flex;
+    flex-direction: column;
+}
+
+#scoreChart {
+    max-height: 380px !important;
+    width: 100% !important;
+}
+
+/* Login Card remains centered */
+.login-card { 
+    max-width: 450px; 
+    grid-column: span 2; 
+    justify-self: center; 
+    margin-top: 5vh; 
+}
+
+.grammar-cards-section { border-top-color: var(--gold); }
+
+/* ===== QUIZ SELECTION LAYOUT FIX (image_4008dd.png Style) ===== */
+.quiz-page-container {
+    width: 90%;
+    max-width: 900px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Pantay sa kaliwa ang button */
+}
+
+/* Back Button Pill Style (Nasa itaas ng card) */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--maroon);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    background: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: var(--transition);
+    border: 1.5px solid #eee;
+    margin-bottom: 20px; /* Space sa pagitan ng button at card */
+}
+
+.back-link:hover {
+    background: var(--maroon);
+    color: #ffffff;
+    transform: translateX(-5px);
+}
+
+/* ===== Grammar Flip Cards ===== */
+.grammar-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.card-container {
+    perspective: 1000px;
+    height: 150px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.card-container:hover .card { transform: rotateY(180deg); }
+
+.card-face {
+    position: absolute;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    display: flex; align-items: center; justify-content: center;
+    padding: 15px; border-radius: 15px; text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.card-front { background: var(--card-bg); color: var(--maroon); border: 3px solid var(--maroon); font-weight: 700; }
+.card-back { background: var(--gold); color: white; transform: rotateY(180deg); border: 3px solid var(--gold); font-weight: 500; }
+
+/* ===== Form Groups ===== */
+.form-group { margin-bottom: 20px; text-align: left; width: 100%; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
+.form-group input, .form-group select {
+    width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #eee;
+    font-family: 'Poppins', sans-serif; font-size: 1rem; outline: none; transition: var(--transition);
+}
+.form-group input:focus { border-color: var(--maroon); }
+
+/* ===== Modal System ===== */
+.modal {
+    display: none; position: fixed; z-index: 2000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: var(--card-bg); margin: 5vh auto; padding: 45px;
+    border-radius: 24px; width: 90%; max-width: 650px;
+    border-top: 10px solid var(--maroon); position: relative; text-align: left;
+}
+
+.close-btn {
+    position: absolute; top: 20px; right: 25px;
+    background: #f2f2f2; border: none; width: 35px; height: 35px;
+    border-radius: 50%; font-size: 1.1rem; color: #666; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+}
+.close-btn:hover { background: var(--maroon); color: white; }
+
+.options { margin-top: 20px; display: flex; flex-direction: column; gap: 15px; }
+.options button {
+    display: block; width: 100%; padding: 18px 25px;
+    border-radius: 15px; border: 1.5px solid #e0e0e0;
+    background: #fff; transition: var(--transition);
+    text-align: left; font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem; color: var(--text-dark); cursor: pointer; font-weight: 500;
+}
+.options button:hover { border-color: var(--gold); background: #fffcf5; transform: translateX(8px); }
+
+/* ===== Buttons ===== */
+.btn, .login-btn, .next-btn {
+    display: inline-block; width: 100%; max-width: 250px;
+    padding: 14px 28px; border-radius: 50px; border: none; cursor: pointer;
+    font-size: 1rem; font-weight: 700; background: var(--maroon);
+    color: #fff; box-shadow: 0 8px 15px rgba(122, 12, 12, 0.15);
+    transition: var(--transition); text-align: center; text-decoration: none;
+}
+.btn:hover { transform: translateY(-3px); background: var(--maroon-dark); }
+.btn-gold, .next-btn, .test-buttons .btn-maroon { background: var(--gold); }
+
+/* ===== Footer ===== */
+.footer-credit { margin-top: auto; padding: 40px 0; color: #bbb; text-align: center; grid-column: span 2; }
+
+/* ===== Responsive Mobile View ===== */
+@media (max-width: 1000px) {
+    .dashboard-container { grid-template-columns: 1fr; }
+    .dashboard-card.full-width, .footer-credit, .login-card { grid-column: span 1; }
+    .quiz-page-container { align-items: center; }
+}

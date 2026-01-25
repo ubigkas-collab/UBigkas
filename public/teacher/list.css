@@ -1,0 +1,124 @@
+/* =========================================
+   UBigkas Admin List Stylesheet
+   Referenced from: admin_panel.css
+   ========================================= */
+
+:root {
+    --maroon: #7a0c0c;
+    --maroon-dark: #5c0808;
+    --gold: #d4af37;
+    --gold-light: #f5e7b2;
+    --white-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-dark: #222222;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ===== Dashboard/List Wrapper Layout ===== */
+.dashboard-wrapper {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    height: 75vh;
+}
+
+/* Sidebar Styling (Same theme as Admin Panel) */
+.sidebar {
+    flex: 1;
+    background: rgba(20, 30, 50, 0.9); /* Dark theme match */
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 4px solid var(--maroon);
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 2.5;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    overflow-y: auto;
+}
+
+/* ===== List Buttons (Class/Student selection) ===== */
+.class-btn, .student-btn {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.class-btn:hover, .class-btn.active {
+    background: var(--maroon);
+    color: white;
+    transform: translateX(5px);
+}
+
+/* ===== Table Styling (Matches Dashboard Card) ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    color: var(--text-dark);
+}
+
+th {
+    background: var(--maroon);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: var(--white-bg);
+}
+
+/* ===== Reusable Components from Admin Panel ===== */
+.btn-back {
+    background: #222;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-weight: bold;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-back:hover {
+    background: var(--gold);
+    color: #222;
+    transform: translateY(-2px);
+}
+
+.placeholder-text {
+    color: var(--gold);
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 50px;
+    font-family: 'Quicksand', sans-serif;
+}

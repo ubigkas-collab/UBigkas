@@ -1,0 +1,109 @@
+/* =========================================
+   UBigkas Navigation Stylesheet (Fixed)
+   Location: /admin/nav.css
+   ========================================= */
+
+:root {
+    --maroon: #7a0c0c;
+    --maroon-dark: #5c0808;
+    --gold: #d4af37;
+    --gold-light: #f5e7b2;
+    --white-bg: #ffffff;
+    --grey-light: #f8f9fa;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Reset for the Navigation Bar */
+nav, nav * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== NAVIGATION STYLES ===== */
+nav {
+    background-color: var(--white-bg);
+    display: flex;
+    /* Forces logo and links to start at the far left */
+    justify-content: flex-start; 
+    align-items: center;
+    /* Low left padding brings logo to the edge like your screenshot */
+    padding: 0.8rem 1.5rem; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-bottom: 3px solid var(--maroon);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+nav .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--maroon);
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.5px;
+    /* Gap between logo and the first nav item */
+    margin-right: 3rem; 
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+nav .logo span {
+    color: var(--gold);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    /* Tight gap between links for a clean look */
+    gap: 1rem; 
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--maroon);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+/* Hover Effect: Pill style */
+nav ul li a:hover {
+    background-color: var(--gold);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+/* iframe handling */
+#nav-iframe {
+    width: 100%;
+    height: 80px;
+    border: none;
+    display: block;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 1rem;
+        justify-content: center;
+    }
+    nav .logo { 
+        margin-right: 0; 
+        margin-bottom: 1rem; 
+    }
+    nav ul { 
+        gap: 0.5rem; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+    }
+}

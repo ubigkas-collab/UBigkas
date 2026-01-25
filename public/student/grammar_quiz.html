@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Filipino Grammar Quiz | UBigkas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="grammar_quiz.css">
+
+<style>
+/* ===== DRIP EFFECT INTEGRATION ===== */
+#drip-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+}
+.drip-layer {
+    position: absolute;
+    top: -110%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: #181818;
+    transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+    clip-path: url(#drip-path);
+}
+#drip-container.active .drip-layer {
+    top: 0;
+}
+.drip-light { background-color: #f8f9fa !important; }
+
+.quiz-instruction {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+/* ===== Nav & Actions ===== */
+nav {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+nav .logo {
+  font-weight: 700;
+  font-size: 22px;
+  text-decoration: none;
+  color: maroon;
+}
+nav .logo span { color: #d4af37; }
+nav ul { list-style: none; display: flex; gap: 15px; margin-left: 20px; }
+nav ul li a { text-decoration: none; font-weight: 500; color: #000000 !important; transition: color 0.3s ease; }
+nav ul li a:hover { color: maroon !important; }
+
+.nav-actions { margin-left: auto; display: flex; flex-direction: row; gap: 10px; align-items: center; }
+#logoutBtn, #musicToggle, #darkModeBtn {
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+#logoutBtn { background-color: #d9534f; color: white; }
+#darkModeBtn { background-color: #333; color: #fff; }
+#musicToggle { background: #d4af37; color: #7a0c0c; }
+
+/* ===== Dark Mode Styles ===== */
+body.dark-mode { background-color: #181818; color: #e6e6e6; }
+body.dark-mode nav { background-color: #202020; }
+body.dark-mode .dashboard-card, body.dark-mode .modal-content { background-color: #242424; color: #e6e6e6; border: 1px solid #333; }
+body.dark-mode nav ul li a { color: #e6e6e6 !important; }
+
+/* ===== QUIZ MODAL REFINEMENTS ===== */
+.modal {
+    display: none; position: fixed; z-index: 2500; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+}
+.modal-content {
+    background: #ffffff; margin: 5% auto; padding: 40px; border-radius: 25px;
+    max-width: 650px; width: 90%; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+#qProgress {
+    font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 5px;
+}
+.sentence {
+    font-size: 1.4rem; font-weight: 600; color: #2c3e50; line-height: 1.4; margin-bottom: 25px;
+}
+body.dark-mode .sentence { color: #fff; }
+
+.options { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.options button {
+    padding: 15px 20px; font-size: 1rem; border: 2px solid #e9ecef; border-radius: 12px;
+    background: #f8f9fa; color: #333; text-align: left; font-weight: 500; transition: all 0.2s ease; cursor: pointer; font-family: 'Poppins', sans-serif;
+}
+.options button:hover { border-color: #d4af37; background-color: #fffdf5; }
+
+.options button.correct { background-color: #2ecc71 !important; color: white !important; border-color: #27ae60 !important; }
+.options button.wrong { background-color: #e74c3c !important; color: white !important; border-color: #c0392b !important; }
+
+.explanation {
+    margin-top: 25px; padding: 15px; background-color: #e8f4fd; color: #2980b9;
+    border-radius: 12px; font-size: 0.9rem; border-left: 5px solid #3498db; display: none;
+}
+body.dark-mode .explanation { background-color: #1a2633; color: #5dade2; }
+
+.score-area {
+    margin-top: 30px; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #f1f1f1; padding-top: 20px;
+}
+
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+.modal-card { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; }
+.modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+.modal-btn { padding: 10px 25px; border-radius: 25px; border: none; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
+.modal-btn.primary { background-color: #d9534f; color: white; }
+.modal-btn.secondary { background-color: #e9ecef; color: #333; }
+
+#scoreResultModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; }
+.score-card { background: white; padding: 40px; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; }
+.score-number { font-size: 3.5rem; font-weight: 700; margin: 15px 0; color: maroon; }
+.score-feedback { font-size: 1.1rem; color: #444; font-weight: 500; margin-bottom: 25px; line-height: 1.5; min-height: 3em; display: flex; align-items: center; justify-content: center;}
+body.dark-mode .score-card { background: #242424; color: #fff; }
+body.dark-mode .score-feedback { color: #ccc; }
+
+.confetti { position: absolute; width: 10px; height: 10px; background: #d4af37; top: -10px; border-radius: 2px; animation: fall 3s linear infinite; }
+@keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+</style>
+</head>
+
+<body>
+
+<div id="drip-container">
+  <div id="dripLayer" class="drip-layer"></div>
+  <svg width="0" height="0">
+    <defs>
+      <clipPath id="drip-path" clipPathUnits="objectBoundingBox">
+        <path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path>
+      </clipPath>
+    </defs>
+  </svg>
+</div>
+
+<div id="toast-container"></div>
+
+<div id="scoreResultModal">
+    <div id="confetti-wrapper"></div>
+    <div class="score-card">
+        <h2>Quiz Complete!</h2>
+        <p>Iyong nakuha ay:</p>
+        <div class="score-number" id="finalScoreDisplay">0/10</div>
+        <p class="score-feedback" id="feedbackMessage"></p>
+        <button class="modal-btn primary" onclick="closeScoreModal()" style="width: 100%;">Mahusay!</button>
+    </div>
+</div>
+
+<nav>
+  <a href="index.html" class="logo">UB<span>igkas</span></a>
+  <ul>
+    <li><a href="student_dashboard.html">Home</a></li>
+    <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+    <li><a href="About.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button id="darkModeBtn">🌙</button>
+    <button id="logoutBtn">Logout</button>
+    <button id="musicToggle">Mute Music</button>
+  </div>
+</nav>
+
+<div id="logoutModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3>Logout Confirmation</h3>
+    <p>Are you sure you want to logout?</p>
+    <div class="modal-actions">
+      <button id="cancelLogout" class="modal-btn secondary">Cancel</button>
+      <button id="confirmLogout" class="modal-btn primary">Logout</button>
+    </div>
+  </div>
+</div>
+
+<audio id="bgMusic" src="assessment/music/Quiz.mp3" loop autoplay></audio>
+
+<div class="dashboard-container">
+    <div class="back-nav">
+        <a href="student_dashboard.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Dashboard
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+        <h1>Filipino Grammar Quiz</h1>
+        <p class="subtitle">Subukan ang iyong galing sa balarilang Filipino.</p>
+
+        <div class="test-buttons">
+            <button class="btn" data-file="vso">Sentence Structure</button>
+            <button class="btn" data-file="pronouns">Pronouns (Panghalip)</button>
+            <button class="btn" data-file="affixes">Verbs (Pandiwa)</button>
+            <button class="btn" data-file="noun">Noun (Pangalan)</button>
+            <button class="btn" data-file="adjective">Adjective (Panguri)</button>
+            <button class="btn" data-file="adverb">Adverb (Pangabay)</button>
+        </div>
+    </div>
+</div>
+
+<div id="quizModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="closeModalBtn">×</button>
+        <div id="qProgress">Question 1 of 10</div>
+        <p class="quiz-instruction" id="quizInstruction"></p>
+        <p class="sentence" id="sentence"></p>
+        <div class="options" id="options"></div>
+        <div class="explanation" id="explanation"></div>
+        <div class="score-area">
+            <p class="score-text" id="score">Score: 0</p>
+            <button class="btn" id="nextBtn" style="max-width:180px;background:#d4af37;color:white;border:none;border-radius:10px;padding:12px 25px;">
+                Next Question
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="footer-credit">©2025 University of Batangas – Lipa City</div>
+
+<script type="module">
+import { auth, db } from "../firebase.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, setDoc, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+let studentName = sessionStorage.getItem("studentName");
+let studentUID  = sessionStorage.getItem("studentUID");
+let classId     = sessionStorage.getItem("classId");
+
+if (!studentName || !studentUID) { window.location.href = "../index.html"; }
+
+function showToast(message) {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => { toast.remove(); }, 4000);
+}
+
+window.closeScoreModal = function() {
+    document.getElementById("scoreResultModal").style.display = "none";
+    document.getElementById("confetti-wrapper").innerHTML = "";
+};
+
+// MODIFIED: Function to pick a random sentence from the list in JSON
+async function getRandomFeedback(score, total) {
+    try {
+        const res = await fetch('assessment/feedback.json');
+        const feedbackData = await res.json();
+        const percent = (score / total) * 100;
+        
+        let pool = [];
+        if (percent === 100) pool = feedbackData.excellent;
+        else if (percent >= 80) pool = feedbackData.great;
+        else if (percent >= 50) pool = feedbackData.good;
+        else pool = feedbackData.keep_trying;
+
+        // Pick a random sentence from the chosen pool
+        const randomIndex = Math.floor(Math.random() * pool.length);
+        return pool[randomIndex];
+    } catch (err) {
+        console.error("Feedback fetch error:", err);
+        return "Mahusay!"; 
+    }
+}
+
+async function triggerScoreModal(finalScore, total) {
+    const modal = document.getElementById("scoreResultModal");
+    const scoreDisplay = document.getElementById("finalScoreDisplay");
+    const feedbackEl = document.getElementById("feedbackMessage");
+    const confettiWrapper = document.getElementById("confetti-wrapper");
+    
+    scoreDisplay.textContent = `${finalScore}/${total}`;
+    
+    // Set randomized feedback
+    feedbackEl.textContent = await getRandomFeedback(finalScore, total);
+    
+    modal.style.display = "flex";
+    
+    if ((finalScore / total) >= 0.8) {
+        for(let i=0; i<50; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.animationDelay = Math.random() * 2 + "s";
+            confettiWrapper.appendChild(confetti);
+        }
+    }
+}
+
+let questions = [];
+let score = 0;
+let currentQuiz = "";
+let currentQuestionIndex = 0;
+let answered = false;
+
+const modal = document.getElementById("quizModal");
+const sentenceEl = document.getElementById("sentence");
+const optionsEl = document.getElementById("options");
+const explanationEl = document.getElementById("explanation");
+const nextBtn = document.getElementById("nextBtn");
+const scoreEl = document.getElementById("score");
+const instructionEl = document.getElementById("quizInstruction");
+const progressEl = document.getElementById("qProgress");
+
+const quizPaths = {
+    vso: "assessment/sentence_structure.json",
+    pronouns: "assessment/pronoun_questions.json",
+    affixes: "assessment/affix_questions.json",
+    noun: "assessment/noun_questions.json",
+    adjective: "assessment/adjective_questions.json",
+    adverb: "assessment/Adverb_questions.json"
+};
+
+const quizInstructions = {
+    vso: "Panuto: Piliin ang tamang ayos ng pangungusap (Verb–Subject–Object).",
+    pronouns: "Panuto: Piliin ang tamang panghalip na angkop sa pangungusap.",
+    affixes: "Panuto: Piliin ang tamang pandiwa ayon sa aspekto o panlapi."
+};
+
+document.querySelectorAll(".test-buttons button").forEach(btn => {
+    btn.addEventListener("click", () => startQuiz(btn.dataset.file));
+});
+
+function startQuiz(quizName) {
+    score = 0;
+    currentQuestionIndex = 0;
+    currentQuiz = quizName;
+    instructionEl.textContent = quizInstructions[quizName] || "Panuto: Sagutin ang sumusunod.";
+    scoreEl.textContent = "Score: 0";
+    fetch(quizPaths[quizName])
+        .then(res => res.json())
+        .then(data => {
+            questions = data.sort(() => 0.5 - Math.random()).slice(0, 10);
+            modal.style.display = "block";
+            loadQuestion();
+        })
+        .catch(err => showToast("Error loading quiz questions."));
+}
+
+function loadQuestion() {
+    if (currentQuestionIndex >= questions.length) {
+        saveScore();
+        modal.style.display = "none";
+        triggerScoreModal(score, questions.length);
+        return;
+    }
+
+    answered = false;
+    nextBtn.disabled = true;
+    nextBtn.style.opacity = "0.5";
+    progressEl.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+    const q = questions[currentQuestionIndex];
+    sentenceEl.textContent = q.wrongSentence;
+    optionsEl.innerHTML = "";
+    explanationEl.style.display = "none";
+
+    q.options.sort(() => 0.5 - Math.random()).forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => {
+            if (answered) return;
+            answered = true;
+            nextBtn.disabled = false;
+            nextBtn.style.opacity = "1";
+
+            if (option === q.correctOption) {
+                btn.classList.add("correct");
+                score++;
+            } else {
+                btn.classList.add("wrong");
+                Array.from(optionsEl.children).forEach(child => {
+                    if (child.textContent === q.correctOption) {
+                        child.classList.add("correct");
+                    }
+                });
+            }
+            explanationEl.textContent = q.explanation;
+            explanationEl.style.display = "block";
+            scoreEl.textContent = `Score: ${score}`;
+        };
+        optionsEl.appendChild(btn);
+    });
+}
+
+async function saveScore() {
+    try {
+        const docRef = doc(db, "students", studentUID, "assessments", currentQuiz);
+        await setDoc(docRef, {
+            studentUID, studentName, classId,
+            quizType: currentQuiz, score, total: questions.length,
+            takenAt: serverTimestamp()
+        }, { merge: true });
+    } catch (err) { console.error("Error saving score:", err); }
+}
+
+const logoutBtn = document.getElementById("logoutBtn");
+const logoutModal = document.getElementById("logoutModal");
+const cancelLogout = document.getElementById("cancelLogout");
+const confirmLogout = document.getElementById("confirmLogout");
+
+logoutBtn.onclick = () => { logoutModal.style.display = "flex"; };
+cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
+
+confirmLogout.onclick = async () => {
+    showToast("Logging out...");
+    try {
+        if (studentUID) {
+            const studentRef = doc(db, "students", studentUID);
+            await updateDoc(studentRef, { status: "offline", lastSeen: serverTimestamp() });
+        }
+        await signOut(auth);
+        sessionStorage.clear();
+        window.location.href = "../index.html";
+    } catch (err) { window.location.href = "../index.html"; }
+};
+
+nextBtn.onclick = () => { currentQuestionIndex++; loadQuestion(); };
+document.getElementById("closeModalBtn").onclick = () => { modal.style.display = "none"; };
+
+const bgMusic = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+let isMuted = false;
+musicToggle.onclick = () => {
+    isMuted = !isMuted;
+    bgMusic.muted = isMuted;
+    musicToggle.textContent = isMuted ? "Unmute Music" : "Mute Music";
+};
+
+/* ===== DRIP THEME SWITCHER ===== */
+const darkModeBtn = document.getElementById("darkModeBtn");
+const dripContainer = document.getElementById("drip-container");
+const dripLayer = document.getElementById("dripLayer");
+
+darkModeBtn.onclick = () => {
+    const isDark = document.body.classList.contains("dark-mode");
+    if (isDark) dripLayer.classList.add("drip-light"); 
+    else dripLayer.classList.remove("drip-light");
+
+    dripContainer.classList.add("active");
+
+    setTimeout(() => {
+        document.body.classList.toggle("dark-mode");
+        const nowDark = document.body.classList.contains("dark-mode");
+        darkModeBtn.textContent = nowDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", nowDark ? "dark" : "light");
+    }, 350);
+
+    setTimeout(() => {
+        dripContainer.classList.remove("active");
+    }, 700);
+};
+
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    darkModeBtn.textContent = "☀️";
+}
+</script>
+
+</body>
+</html>

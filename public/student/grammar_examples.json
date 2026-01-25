@@ -1,0 +1,42 @@
+{
+  "Pangngalan": [
+    "Bata", "Lipa City", "Aklat", "Guro", "Pagkain", 
+    "Lapis", "Bundok", "Pag-asa", "Unibersidad", "Pamilya", 
+    "Sapatos", "Bulkang Taal", "Kalayaan", "Magsasaka", "Internet",
+    "Puso", "Langit", "Karagatan", "Bayani", "Hustisya",
+    "Gusali", "Halaman", "Pangarap", "Kaibigan", "Dyornal",
+    "Kultura", "Kasaysayan", "Watawat", "Musika", "Bayan"
+  ],
+  "Pandiwa": [
+    "Tumakbo", "Kumakain", "Nag-aaral", "Sumasayaw", "Lumilipad", 
+    "Nagsusulat", "Naglalaba", "Umiinom", "Tumatawa", "Nagbibisikleta", 
+    "Nagdarasal", "Naglalaro", "Bumibili", "Umaawit", "Nagwawalis",
+    "Lumalakad", "Nag-iisip", "Tumutulong", "Nagluluto", "Nagbabasa",
+    "Natutulog", "Gumigising", "Nagbibihis", "Nagmamaneho", "Lumalangoy",
+    "Nagpapahinga", "Tumatawag", "Nagpapadala", "Sumasagot", "Naghihintay"
+  ],
+  "Pang-uri": [
+    "Maganda", "Mabilis", "Matalino", "Mainit", "Malinis", 
+    "Mabait", "Masipag", "Matangkad", "Maliit", "Masarap", 
+    "Makulay", "Maaliwalas", "Mahinhin", "Matapang", "Tahimik",
+    "Malawak", "Mabango", "Malamig", "Maliwanag", "Madilim",
+    "Matamis", "Maasim", "Malambot", "Matigas", "Payapa",
+    "Masaya", "Malungkot", "Gutom", "Busog", "Sariwa"
+  ],
+  "Pang-abay": [
+    "Mabilis", "Dahan-dahan", "Kanina", "Doon", "Opo", 
+    "Bukas", "Tunay", "Matiyaga", "Mahigpit", "Minsan", 
+    "Palagi", "Dito", "Ngayon", "Tiyak", "Maluwag",
+    "Maaga", "Huli", "Bigla", "Paitaas", "Pababa",
+    "Lubos", "Masyado", "Tila", "Sadyang", "Marahil",
+    "Kahit", "Habang", "Tuwing", "Hanggang", "Saanman"
+  ],
+  "Panghalip": [
+    "Ako", "Sila", "Ito", "Tayo", "Kanya", 
+    "Iyan", "Kami", "Ikaw", "Niya", "Sinu-sino", 
+    "Anuman", "Kayo", "Amin", "Inyo", "Sino",
+    "Dito", "Diyan", "Doon", "Heto", "Hayan",
+    "Hayun", "Mismo", "Lahat", "Madla", "Bawat",
+    "Alinman", "Sinuman", "Saanman", "Nila", "Mo"
+  ]
+}
