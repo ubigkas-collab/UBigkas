@@ -10,6 +10,16 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
+  /* ===== TEXT SCALING VARIABLE ===== */
+  :root {
+    --text-scale: 100%;
+  }
+
+  body {
+    font-size: var(--text-scale);
+    transition: background-color 0.3s ease;
+  }
+
   /* ===== DRIP EFFECT INTEGRATION ===== */
   #drip-container {
     position: fixed;
@@ -35,37 +45,26 @@
   }
   .drip-light { background-color: #fdfdfd !important; }
 
-  /* ===== Logout & Dark Mode Button Styles ===== */
+  /* ===== SETTINGS DROPDOWN ===== */
   .nav-actions {
     margin-left: auto;
     display: flex;
-    gap: 10px;
     align-items: center;
   }
 
-  #logoutBtn {
-    padding: 10px 25px;
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    /* Invisible bridge to keep menu open while moving mouse from button to menu */
+    padding-bottom: 15px; 
+    margin-bottom: -15px;
+  }
+
+  #settingsBtn {
+    padding: 10px 20px;
     border-radius: 25px;
-    background-color: #d9534f;
+    background-color: #7a0c0c;
     color: white;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-
-  #logoutBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    background-color: #c9302c;
-  }
-
-  #darkModeBtn {
-    padding: 10px 15px;
-    border-radius: 25px;
-    background-color: #333;
-    color: #fff;
     font-weight: 600;
     border: none;
     cursor: pointer;
@@ -73,19 +72,74 @@
     transition: all 0.3s ease;
   }
 
-  #darkModeBtn:hover {
-    background-color: #555;
+  .dropdown-content {
+    /* Changed from display:none to opacity for transitions */
+    display: block; 
+    opacity: 0;
+    visibility: hidden;
+    
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 10001;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 10px;
+
+    /* RETRACTION DELAY LOGIC */
+    /* It takes 0.3s to fade out, but starts only after a 0.8s delay */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition-delay: 0.8s; 
   }
+
+  .dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    /* Remove delay on hover so it opens instantly */
+    transition-delay: 0s; 
+  }
+
+  .dropdown-content button {
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+    border: none;
+    background: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+    color: #333;
+  }
+
+  .dropdown-content button:hover {
+    background-color: #f1f1f1;
+  }
+
+  #logoutBtn { color: #d9534f !important; font-weight: 700; }
 
   /* ===== Dark Mode Styles ===== */
   body.dark-mode {
     background-color: #181818;
-    color: #e6e6e6;
+    color: #ffffff;
   }
 
-  body.dark-mode nav {
-    background-color: #202020;
+  body.dark-mode nav { background-color: #202020; 
+  color:#e6e6e6;
   }
+  
+  body.dark-mode .dropdown-content {
+    background-color: #242424;
+    border: 1px solid #333;
+  }
+
+  body.dark-mode .dropdown-content button { color: #e6e6e6; }
+  body.dark-mode .dropdown-content button:hover { background-color: #333; }
 
   body.dark-mode .dashboard-card,
   body.dark-mode .assessment-section,
@@ -95,30 +149,13 @@
     border: 1px solid #333;
   }
 
-  body.dark-mode .footer-credit {
-    color: #999;
-  }
-
-  body.dark-mode a {
-    color: #e6e6e6;
-  }
-
-  body.dark-mode button {
-    background-color: #333;
-    color: #e6e6e6;
-  }
-
-  body.dark-mode button:hover {
-    background-color: #444;
-  }
-
   /* ===== CUSTOM MODAL STYLES ===== */
   .modal-overlay {
     display: none;
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 2000;
+    z-index: 20000;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(4px);
@@ -131,13 +168,13 @@
     width: 90%;
     max-width: 400px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
 
-  .modal-actions {
-    display: flex; gap: 15px; justify-content: center; margin-top: 20px;
+  .modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+  
+  .feedback-quiz-name{
+    font-weight: bold;
   }
-
   .modal-btn {
     padding: 10px 25px; border-radius: 25px; border: none;
     font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif;
@@ -147,7 +184,6 @@
   .modal-btn.secondary { background-color: #e9ecef; color: #333; }
 
   body.dark-mode .modal-card { background: #242424; color: #e6e6e6; border: 1px solid #333; }
-  body.dark-mode .modal-btn.secondary { background-color: #333; color: #fff; }
 
   /* ===== GRAMMAR CARD FLIP LOGIC ===== */
   .grammar-cards {
@@ -156,11 +192,7 @@
     gap: 20px;
     margin-top: 20px;
   }
-  .card-container {
-    perspective: 1000px;
-    cursor: pointer;
-    height: 180px;
-  }
+  .card-container { perspective: 1000px; cursor: pointer; height: 180px; }
   .card {
     position: relative;
     width: 100%;
@@ -168,15 +200,12 @@
     transition: transform 0.6s;
     transform-style: preserve-3d;
   }
-  .card.is-flipped {
-    transform: rotateY(180deg);
-  }
+  .card.is-flipped { transform: rotateY(180deg); }
   .card-face {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -184,22 +213,14 @@
     border-radius: 15px;
     padding: 15px;
   }
-  .card-front {
-    background-color: #7a0c0c;
-    color: white;
-    font-weight: 700;
-  }
+  .card-front { background-color: #7a0c0c; color: white; font-weight: 700; }
   .card-back {
     background-color: #fff;
     color: #333;
     transform: rotateY(180deg);
     border: 1px solid #ddd;
   }
-  body.dark-mode .card-back {
-    background-color: #333;
-    color: #fff;
-    border-color: #444;
-  }
+  body.dark-mode .card-back { background-color: #333; color: #fff; border-color: #444; }
   .card-example {
     margin-top: 12px;
     font-style: italic;
@@ -210,16 +231,6 @@
     width: 90%;
     font-size: 0.9rem;
   }
-  
-  /* Feedback Styling */
-  .feedback-item {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    font-size: 0.9rem;
-  }
-  body.dark-mode .feedback-item { border-bottom-color: #333; }
-  .feedback-quiz-name { font-weight: 700; color: #7a0c0c; margin-right: 5px; }
-  body.dark-mode .feedback-quiz-name { color: #d4af37; }
 </style>
 
 </head>
@@ -246,8 +257,15 @@
   </ul>
 
   <div class="nav-actions">
-    <button id="darkModeBtn">🌙</button>
-    <button id="logoutBtn">Logout</button>
+    <div class="dropdown">
+      <button id="settingsBtn">Settings ⚙️</button>
+      <div class="dropdown-content">
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="textSizeBtn">🔍 Text Size: 100%</button>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+        <button id="logoutBtn">🚪 Logout</button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -293,7 +311,6 @@
           </div>
         </div>
       </div>
-
       <div class="card-container" data-type="Pandiwa">
         <div class="card">
           <div class="card-face card-front">Pandiwa</div>
@@ -353,121 +370,43 @@ const classId     = sessionStorage.getItem("classId");
 document.getElementById("studentName").textContent = studentName;
 document.getElementById("classId").textContent = classId;
 
-/* ===================== FEEDBACK LOGIC ===================== */
+/* ===================== TEXT SIZE LOGIC ===================== */
+const textSizeBtn = document.getElementById("textSizeBtn");
+const sizes = ["100%", "115%", "130%"];
+let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+if(currentSizeIndex === -1) currentSizeIndex = 0;
+
+function updateTextSize() {
+  const newSize = sizes[currentSizeIndex];
+  document.documentElement.style.setProperty('--text-scale', newSize);
+  textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+  localStorage.setItem("textSize", newSize);
+}
+
+textSizeBtn.onclick = (e) => {
+  e.stopPropagation();
+  currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+  updateTextSize();
+};
+updateTextSize();
+
+/* ===================== FEEDBACK & CHART LOGIC ===================== */
 const feedbackPool = {
-    needsImprovement: [
-        "It seems there is some confusion with {quiz}. Let's review the core rules and try again!",
-        "Don't be discouraged! {quiz} can be tricky. A bit more practice will go a long way.",
-        "Focus on the fundamental concepts of {quiz}. You've got this!",
-        "Practice makes perfect. Re-reading the examples for {quiz} might help clarify things."
-    ],
-    proficient: [
-        "Great job! You have a solid grasp of {quiz}, but there is still room for a perfect score.",
-        "You're doing well with {quiz}. Just a few more exercises and you'll be an expert!",
-        "Good progress on {quiz}! Keep up the consistent effort.",
-        "Your understanding of {quiz} is clear. Aim for 100% on your next attempt!"
-    ],
-    advanced: [
-        "Excellent! You have mastered {quiz} completely.",
-        "Fantastic work! Your knowledge of {quiz} is impressive.",
-        "Perfect or near-perfect! You are a pro at {quiz}.",
-        "Outstanding performance! You clearly understand the nuances of {quiz}."
-    ]
+    needsImprovement: ["It seems there is some confusion with {quiz}. Let's review!", "Don't be discouraged! {quiz} can be tricky.", "Focus on {quiz} fundamentals."],
+    proficient: ["Great job! You have a solid grasp of {quiz}.", "You're doing well with {quiz}. Keep it up!", "Good progress on {quiz}!"],
+    advanced: ["Excellent! You have mastered {quiz}.", "Fantastic work on {quiz}!", "Outstanding performance! You are a pro at {quiz}."]
 };
 
 function formatQuizName(name) {
-    const names = {
-        vso: "Sentence Structure",
-        pronouns: "Pronouns",
-        affixes: "Verbs/Affixes",
-        noun: "Nouns",
-        adjective: "Adjectives",
-        adverb: "Adverbs"
-    };
+    const names = { vso: "Sentence Structure", pronouns: "Pronouns", affixes: "Verbs/Affixes", noun: "Nouns", adjective: "Adjectives", adverb: "Adverbs" };
     return names[name] || name;
 }
 
 function getFeedback(quizName, percentage) {
     let category = percentage < 75 ? "needsImprovement" : (percentage < 90 ? "proficient" : "advanced");
     const options = feedbackPool[category];
-    const text = options[Math.floor(Math.random() * options.length)];
-    return text.replace("{quiz}", formatQuizName(quizName));
+    return options[Math.floor(Math.random() * options.length)].replace("{quiz}", formatQuizName(quizName));
 }
-
-/* ===================== DYNAMIC EXAMPLES LOGIC ===================== */
-let grammarData = {};
-
-fetch('grammar_examples.json')
-  .then(res => res.json())
-  .then(data => {
-    grammarData = data;
-    document.querySelectorAll('.card-container').forEach(updateExample);
-  })
-  .catch(err => console.error("Error loading examples:", err));
-
-function updateExample(container) {
-    const category = container.getAttribute('data-type');
-    const exampleDiv = container.querySelector('.card-example');
-    if (grammarData[category]) {
-        const list = grammarData[category];
-        const randomItem = list[Math.floor(Math.random() * list.length)];
-        exampleDiv.textContent = `Halimbawa: ${randomItem}`;
-    }
-}
-
-document.querySelectorAll('.card-container').forEach(container => {
-    const card = container.querySelector('.card');
-
-    container.addEventListener('click', () => {
-        card.classList.toggle('is-flipped');
-    });
-
-    card.addEventListener('transitionend', (event) => {
-        if (event.propertyName === 'transform') {
-            if (!card.classList.contains('is-flipped')) {
-                updateExample(container);
-            }
-        }
-    });
-});
-
-/* ===================== REMAINING ORIGINAL LOGIC ===================== */
-async function setStudentStatus(uid, status) {
-  try {
-    const studentRef = doc(db, "students", uid);
-    await updateDoc(studentRef, { status: status, lastSeen: serverTimestamp() });
-  } catch (err) { console.error("Status update failed:", err); }
-}
-
-onAuthStateChanged(auth, async user => {
-  if (!user || !studentUID) { window.location.href = "../index.html"; }
-  else { await setStudentStatus(studentUID, "online"); loadAssessmentScores(studentUID); }
-});
-
-document.getElementById("quizBtn").onclick = () => { window.location.href = "grammar_quiz.html"; };
-
-const logoutBtn = document.getElementById("logoutBtn");
-const logoutModal = document.getElementById("logoutModal");
-const cancelLogout = document.getElementById("cancelLogout");
-const confirmLogout = document.getElementById("confirmLogout");
-
-logoutBtn.onclick = () => { logoutModal.style.display = "flex"; };
-cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
-
-confirmLogout.onclick = async () => {
-  if (studentUID) await setStudentStatus(studentUID, "offline");
-  await signOut(auth);
-  sessionStorage.clear();
-  window.location.href = "../index.html";
-};
-
-window.onclick = (event) => {
-  if (event.target == logoutModal) logoutModal.style.display = "none";
-};
-
-window.addEventListener("beforeunload", () => {
-  if (studentUID) setStudentStatus(studentUID, "offline");
-});
 
 async function loadAssessmentScores(uid) {
   try {
@@ -485,11 +424,8 @@ async function loadAssessmentScores(uid) {
       const total = data.total ?? 1;
       const percentage = Math.round((score / total) * 100);
 
-      if (!scoreMap[quiz] || score > scoreMap[quiz].score) { 
-        scoreMap[quiz] = { score, total }; 
-      }
+      if (!scoreMap[quiz] || score > scoreMap[quiz].score) { scoreMap[quiz] = { score, total }; }
 
-      // Append Feedback
       const div = document.createElement("div");
       div.className = "feedback-item";
       div.innerHTML = `<span class="feedback-quiz-name">${formatQuizName(quiz)}:</span> ${getFeedback(quiz, percentage)}`;
@@ -509,10 +445,7 @@ function renderChart(labels, scores) {
   const ctx = document.getElementById("scoreChart").getContext("2d");
   new Chart(ctx, {
     type: "bar",
-    data: {
-      labels,
-      datasets: [{ data: scores, backgroundColor: "#7a0c0c", borderRadius: 10 }]
-    },
+    data: { labels, datasets: [{ data: scores, backgroundColor: "#7a0c0c", borderRadius: 10 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
@@ -524,38 +457,99 @@ function renderChart(labels, scores) {
   });
 }
 
-/* ===================== DRIP THEME SWITCHER ===================== */
+/* ===================== AUTH & STATUS ===================== */
+async function setStudentStatus(uid, status) {
+  try {
+    const studentRef = doc(db, "students", uid);
+    await updateDoc(studentRef, { status: status, lastSeen: serverTimestamp() });
+  } catch (err) { console.error("Status update failed:", err); }
+}
+
+onAuthStateChanged(auth, async user => {
+  if (!user || !studentUID) { window.location.href = "../index.html"; }
+  else { await setStudentStatus(studentUID, "online"); loadAssessmentScores(studentUID); }
+});
+
+/* ===================== UI INTERACTIONS ===================== */
+document.getElementById("quizBtn").onclick = () => { window.location.href = "grammar_quiz.html"; };
+
+const logoutBtn = document.getElementById("logoutBtn");
+const logoutModal = document.getElementById("logoutModal");
+const cancelLogout = document.getElementById("cancelLogout");
+const confirmLogout = document.getElementById("confirmLogout");
+
+logoutBtn.onclick = (e) => { e.stopPropagation(); logoutModal.style.display = "flex"; };
+cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
+
+confirmLogout.onclick = async () => {
+  if (studentUID) await setStudentStatus(studentUID, "offline");
+  await signOut(auth);
+  sessionStorage.clear();
+  window.location.href = "../index.html";
+};
+
+/* ===================== THEME SWITCHER ===================== */
 const darkModeBtn = document.getElementById("darkModeBtn");
 const dripContainer = document.getElementById("drip-container");
 const dripLayer = document.getElementById("dripLayer");
 
-darkModeBtn.onclick = () => {
+function updateThemeText(isDark) {
+    darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+}
+
+darkModeBtn.onclick = (e) => {
+  e.stopPropagation();
   const isDark = document.body.classList.contains("dark-mode");
-  
-  if (isDark) {
-    dripLayer.classList.add("drip-light");
-  } else {
-    dripLayer.classList.remove("drip-light");
-  }
+  if (isDark) dripLayer.classList.add("drip-light");
+  else dripLayer.classList.remove("drip-light");
 
   dripContainer.classList.add("active");
 
   setTimeout(() => {
     document.body.classList.toggle("dark-mode");
     const nowDark = document.body.classList.contains("dark-mode");
-    darkModeBtn.textContent = nowDark ? "☀️" : "🌙";
+    updateThemeText(nowDark);
     localStorage.setItem("theme", nowDark ? "dark" : "light");
   }, 350);
 
-  setTimeout(() => {
-    dripContainer.classList.remove("active");
-  }, 700);
+  setTimeout(() => { dripContainer.classList.remove("active"); }, 700);
 };
 
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark-mode");
-  darkModeBtn.textContent = "☀️";
+  updateThemeText(true);
+} else {
+  updateThemeText(false);
 }
+
+/* ===================== GRAMMAR EXAMPLES ===================== */
+let grammarData = {};
+fetch('grammar_examples.json').then(res => res.json()).then(data => {
+    grammarData = data;
+    document.querySelectorAll('.card-container').forEach(updateExample);
+}).catch(err => console.error("Error loading examples:", err));
+
+function updateExample(container) {
+    const category = container.getAttribute('data-type');
+    const exampleDiv = container.querySelector('.card-example');
+    if (grammarData[category]) {
+        const list = grammarData[category];
+        const randomItem = list[Math.floor(Math.random() * list.length)];
+        exampleDiv.textContent = `Halimbawa: ${randomItem}`;
+    }
+}
+
+document.querySelectorAll('.card-container').forEach(container => {
+    const card = container.querySelector('.card');
+    container.addEventListener('click', () => card.classList.toggle('is-flipped'));
+    card.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'transform' && !card.classList.contains('is-flipped')) updateExample(container);
+    });
+});
+
+window.onclick = (event) => { if (event.target == logoutModal) logoutModal.style.display = "none"; };
+window.addEventListener("beforeunload", () => { if (studentUID) setStudentStatus(studentUID, "offline"); });
+
 </script>
 
 </body>

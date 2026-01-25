@@ -17,6 +17,7 @@
     --card-bg: #fff;
     --nav-text: #333;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --text-scale: 100%;
 }
 
 /* ===== DRIP EFFECT STYLES ===== */
@@ -35,7 +36,7 @@
     left: 0;
     width: 100%;
     height: 120%;
-    background-color: #121212; /* Dark mode color */
+    background-color: #121212; 
     transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
     clip-path: url(#drip-path);
 }
@@ -48,6 +49,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: var(--bg);
     margin: 0;
+    font-size: var(--text-scale);
     transition: var(--transition);
 }
 
@@ -98,35 +100,15 @@ nav ul li a:hover {
     color: var(--gold);
 }
 
-.nav-actions { 
-    display: flex; 
-    gap: 12px; 
-    align-items: center; 
-}
-
-#logoutBtn, #darkModeBtn {
-    padding: 8px 18px;
-    border-radius: 25px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    transition: var(--transition);
-}
-
-#logoutBtn {
-    background-color: #d9534f;
-    color: white;
-}
-
-#logoutBtn:hover {
-    background-color: #c9302c;
-}
-
-#darkModeBtn {
-    background-color: #333;
-    color: #fff;
-}
+/* ===== SETTINGS DROPDOWN ===== */
+.nav-actions { margin-left: auto; display: flex; align-items: center; }
+.dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
+#settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: var(--maroon); color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: var(--transition); }
+.dropdown-content { display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; transition: opacity 0.3s ease, visibility 0.3s ease; transition-delay: 0.8s; }
+.dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transition-delay: 0s; }
+.dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
+.dropdown-content button:hover { background-color: #f1f1f1; }
+#logoutBtn { color: #d9534f !important; font-weight: 700; }
 
 /* ===== CUSTOM MODAL STYLES ===== */
 .modal-overlay {
@@ -134,7 +116,7 @@ nav ul li a:hover {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 2000;
+    z-index: 20000;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(4px);
@@ -199,6 +181,9 @@ body.dark-mode nav {
 }
 
 body.dark-mode nav .logo { color: #ffffff; }
+body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
+body.dark-mode .dropdown-content button { color: #e6e6e6; }
+body.dark-mode .dropdown-content button:hover { background-color: #333; }
 
 body.dark-mode .modal-card { background: #242424; color: #e6e6e6; border: 1px solid #333; }
 body.dark-mode .modal-btn.secondary { background-color: #333; color: #fff; }
@@ -292,7 +277,7 @@ textarea {
     font-family: 'Poppins', sans-serif;
 }
 
-button {
+#checkBtn {
     background: var(--maroon);
     color: white;
     border: none;
@@ -304,7 +289,7 @@ button {
     transition: var(--transition);
 }
 
-button:hover {
+#checkBtn:hover {
     background: var(--gold);
     color: var(--maroon);
 }
@@ -339,6 +324,18 @@ body.dark-mode .output-card { background: #2a2419; }
     font-size: 0.9rem;
     color: #666;
 }
+
+.desc-btn {
+    background: var(--maroon);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: var(--transition);
+}
 </style>
 </head>
 
@@ -364,8 +361,15 @@ body.dark-mode .output-card { background: #2a2419; }
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <button id="darkModeBtn">🌙</button>
-    <button id="logoutBtn">Logout</button>
+    <div class="dropdown">
+        <button id="settingsBtn">Settings ⚙️</button>
+        <div class="dropdown-content">
+            <button id="darkModeBtn">🌙 Dark Mode</button>
+            <button id="textSizeBtn">🔍 Text Size: 100%</button>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+            <button id="logoutBtn">🚪 Logout</button>
+        </div>
+    </div>
   </div>
 </nav>
 
@@ -426,6 +430,26 @@ const studentUID = sessionStorage.getItem("studentUID");
 
 let latestCorrectedSentence = "";
 
+/* ===== TEXT SIZE LOGIC ===== */
+const textSizeBtn = document.getElementById("textSizeBtn");
+const sizes = ["100%", "115%", "130%"];
+let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+if(currentSizeIndex === -1) currentSizeIndex = 0;
+
+function updateTextSize() {
+    const newSize = sizes[currentSizeIndex];
+    document.documentElement.style.setProperty('--text-scale', newSize);
+    textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+    localStorage.setItem("textSize", newSize);
+}
+
+textSizeBtn.onclick = (e) => {
+    e.stopPropagation();
+    currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+    updateTextSize();
+};
+updateTextSize();
+
 /* ===== SPEECH TO TEXT (STT) ===== */
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (SpeechRecognition) {
@@ -458,10 +482,10 @@ window.speakText = function(text) {
 checkBtn.onclick = async () => {
     const sentence = input.value.trim();
     if (!sentence) {
-        analysisContainer.innerHTML = "<b style='color:red;'>Walang input | No Input.</b>";
+        analysisContainer.innerHTML = "<b style='color:red;'>Please provide an input.</b>";
         return;
     }
-    analysisContainer.textContent = "Sini-sinkronisa...";
+    analysisContainer.textContent = "Processing...";
     try {
         const res = await fetch("http://127.0.0.1:5000/correct", {
             method: "POST",
@@ -469,25 +493,31 @@ checkBtn.onclick = async () => {
             body: JSON.stringify({ sentence })
         });
         const data = await res.json();
-        latestCorrectedSentence = data.corrected;
+        
+        latestCorrectedSentence = data.corrected || "";
+        const originalText = data.original || sentence;
+        const safeCorrected = latestCorrectedSentence.replace(/'/g, "\\'");
 
         analysisContainer.innerHTML = `
-            <p><b>Original:</b> ${data.original}</p>
-            <p><b>Corrected:</b> <span style="color: #28a745; font-weight: bold;">${data.corrected}</span>
-            <button class="tts-btn" onclick="speakText('${data.corrected.replace(/'/g, "\\'")}')">🔊 Pakinggan</button></p>
+            <p><b>Original:</b> ${originalText}</p>
+            <p><b>Corrected:</b> <span style="color: #28a745; font-weight: bold;">${latestCorrectedSentence}</span>
+            <button class="tts-btn" onclick="speakText('${safeCorrected}')">🔊 Listen</button></p>
         `;
-    } catch (err) { analysisContainer.textContent = "Error: " + err.message; }
+    } catch (err) { 
+        console.error(err);
+        analysisContainer.textContent = "Connection Error: " + err.message; 
+    }
 };
 
 /* ===== SENTENCE DESCRIPTION LOGIC ===== */
 descBtn.onclick = async () => {
     const sentenceToAnalyze = latestCorrectedSentence || input.value.trim();
     if (!sentenceToAnalyze) {
-        analysisContainer.innerHTML = "<b style='color:red;'>Magsulat muna ng pangungusap.</b>";
+        analysisContainer.innerHTML = "<b style='color:red;'>Please write a sentence first.</b>";
         return;
     }
 
-    analysisContainer.innerHTML = "<p>Inaanalisa ang kayarian...</p>";
+    analysisContainer.innerHTML = "<p>Analyzing structure...</p>";
 
     try {
         const res = await fetch("http://127.0.0.1:5000/analyze", {
@@ -502,11 +532,14 @@ descBtn.onclick = async () => {
             return;
         }
 
+        const displaySentence = data.corrected || sentenceToAnalyze;
+        const safeDisplay = displaySentence.replace(/'/g, "\\'");
+
         analysisContainer.innerHTML = `
-            <p><b>Sinusuring Pangungusap:</b> <span style="color: #28a745; font-weight: bold;">${data.corrected}</span> 
-               <button class="tts-btn" onclick="speakText('${data.corrected.replace(/'/g, "\\'")}')">🔊</button>
+            <p><b>Analyzed Sentence:</b> <span style="color: #28a745; font-weight: bold;">${displaySentence}</span> 
+                <button class="tts-btn" onclick="speakText('${safeDisplay}')">🔊</button>
             </p>
-            <p><b>Structure:</b> ${data.structure || "Hindi matukoy"}</p>
+            <p><b>Sentence Structure:</b> ${data.structure || "Undetermined"}</p>
         `;
 
         const table = document.createElement("table");
@@ -515,23 +548,26 @@ descBtn.onclick = async () => {
             <thead>
                 <tr>
                     <th>Word</th>
-                    <th>Type</th>
-                    <th>Meaning</th>
+                    <th>Part of Speech</th>
+                    <th>English Meaning</th>
                 </tr>
             </thead>
             <tbody></tbody>
         `;
 
         const tbody = table.querySelector("tbody");
-        data.words.forEach(w => {
-            tbody.innerHTML += `<tr>
-                <td>${w.word}</td>
-                <td>${w.type || "Di-tukoy"}</td>
-                <td>${w.meaning || "Walang kahulugan"}</td>
-            </tr>`;
-        });
+        if (data.words && Array.isArray(data.words)) {
+            data.words.forEach(w => {
+                tbody.innerHTML += `<tr>
+                    <td>${w.word || "-"}</td>
+                    <td>${w.type || "Unknown"}</td>
+                    <td>${w.meaning || "No meaning"}</td>
+                </tr>`;
+            });
+        }
         analysisContainer.appendChild(table);
     } catch (err) {
+        console.error(err);
         analysisContainer.innerHTML = `<b style='color:red;'>Server Error: ${err.message}</b>`;
     }
 };
@@ -549,7 +585,7 @@ const logoutModal = document.getElementById("logoutModal");
 const cancelLogout = document.getElementById("cancelLogout");
 const confirmLogout = document.getElementById("confirmLogout");
 
-logoutBtn.onclick = () => { logoutModal.style.display = "flex"; };
+logoutBtn.onclick = (e) => { e.stopPropagation(); logoutModal.style.display = "flex"; };
 cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
 
 confirmLogout.onclick = async () => {
@@ -568,27 +604,29 @@ const darkModeBtn = document.getElementById("darkModeBtn");
 const dripContainer = document.getElementById("drip-container");
 const dripLayer = document.getElementById("dripLayer");
 
-darkModeBtn.onclick = () => {
+function updateThemeText(isDark) {
+    darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+}
+
+darkModeBtn.onclick = (e) => {
+    e.stopPropagation();
     const isDark = document.body.classList.contains("dark-mode");
     
-    // Prep drip color based on the target theme
     if (isDark) {
-        dripLayer.classList.add("drip-light"); // Switching to light
+        dripLayer.classList.add("drip-light"); 
     } else {
-        dripLayer.classList.remove("drip-light"); // Switching to dark
+        dripLayer.classList.remove("drip-light"); 
     }
 
     dripContainer.classList.add("active");
 
-    // Swap theme halfway through the drip slide
     setTimeout(() => {
         document.body.classList.toggle("dark-mode");
         const nowDark = document.body.classList.contains("dark-mode");
-        darkModeBtn.textContent = nowDark ? "☀️" : "🌙";
+        updateThemeText(nowDark);
         localStorage.setItem("theme", nowDark ? "dark" : "light");
     }, 350);
 
-    // Remove active class to reset position
     setTimeout(() => {
         dripContainer.classList.remove("active");
     }, 700);
@@ -596,7 +634,7 @@ darkModeBtn.onclick = () => {
 
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
-    darkModeBtn.textContent = "☀️";
+    updateThemeText(true);
 }
 </script>
 

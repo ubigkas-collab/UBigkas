@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | UBigkas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css"> 
+    
+    <style>
+        /* ===== TEXT SCALING VARIABLE ===== */
+        :root { --text-scale: 100%; }
+        body { font-size: var(--text-scale); transition: background-color 0.3s ease; }
+
+        /* CSS shared with Dashboard for Nav & Drip */
+        #drip-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
+        .drip-layer { position: absolute; top: -110%; left: 0; width: 100%; height: 120%; background-color: #181818; transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1); clip-path: url(#drip-path); }
+        #drip-container.active .drip-layer { top: 0; }
+        .drip-light { background-color: #fdfdfd !important; }
+
+        /* ===== SETTINGS DROPDOWN (Integrated from Dashboard) ===== */
+        .nav-actions { margin-left: auto; display: flex; align-items: center; }
+        .dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
+        #settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: #7a0c0c; color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+        .dropdown-content { display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; transition: opacity 0.3s ease, visibility 0.3s ease; transition-delay: 0.8s; }
+        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transition-delay: 0s; }
+        .dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
+        .dropdown-content button:hover { background-color: #f1f1f1; }
+        #logoutBtn { color: #d9534f !important; font-weight: 700; }
+        
+        /* Dark Mode overrides */
+        body.dark-mode { background-color: #181818; color: #e6e6e6; }
+        body.dark-mode nav { background-color: #202020; }
+        body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
+        body.dark-mode .dropdown-content button { color: #e6e6e6; }
+        body.dark-mode .dropdown-content button:hover { background-color: #333; }
+        body.dark-mode #featureDeck { background-color: #242424; color: #fff; border: 1px solid #333; }
+        body.dark-mode #missionSub { color: #bbb; }
+
+        /* Carousel Content Styles */
+        .container { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center; }
+        #featureDeck { position: relative; min-height: 250px; background: #fff; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: background 0.3s ease; }
+        .feature-card { display: none; }
+        .feature-card.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .carousel-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
+        .btn-action { padding: 12px 25px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: transform 0.2s; }
+        .btn-action:active { transform: scale(0.95); }
+        
+        /* Modal Styles */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .modal-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 400px; }
+        body.dark-mode .modal-card { background: #242424; color: white; border: 1px solid #333; }
+
+        /* Responsive Mobile Viewport */
+        @media (max-width: 768px) {
+            .container { margin: 30px auto; }
+            h1 { font-size: 1.8rem !important; }
+            #featureDeck { padding: 25px 20px; min-height: 320px; }
+            .carousel-btns { flex-direction: row; width: 100%; }
+            .btn-action { flex: 1; padding: 10px 15px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="drip-container">
+    <div id="dripLayer" class="drip-layer"></div>
+    <svg width="0" height="0"><defs><clipPath id="drip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path></clipPath></defs></svg>
+</div>
+
+<nav>
+    <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
+    <ul>
+        <li><a href="student_dashboard.html">Home</a></li>
+        <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+        <div class="dropdown">
+            <button id="settingsBtn">Settings ⚙️</button>
+            <div class="dropdown-content">
+                <button id="darkModeBtn">🌙 Dark Mode</button>
+                <button id="textSizeBtn">🔍 Text Size: 100%</button>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+                <button id="logoutBtn">🚪 Logout</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 style="color:#7a0c0c; font-size: 2.5rem; margin-bottom: 10px;">About UBigkas</h1>
+    <p style="font-weight: 600; color: #555;" id="missionSub">Wika Natin, Pagyamanin sa Makabagong Panahon.</p>
+    
+    <div style="text-align: left; margin: 40px 0; line-height: 1.8;">
+        <p><strong>UBigkas</strong> is a dedicated language learning initiative born out of the University of Batangas. Our platform serves as a bridge between the foundational rules of Filipino grammar and the fast-paced demands of modern communication. We believe that mastery of one's native tongue is the first step toward effective global expression.</p>
+        
+        <p>Whether you are a student looking to perfect your sentence construction or an enthusiast wanting to dive deeper into the nuances of Tagalog, UBigkas provides the digital tools necessary to make learning intuitive, accurate, and engaging.</p>
+    </div>
+
+    <div id="featureDeck">
+        <div class="feature-card active">
+            <h2 style="color:#7a0c0c">Comprehensive Assessments</h2>
+            <p>Our interactive quiz engine goes beyond simple multiple-choice questions. We offer modules covering <strong>Verb Conjugation (Pandiwa)</strong>, <strong>Noun Classification (Pangngalan)</strong>, and <strong>Syntactic Structures</strong>. Each quiz is designed to challenge your understanding and provide a feedback for improvement.</p>
+        </div>
+        
+        <div class="feature-card">
+            <h2 style="color:#7a0c0c">Grammar & Speech Tools</h2>
+            <p>Refine your language skills with our <strong>Grammar Corrector</strong> and integrated <strong>Speech-to-Text (STT)</strong> and <strong>Text-to-Speech (TTS)</strong> features designed for pronunciation practice.</p>
+            <p style="font-size: 0.85rem; opacity: 0.9;"><em>Note: As Filipino NLP resources are currently evolving, our AI analysis is still in development. While we strive for accuracy, users may encounter inconsistencies as we work toward a more robust Grammar focus.</em></p>
+        </div>
+
+        <div class="feature-card">
+            <h2 style="color:#7a0c0c">Personalized Learning Paths</h2>
+            <p>No two students learn at the same pace. UBigkas tracks your performance over time, generating a <strong>Performance Dashboard</strong> that highlights your strengths and identifies areas that need more focus, ensuring that your study time is used efficiently.</p>
+        </div>
+    </div>
+
+    <div class="carousel-btns">
+        <button id="prevBtn" class="btn-action">← Previous</button>
+        <button id="nextBtn" class="btn-action" style="background:#7a0c0c; color:white;">Learn More →</button>
+    </div>
+</div>
+
+<div id="logoutModal" class="modal-overlay">
+    <div class="modal-card">
+        <h3>Logout Confirmation</h3>
+        <p>Are you sure you want to logout?</p>
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
+            <button id="cancelLogout" class="btn-action">Cancel</button>
+            <button id="confirmLogout" class="btn-action" style="background:#d9534f; color:white;">Logout</button>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { auth } from "../firebase.js";
+    import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    // Carousel Logic
+    const cards = document.querySelectorAll('.feature-card');
+    let idx = 0;
+    document.getElementById('nextBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx + 1) % cards.length; cards[idx].classList.add('active'); };
+    document.getElementById('prevBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx - 1 + cards.length) % cards.length; cards[idx].classList.add('active'); };
+
+    /* ===================== TEXT SIZE LOGIC ===================== */
+    const textSizeBtn = document.getElementById("textSizeBtn");
+    const sizes = ["100%", "115%", "130%"];
+    let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+    if(currentSizeIndex === -1) currentSizeIndex = 0;
+
+    function updateTextSize() {
+        const newSize = sizes[currentSizeIndex];
+        document.documentElement.style.setProperty('--text-scale', newSize);
+        textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+        localStorage.setItem("textSize", newSize);
+    }
+
+    textSizeBtn.onclick = (e) => {
+        e.stopPropagation();
+        currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+        updateTextSize();
+    };
+    updateTextSize();
+
+    /* ===================== THEME SWITCHER ===================== */
+    const darkModeBtn = document.getElementById("darkModeBtn");
+    const dripContainer = document.getElementById("drip-container");
+    const dripLayer = document.getElementById("dripLayer");
+
+    function updateThemeText(isDark) {
+        darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+    }
+
+    darkModeBtn.onclick = (e) => {
+        e.stopPropagation();
+        const isDark = document.body.classList.contains("dark-mode");
+        isDark ? dripLayer.classList.add("drip-light") : dripLayer.classList.remove("drip-light");
+        dripContainer.classList.add("active");
+
+        setTimeout(() => {
+            document.body.classList.toggle("dark-mode");
+            const nowDark = document.body.classList.contains("dark-mode");
+            updateThemeText(nowDark);
+            localStorage.setItem("theme", nowDark ? "dark" : "light");
+        }, 350);
+        setTimeout(() => dripContainer.classList.remove("active"), 700);
+    };
+
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        updateThemeText(true);
+    }
+
+    /* ===================== LOGOUT LOGIC ===================== */
+    const logoutBtn = document.getElementById("logoutBtn");
+    const logoutModal = document.getElementById("logoutModal");
+
+    logoutBtn.onclick = (e) => { e.stopPropagation(); logoutModal.style.display = "flex"; };
+    document.getElementById("cancelLogout").onclick = () => logoutModal.style.display = "none";
+    
+    document.getElementById("confirmLogout").onclick = async () => {
+        await signOut(auth);
+        sessionStorage.clear();
+        window.location.href = "../index.html";
+    };
+
+    window.onclick = (event) => { if (event.target == logoutModal) logoutModal.style.display = "none"; };
+</script>
+</body>
+</html>

@@ -3,87 +3,108 @@ from flask_cors import CORS
 import re
 import sys
 import os
+import logging
+import nltk
+
+# Auto-download required NLTK data
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab')
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # --- Path Configuration ---
 current_dir = os.path.dirname(os.path.abspath(__file__))
-nlp_path = os.path.join(current_dir, '..', 'NLP')
-sys.path.append(nlp_path)
+nlp_path = os.path.abspath(os.path.join(current_dir, '..', 'NLP'))
+
+if nlp_path not in sys.path:
+    sys.path.append(nlp_path)
 
 # --- NLP Imports ---
-from filipino_grammar_corrector import FilipinoGrammarCorrector
-from filipino_rules import analyze_word, detect_sentence_structure
-from dictionary_utils import get_meaning_and_type
+try:
+    from filipino_grammar_corrector import FilipinoGrammarCorrector
+    from filipino_rules import analyze_word, detect_sentence_structure
+    from dictionary_utils import get_meaning_and_type
+except ImportError as e:
+    logger.critical(f"Failed to import NLP modules. Error: {e}")
+    sys.exit(1)
 
 app = Flask(__name__)
-CORS(app)
+# Enhanced CORS to handle pre-flight OPTIONS requests
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # --- Initialize AI Models ---
-print("Initializing Filipino Grammar Corrector...")
-corrector = FilipinoGrammarCorrector(
-    dictionary_path=os.path.join(nlp_path, 'Filipino-wordlist.txt'),
-    slang_path=os.path.join(nlp_path, 'slang_map.txt')
-)
-print("Server is ready!")
+logger.info("Initializing New Transformer-Based Filipino Grammar Corrector...")
+tl_en_model_path = os.path.join(nlp_path, 'final_tl_en_translator')
+en_tl_model_path = os.path.join(nlp_path, 'final_tagalog_translator')
+spelling_model_path = os.path.join(nlp_path, 'my_spelling_model')
 
-@app.route("/analyze", methods=["POST"])
+try:
+    corrector = FilipinoGrammarCorrector(
+        tl_en_model=tl_en_model_path,
+        en_tl_model=en_tl_model_path,
+        spelling_model_path=spelling_model_path
+    )
+    logger.info("AI Models loaded successfully!")
+except Exception as e:
+    logger.critical(f"Failed to initialize AI models: {e}")
+    sys.exit(1)
+
+@app.route("/analyze", methods=["POST", "OPTIONS"])
 def analyze_sentence():
-    data = request.get_json()
-    # The frontend should now be sending the AI-corrected sentence here
-    sentence = data.get("sentence", "").strip()
-    
-    if not sentence:
-        return jsonify({"error": "No sentence provided"}), 400
-
-    # 1. Split the already-corrected sentence into words
-    # We use the sentence as provided by the user/frontend
-    raw_words = re.findall(r"\b[\w-]+\b", sentence)
-    word_details = []
-    
-    for word in raw_words:
-        # 2. Just get the data for this specific word
-        meaning, word_type, _, _, _, _ = get_meaning_and_type(word)
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
         
-        # 3. Perform grammar rule analysis (roots, affixes, etc.)
-        info = analyze_word(word)
-        
-        # 4. Populate the table data
-        info['word'] = word  # Ensure the word itself is included
-        info['meaning'] = meaning if meaning else "Walang kahulugan"
-        info['type'] = word_type if word_type else "Di-tukoy"
-        word_details.append(info)
-
-    # 5. Detect structure of this specific sentence
-    structure = detect_sentence_structure(sentence)
-
-    return jsonify({
-        "original": sentence, # This is the "corrected" sentence sent by frontend
-        "corrected": sentence, 
-        "structure": structure,
-        "words": word_details
-    })
-
-@app.route("/correct", methods=["POST"])
-def correct_sentence():
-    """
-    Uses the AI model to return the final corrected version.
-    """
     data = request.get_json()
     sentence = data.get("sentence", "").strip()
-    
     if not sentence:
         return jsonify({"error": "No sentence provided"}), 400
 
     try:
-        result = corrector.correct_grammar(sentence)
+        structure = detect_sentence_structure(sentence)
+        raw_words = re.findall(r"\b[\w-]+\b", sentence)
+        word_details = []
+        
+        for word in raw_words:
+            meaning, word_type, _, _, _, _ = get_meaning_and_type(word)
+            info = analyze_word(word)
+            info['word'] = word
+            info['meaning'] = meaning if meaning else "No meaning found"
+            info['type'] = word_type if word_type else "Unknown"
+            word_details.append(info)
+
         return jsonify({
-            "original": result["original"],
-            "corrected": result["marian_corrected"], 
-            "slang_removed": result["cleaned"],
-            "english_translation": result["english"]
+            "original": sentence,
+            "corrected": sentence,
+            "structure": structure,
+            "words": word_details
         })
     except Exception as e:
-        print(f"Error processing sentence: {e}")
+        logger.error(f"Analysis Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/correct", methods=["POST", "OPTIONS"])
+def correct_sentence():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+
+    data = request.get_json()
+    sentence = data.get("sentence", "").strip()
+    if not sentence:
+        return jsonify({"error": "No sentence provided"}), 400
+
+    try:
+        corrected_text = corrector.correct_grammar_with_pipeline(sentence)
+        return jsonify({
+            "original": sentence,
+            "corrected": corrected_text
+        })
+    except Exception as e:
+        logger.error(f"Correction Error: {e}")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, use_reloader=False)
