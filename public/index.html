@@ -150,20 +150,91 @@ nav {
     margin-bottom: 100px;
 }
 
-#featureDeck { position: relative; width: 100%; max-width: 800px; min-height: 250px; }
+#featureDeck { 
+    position: relative; 
+    width: 100%; 
+    max-width: 960px;
+    min-height: 380px;
+    margin: 0 auto;
+}
+
 .feature-card {
     position: absolute;
     inset: 0;
     display: none;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 0 10px;
+    justify-content: center;
+    padding: 20px 30px;
+    gap: 50px;
 }
-.feature-card.active { display: flex; animation: fadeInHero 0.8s ease; }
-.feature-card h2 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 15px; }
-.feature-card p { font-size: 1.1rem; max-width: 600px; color: var(--text-muted); }
-@keyframes fadeInHero { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.feature-card.active { 
+    display: flex; 
+    animation: fadeInHero 0.8s ease; 
+}
+
+.feature-image-container {
+    flex: 0 0 auto;
+    width: 320px;               /* ← made a little smaller (was 360px) */
+    max-width: 38%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.feature-image {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--shadow);
+    object-fit: contain;
+    display: block;
+}
+
+.feature-content {
+    flex: 1;
+    min-width: 0;
+    max-width: 480px;
+    text-align: left;
+}
+
+.feature-card h2 { 
+    font-size: clamp(1.8rem, 5vw, 2.8rem); 
+    margin: 0 0 16px 0; 
+    color: var(--maroon);
+}
+
+.feature-card p { 
+    font-size: 1.1rem; 
+    line-height: 1.6;
+    color: var(--text-muted); 
+    margin: 0;
+}
+
+@keyframes fadeInHero { 
+    from { opacity: 0; transform: translateY(20px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+    #featureDeck {
+        min-height: 460px;
+    }
+    .feature-card {
+        flex-direction: column;
+        gap: 32px;
+        padding: 20px;
+        text-align: center;
+    }
+    .feature-image-container {
+        max-width: 340px;       /* slightly smaller on mobile too */
+        width: 90%;
+    }
+    .feature-content {
+        text-align: center;
+        max-width: 90%;
+    }
+}
 
 /* --- TEAM SECTION --- */
 .team-section {
@@ -200,14 +271,14 @@ nav {
     background: rgba(0,0,0,0.6);
     z-index: 2000;
     backdrop-filter: blur(6px);
-    overflow-y: auto; /* Enable scroll if content is long */
+    overflow-y: auto;
     padding: 20px;
 }
 .modal-content {
     background: var(--card-bg);
     max-width: 420px;
     width: 100%;
-    margin: 20px auto; /* Margin for spacing on mobile */
+    margin: 20px auto;
     padding: 40px 30px;
     border-radius: 20px;
     position: relative;
@@ -265,17 +336,6 @@ nav {
 }
 
 .footer-credit { text-align: center; padding: 40px 0; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--input-border); }
-
-/* --- MOBILE RESPONSIVENESS --- */
-@media (max-width: 600px) {
-    .nav-btns #openLoginModal { padding: 8px 15px !important; }
-    .hero-section { margin-bottom: 50px; }
-    #featureDeck { height: 350px; } /* taller for wrapped text */
-    .feature-card h2 { line-height: 1.2; }
-    .hero-section div[style*="flex"] { flex-direction: column; width: 100%; }
-    .hero-section .login-btn { width: 100% !important; }
-    .modal-content { padding: 30px 20px; }
-}
 </style>
 </head>
 
@@ -307,19 +367,34 @@ nav {
     <main class="hero-section">
         <div id="featureDeck">
             <div class="feature-card active">
-                <h2 style="color:var(--maroon)">Interactive Quizzes</h2>
-                <p>Test your knowledge with sentence structure, verbs, pronouns, and more!</p>
+                <div class="feature-image-container">
+                    <img src="./brahmmy-img/brahmmy-reading.png" alt="Interactive Quizzes" class="feature-image">
+                </div>
+                <div class="feature-content">
+                    <h2>Interactive Quizzes</h2>
+                    <p>Test your knowledge with sentence structure, verbs, pronouns, and more!</p>
+                </div>
             </div>
             <div class="feature-card">
-                <h2 style="color:var(--maroon)">Grammar Correction</h2>
-                <p>Automatically check and correct your Filipino sentences using our AI tool.</p>
+                <div class="feature-image-container">
+                    <img src="./brahmmy-img/brahmmy-quiz.png" alt="Grammar Correction" class="feature-image">
+                </div>
+                <div class="feature-content">
+                    <h2>Grammar Correction</h2>
+                    <p>Automatically check and correct your Filipino sentences using our AI tool.</p>
+                </div>
             </div>
             <div class="feature-card">
-                <h2 style="color:var(--maroon)">Student Dashboard</h2>
-                <p>Track your progress, see scores, and improve continuously.</p>
+                <div class="feature-image-container">
+                    <img src="./brahmmy-img/brahmmy-dashboard.png" alt="Student Dashboard" class="feature-image">
+                </div>
+                <div class="feature-content">
+                    <h2>Student Dashboard</h2>
+                    <p>Track your progress, see scores, and improve continuously.</p>
+                </div>
             </div>
         </div>
-        <div style="margin-top:40px; text-align:center; display: flex; gap: 20px;">
+        <div style="margin-top:50px; text-align:center; display: flex; gap: 20px; justify-content: center;">
             <button id="prevFeature" class="login-btn" style="background:var(--text-muted); width: 140px;">← Previous</button>
             <button id="nextFeature" class="login-btn" style="width: 140px;">Next →</button>
         </div>
@@ -336,7 +411,7 @@ nav {
             <div class="team-item">
                 <div class="team-img"></div>
                 <h4>Cleivan Krisher Cabaysa</h4>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">UI/IX Designer</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">UI/UX Designer</p>
             </div>
             <div class="team-item">
                 <div class="team-img"></div>
@@ -349,7 +424,7 @@ nav {
 
 <div id="loginModal" class="modal">
     <div class="modal-content">
-        <span class="close" id="closeLoginModal">&times;</span>
+        <span class="close" id="closeLoginModal">×</span>
         <h1 style="color: var(--maroon); text-align: center; margin-top: 0;">Welcome</h1>
         <p style="color: var(--text-muted); text-align: center; margin-bottom: 25px;">Log in to your UBigkas Account</p>
 
@@ -365,7 +440,6 @@ nav {
             <button type="submit" class="login-btn">Login</button>
         </form>
 
-        
         <button type="button" class="google-btn" id="googleLoginBtn">
             <img src="../brahmmy-img/brahmmy-email.png" alt="Google" style="width:20px">
             Login with UBMail
@@ -379,7 +453,7 @@ nav {
 
 <div id="teacherModal" class="modal">
     <div class="modal-content">
-        <span class="close" id="closeTeacherModal">&times;</span>
+        <span class="close" id="closeTeacherModal">×</span>
         <h2 style="text-align: center; color: var(--maroon); margin-top: 0;">Teacher Registration</h2>
         <form id="teacherSignupForm">
             <div class="form-group"><input type="email" id="teacherEmail" placeholder="Institutional Email (@ub.edu.ph)" required></div>

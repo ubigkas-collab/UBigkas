@@ -73,11 +73,9 @@
   }
 
   .dropdown-content {
-    /* Changed from display:none to opacity for transitions */
     display: block; 
     opacity: 0;
     visibility: hidden;
-    
     position: absolute;
     right: 0;
     background-color: white;
@@ -87,9 +85,6 @@
     border-radius: 12px;
     overflow: hidden;
     margin-top: 10px;
-
-    /* RETRACTION DELAY LOGIC */
-    /* It takes 0.3s to fade out, but starts only after a 0.8s delay */
     transition: opacity 0.3s ease, visibility 0.3s ease;
     transition-delay: 0.8s; 
   }
@@ -97,7 +92,6 @@
   .dropdown:hover .dropdown-content {
     opacity: 1;
     visibility: visible;
-    /* Remove delay on hover so it opens instantly */
     transition-delay: 0s; 
   }
 
@@ -123,16 +117,29 @@
 
   #logoutBtn { color: #d9534f !important; font-weight: 700; }
 
-  /* ===== Dark Mode Styles ===== */
+  /* ===== DARK MODE STYLES (UPDATED) ===== */
   body.dark-mode {
     background-color: #181818;
     color: #ffffff;
   }
 
-  body.dark-mode nav { background-color: #202020; 
-  color:#e6e6e6;
+  body.dark-mode nav { 
+    background-color: #202020; 
+    color: #ffffff;
   }
-  
+
+  /* Nav links and UB logo text color */
+  body.dark-mode nav ul li a,
+  body.dark-mode nav .logo {
+    color: #ffffff;
+  }
+
+  /* Gold hover effect for Nav and Logo */
+  body.dark-mode nav ul li a:hover,
+  body.dark-mode nav .logo:hover {
+    color: #d4af37;
+  }
+
   body.dark-mode .dropdown-content {
     background-color: #242424;
     border: 1px solid #333;
@@ -320,7 +327,6 @@
           </div>
         </div>
       </div>
-
       <div class="card-container" data-type="Pang-uri">
         <div class="card">
           <div class="card-face card-front">Pang-uri</div>
@@ -330,7 +336,6 @@
           </div>
         </div>
       </div>
-
       <div class="card-container" data-type="Pang-abay">
         <div class="card">
           <div class="card-face card-front">Pang-abay</div>
@@ -340,7 +345,6 @@
           </div>
         </div>
       </div>
-
       <div class="card-container" data-type="Panghalip">
         <div class="card">
           <div class="card-face card-front">Panghalip</div>
