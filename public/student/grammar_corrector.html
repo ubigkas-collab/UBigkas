@@ -45,6 +45,225 @@
 }
 .drip-light { background-color: #f8f9fa !important; }
 
+/* ===== MOBILE NAVIGATION STYLES ===== */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: maroon;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    padding: 80px 20px 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.mobile-nav.active {
+    left: 0;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav ul li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav ul li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav ul li a:hover {
+    background-color: #f5f5f5;
+    color: maroon;
+}
+
+.mobile-nav-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-nav-actions button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode styles for mobile nav */
+body.dark-mode .mobile-nav {
+    background-color: #202020;
+}
+
+body.dark-mode .mobile-nav ul li a {
+    color: #fff;
+}
+
+body.dark-mode .mobile-nav ul li a:hover {
+    background-color: #333;
+    color: #d4af37;
+}
+
+body.dark-mode .menu-toggle span {
+    background-color: #fff;
+}
+
+/* ===== MOBILE RESPONSIVE STYLES ===== */
+@media screen and (max-width: 768px) {
+    /* Mobile Navigation Layout */
+    nav {
+        position: relative;
+        height: 70px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    /* Hide desktop nav */
+    nav ul, .nav-actions {
+        display: none;
+    }
+    
+    /* Show burger button */
+    .menu-toggle {
+        display: flex;
+    }
+    
+    /* Center logo */
+    nav .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+    
+    /* Container adjustments */
+    .container {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    textarea {
+        min-height: 100px;
+        font-size: 0.95rem;
+    }
+    
+    .footer-credit {
+        padding: 15px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    nav {
+        padding: 0 15px;
+        height: 60px;
+    }
+    
+    .menu-toggle {
+        left: 15px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    h1 {
+        font-size: 1.4rem;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+}
+
+/* REST OF YOUR ORIGINAL STYLES BELOW - KEEPING THEM AS IS */
 body {
     font-family: 'Poppins', sans-serif;
     background: var(--bg);
@@ -287,6 +506,7 @@ textarea {
     font-weight: 600;
     margin-top: 15px;
     transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
 }
 
 #checkBtn:hover {
@@ -335,6 +555,7 @@ body.dark-mode .output-card { background: #2a2419; }
     font-weight: 600;
     margin-top: 15px;
     transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
 }
 </style>
 </head>
@@ -352,15 +573,37 @@ body.dark-mode .output-card { background: #2a2419; }
   </svg>
 </div>
 
+<!-- Mobile Navigation Elements -->
+<button class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div class="mobile-nav" id="mobileNav">
+    <ul>
+        <li><a href="student_dashboard.html">Home</a></li>
+        <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+        <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+        <button id="mobileLogoutBtn">Logout</button>
+    </div>
+</div>
+
 <nav>
   <a href="index.html" class="logo">UB<span>igkas</span></a>
-  <ul>
+  <ul id="desktopNav">
     <li><a href="student_dashboard.html">Home</a></li>
     <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
     <li><a href="About.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div class="nav-actions">
+  <div class="nav-actions" id="desktopActions">
     <div class="dropdown">
         <button id="settingsBtn">Settings ⚙️</button>
         <div class="dropdown-content">
@@ -429,6 +672,70 @@ const analysisContainer = document.getElementById("analysisContainer");
 const studentUID = sessionStorage.getItem("studentUID");
 
 let latestCorrectedSentence = "";
+
+/* ===== MOBILE NAVIGATION ===== */
+const menuToggle = document.getElementById("menuToggle");
+const mobileOverlay = document.getElementById("mobileOverlay");
+const mobileNav = document.getElementById("mobileNav");
+
+menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("active");
+    mobileNav.classList.toggle("active");
+    mobileOverlay.classList.toggle("active");
+});
+
+mobileOverlay.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    mobileNav.classList.remove("active");
+    mobileOverlay.classList.remove("active");
+});
+
+// Mobile Action Buttons
+document.getElementById("mobileDarkModeBtn").addEventListener("click", () => {
+    document.getElementById("darkModeBtn").click();
+});
+
+document.getElementById("mobileLogoutBtn").addEventListener("click", () => {
+    document.getElementById("logoutBtn").click();
+});
+
+/* ===== DRIP THEME SWITCHER ===== */
+const darkModeBtn = document.getElementById("darkModeBtn");
+const dripContainer = document.getElementById("drip-container");
+const dripLayer = document.getElementById("dripLayer");
+
+function updateThemeText(isDark) {
+    darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+}
+
+darkModeBtn.onclick = (e) => {
+    e.stopPropagation();
+    const isDark = document.body.classList.contains("dark-mode");
+    
+    if (isDark) {
+        dripLayer.classList.add("drip-light"); 
+    } else {
+        dripLayer.classList.remove("drip-light"); 
+    }
+
+    dripContainer.classList.add("active");
+
+    setTimeout(() => {
+        document.body.classList.toggle("dark-mode");
+        const nowDark = document.body.classList.contains("dark-mode");
+        updateThemeText(nowDark);
+        localStorage.setItem("theme", nowDark ? "dark" : "light");
+    }, 350);
+
+    setTimeout(() => {
+        dripContainer.classList.remove("active");
+    }, 700);
+};
+
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    updateThemeText(true);
+}
 
 /* ===== TEXT SIZE LOGIC ===== */
 const textSizeBtn = document.getElementById("textSizeBtn");
@@ -592,52 +899,37 @@ cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
 
 confirmLogout.onclick = async () => {
   if (studentUID) await setStudentStatus(studentUID, "offline");
-  await signOut(auth);
-  sessionStorage.clear();
-  window.location.href = "../index.html";
+  
+  // Trigger drip transition
+  const dripContainer = document.getElementById("drip-container");
+  const dripLayer = document.getElementById("dripLayer");
+  dripContainer.classList.add("active");
+  
+  // Add appropriate class based on current theme
+  const isDark = document.body.classList.contains("dark-mode");
+  if (isDark) {
+      dripLayer.classList.remove("drip-light");
+  } else {
+      dripLayer.classList.add("drip-light");
+  }
+  
+  setTimeout(async () => {
+      await signOut(auth);
+      sessionStorage.clear();
+      window.location.href = "../index.html";
+  }, 700);
 };
 
 window.onclick = (event) => {
   if (event.target == logoutModal) logoutModal.style.display = "none";
 };
 
-/* ===== DRIP THEME SWITCHER ===== */
-const darkModeBtn = document.getElementById("darkModeBtn");
-const dripContainer = document.getElementById("drip-container");
-const dripLayer = document.getElementById("dripLayer");
-
-function updateThemeText(isDark) {
-    darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-}
-
-darkModeBtn.onclick = (e) => {
-    e.stopPropagation();
+/* ===== INITIALIZE MOBILE BUTTONS ===== */
+document.addEventListener("DOMContentLoaded", () => {
     const isDark = document.body.classList.contains("dark-mode");
-    
-    if (isDark) {
-        dripLayer.classList.add("drip-light"); 
-    } else {
-        dripLayer.classList.remove("drip-light"); 
-    }
-
-    dripContainer.classList.add("active");
-
-    setTimeout(() => {
-        document.body.classList.toggle("dark-mode");
-        const nowDark = document.body.classList.contains("dark-mode");
-        updateThemeText(nowDark);
-        localStorage.setItem("theme", nowDark ? "dark" : "light");
-    }, 350);
-
-    setTimeout(() => {
-        dripContainer.classList.remove("active");
-    }, 700);
-};
-
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    updateThemeText(true);
-}
+    document.getElementById("mobileDarkModeBtn").textContent = 
+        isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+});
 </script>
 
 </body>

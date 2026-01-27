@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Filipino Grammar Quiz | UBigkas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UBigkas Grammar Corrector</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="grammar_quiz.css">
+
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=8fjKpKGn"></script>
 
 <style>
-/* ===== DRIP EFFECT INTEGRATION ===== */
+/* ===== DRIP EFFECT STYLES ===== */
 #drip-container {
     position: fixed;
     top: 0;
@@ -18,7 +18,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 10000;
+    z-index: 10001;
 }
 .drip-layer {
     position: absolute;
@@ -26,7 +26,7 @@
     left: 0;
     width: 100%;
     height: 120%;
-    background-color: #181818;
+    background-color: #121212; 
     transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
     clip-path: url(#drip-path);
 }
@@ -35,15 +35,7 @@
 }
 .drip-light { background-color: #f8f9fa !important; }
 
-.quiz-instruction {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 12px;
-    font-weight: 500;
-}
-
-/* ===== MOBILE RESPONSIVE STYLES ===== */
-/* Mobile Navigation */
+/* ===== MOBILE NAVIGATION STYLES ===== */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -175,300 +167,16 @@ body.dark-mode .menu-toggle span {
     background-color: #fff;
 }
 
-/* ===== NAV & ACTIONS ===== */
-nav {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    position: relative;
-    z-index: 100;
-}
-nav .logo {
-    font-weight: 700;
-    font-size: 22px;
-    text-decoration: none;
-    color: maroon;
-    flex-shrink: 0;
-}
-nav .logo span { color: #d4af37; }
-nav ul { 
-    list-style: none; 
-    display: flex; 
-    gap: 15px; 
-    margin-left: 20px;
-}
-nav ul li a { 
-    text-decoration: none; 
-    font-weight: 500; 
-    color: #000000 !important; 
-    transition: color 0.3s ease; 
-    white-space: nowrap;
-}
-nav ul li a:hover { color: maroon !important; }
-
-.nav-actions { 
-    margin-left: auto; 
-    display: flex; 
-    flex-direction: row; 
-    gap: 10px; 
-    align-items: center;
-    flex-shrink: 0;
-}
-#logoutBtn, #musicToggle, #darkModeBtn {
-    padding: 8px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-#logoutBtn { background-color: #d9534f; color: white; }
-#darkModeBtn { background-color: #333; color: #fff; }
-#musicToggle { background: #d4af37; color: #7a0c0c; }
-
-/* ===== DARK MODE STYLES ===== */
-body.dark-mode { background-color: #181818; color: #e6e6e6; }
-body.dark-mode nav { background-color: #202020; }
-body.dark-mode nav ul li a,
-body.dark-mode nav .logo {
-    color: #ffffff !important;
-}
-body.dark-mode nav ul li a:hover,
-body.dark-mode nav .logo:hover {
-    color: #d4af37 !important;
-}
-body.dark-mode .dashboard-card, 
-body.dark-mode .modal-content { 
-    background-color: #242424; 
-    color: #e6e6e6; 
-    border: 1px solid #333; 
-}
-body.dark-mode .modal-card { background-color: #242424; color: #fff; border: 1px solid #444; }
-body.dark-mode .modal-card h3 { color: #fff; }
-body.dark-mode .modal-card p { color: #ccc; }
-body.dark-mode .modal-btn.secondary { background-color: #444; color: #eee; }
-
-/* ===== QUIZ MODAL ===== */
-.modal {
-    display: none; position: fixed; z-index: 2500; left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
-}
-.modal-content {
-    background: #ffffff; margin: 2% auto -5% auto; padding: 40px; border-radius: 25px;
-    max-width: 650px; width: 90%; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    max-height: 85vh; overflow-y: auto; scrollbar-width: thin;
-}
-.modal-content::-webkit-scrollbar {
-    width: 8px;
-}
-.modal-content::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-.modal-content::-webkit-scrollbar-thumb {
-    background: #d4af37;
-    border-radius: 10px;
-}
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: #b38f00;
-}
-body.dark-mode .modal-content {
-    background: #242424;
-    color: #e6e6e6;
-}
-body.dark-mode .modal-content::-webkit-scrollbar-track {
-    background: #333;
-}
-body.dark-mode .modal-content::-webkit-scrollbar-thumb {
-    background: #d4af37;
-}
-
-#qProgress {
-    font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 5px;
-}
-.sentence {
-    font-size: 1.4rem; font-weight: 600; color: #2c3e50; line-height: 1.4; margin-bottom: 25px;
-}
-body.dark-mode .sentence { color: #fff; }
-
-.options { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.options button {
-    padding: 15px 20px; font-size: 1rem; border: 2px solid #e9ecef; border-radius: 12px;
-    background: #f8f9fa; color: #333; text-align: left; font-weight: 500; transition: all 0.2s ease; cursor: pointer; font-family: 'Poppins', sans-serif;
-}
-.options button:hover { border-color: #d4af37; background-color: #fffdf5; }
-.options button.correct { background-color: #2ecc71 !important; color: white !important; border-color: #27ae60 !important; }
-.options button.wrong { background-color: #e74c3c !important; color: white !important; border-color: #c0392b !important; }
-
-.explanation {
-    margin-top: 25px; padding: 15px; background-color: #e8f4fd; color: #2980b9;
-    border-radius: 12px; font-size: 0.9rem; border-left: 5px solid #3498db; display: none;
-}
-body.dark-mode .explanation { background-color: #1a2633; color: #5dade2; }
-
-.score-area {
-    margin-top: 30px; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #f1f1f1; padding-top: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 4000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-.modal-card { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; }
-.modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
-.modal-btn { padding: 10px 25px; border-radius: 25px; border: none; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
-.modal-btn.primary { background-color: #d9534f; color: white; }
-.modal-btn.secondary { background-color: #e9ecef; color: #333; }
-
-/* ===== SCORE MODAL & CONFETTI ===== */
-#scoreResultModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 5000; justify-content: center; align-items: center; }
-.score-card { background: white; padding: 40px; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; position: relative; z-index: 5002; }
-.score-number { font-size: 3.5rem; font-weight: 700; margin: 15px 0; color: maroon; }
-.score-feedback { font-size: 1.1rem; color: #444; font-weight: 500; margin-bottom: 25px; line-height: 1.5; min-height: 3em; display: flex; align-items: center; justify-content: center;}
-body.dark-mode .score-card { background: #242424; color: #fff; }
-body.dark-mode .score-feedback { color: #ccc; }
-
-#confetti-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5001;
-    overflow: hidden;
-}
-
-.confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: -20px;
-    border-radius: 2px;
-    animation: fall 3s linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Camera shake (only on wrong answer) */
-.camera-shake {
-    animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-@keyframes shake {
-    10%, 90% { transform: translate3d(-3px, 0, 0); }
-    20%, 80% { transform: translate3d(5px, 0, 0); }
-    30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
-    40%, 60% { transform: translate3d(8px, 0, 0); }
-}
-
-/* ===== DASHBOARD CONTAINER ===== */
-.dashboard-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.back-nav {
-    margin-bottom: 20px;
-}
-
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: maroon;
-    font-weight: 500;
-    padding: 8px 15px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.back-link:hover {
-    background-color: #f5f5f5;
-}
-
-.dashboard-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.dashboard-card h1 {
-    font-size: 2rem;
-    color: maroon;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-}
-
-.test-buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.btn {
-    padding: 15px 25px;
-    background: maroon;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Poppins', sans-serif;
-}
-
-.btn:hover {
-    background: #7a0c0c;
-    transform: translateY(-2px);
-}
-
-.footer-credit {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 40px;
-}
-
-/* ===== RESPONSIVE MEDIA QUERIES ===== */
-@media screen and (max-width: 992px) {
-    .dashboard-card h1 {
-        font-size: 1.8rem;
-    }
-    
-    .test-buttons {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
+/* ===== MOBILE RESPONSIVE STYLES ===== */
 @media screen and (max-width: 768px) {
-    /* MOBILE NAVIGATION LAYOUT */
+    /* Mobile Navigation Layout */
     nav {
+        position: relative;
+        height: 70px;
+        padding: 0 20px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 15px 20px;
-        height: 70px;
-        position: relative;
+        justify-content: space-between;
     }
     
     /* Hide desktop nav */
@@ -476,83 +184,26 @@ body.dark-mode .score-feedback { color: #ccc; }
         display: none;
     }
     
-    /* Burger button in upper left corner */
+    /* Burger button on left */
     .menu-toggle {
         display: flex;
         position: absolute;
         left: 20px;
-        top: 15px; /* Upper position */
+        top: 50%;
+        transform: translateY(-50%);
     }
     
     /* UBigkas logo centered */
     nav .logo {
-        position: static;
-        transform: none;
-        text-align: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
     }
     
-    .dashboard-container {
+    .container {
         padding: 15px;
-    }
-    
-    .dashboard-card {
-        padding: 20px;
-    }
-    
-    .dashboard-card h1 {
-        font-size: 1.6rem;
-    }
-    
-    .subtitle {
-        font-size: 1rem;
-    }
-    
-    .test-buttons {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .btn {
-        padding: 14px 20px;
-        font-size: 0.95rem;
-    }
-    
-    /* Quiz modal adjustments */
-    .modal-content {
-        padding: 25px 20px;
-        margin: 5% auto;
-        width: 95%;
-        max-height: 90vh;
-    }
-    
-    .sentence {
-        font-size: 1.2rem;
-        line-height: 1.3;
-    }
-    
-    .options button {
-        padding: 14px 16px;
-        font-size: 0.95rem;
-    }
-    
-    .score-area {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .score-area .btn {
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    /* Score modal adjustments */
-    .score-card {
-        padding: 30px 20px;
-        width: 95%;
-    }
-    
-    .score-number {
-        font-size: 2.8rem;
+        margin-top: 20px;
     }
     
     .footer-credit {
@@ -563,70 +214,329 @@ body.dark-mode .score-feedback { color: #ccc; }
 
 @media screen and (max-width: 480px) {
     nav {
-        padding: 15px;
+        padding: 0 15px;
         height: 60px;
     }
     
     .menu-toggle {
         left: 15px;
-        top: 15px; /* Same upper position */
     }
     
     .logo {
         font-size: 20px;
     }
-    
-    .dashboard-card h1 {
-        font-size: 1.4rem;
-    }
-    
-    .subtitle {
-        font-size: 0.95rem;
-    }
-    
-    .modal-content {
-        padding: 20px 15px;
-    }
-    
-    .sentence {
-        font-size: 1.1rem;
-    }
-    
-    .options button {
-        padding: 12px 14px;
-        font-size: 0.9rem;
-    }
-    
-    .score-number {
-        font-size: 2.5rem;
-    }
-    
-    .score-feedback {
-        font-size: 1rem;
-    }
 }
 
-/* Small height devices */
-@media screen and (max-height: 600px) {
-    .modal-content {
-        margin: 2% auto;
-        max-height: 96vh;
-    }
-    
-    .sentence {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-    }
-    
-    .options button {
-        padding: 10px 15px;
-    }
+/* YOUR ORIGINAL STYLES BELOW - KEEP THEM EXACTLY AS THEY WERE */
+:root {
+    --maroon: #7a0c0c;
+    --gold: #d4af37;
+    --bg: #f8f9fa;
+    --card-bg: #fff;
+    --nav-text: #333;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --text-scale: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    margin: 0;
+    font-size: var(--text-scale);
+    transition: var(--transition);
+}
+
+/* ===== FIXED NAVIGATION ===== */ 
+nav { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 12px 5%; 
+    background-color: var(--card-bg); 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+} 
+
+nav .logo { 
+    font-weight: 700; 
+    font-size: 24px; 
+    text-decoration: none; 
+    color: var(--maroon); 
+    display: flex; 
+    align-items: center;
+    margin-right: 40px;
+} 
+
+nav .logo span { 
+    color: var(--gold); 
+} 
+
+nav ul { 
+    list-style: none; 
+    display: flex; 
+    gap: 24px; 
+    margin: 0; 
+    padding: 0; 
+    flex-grow: 1;
+} 
+
+nav ul li a { 
+    text-decoration: none; 
+    font-weight: 500; 
+    color: var(--nav-text); 
+    transition: var(--transition);
+}
+
+nav ul li a:hover {
+    color: var(--gold);
+}
+
+/* ===== SETTINGS DROPDOWN ===== */
+.nav-actions { margin-left: auto; display: flex; align-items: center; }
+.dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
+#settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: var(--maroon); color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: var(--transition); }
+.dropdown-content { display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; transition: opacity 0.3s ease, visibility 0.3s ease; transition-delay: 0.8s; }
+.dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transition-delay: 0s; }
+.dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
+.dropdown-content button:hover { background-color: #f1f1f1; }
+#logoutBtn { color: #d9534f !important; font-weight: 700; }
+
+/* ===== CUSTOM MODAL STYLES ===== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 20000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-actions {
+    display: flex; gap: 15px; justify-content: center; margin-top: 20px;
+}
+
+.modal-btn {
+    padding: 10px 25px; border-radius: 25px; border: none;
+    font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif;
+}
+
+.modal-btn.primary { background-color: #d9534f; color: white; }
+.modal-btn.secondary { background-color: #e9ecef; color: #333; }
+
+/* ===== Back to Dashboard Button ===== */ 
+.back-nav { 
+    margin: 20px 0; 
+} 
+
+.back-nav .back-link { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    color: #333; 
+    background-color: #e9ecef; 
+    padding: 10px 16px; 
+    border-radius: 8px; 
+    transition: var(--transition); 
+} 
+
+.back-nav .back-link:hover { 
+    background-color: var(--gold); 
+    color: var(--maroon); 
+}
+
+/* ===== DARK MODE STYLES ===== */
+body.dark-mode {
+    --bg: #121212; 
+    --card-bg: #1e1e1e;
+    --nav-text: #ffffff; 
+    color: #e0e0e0;
+}
+
+body.dark-mode nav {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom: 1px solid #333;
+}
+
+body.dark-mode nav .logo { color: #ffffff; }
+body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
+body.dark-mode .dropdown-content button { color: #e6e6e6; }
+body.dark-mode .dropdown-content button:hover { background-color: #333; }
+
+body.dark-mode .modal-card { background: #242424; color: #e6e6e6; border: 1px solid #333; }
+body.dark-mode .modal-btn.secondary { background-color: #333; color: #fff; }
+
+body.dark-mode .card {
+    border: 1px solid #2c2c2c;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+body.dark-mode textarea {
+    background-color: #252525;
+    color: #ffffff;
+    border: 1px solid #3d3d3d;
+}
+
+body.dark-mode .analysis-table { background: #1e1e1e; color: #fff; }
+body.dark-mode .analysis-table th { background: #4a0707; }
+body.dark-mode .analysis-table td { border-color: #333; }
+
+/* ===== Page Layout ===== */
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--maroon);
+    font-weight: 700;
+}
+
+body.dark-mode h1 { color: #ffffff; }
+
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    padding-right: 50px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    resize: vertical;
+    box-sizing: border-box;
+    line-height: 1.5;
+    transition: var(--transition);
+}
+
+.stt-btn {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    background: none;
+    border: none;
+    color: var(--maroon);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tts-btn {
+    background: var(--maroon);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-left: 10px;
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+}
+
+#checkBtn {
+    background: var(--maroon);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
+}
+
+#checkBtn:hover {
+    background: var(--gold);
+    color: var(--maroon);
+}
+
+.output-card {
+    background: #fef9f0;
+    border-left: 6px solid var(--gold);
+}
+body.dark-mode .output-card { background: #2a2419; }
+
+.analysis-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+}
+
+.analysis-table th, .analysis-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.analysis-table th {
+    background: var(--maroon);
+    color: white;
+}
+
+.footer-credit {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.desc-btn {
+    background: var(--maroon);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
 }
 </style>
 </head>
 
 <body>
 
+<!-- ADDED DRIP CONTAINER -->
 <div id="drip-container">
   <div id="dripLayer" class="drip-layer"></div>
   <svg width="0" height="0">
@@ -638,7 +548,7 @@ body.dark-mode .score-feedback { color: #ccc; }
   </svg>
 </div>
 
-<!-- Mobile Navigation Elements -->
+<!-- ADDED MOBILE NAVIGATION ELEMENTS -->
 <button class="menu-toggle" id="menuToggle">
     <span></span>
     <span></span>
@@ -657,25 +567,10 @@ body.dark-mode .score-feedback { color: #ccc; }
     <div class="mobile-nav-actions">
         <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
         <button id="mobileLogoutBtn">Logout</button>
-        <button id="mobileMusicToggle">Mute Music</button>
     </div>
 </div>
 
-<div id="toast-container"></div>
-
-<div id="scoreResultModal">
-    <div id="confetti-wrapper"></div>
-    <div class="score-card">
-        <!-- Brahmmy shows medal when passed, sad when failed -->
-        <img id="brahmmyResult" src="" alt="" style="display: none; margin: 0 auto 20px auto; width:220px;">
-        <h2>Quiz Complete!</h2>
-        <p>Iyong nakuha ay:</p>
-        <div class="score-number" id="finalScoreDisplay">0/10</div>
-        <p class="score-feedback" id="feedbackMessage"></p>
-        <button class="modal-btn primary" id="continueBtn" style="width: 100%;">Mahusay!</button>
-    </div>
-</div>
-
+<!-- YOUR ORIGINAL NAV -->
 <nav>
   <a href="index.html" class="logo">UB<span>igkas</span></a>
   <ul id="desktopNav">
@@ -685,9 +580,15 @@ body.dark-mode .score-feedback { color: #ccc; }
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-actions" id="desktopActions">
-    <button id="darkModeBtn">🌙</button>
-    <button id="logoutBtn">Logout</button>
-    <button id="musicToggle">Mute Music</button>
+    <div class="dropdown">
+        <button id="settingsBtn">Settings ⚙️</button>
+        <div class="dropdown-content">
+            <button id="darkModeBtn">🌙 Dark Mode</button>
+            <button id="textSizeBtn">🔍 Text Size: 100%</button>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+            <button id="logoutBtn">🚪 Logout</button>
+        </div>
+    </div>
   </div>
 </nav>
 
@@ -702,12 +603,10 @@ body.dark-mode .score-feedback { color: #ccc; }
   </div>
 </div>
 
-<audio id="bgMusic" src="assessment/music/Quiz.mp3" loop autoplay></audio>
-
-<div class="dashboard-container">
+<div class="container">
     <div class="back-nav">
         <a href="student_dashboard.html" class="back-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
@@ -715,36 +614,22 @@ body.dark-mode .score-feedback { color: #ccc; }
         </a>
     </div>
 
-    <div class="dashboard-card">
-        <h1>Filipino Grammar Quiz</h1>
-        <p class="subtitle">Subukan ang iyong galing sa balarilang Filipino.</p>
+    <h1>UBigkas Grammar Corrector</h1>
 
-        <div class="test-buttons">
-            <button class="btn" data-file="vso">Sentence Structure</button>
-            <button class="btn" data-file="pronouns">Pronouns (Panghalip)</button>
-            <button class="btn" data-file="affixes">Verbs (Pandiwa)</button>
-            <button class="btn" data-file="noun">Noun (Pangalan)</button>
-            <button class="btn" data-file="adjective">Adjective (Panguri)</button>
-            <button class="btn" data-file="adverb">Adverb (Pangabay)</button>
+    <div class="card">
+        <label><b>Ilagay ang pangungusap:</b></label>
+        <div class="input-wrapper">
+            <textarea id="inputSentence" placeholder="Halimbawa: Ang bata tumakbo sa eskwelahan."></textarea>
+            <button id="sttBtn" class="stt-btn" title="Speak to Input">🎤</button>
         </div>
+        <button id="checkBtn">I-check ang Grammar</button>
     </div>
-</div>
 
-<div id="quizModal" class="modal">
-    <div class="modal-content" id="quizContent">
-        <button class="close-btn" id="closeModalBtn">×</button>
-        <div id="qProgress">Question 1 of 10</div>
-        <p class="quiz-instruction" id="quizInstruction"></p>
-        <p class="sentence" id="sentence"></p>
-        <div class="options" id="options"></div>
-        <div class="explanation" id="explanation"></div>
-
-        <div class="score-area">
-            <p class="score-text" id="score">Score: 0</p>
-            <button class="btn" id="nextBtn" style="max-width:180px;background:#d4af37;color:white;border:none;border-radius:10px;padding:12px 25px;">
-                Next Question
-            </button>
+    <div class="card output-card">
+        <div id="analysisContainer">
+            <p style="color: #888;">Ang resulta ay lalabas dito...</p>
         </div>
+        <button class="desc-btn" id="descBtn">Sentence Description</button>
     </div>
 </div>
 
@@ -753,316 +638,18 @@ body.dark-mode .score-feedback { color: #ccc; }
 <script type="module">
 import { auth, db } from "../firebase.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, setDoc, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-let studentName = sessionStorage.getItem("studentName");
-let studentUID  = sessionStorage.getItem("studentUID");
-let classId     = sessionStorage.getItem("classId");
+const input = document.getElementById("inputSentence");
+const checkBtn = document.getElementById("checkBtn");
+const descBtn = document.getElementById("descBtn");
+const sttBtn = document.getElementById("sttBtn");
+const analysisContainer = document.getElementById("analysisContainer");
+const studentUID = sessionStorage.getItem("studentUID");
 
-if (!studentName || !studentUID) { window.location.href = "../index.html"; }
+let latestCorrectedSentence = "";
 
-function showToast(message) {
-    const container = document.getElementById("toast-container");
-    const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.textContent = message;
-    container.appendChild(toast);
-    setTimeout(() => { toast.remove(); }, 4000);
-}
-
-// FIXED: Score modal button handler
-document.getElementById("continueBtn").onclick = function() {
-    document.getElementById("scoreResultModal").style.display = "none";
-    document.getElementById("confetti-wrapper").innerHTML = "";
-};
-
-async function getRandomFeedback(score, total) {
-    try {
-        const res = await fetch('assessment/feedback.json');
-        const feedbackData = await res.json();
-        const percent = (score / total) * 100;
-        
-        let pool = [];
-        if (percent === 100) pool = feedbackData.excellent;
-        else if (percent >= 80) pool = feedbackData.great;
-        else if (percent >= 50) pool = feedbackData.good;
-        else pool = feedbackData.keep_trying;
-
-        const randomIndex = Math.floor(Math.random() * pool.length);
-        return pool[randomIndex];
-    } catch (err) {
-        console.error("Feedback fetch error:", err);
-        return "Mahusay!"; 
-    }
-}
-
-async function triggerScoreModal(finalScore, total) {
-    const modal = document.getElementById("scoreResultModal");
-    const scoreDisplay = document.getElementById("finalScoreDisplay");
-    const feedbackEl = document.getElementById("feedbackMessage");
-    const confettiWrapper = document.getElementById("confetti-wrapper");
-    const brahmmyResult = document.getElementById("brahmmyResult");
-    const continueBtn = document.getElementById("continueBtn");
-    
-    scoreDisplay.textContent = `${finalScore}/${total}`;
-    feedbackEl.textContent = await getRandomFeedback(finalScore, total);
-    
-    // Show Brahmmy medal when passed (≥ 50%), sad Brahmmy when failed
-    if ((finalScore / total) >= 0.5) {
-        brahmmyResult.src = "../brahmmy-img/BRAHMMY_MEDAL.PNG";
-        brahmmyResult.style.display = "block";
-        continueBtn.textContent = "Mahusay!";
-    } else {
-        brahmmyResult.src = "../brahmmy-img/brahmmy-sad.png";
-        brahmmyResult.style.display = "block";
-        continueBtn.textContent = "Continue";
-    }
-    
-    modal.style.display = "flex";
-    confettiWrapper.innerHTML = "";
-    
-    // Only show confetti when passed (≥ 50%)
-    if ((finalScore / total) >= 0.5) {
-        const colors = ['#d4af37', '#7a0c0c', '#ffffff', '#ff0000', '#ffd700'];
-        for(let i=0; i<100; i++) {
-            const confetti = document.createElement("div");
-            confetti.className = "confetti";
-            confetti.style.left = Math.random() * 100 + "vw";
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.animationDelay = Math.random() * 2 + "s";
-            confetti.style.width = Math.random() * 8 + 5 + "px";
-            confetti.style.height = confetti.style.width;
-            confettiWrapper.appendChild(confetti);
-        }
-    }
-}
-
-let questions = [];
-let score = 0;
-let currentQuiz = "";
-let currentQuestionIndex = 0;
-let answered = false;
-
-const modal = document.getElementById("quizModal");
-const sentenceEl = document.getElementById("sentence");
-const optionsEl = document.getElementById("options");
-const explanationEl = document.getElementById("explanation");
-const nextBtn = document.getElementById("nextBtn");
-const scoreEl = document.getElementById("score");
-const instructionEl = document.getElementById("quizInstruction");
-const progressEl = document.getElementById("qProgress");
-const quizContent = document.getElementById("quizContent");
-
-/* ========== QUIZ CONFIGURATION ========== */
-/* Only 3 JSON files available */
-const quizPaths = {
-    vso: "assessment/sentence_structure.json",
-    pronouns: "assessment/pronoun_questions.json",
-    affixes: "assessment/affix_questions.json"
-};
-
-/* Instructions for all 6 buttons */
-const quizInstructions = {
-    vso: "Panuto: Piliin ang tamang ayos ng pangungusap (Verb–Subject–Object).",
-    pronouns: "Panuto: Piliin ang tamang panghalip na angkop sa pangungusap.",
-    affixes: "Panuto: Piliin ang tamang pandiwa ayon sa aspekto o panlapi.",
-    noun: "Panuto: Piliin ang tamang pangngalan na angkop sa pangungusap.",
-    adjective: "Panuto: Piliin ang tamang pang-uri na angkop sa pangungusap.",
-    adverb: "Panuto: Piliin ang tamang pang-abay na angkop sa pangungusap."
-};
-
-/* Button mapping: Last 4 buttons use the same "affixes" JSON file */
-const buttonMapping = {
-    "vso": "vso",
-    "pronouns": "pronouns", 
-    "affixes": "affixes",      // Verbs (Pandiwa) button
-    "noun": "affixes",         // Noun button uses affixes file
-    "adjective": "affixes",    // Adjective button uses affixes file
-    "adverb": "affixes"        // Adverb button uses affixes file
-};
-
-/* ========== START QUIZ ========== */
-document.querySelectorAll(".test-buttons button").forEach(btn => {
-    btn.addEventListener("click", function() {
-        const buttonType = this.getAttribute("data-file");
-        const quizFile = buttonMapping[buttonType];
-        
-        // Show appropriate instruction for the clicked button
-        instructionEl.textContent = quizInstructions[buttonType];
-        
-        startQuiz(quizFile);
-    });
-});
-
-function startQuiz(quizName) {
-    console.log("Starting quiz:", quizName);
-    
-    if (!quizPaths[quizName]) {
-        console.error("Quiz path not found:", quizName);
-        showToast(`Error: Quiz configuration not found.`);
-        return;
-    }
-    
-    score = 0;
-    currentQuestionIndex = 0;
-    currentQuiz = quizName;
-    scoreEl.textContent = "Score: 0";
-    
-    fetch(quizPaths[quizName])
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`Failed to load quiz file: ${res.status} ${res.statusText}`);
-            }
-            return res.json();
-        })
-        .then(data => {
-            if (!data || !Array.isArray(data) || data.length === 0) {
-                throw new Error("Quiz data is empty or not an array");
-            }
-            
-            questions = data.sort(() => 0.5 - Math.random()).slice(0, 10);
-            modal.style.display = "block";
-            loadQuestion();
-        })
-        .catch(err => {
-            console.error("Error loading quiz questions:", err);
-            showToast(`Error loading quiz. Please check if the JSON files exist.`);
-        });
-}
-
-function loadQuestion() {
-    if (currentQuestionIndex >= questions.length) {
-        saveScore();
-        modal.style.display = "none";
-        triggerScoreModal(score, questions.length);
-        return;
-    }
-
-    answered = false;
-    nextBtn.disabled = true;
-    nextBtn.style.opacity = "0.5";
-    progressEl.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-
-    const q = questions[currentQuestionIndex];
-    sentenceEl.textContent = q.wrongSentence;
-    optionsEl.innerHTML = "";
-    explanationEl.style.display = "none";
-
-    // Check if options exist
-    if (!q.options || q.options.length === 0) {
-        console.error("No options available for question:", q);
-        showToast("Error: No options available for this question.");
-        return;
-    }
-
-    q.options.sort(() => 0.5 - Math.random()).forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.onclick = () => {
-            if (answered) return;
-            answered = true;
-            nextBtn.disabled = false;
-            nextBtn.style.opacity = "1";
-
-            if (option === q.correctOption) {
-                btn.classList.add("correct");
-                score++;
-                // Right answer: confetti
-                triggerConfetti();
-            } else {
-                btn.classList.add("wrong");
-                // Highlight correct answer
-                Array.from(optionsEl.children).forEach(child => {
-                    if (child.textContent === q.correctOption) {
-                        child.classList.add("correct");
-                    }
-                });
-                // Wrong answer: camera shake
-                quizContent.classList.add("camera-shake");
-                setTimeout(() => quizContent.classList.remove("camera-shake"), 600);
-            }
-
-            explanationEl.textContent = q.explanation;
-            explanationEl.style.display = "block";
-            scoreEl.textContent = `Score: ${score}`;
-        };
-        optionsEl.appendChild(btn);
-    });
-}
-
-function triggerConfetti() {
-    const wrapper = document.getElementById("confetti-wrapper") || document.createElement("div");
-    if (!document.getElementById("confetti-wrapper")) {
-        wrapper.id = "confetti-wrapper";
-        wrapper.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;";
-        document.body.appendChild(wrapper);
-    }
-
-    const colors = ['#d4af37', '#7a0c0c', '#ffffff', '#ff0000', '#ffd700'];
-    for(let i = 0; i < 30; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 0.5 + "s";
-        confetti.style.width = Math.random() * 8 + 5 + "px";
-        confetti.style.height = confetti.style.width;
-        wrapper.appendChild(confetti);
-    }
-
-    setTimeout(() => {
-        wrapper.innerHTML = "";
-    }, 3000);
-}
-
-nextBtn.addEventListener("click", () => {
-    currentQuestionIndex++;
-    loadQuestion();
-});
-
-document.getElementById("closeModalBtn").addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-async function saveScore() {
-    if (!studentUID || !classId) {
-        console.error("Missing student UID or class ID");
-        return;
-    }
-
-    const timestamp = new Date().toISOString().split('T')[0];
-    const quizType = currentQuiz.charAt(0).toUpperCase() + currentQuiz.slice(1);
-    const docRef = doc(db, "students", studentUID, "scores", `quiz_${Date.now()}`);
-    
-    try {
-        await setDoc(docRef, {
-            studentName: studentName,
-            studentUID: studentUID,
-            classId: classId,
-            quizType: quizType,
-            score: score,
-            total: questions.length,
-            percentage: Math.round((score / questions.length) * 100),
-            timestamp: serverTimestamp(),
-            date: timestamp
-        });
-        
-        // Update dashboard stats
-        const statsRef = doc(db, "students", studentUID);
-        await updateDoc(statsRef, {
-            lastActivity: serverTimestamp(),
-            lastQuizTaken: quizType,
-            lastQuizScore: score + "/" + questions.length
-        });
-        
-        console.log("Score saved successfully!");
-    } catch (error) {
-        console.error("Error saving score:", error);
-        showToast("Error saving score. Please check your connection.");
-    }
-}
-
-// ===== MOBILE NAVIGATION =====
+/* ===== ADDED: MOBILE NAVIGATION ===== */
 const menuToggle = document.getElementById("menuToggle");
 const mobileOverlay = document.getElementById("mobileOverlay");
 const mobileNav = document.getElementById("mobileNav");
@@ -1088,136 +675,223 @@ document.getElementById("mobileLogoutBtn").addEventListener("click", () => {
     document.getElementById("logoutBtn").click();
 });
 
-document.getElementById("mobileMusicToggle").addEventListener("click", () => {
-    document.getElementById("musicToggle").click();
-});
-
-// ===== DARK MODE TOGGLE =====
+/* ===== ADDED: DRIP THEME SWITCHER ===== */
 const darkModeBtn = document.getElementById("darkModeBtn");
-const storedTheme = localStorage.getItem("theme") || "light";
+const dripContainer = document.getElementById("drip-container");
+const dripLayer = document.getElementById("dripLayer");
 
-if (storedTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    darkModeBtn.textContent = "☀️";
+function updateThemeText(isDark) {
+    darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
 }
 
-darkModeBtn.addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("dark-mode");
-    darkModeBtn.textContent = isDark ? "☀️" : "🌙";
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    
-    // Update mobile button text
-    document.getElementById("mobileDarkModeBtn").textContent = 
-        isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-});
-
-// ===== MUSIC TOGGLE =====
-const musicToggle = document.getElementById("musicToggle");
-const bgMusic = document.getElementById("bgMusic");
-let isMuted = localStorage.getItem("musicMuted") === "true";
-
-if (isMuted) {
-    bgMusic.muted = true;
-    musicToggle.textContent = "🔇 Unmute Music";
-}
-
-musicToggle.addEventListener("click", () => {
-    isMuted = !isMuted;
-    bgMusic.muted = isMuted;
-    musicToggle.textContent = isMuted ? "🔇 Unmute Music" : "🔊 Mute Music";
-    localStorage.setItem("musicMuted", isMuted);
-});
-
-// ===== LOGOUT FUNCTIONALITY =====
-const logoutModal = document.getElementById("logoutModal");
-const confirmLogout = document.getElementById("confirmLogout");
-const cancelLogout = document.getElementById("cancelLogout");
-
-document.getElementById("logoutBtn").addEventListener("click", () => {
-    logoutModal.style.display = "flex";
-});
-
-cancelLogout.addEventListener("click", () => {
-    logoutModal.style.display = "none";
-});
-
-confirmLogout.addEventListener("click", async () => {
-    try {
-        await signOut(auth);
-        sessionStorage.clear();
-        localStorage.removeItem("theme");
-        localStorage.removeItem("musicMuted");
-        
-        // Trigger drip transition
-        const dripContainer = document.getElementById("drip-container");
-        const dripLayer = document.getElementById("dripLayer");
-        dripContainer.classList.add("active");
-        
-        // Add appropriate class based on current theme
-        const isDark = document.body.classList.contains("dark-mode");
-        if (isDark) {
-            dripLayer.classList.remove("drip-light");
-        } else {
-            dripLayer.classList.add("drip-light");
-        }
-        
-        setTimeout(() => {
-            window.location.href = "../index.html";
-        }, 700);
-        
-    } catch (error) {
-        console.error("Logout error:", error);
-        showToast("Logout failed. Please try again.");
-    }
-});
-
-// ===== MODAL CLOSING =====
-window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
-    if (e.target === logoutModal) {
-        logoutModal.style.display = "none";
-    }
-    if (e.target === document.getElementById("scoreResultModal")) {
-        document.getElementById("scoreResultModal").style.display = "none";
-        document.getElementById("confetti-wrapper").innerHTML = "";
-    }
-});
-
-// ===== KEYBOARD SHORTCUTS =====
-document.addEventListener("keydown", (e) => {
-    // Close modals with Escape
-    if (e.key === "Escape") {
-        modal.style.display = "none";
-        logoutModal.style.display = "none";
-        document.getElementById("scoreResultModal").style.display = "none";
-    }
-    
-    // Next question with Enter (when next button is enabled)
-    if (e.key === "Enter" && !nextBtn.disabled && modal.style.display === "block") {
-        nextBtn.click();
-    }
-});
-
-// ===== INITIALIZE MOBILE BUTTONS =====
-document.addEventListener("DOMContentLoaded", () => {
+darkModeBtn.onclick = (e) => {
+    e.stopPropagation();
     const isDark = document.body.classList.contains("dark-mode");
-    document.getElementById("mobileDarkModeBtn").textContent = 
-        isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
     
-    const isMutedInit = localStorage.getItem("musicMuted") === "true";
-    document.getElementById("mobileMusicToggle").textContent = 
-        isMutedInit ? "🔇 Unmute Music" : "🔊 Mute Music";
-});
-
-// ===== MOBILE AUTOPLAY FIX =====
-document.addEventListener('touchstart', function() {
-    const bgMusic = document.getElementById('bgMusic');
-    if (bgMusic.paused) {
-        bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
+    if (isDark) {
+        dripLayer.classList.add("drip-light"); 
+    } else {
+        dripLayer.classList.remove("drip-light"); 
     }
-}, { once: true });
+
+    dripContainer.classList.add("active");
+
+    setTimeout(() => {
+        document.body.classList.toggle("dark-mode");
+        const nowDark = document.body.classList.contains("dark-mode");
+        updateThemeText(nowDark);
+        localStorage.setItem("theme", nowDark ? "dark" : "light");
+    }, 350);
+
+    setTimeout(() => {
+        dripContainer.classList.remove("active");
+    }, 700);
+};
+
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    updateThemeText(true);
+}
+
+/* YOUR ORIGINAL JAVASCRIPT BELOW - KEEPING IT AS IS */
+const textSizeBtn = document.getElementById("textSizeBtn");
+const sizes = ["100%", "115%", "130%"];
+let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+if(currentSizeIndex === -1) currentSizeIndex = 0;
+
+function updateTextSize() {
+    const newSize = sizes[currentSizeIndex];
+    document.documentElement.style.setProperty('--text-scale', newSize);
+    textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+    localStorage.setItem("textSize", newSize);
+}
+
+textSizeBtn.onclick = (e) => {
+    e.stopPropagation();
+    currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+    updateTextSize();
+};
+updateTextSize();
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'tl-PH'; 
+    recognition.interimResults = false;
+    sttBtn.onclick = () => {
+        recognition.start();
+        sttBtn.classList.add("recording");
+    };
+    recognition.onresult = (event) => {
+        input.value = event.results[0][0].transcript;
+        sttBtn.classList.remove("recording");
+    };
+    recognition.onend = () => sttBtn.classList.remove("recording");
+} else {
+    sttBtn.style.display = "none";
+}
+
+window.speakText = function(text) {
+    if (window.speechSynthesis) { window.speechSynthesis.cancel(); }
+    if (typeof responsiveVoice !== "undefined") {
+        responsiveVoice.cancel(); 
+        responsiveVoice.speak(text, "Filipino Female", { pitch: 1, rate: 1, volume: 1 });
+    }
+}
+
+checkBtn.onclick = async () => {
+    const sentence = input.value.trim();
+    if (!sentence) {
+        analysisContainer.innerHTML = "<b style='color:red;'>Please provide an input.</b>";
+        return;
+    }
+    analysisContainer.textContent = "Processing...";
+    try {
+        const res = await fetch("https://vinci14-ubigkas-nlp-engine.hf.space/correct", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sentence })
+        });
+        const data = await res.json();
+        
+        latestCorrectedSentence = data.corrected || "";
+        const originalText = data.original || sentence;
+        const safeCorrected = latestCorrectedSentence.replace(/'/g, "\\'");
+
+        analysisContainer.innerHTML = `
+            <p><b>Original:</b> ${originalText}</p>
+            <p><b>Corrected:</b> <span style="color: #28a745; font-weight: bold;">${latestCorrectedSentence}</span>
+            <button class="tts-btn" onclick="speakText('${safeCorrected}')">🔊 Listen</button></p>
+        `;
+    } catch (err) { 
+        console.error(err);
+        analysisContainer.textContent = "Connection Error: " + err.message; 
+    }
+};
+
+descBtn.onclick = async () => {
+    const sentenceToAnalyze = latestCorrectedSentence || input.value.trim();
+    if (!sentenceToAnalyze) {
+        analysisContainer.innerHTML = "<b style='color:red;'>Please write a sentence first.</b>";
+        return;
+    }
+
+    analysisContainer.innerHTML = "<p>Analyzing structure...</p>";
+
+    try {
+        const res = await fetch("https://vinci14-ubigkas-nlp-engine.hf.space/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sentence: sentenceToAnalyze }) 
+        });
+        const data = await res.json();
+        
+        if (data.error) {
+            analysisContainer.innerHTML = `<b style='color:red;'>Error: ${data.error}</b>`;
+            return;
+        }
+
+        const displaySentence = data.corrected_base || sentenceToAnalyze;
+        const safeDisplay = displaySentence.replace(/'/g, "\\'");
+
+        analysisContainer.innerHTML = `
+            <p><b>Analyzed Sentence:</b> <span style="color: #28a745; font-weight: bold;">${displaySentence}</span> 
+                <button class="tts-btn" onclick="speakText('${safeDisplay}')">🔊</button>
+            </p>
+            <p><b>Sentence Structure:</b> ${data.structure || "Undetermined"}</p>
+        `;
+
+        const table = document.createElement("table");
+        table.className = "analysis-table";
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Part of Speech</th>
+                    <th>English Meaning</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        `;
+
+        const tbody = table.querySelector("tbody");
+        if (data.words && Array.isArray(data.words)) {
+            data.words.forEach(w => {
+                tbody.innerHTML += `<tr>
+                    <td>${w.word || "-"}</td>
+                    <td>${w.type || "Unknown"}</td>
+                    <td>${w.meaning || "No meaning"}</td>
+                </tr>`;
+            });
+        }
+        analysisContainer.appendChild(table);
+    } catch (err) {
+        console.error(err);
+        analysisContainer.innerHTML = `<b style='color:red;'>Server Error: ${err.message}</b>`;
+    }
+};
+
+async function setStudentStatus(uid, status) {
+  try {
+    const studentRef = doc(db, "students", uid);
+    await updateDoc(studentRef, { status: status, lastSeen: serverTimestamp() });
+  } catch (err) { console.error("Status update failed:", err); }
+}
+
+const logoutBtn = document.getElementById("logoutBtn");
+const logoutModal = document.getElementById("logoutModal");
+const cancelLogout = document.getElementById("cancelLogout");
+const confirmLogout = document.getElementById("confirmLogout");
+
+logoutBtn.onclick = (e) => { e.stopPropagation(); logoutModal.style.display = "flex"; };
+cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
+
+confirmLogout.onclick = async () => {
+  if (studentUID) await setStudentStatus(studentUID, "offline");
+  
+  // ADDED DRIP EFFECT FOR LOGOUT
+  const dripContainer = document.getElementById("drip-container");
+  const dripLayer = document.getElementById("dripLayer");
+  dripContainer.classList.add("active");
+  
+  const isDark = document.body.classList.contains("dark-mode");
+  if (isDark) {
+      dripLayer.classList.remove("drip-light");
+  } else {
+      dripLayer.classList.add("drip-light");
+  }
+  
+  setTimeout(async () => {
+      await signOut(auth);
+      sessionStorage.clear();
+      window.location.href = "../index.html";
+  }, 700);
+};
+
+window.onclick = (event) => {
+  if (event.target == logoutModal) logoutModal.style.display = "none";
+};
 </script>
+
 </body>
 </html>

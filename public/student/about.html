@@ -12,13 +12,213 @@
         :root { --text-scale: 100%; }
         body { font-size: var(--text-scale); transition: background-color 0.3s ease; }
 
-        /* CSS shared with Dashboard for Nav & Drip */
+        /* ===== DRIP EFFECT STYLES ===== */
         #drip-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
         .drip-layer { position: absolute; top: -110%; left: 0; width: 100%; height: 120%; background-color: #181818; transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1); clip-path: url(#drip-path); }
         #drip-container.active .drip-layer { top: 0; }
         .drip-light { background-color: #fdfdfd !important; }
 
-        /* ===== SETTINGS DROPDOWN (Integrated from Dashboard) ===== */
+        /* ===== MOBILE NAVIGATION STYLES ===== */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: maroon;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: #fff;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 80px 20px 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            background-color: #f5f5f5;
+            color: maroon;
+        }
+
+        .mobile-nav-actions {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mobile-nav-actions button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        /* Dark mode styles for mobile nav */
+        body.dark-mode .mobile-nav {
+            background-color: #202020;
+        }
+
+        body.dark-mode .mobile-nav ul li a {
+            color: #fff;
+        }
+
+        body.dark-mode .mobile-nav ul li a:hover {
+            background-color: #333;
+            color: #d4af37;
+        }
+
+        body.dark-mode .menu-toggle span {
+            background-color: #fff;
+        }
+
+        /* ===== MOBILE RESPONSIVE STYLES ===== */
+        @media screen and (max-width: 768px) {
+            /* Mobile Navigation Layout */
+            nav {
+                position: relative;
+                height: 70px;
+                padding: 0 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            /* Hide desktop nav */
+            nav ul, .nav-actions {
+                display: none;
+            }
+            
+            /* Burger button on left */
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            /* UBigkas logo centered */
+            nav .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 0;
+            }
+            
+            .container {
+                margin: 30px auto;
+                padding: 0 15px;
+            }
+            
+            h1 { font-size: 1.8rem !important; }
+            #featureDeck { padding: 25px 20px; min-height: 320px; }
+            .carousel-btns { flex-direction: row; width: 100%; }
+            .btn-action { flex: 1; padding: 10px 15px; font-size: 0.9rem; }
+        }
+
+        @media screen and (max-width: 480px) {
+            nav {
+                padding: 0 15px;
+                height: 60px;
+            }
+            
+            .menu-toggle {
+                left: 15px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .container {
+                margin: 20px auto;
+            }
+            
+            h1 {
+                font-size: 1.6rem !important;
+            }
+        }
+
+        /* YOUR ORIGINAL STYLES BELOW - KEEP THEM AS IS */
         .nav-actions { margin-left: auto; display: flex; align-items: center; }
         .dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
         #settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: #7a0c0c; color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
@@ -51,33 +251,48 @@
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .modal-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 400px; }
         body.dark-mode .modal-card { background: #242424; color: white; border: 1px solid #333; }
-
-        /* Responsive Mobile Viewport */
-        @media (max-width: 768px) {
-            .container { margin: 30px auto; }
-            h1 { font-size: 1.8rem !important; }
-            #featureDeck { padding: 25px 20px; min-height: 320px; }
-            .carousel-btns { flex-direction: row; width: 100%; }
-            .btn-action { flex: 1; padding: 10px 15px; font-size: 0.9rem; }
-        }
     </style>
 </head>
 <body>
 
+<!-- ADDED DRIP CONTAINER -->
 <div id="drip-container">
     <div id="dripLayer" class="drip-layer"></div>
     <svg width="0" height="0"><defs><clipPath id="drip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path></clipPath></defs></svg>
 </div>
 
-<nav>
-    <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
+<!-- ADDED MOBILE NAVIGATION ELEMENTS -->
+<button class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div class="mobile-nav" id="mobileNav">
     <ul>
         <li><a href="student_dashboard.html">Home</a></li>
         <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
-    <div class="nav-actions">
+    <div class="mobile-nav-actions">
+        <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+        <button id="mobileLogoutBtn">Logout</button>
+    </div>
+</div>
+
+<!-- YOUR ORIGINAL NAV -->
+<nav>
+    <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
+    <ul id="desktopNav">
+        <li><a href="student_dashboard.html">Home</a></li>
+        <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions" id="desktopActions">
         <div class="dropdown">
             <button id="settingsBtn">Settings ⚙️</button>
             <div class="dropdown-content">
@@ -139,33 +354,33 @@
     import { auth } from "../firebase.js";
     import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    // Carousel Logic
-    const cards = document.querySelectorAll('.feature-card');
-    let idx = 0;
-    document.getElementById('nextBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx + 1) % cards.length; cards[idx].classList.add('active'); };
-    document.getElementById('prevBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx - 1 + cards.length) % cards.length; cards[idx].classList.add('active'); };
+    /* ===== ADDED: MOBILE NAVIGATION ===== */
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileOverlay = document.getElementById("mobileOverlay");
+    const mobileNav = document.getElementById("mobileNav");
 
-    /* ===================== TEXT SIZE LOGIC ===================== */
-    const textSizeBtn = document.getElementById("textSizeBtn");
-    const sizes = ["100%", "115%", "130%"];
-    let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
-    if(currentSizeIndex === -1) currentSizeIndex = 0;
+    menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        mobileNav.classList.toggle("active");
+        mobileOverlay.classList.toggle("active");
+    });
 
-    function updateTextSize() {
-        const newSize = sizes[currentSizeIndex];
-        document.documentElement.style.setProperty('--text-scale', newSize);
-        textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
-        localStorage.setItem("textSize", newSize);
-    }
+    mobileOverlay.addEventListener("click", () => {
+        menuToggle.classList.remove("active");
+        mobileNav.classList.remove("active");
+        mobileOverlay.classList.remove("active");
+    });
 
-    textSizeBtn.onclick = (e) => {
-        e.stopPropagation();
-        currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
-        updateTextSize();
-    };
-    updateTextSize();
+    // Mobile Action Buttons
+    document.getElementById("mobileDarkModeBtn").addEventListener("click", () => {
+        document.getElementById("darkModeBtn").click();
+    });
 
-    /* ===================== THEME SWITCHER ===================== */
+    document.getElementById("mobileLogoutBtn").addEventListener("click", () => {
+        document.getElementById("logoutBtn").click();
+    });
+
+    /* ===== ADDED: DRIP THEME SWITCHER ===== */
     const darkModeBtn = document.getElementById("darkModeBtn");
     const dripContainer = document.getElementById("drip-container");
     const dripLayer = document.getElementById("dripLayer");
@@ -194,7 +409,32 @@
         updateThemeText(true);
     }
 
-    /* ===================== LOGOUT LOGIC ===================== */
+    /* YOUR ORIGINAL JAVASCRIPT BELOW - KEEPING IT AS IS */
+    // Carousel Logic
+    const cards = document.querySelectorAll('.feature-card');
+    let idx = 0;
+    document.getElementById('nextBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx + 1) % cards.length; cards[idx].classList.add('active'); };
+    document.getElementById('prevBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx - 1 + cards.length) % cards.length; cards[idx].classList.add('active'); };
+
+    const textSizeBtn = document.getElementById("textSizeBtn");
+    const sizes = ["100%", "115%", "130%"];
+    let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+    if(currentSizeIndex === -1) currentSizeIndex = 0;
+
+    function updateTextSize() {
+        const newSize = sizes[currentSizeIndex];
+        document.documentElement.style.setProperty('--text-scale', newSize);
+        textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+        localStorage.setItem("textSize", newSize);
+    }
+
+    textSizeBtn.onclick = (e) => {
+        e.stopPropagation();
+        currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+        updateTextSize();
+    };
+    updateTextSize();
+
     const logoutBtn = document.getElementById("logoutBtn");
     const logoutModal = document.getElementById("logoutModal");
 
@@ -202,9 +442,23 @@
     document.getElementById("cancelLogout").onclick = () => logoutModal.style.display = "none";
     
     document.getElementById("confirmLogout").onclick = async () => {
-        await signOut(auth);
-        sessionStorage.clear();
-        window.location.href = "../index.html";
+        // ADDED DRIP EFFECT FOR LOGOUT
+        const dripContainer = document.getElementById("drip-container");
+        const dripLayer = document.getElementById("dripLayer");
+        dripContainer.classList.add("active");
+        
+        const isDark = document.body.classList.contains("dark-mode");
+        if (isDark) {
+            dripLayer.classList.remove("drip-light");
+        } else {
+            dripLayer.classList.add("drip-light");
+        }
+        
+        setTimeout(async () => {
+            await signOut(auth);
+            sessionStorage.clear();
+            window.location.href = "../index.html";
+        }, 700);
     };
 
     window.onclick = (event) => { if (event.target == logoutModal) logoutModal.style.display = "none"; };
