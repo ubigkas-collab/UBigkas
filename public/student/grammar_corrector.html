@@ -487,7 +487,8 @@ checkBtn.onclick = async () => {
     }
     analysisContainer.textContent = "Processing...";
     try {
-        const res = await fetch("http://127.0.0.1:5000/correct", {
+        // CONNECTED TO HUGGING FACE API
+        const res = await fetch("https://vinci14-ubigkas-nlp-engine.hf.space/correct", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sentence })
@@ -520,7 +521,8 @@ descBtn.onclick = async () => {
     analysisContainer.innerHTML = "<p>Analyzing structure...</p>";
 
     try {
-        const res = await fetch("http://127.0.0.1:5000/analyze", {
+        // CONNECTED TO HUGGING FACE API
+        const res = await fetch("https://vinci14-ubigkas-nlp-engine.hf.space/analyze", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sentence: sentenceToAnalyze }) 
@@ -532,7 +534,7 @@ descBtn.onclick = async () => {
             return;
         }
 
-        const displaySentence = data.corrected || sentenceToAnalyze;
+        const displaySentence = data.corrected_base || sentenceToAnalyze;
         const safeDisplay = displaySentence.replace(/'/g, "\\'");
 
         analysisContainer.innerHTML = `
