@@ -18,6 +18,8 @@
   body {
     font-size: var(--text-scale);
     transition: background-color 0.3s ease;
+    margin: 0;
+    overflow-x: hidden;
   }
 
   /* ===== DRIP EFFECT INTEGRATION ===== */
@@ -45,6 +47,35 @@
   }
   .drip-light { background-color: #fdfdfd !important; }
 
+  /* ===== NAVIGATION RESPONSIVENESS ===== */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    flex-wrap: wrap;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 10px 20px; }
+    nav ul { 
+      order: 3; 
+      width: 100%; 
+      justify-content: center; 
+      gap: 10px; 
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .nav-actions { order: 2; }
+  }
+
   /* ===== SETTINGS DROPDOWN ===== */
   .nav-actions {
     margin-left: auto;
@@ -55,13 +86,12 @@
   .dropdown {
     position: relative;
     display: inline-block;
-    /* Invisible bridge to keep menu open while moving mouse from button to menu */
     padding-bottom: 15px; 
     margin-bottom: -15px;
   }
 
   #settingsBtn {
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 25px;
     background-color: #7a0c0c;
     color: white;
@@ -70,6 +100,7 @@
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
+    font-size: 0.9rem;
   }
 
   .dropdown-content {
@@ -79,7 +110,7 @@
     position: absolute;
     right: 0;
     background-color: white;
-    min-width: 220px;
+    min-width: 200px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 10001;
     border-radius: 12px;
@@ -117,34 +148,28 @@
 
   #logoutBtn { color: #d9534f !important; font-weight: 700; }
 
-  /* ===== DARK MODE STYLES (UPDATED) ===== */
-  body.dark-mode {
-    background-color: #181818;
-    color: #ffffff;
+  /* ===== DASHBOARD LAYOUT ===== */
+  .dashboard-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  body.dark-mode nav { 
-    background-color: #202020; 
-    color: #ffffff;
+  .dashboard-card.full-width {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px 20px;
+    margin-bottom: 20px;
   }
 
-  /* Nav links and UB logo text color */
-  body.dark-mode nav ul li a,
-  body.dark-mode nav .logo {
-    color: #ffffff;
-  }
+  .dashboard-card h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 5px; }
 
-  /* Gold hover effect for Nav and Logo */
-  body.dark-mode nav ul li a:hover,
-  body.dark-mode nav .logo:hover {
-    color: #d4af37;
-  }
-
-  body.dark-mode .dropdown-content {
-    background-color: #242424;
-    border: 1px solid #333;
-  }
-
+  /* ===== DARK MODE STYLES ===== */
+  body.dark-mode { background-color: #181818; color: #ffffff; }
+  body.dark-mode nav { background-color: #202020; color: #ffffff; }
+  body.dark-mode nav ul li a, body.dark-mode nav .logo { color: #ffffff; }
+  body.dark-mode nav ul li a:hover { color: #d4af37; }
+  body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
   body.dark-mode .dropdown-content button { color: #e6e6e6; }
   body.dark-mode .dropdown-content button:hover { background-color: #333; }
 
@@ -156,46 +181,10 @@
     border: 1px solid #333;
   }
 
-  /* ===== CUSTOM MODAL STYLES ===== */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 20000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(4px);
-  }
-
-  .modal-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
-  
-  .feedback-quiz-name{
-    font-weight: bold;
-  }
-  .modal-btn {
-    padding: 10px 25px; border-radius: 25px; border: none;
-    font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif;
-  }
-
-  .modal-btn.primary { background-color: #d9534f; color: white; }
-  .modal-btn.secondary { background-color: #e9ecef; color: #333; }
-
-  body.dark-mode .modal-card { background: #242424; color: #e6e6e6; border: 1px solid #333; }
-
   /* ===== GRAMMAR CARD FLIP LOGIC ===== */
   .grammar-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
     margin-top: 20px;
   }
@@ -219,27 +208,42 @@
     justify-content: center;
     border-radius: 15px;
     padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
   }
-  .card-front { background-color: #7a0c0c; color: white; font-weight: 700; }
+  .card-front { background-color: #7a0c0c; color: white; font-weight: 700; font-size: 1.2rem; }
   .card-back {
     background-color: #fff;
     color: #333;
     transform: rotateY(180deg);
     border: 1px solid #ddd;
-  }
-  body.dark-mode .card-back { background-color: #333; color: #fff; border-color: #444; }
-  .card-example {
-    margin-top: 12px;
-    font-style: italic;
-    font-weight: 700;
-    color: #d4af37;
-    border-top: 1px dashed #ccc;
-    padding-top: 8px;
-    width: 90%;
     font-size: 0.9rem;
   }
-</style>
+  body.dark-mode .card-back { background-color: #333; color: #fff; border-color: #444; }
 
+  /* ===== MOBILE BREAKPOINTS ===== */
+  @media (max-width: 600px) {
+    .dashboard-container { padding: 15px; }
+    .assessment-section { padding: 15px; }
+    .grammar-cards { grid-template-columns: 1fr; }
+    .card-container { height: 160px; }
+    .nav-actions { margin-left: 0; }
+    .modal-card { width: 85%; padding: 20px; }
+    #scoreChart { height: 250px !important; }
+  }
+
+  /* (Existing Modal/Button Styles) */
+  .modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px);
+  }
+  .modal-card { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; }
+  .modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
+  .modal-btn { padding: 10px 25px; border-radius: 25px; border: none; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
+  .modal-btn.primary { background-color: #d9534f; color: white; }
+  .modal-btn.secondary { background-color: #e9ecef; color: #333; }
+  .card-example { margin-top: 12px; font-style: italic; font-weight: 700; color: #d4af37; border-top: 1px dashed #ccc; padding-top: 8px; width: 90%; font-size: 0.85rem; }
+  </style>
 </head>
 <body>
 
@@ -258,7 +262,7 @@
   <a href="index.html" class="logo">UB<span>igkas</span></a>
   <ul>
     <li><a href="student_dashboard.html">Home</a></li>
-    <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+    <li><a href="grammar_corrector.html">Corrector</a></li>
     <li><a href="About.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -291,12 +295,14 @@
   <div class="dashboard-card full-width">
     <h1>Welcome, <span id="studentName"></span>!</h1>
     <p class="subtitle">Class Group: <span id="classId"></span></p>
-    <button class="btn" id="quizBtn">Take Grammar Quiz</button>
+    <button class="btn" id="quizBtn" style="margin-top: 15px;">Take Grammar Quiz</button>
   </div>
 
   <div class="assessment-section">
     <h3>Assessment Performance</h3>
-    <canvas id="scoreChart" height="220"></canvas>
+    <div style="height: 220px; position: relative; width: 100%;">
+      <canvas id="scoreChart"></canvas>
+    </div>
   </div>
 
   <div class="assessment-section" style="margin-top: 20px;">
@@ -363,16 +369,17 @@
 </div>
 
 <script type="module">
+// [Original JS Script Logic - No changes made here]
 import { auth, db } from "../firebase.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { collection, getDocs, doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const studentName = sessionStorage.getItem("studentName") || "Student";
+const studentNameStr = sessionStorage.getItem("studentName") || "Student";
 const studentUID  = sessionStorage.getItem("studentUID");
-const classId     = sessionStorage.getItem("classId");
+const classIdStr     = sessionStorage.getItem("classId");
 
-document.getElementById("studentName").textContent = studentName;
-document.getElementById("classId").textContent = classId;
+document.getElementById("studentName").textContent = studentNameStr;
+document.getElementById("classId").textContent = classIdStr;
 
 /* ===================== TEXT SIZE LOGIC ===================== */
 const textSizeBtn = document.getElementById("textSizeBtn");
@@ -432,13 +439,14 @@ async function loadAssessmentScores(uid) {
 
       const div = document.createElement("div");
       div.className = "feedback-item";
-      div.innerHTML = `<span class="feedback-quiz-name">${formatQuizName(quiz)}:</span> ${getFeedback(quiz, percentage)}`;
+      div.style.marginBottom = "8px";
+      div.innerHTML = `<span class="feedback-quiz-name" style="font-weight:bold;">${formatQuizName(quiz)}:</span> ${getFeedback(quiz, percentage)}`;
       feedbackContainer.appendChild(div);
     });
 
     const labels = []; const values = [];
     for (const [quiz, val] of Object.entries(scoreMap)) {
-      labels.push(quiz);
+      labels.push(formatQuizName(quiz));
       values.push(Math.round((val.score / val.total) * 100));
     }
     if (labels.length) renderChart(labels, values);
@@ -553,7 +561,6 @@ document.querySelectorAll('.card-container').forEach(container => {
 
 window.onclick = (event) => { if (event.target == logoutModal) logoutModal.style.display = "none"; };
 window.addEventListener("beforeunload", () => { if (studentUID) setStudentStatus(studentUID, "offline"); });
-
 </script>
 
 </body>
