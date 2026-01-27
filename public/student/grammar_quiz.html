@@ -463,12 +463,12 @@ body.dark-mode .score-feedback { color: #ccc; }
 @media screen and (max-width: 768px) {
     /* MOBILE NAVIGATION LAYOUT */
     nav {
-        position: relative;
-        height: 60px;
-        padding: 0 20px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        padding: 15px 20px;
+        height: 70px;
+        position: relative;
     }
     
     /* Hide desktop nav */
@@ -476,26 +476,20 @@ body.dark-mode .score-feedback { color: #ccc; }
         display: none;
     }
     
-    /* Burger button on left, in line with logo */
+    /* Burger button in left corner */
     .menu-toggle {
         display: flex;
-        order: 1;
-        margin-right: 0;
-    }
-    
-    /* UBigkas logo in middle, burger on left */
-    nav .logo {
-        order: 2;
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        margin: 0;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
     }
     
-    /* Remove any previous positioning */
-    .menu-toggle {
+    /* UBigkas logo centered */
+    nav .logo {
         position: static;
         transform: none;
+        text-align: center;
     }
     
     .dashboard-container {
@@ -570,8 +564,12 @@ body.dark-mode .score-feedback { color: #ccc; }
 
 @media screen and (max-width: 480px) {
     nav {
-        padding: 0 15px;
-        height: 55px;
+        padding: 15px;
+        height: 60px;
+    }
+    
+    .menu-toggle {
+        left: 15px;
     }
     
     .logo {
