@@ -1,0 +1,10 @@
+torch
+transformers
+numpy
+pyspellchecker
+datasets
+scikit-learn
+pandas
+nltk
+flask
+flask-cors
