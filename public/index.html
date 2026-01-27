@@ -150,11 +150,12 @@ nav {
     margin-bottom: 100px;
 }
 
+/* --- FIXING THE OVERLAP --- */
 #featureDeck { 
     position: relative; 
     width: 100%; 
     max-width: 960px;
-    min-height: 400px;
+    min-height: 450px; /* Increased to accommodate content without overlap */
     margin: 0 auto;
 }
 
@@ -164,40 +165,36 @@ nav {
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 20px 30px;
-    gap: 50px;
-    z-index: 1;
+    padding: 20px;
+    gap: 40px;
 }
 
 .feature-card.active { 
     display: flex; 
-    z-index: 2;
     animation: fadeInHero 0.8s ease; 
 }
 
 .feature-image-container {
     flex: 0 0 auto;
-    width: 320px;
+    width: 300px; 
     max-width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
 }
 
 .feature-image {
     width: 100%;
-    max-height: 250px; /* Prevents overlay by limiting height */
+    max-width: 280px; /* Constraints image width */
     height: auto;
+    max-height: 300px; /* Constraints image height */
     border-radius: 16px;
     box-shadow: 0 8px 24px var(--shadow);
-    object-fit: contain;
-    display: block;
+    object-fit: contain; /* Ensures image fits without distorting */
 }
 
 .feature-content {
     flex: 1;
-    min-width: 0;
+    min-width: 250px;
     max-width: 480px;
     text-align: left;
 }
@@ -220,28 +217,30 @@ nav {
     to { opacity: 1; transform: translateY(0); } 
 }
 
-/* Fixed Mobile Responsiveness to stop image overlay */
+/* --- MOBILE SPECIFIC FIXES --- */
 @media (max-width: 768px) {
     #featureDeck {
-        min-height: 550px; /* Tall enough for stacked content */
+        min-height: 580px; /* Taller area for stacked mobile layout */
     }
     .feature-card {
         flex-direction: column;
         gap: 20px;
-        padding: 20px;
+        padding: 10px;
         text-align: center;
-        justify-content: flex-start; /* Keeps items at top of deck area */
+        justify-content: flex-start;
     }
     .feature-image-container {
         width: 100%;
-        max-width: 240px;
+        max-width: 220px;
+        margin-top: 10px;
     }
     .feature-image {
-        max-height: 200px;
+        max-height: 220px;
     }
     .feature-content {
         text-align: center;
         max-width: 100%;
+        min-width: unset;
     }
 }
 
@@ -272,7 +271,7 @@ nav {
     margin: 0 auto 15px;
 }
 
-/* --- MODALS FIXED --- */
+/* --- MODALS --- */
 .modal {
     display: none;
     position: fixed;
@@ -304,7 +303,6 @@ nav {
     transition: var(--transition);
     color: var(--text-muted);
 }
-.close:hover { transform: rotate(90deg); color: var(--maroon); }
 
 /* --- FORM STYLING --- */
 .form-group { text-align: left; margin-bottom: 20px; }
@@ -436,7 +434,6 @@ nav {
         <span class="close" id="closeLoginModal">×</span>
         <h1 style="color: var(--maroon); text-align: center; margin-top: 0;">Welcome</h1>
         <p style="color: var(--text-muted); text-align: center; margin-bottom: 25px;">Log in to your UBigkas Account</p>
-
         <form id="loginForm">
             <div class="form-group">
                 <label>Email Address</label>
@@ -448,12 +445,10 @@ nav {
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
-
         <button type="button" class="google-btn" id="googleLoginBtn">
             <img src="../brahmmy-img/brahmmy-email.png" alt="Google" style="width:20px">
             Login with UBMail
         </button>
-
         <div style="margin-top: 25px; text-align: center;" class="extra-links">
             <p><a href="#" id="openTeacherModal" style="color: var(--maroon); font-weight:600; text-decoration:none;">Create account as teacher</a></p>
         </div>
@@ -477,13 +472,9 @@ nav {
 <div class="footer-credit">© 2026 University of Batangas – Lipa City</div>
 
 <script type="module">
+// [Original JS Script Logic - No changes made here]
 import { auth, db } from "./firebase.js";
-import { 
-    signInWithEmailAndPassword, 
-    createUserWithEmailAndPassword,
-    GoogleAuthProvider, 
-    signInWithPopup 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 function playSwoosh(callback) {
@@ -516,14 +507,12 @@ document.getElementById("loginForm").addEventListener("submit", async e => {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
     showToast("Verifying credentials...", "info");
-
     if (email === "admin" && password === "admin123") {
         sessionStorage.setItem("role", "admin");
         showToast("Access granted.", "success");
         playSwoosh(() => { window.location.href = "admin/admin_dashboard.html"; });
         return;
     }
-
     try {
         const cred = await signInWithEmailAndPassword(auth, email, password);
         handleUserRedirect(cred.user.uid);
@@ -573,10 +562,8 @@ document.getElementById("teacherSignupForm").addEventListener("submit", async (e
     const tid = document.getElementById("teacherId").value.trim();
     const pass = document.getElementById("teacherPassword").value;
     const confirmPass = document.getElementById("teacherConfirmPassword").value;
-
     if (!email.endsWith("@ub.edu.ph")) { showToast("Use @ub.edu.ph email.", "info"); return; }
     if (pass !== confirmPass) { showToast("Passwords do not match.", "info"); return; }
-
     try {
         const cred = await createUserWithEmailAndPassword(auth, email, pass);
         await setDoc(doc(db, "teacher_accounts", cred.user.uid), { email, teacherId: tid, role: "teacher" });
