@@ -90,6 +90,23 @@
     align-items: center;
   }
 
+  /* ===== BURGER MENU BUTTON ===== */
+  .burger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+  }
+  .burger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #7a0c0c;
+    border-radius: 2px;
+  }
+
   /* ===== SETTINGS DROPDOWN ===== */
   .dropdown {
     position: relative;
@@ -172,6 +189,7 @@
   body.dark-mode .dashboard-card, body.dark-mode .assessment-section, body.dark-mode .grammar-cards-section {
     background-color: #242424; color: #e6e6e6; border: 1px solid #333;
   }
+  body.dark-mode .burger-menu span { background-color: #ffffff; }
 
   /* ===== DASHBOARD LAYOUT ===== */
   .dashboard-container { padding: 40px 5%; max-width: 1200px; margin: 0 auto; }
@@ -192,43 +210,53 @@
   /* ===== MOBILE RESPONSIVE FIXES ===== */
   @media (max-width: 850px) {
     nav {
-      height: auto;
-      padding: 15px 5%;
+      height: 70px;
       display: grid;
-      grid-template-columns: 1fr auto 1fr; /* For 3-column alignment */
+      grid-template-columns: 1fr auto 1fr; 
       align-items: center;
     }
     
-    /* Logo in the middle */
+    .burger-menu {
+      display: flex;
+      grid-column: 1;
+      justify-self: start;
+    }
+
     nav .logo {
       grid-column: 2;
       justify-self: center;
       font-size: 1.5rem;
     }
 
-    /* Settings Button top right */
     .nav-actions {
       grid-column: 3;
       justify-self: end;
       margin-left: 0;
-      width: auto;
     }
 
-    /* Navigation links below the header row */
     nav ul {
-      grid-row: 2;
-      grid-column: 1 / span 3;
+      display: none; 
+      position: absolute;
+      top: 70px;
+      left: 0;
       width: 100%;
-      justify-content: center;
+      background-color: #ffffff;
+      flex-direction: column;
+      padding: 20px;
       gap: 15px;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+      text-align: center;
     }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    body.dark-mode nav ul { background-color: #202020; }
 
     .dropdown-content {
       right: 0;
-      transform: none;
       top: 45px;
     }
 
@@ -261,8 +289,12 @@
 </div>
 
 <nav>
+  <button class="burger-menu" id="burgerBtn">
+    <span></span><span></span><span></span>
+  </button>
+
   <a href="index.html" class="logo">UB<span>igkas</span></a>
-  <ul>
+  <ul id="navLinks">
     <li><a href="student_dashboard.html">Home</a></li>
     <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
     <li><a href="About.html">About</a></li>
@@ -382,6 +414,15 @@ const classId     = sessionStorage.getItem("classId");
 document.getElementById("studentName").textContent = studentName;
 document.getElementById("classId").textContent = classId;
 
+/* ===================== BURGER MENU TOGGLE ===================== */
+const burgerBtn = document.getElementById("burgerBtn");
+const navLinks = document.getElementById("navLinks");
+
+burgerBtn.onclick = (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle("show");
+};
+
 /* ===================== MOBILE DROPDOWN TOGGLE ===================== */
 const settingsBtn = document.getElementById("settingsBtn");
 const dropdownMenu = document.getElementById("settingsDropdown");
@@ -391,10 +432,13 @@ settingsBtn.onclick = (e) => {
     dropdownMenu.classList.toggle("is-active");
 };
 
-// Close dropdown if user clicks anywhere else
+// Close dropdown or menu if user clicks anywhere else
 document.addEventListener('click', (event) => {
     if (!settingsBtn.contains(event.target)) {
         dropdownMenu.classList.remove("is-active");
+    }
+    if (!burgerBtn.contains(event.target)) {
+        navLinks.classList.remove("show");
     }
 });
 
@@ -570,10 +614,8 @@ function updateExample(container) {
 document.querySelectorAll('.card-container').forEach(container => {
     const card = container.querySelector('.card');
     container.addEventListener('click', () => {
-        // Only trigger flip if it's not currently flipped
         if (!card.classList.contains('is-flipped')) {
             card.classList.add('is-flipped');
-            // Auto flip back after 3 seconds
             setTimeout(() => {
                 card.classList.remove('is-flipped');
             }, 3000);
