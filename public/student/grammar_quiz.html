@@ -55,7 +55,10 @@
     cursor: pointer;
     padding: 0;
     z-index: 1001;
-    margin-left: auto;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .menu-toggle span {
@@ -109,6 +112,9 @@
     padding: 80px 20px 20px;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .mobile-nav.active {
@@ -119,20 +125,23 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;
 }
 
 .mobile-nav ul li {
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .mobile-nav ul li a {
     display: block;
-    padding: 12px 15px;
+    padding: 15px;
     text-decoration: none;
     color: #333;
     font-weight: 500;
     border-radius: 8px;
     transition: all 0.3s ease;
+    font-size: 1.1rem;
 }
 
 .mobile-nav ul li a:hover {
@@ -145,17 +154,19 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
 }
 
 .mobile-nav-actions button {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border-radius: 25px;
     font-weight: 600;
     border: none;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
 /* Dark mode styles for mobile nav */
@@ -185,6 +196,7 @@ nav {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: relative;
     z-index: 100;
+    height: 70px;
 }
 nav .logo {
     font-weight: 700;
@@ -192,6 +204,9 @@ nav .logo {
     text-decoration: none;
     color: maroon;
     flex-shrink: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 nav .logo span { color: #d4af37; }
 nav ul { 
@@ -462,13 +477,33 @@ body.dark-mode .score-feedback { color: #ccc; }
 }
 
 @media screen and (max-width: 768px) {
+    /* MOBILE NAVIGATION LAYOUT */
+    nav {
+        position: relative;
+        height: 70px;
+        padding: 0 20px;
+    }
+    
     /* Hide desktop nav and show mobile toggle */
     nav ul, .nav-actions {
         display: none;
     }
     
+    /* Burger button on left side */
     .menu-toggle {
         display: flex;
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    /* UBigkas logo in middle */
+    nav .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
     }
     
     .dashboard-container {
@@ -543,11 +578,16 @@ body.dark-mode .score-feedback { color: #ccc; }
 
 @media screen and (max-width: 480px) {
     nav {
-        padding: 10px 15px;
+        padding: 0 15px;
+        height: 60px;
     }
     
     .logo {
         font-size: 20px;
+    }
+    
+    .menu-toggle {
+        left: 15px;
     }
     
     .dashboard-card h1 {
