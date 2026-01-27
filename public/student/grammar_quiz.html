@@ -42,57 +42,163 @@
     font-weight: 500;
 }
 
+/* ===== Mobile Responsive Styles ===== */
+/* Mobile Navigation */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    margin-right: 15px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: maroon;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    padding: 80px 20px 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.mobile-nav.active {
+    left: 0;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav ul li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav ul li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav ul li a:hover {
+    background-color: #f5f5f5;
+    color: maroon;
+}
+
+.mobile-nav-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-nav-actions button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode styles for mobile nav */
+body.dark-mode .mobile-nav {
+    background-color: #202020;
+}
+
+body.dark-mode .mobile-nav ul li a {
+    color: #fff;
+}
+
+body.dark-mode .mobile-nav ul li a:hover {
+    background-color: #333;
+    color: #d4af37;
+}
+
+body.dark-mode .menu-toggle span {
+    background-color: #fff;
+}
+
 /* ===== Nav & Actions ===== */
 nav {
     display: flex;
     align-items: center;
-    padding: 0 5%;
-    height: 80px;
+    padding: 10px 20px;
     background-color: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 100;
 }
-
 nav .logo {
-    font-weight: 800;
-    font-size: 1.8rem;
+    font-weight: 700;
+    font-size: 22px;
     text-decoration: none;
     color: maroon;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    flex-shrink: 0;
 }
 nav .logo span { color: #d4af37; }
-
-/* ===== BURGER MENU BUTTON ===== */
-.burger-menu {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 10px;
-    z-index: 1002;
-    position: relative;
-    top: 5px; /* Moved down a bit */
-}
-.burger-menu span {
-    width: 25px;
-    height: 3px;
-    background-color: maroon;
-    border-radius: 2px;
-    transition: 0.3s;
-}
-
 nav ul { 
     list-style: none; 
     display: flex; 
-    gap: 30px;
-    margin: 0;
-    padding: 0;
+    gap: 15px; 
+    margin-left: 20px;
 }
 nav ul li a { 
     text-decoration: none; 
@@ -111,9 +217,8 @@ nav ul li a:hover { color: maroon !important; }
     align-items: center;
     flex-shrink: 0;
 }
-
 #logoutBtn, #musicToggle, #darkModeBtn {
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-radius: 25px;
     font-weight: 600;
     border: none;
@@ -122,37 +227,13 @@ nav ul li a:hover { color: maroon !important; }
     transition: all 0.3s ease;
     white-space: nowrap;
 }
-#logoutBtn { 
-    background-color: #333; 
-    color: white; 
-}
-#logoutBtn:hover {
-    background-color: #444;
-}
-#darkModeBtn { 
-    background-color: #333; 
-    color: #fff; 
-}
-#darkModeBtn:hover {
-    background-color: #444;
-}
-#musicToggle { 
-    background: #d4af37; 
-    color: maroon; 
-    font-weight: 600;
-}
-#musicToggle:hover {
-    background: #b38f00;
-}
+#logoutBtn { background-color: #d9534f; color: white; }
+#darkModeBtn { background-color: #333; color: #fff; }
+#musicToggle { background: #d4af37; color: #7a0c0c; }
 
-/* ===== DARK MODE STYLES ===== */
-body.dark-mode { 
-    background-color: #181818; 
-    color: #e6e6e6; 
-}
-body.dark-mode nav { 
-    background-color: #202020; 
-}
+/* ===== DARK MODE STYLES (UPDATED FOR CONSISTENCY) ===== */
+body.dark-mode { background-color: #181818; color: #e6e6e6; }
+body.dark-mode nav { background-color: #202020; }
 
 /* Nav links and UB logo text color in dark mode */
 body.dark-mode nav ul li a,
@@ -173,108 +254,11 @@ body.dark-mode .modal-content {
     border: 1px solid #333; 
 }
 
-body.dark-mode .burger-menu span { 
-    background-color: #ffffff; 
-}
-
 /* FIX: Dark Mode for Logout Modal */
-body.dark-mode .modal-card { 
-    background-color: #242424; 
-    color: #fff; 
-    border: 1px solid #444; 
-}
-body.dark-mode .modal-card h3 { 
-    color: #fff; 
-}
-body.dark-mode .modal-card p { 
-    color: #ccc; 
-}
-body.dark-mode .modal-btn.secondary { 
-    background-color: #444; 
-    color: #eee; 
-}
-
-/* ===== MOBILE RESPONSIVE ===== */
-@media (max-width: 850px) {
-    nav {
-        height: 70px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        padding: 0 20px;
-    }
-
-    .burger-menu {
-        display: flex;
-        grid-column: 1;
-        justify-self: start;
-        align-self: center;
-    }
-
-    nav .logo {
-        position: relative;
-        left: 0;
-        transform: none;
-        grid-column: 2;
-        justify-self: center;
-        font-size: 1.5rem;
-    }
-
-    .nav-actions {
-        grid-column: 3;
-        justify-self: end;
-    }
-
-    /* Side Panel Navigation */
-    nav ul {
-        position: fixed;
-        top: 0;
-        left: -100%; /* Fully hidden */
-        width: 280px;
-        height: 100vh;
-        background-color: #ffffff;
-        flex-direction: column;
-        padding: 100px 30px 30px 30px;
-        gap: 25px;
-        box-shadow: 10px 0 20px rgba(0,0,0,0.1);
-        transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        z-index: 1001;
-    }
-
-    nav ul.show {
-        left: 0;
-    }
-
-    nav ul li a {
-        font-size: 1.2rem;
-        display: block;
-        width: 100%;
-        color: #000000 !important;
-    }
-
-    nav ul li a:hover {
-        color: maroon !important;
-    }
-
-    body.dark-mode nav ul {
-        background-color: #202020;
-        box-shadow: 10px 0 20px rgba(0,0,0,0.4);
-    }
-
-    body.dark-mode nav ul li a {
-        color: #ffffff !important;
-    }
-
-    body.dark-mode nav ul li a:hover {
-        color: #d4af37 !important;
-    }
-
-    /* Adjust button sizes for mobile */
-    #logoutBtn, #musicToggle, #darkModeBtn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-}
+body.dark-mode .modal-card { background-color: #242424; color: #fff; border: 1px solid #444; }
+body.dark-mode .modal-card h3 { color: #fff; }
+body.dark-mode .modal-card p { color: #ccc; }
+body.dark-mode .modal-btn.secondary { background-color: #444; color: #eee; }
 
 /* ===== QUIZ MODAL REFINEMENTS ===== */
 .modal {
@@ -282,7 +266,7 @@ body.dark-mode .modal-btn.secondary {
     background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
 }
 .modal-content {
-    background: #ffffff; margin: 2% auto; padding: 40px; border-radius: 25px;
+    background: #ffffff; margin: 2% auto -5% auto; padding: 40px; border-radius: 25px;
     max-width: 650px; width: 90%; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     max-height: 85vh; overflow-y: auto; scrollbar-width: thin;
 }
@@ -386,20 +370,6 @@ body.dark-mode .score-feedback { color: #ccc; }
     }
 }
 
-/* ===== BRAHMMY FEEDBACK ===== */
-#brahmmyFeedback {
-    width: 140px;
-    height: auto;
-    display: block;
-    margin: 20px auto 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-#brahmmyFeedback.visible {
-    opacity: 1;
-}
-
 /* Camera shake (only on wrong answer) */
 .camera-shake {
     animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
@@ -414,7 +384,7 @@ body.dark-mode .score-feedback { color: #ccc; }
 
 /* ===== Dashboard Container ===== */
 .dashboard-container {
-    padding: 20px 5%;
+    padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -439,24 +409,11 @@ body.dark-mode .score-feedback { color: #ccc; }
     background-color: #f5f5f5;
 }
 
-body.dark-mode .back-link {
-    color: #ffffff;
-}
-
-body.dark-mode .back-link:hover {
-    background-color: #333;
-}
-
 .dashboard-card {
     background: #fff;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-body.dark-mode .dashboard-card {
-    background: #242424;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .dashboard-card h1 {
@@ -465,18 +422,10 @@ body.dark-mode .dashboard-card {
     margin-bottom: 10px;
 }
 
-body.dark-mode .dashboard-card h1 {
-    color: #ffffff;
-}
-
 .subtitle {
     color: #666;
     margin-bottom: 30px;
     font-size: 1.1rem;
-}
-
-body.dark-mode .subtitle {
-    color: #ccc;
 }
 
 .test-buttons {
@@ -504,24 +453,12 @@ body.dark-mode .subtitle {
     transform: translateY(-2px);
 }
 
-body.dark-mode .btn {
-    background: #7a0c0c;
-}
-
-body.dark-mode .btn:hover {
-    background: #8a1c1c;
-}
-
 .footer-credit {
     text-align: center;
     padding: 20px;
     color: #666;
     font-size: 0.9rem;
     margin-top: 40px;
-}
-
-body.dark-mode .footer-credit {
-    color: #ccc;
 }
 
 /* ===== RESPONSIVE MEDIA QUERIES ===== */
@@ -536,6 +473,16 @@ body.dark-mode .footer-credit {
 }
 
 @media screen and (max-width: 768px) {
+    /* Hide desktop nav and show mobile toggle */
+    nav ul, .nav-actions {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: flex;
+        margin-left: auto;
+    }
+    
     .dashboard-container {
         padding: 15px;
     }
@@ -600,10 +547,6 @@ body.dark-mode .footer-credit {
         font-size: 2.8rem;
     }
     
-    #brahmmyFeedback {
-        width: 120px;
-    }
-    
     .footer-credit {
         padding: 15px;
         font-size: 0.85rem;
@@ -611,8 +554,12 @@ body.dark-mode .footer-credit {
 }
 
 @media screen and (max-width: 480px) {
+    nav {
+        padding: 10px 15px;
+    }
+    
     .logo {
-        font-size: 1.5rem;
+        font-size: 20px;
     }
     
     .dashboard-card h1 {
@@ -643,10 +590,6 @@ body.dark-mode .footer-credit {
     .score-feedback {
         font-size: 1rem;
     }
-    
-    #brahmmyFeedback {
-        width: 100px;
-    }
 }
 
 /* Small height devices */
@@ -664,46 +607,6 @@ body.dark-mode .footer-credit {
     .options button {
         padding: 10px 15px;
     }
-    
-    #brahmmyFeedback {
-        width: 100px;
-        margin: 10px auto 0;
-    }
-}
-
-/* Close button in modal */
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #aaa;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.close-btn:hover {
-    color: #000;
-    background-color: #f1f1f1;
-}
-
-body.dark-mode .close-btn {
-    color: #ccc;
-}
-
-body.dark-mode .close-btn:hover {
-    color: #fff;
-    background-color: #333;
 }
 </style>
 </head>
@@ -721,35 +624,53 @@ body.dark-mode .close-btn:hover {
   </svg>
 </div>
 
+<!-- Mobile Navigation Elements -->
+<button class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div class="mobile-nav" id="mobileNav">
+    <ul>
+        <li><a href="student_dashboard.html">Home</a></li>
+        <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+        <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+        <button id="mobileLogoutBtn">Logout</button>
+        <button id="mobileMusicToggle">Mute Music</button>
+    </div>
+</div>
+
 <div id="toast-container"></div>
 
 <div id="scoreResultModal">
     <div id="confetti-wrapper"></div>
     <div class="score-card">
-        <img id="brahmmyMedal" src="" alt="" style="display: block; margin: 0 auto 20px auto; width:220px;">
+        <!-- Brahmmy only shows when failed -->
+        <img id="brahmmyResult" src="" alt="" style="display: none; margin: 0 auto 20px auto; width:220px;">
         <h2>Quiz Complete!</h2>
         <p>Iyong nakuha ay:</p>
         <div class="score-number" id="finalScoreDisplay">0/10</div>
         <p class="score-feedback" id="feedbackMessage"></p>
-        <button class="modal-btn primary" onclick="closeScoreModal()" style="width: 100%;">Mahusay!</button>
+        <button class="modal-btn primary" id="continueBtn" style="width: 100%;">Mahusay!</button>
     </div>
 </div>
 
 <nav>
-  <button class="burger-menu" id="burgerBtn">
-    <span></span><span></span><span></span>
-  </button>
-
   <a href="index.html" class="logo">UB<span>igkas</span></a>
-  
-  <ul id="navLinks">
+  <ul id="desktopNav">
     <li><a href="student_dashboard.html">Home</a></li>
     <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
     <li><a href="About.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-
-  <div class="nav-actions">
+  <div class="nav-actions" id="desktopActions">
     <button id="darkModeBtn">🌙</button>
     <button id="logoutBtn">Logout</button>
     <button id="musicToggle">Mute Music</button>
@@ -804,14 +725,9 @@ body.dark-mode .close-btn:hover {
         <div class="options" id="options"></div>
         <div class="explanation" id="explanation"></div>
 
-        <!-- Brahmmy feedback - below explanation -->
-        <div style="text-align:center; margin-top:20px; min-height:140px;">
-            <img id="brahmmyFeedback" src="" alt="Brahmmy">
-        </div>
-
         <div class="score-area">
             <p class="score-text" id="score">Score: 0</p>
-            <button class="btn" id="nextBtn" style="max-width:180px;background:#d4af37;color:maroon;border:none;border-radius:10px;padding:12px 25px;font-weight:600;">
+            <button class="btn" id="nextBtn" style="max-width:180px;background:#d4af37;color:white;border:none;border-radius:10px;padding:12px 25px;">
                 Next Question
             </button>
         </div>
@@ -840,7 +756,8 @@ function showToast(message) {
     setTimeout(() => { toast.remove(); }, 4000);
 }
 
-window.closeScoreModal = function() {
+// FIXED: Score modal button handler
+document.getElementById("continueBtn").onclick = function() {
     document.getElementById("scoreResultModal").style.display = "none";
     document.getElementById("confetti-wrapper").innerHTML = "";
 };
@@ -870,24 +787,28 @@ async function triggerScoreModal(finalScore, total) {
     const scoreDisplay = document.getElementById("finalScoreDisplay");
     const feedbackEl = document.getElementById("feedbackMessage");
     const confettiWrapper = document.getElementById("confetti-wrapper");
-    const brahmmyMedal = document.getElementById("brahmmyMedal");
+    const brahmmyResult = document.getElementById("brahmmyResult");
+    const continueBtn = document.getElementById("continueBtn");
     
     scoreDisplay.textContent = `${finalScore}/${total}`;
     feedbackEl.textContent = await getRandomFeedback(finalScore, total);
     
-    // Show Brahmmy medal if passed (≥ 50%)
-    if ((finalScore / total) >= 0.5) {
-        brahmmyMedal.src = "../brahmmy-img/brahmmy-medal.png";
-        brahmmyMedal.style.display = "block";
+    // Show sad Brahmmy only when failed (< 50%)
+    if ((finalScore / total) < 0.5) {
+        brahmmyResult.src = "../brahmmy-img/brahmmy-sad.png";
+        brahmmyResult.style.display = "block";
+        continueBtn.textContent = "Continue";
     } else {
-        brahmmyMedal.style.display = "none";
+        brahmmyResult.style.display = "none";
+        continueBtn.textContent = "Mahusay!";
     }
     
     modal.style.display = "flex";
     confettiWrapper.innerHTML = "";
     
+    // Only show confetti when passed (≥ 50%)
     if ((finalScore / total) >= 0.5) {
-        const colors = ['#d4af37', 'maroon', '#ffffff', '#ff0000', '#ffd700'];
+        const colors = ['#d4af37', '#7a0c0c', '#ffffff', '#ff0000', '#ffd700'];
         for(let i=0; i<100; i++) {
             const confetti = document.createElement("div");
             confetti.className = "confetti";
@@ -916,43 +837,81 @@ const scoreEl = document.getElementById("score");
 const instructionEl = document.getElementById("quizInstruction");
 const progressEl = document.getElementById("qProgress");
 const quizContent = document.getElementById("quizContent");
-const brahmmyFeedback = document.getElementById("brahmmyFeedback");
 
+/* ========== QUIZ CONFIGURATION ========== */
+/* Only 3 JSON files available */
 const quizPaths = {
     vso: "assessment/sentence_structure.json",
     pronouns: "assessment/pronoun_questions.json",
-    affixes: "assessment/affix_questions.json",
-    noun: "assessment/noun_questions.json",
-    adjective: "assessment/adjective_questions.json",
-    adverb: "assessment/Adverb_questions.json"
+    affixes: "assessment/affix_questions.json"
 };
 
+/* Instructions for all 6 buttons */
 const quizInstructions = {
     vso: "Panuto: Piliin ang tamang ayos ng pangungusap (Verb–Subject–Object).",
     pronouns: "Panuto: Piliin ang tamang panghalip na angkop sa pangungusap.",
-    affixes: "Panuto: Piliin ang tamang pandiwa ayon sa aspekto o panlapi."
+    affixes: "Panuto: Piliin ang tamang pandiwa ayon sa aspekto o panlapi.",
+    noun: "Panuto: Piliin ang tamang pangngalan na angkop sa pangungusap.",
+    adjective: "Panuto: Piliin ang tamang pang-uri na angkop sa pangungusap.",
+    adverb: "Panuto: Piliin ang tamang pang-abay na angkop sa pangungusap."
 };
 
+/* Button mapping: Last 4 buttons use the same "affixes" JSON file */
+const buttonMapping = {
+    "vso": "vso",
+    "pronouns": "pronouns", 
+    "affixes": "affixes",      // Verbs (Pandiwa) button
+    "noun": "affixes",         // Noun button uses affixes file
+    "adjective": "affixes",    // Adjective button uses affixes file
+    "adverb": "affixes"        // Adverb button uses affixes file
+};
+
+/* ========== START QUIZ ========== */
 document.querySelectorAll(".test-buttons button").forEach(btn => {
-    btn.addEventListener("click", () => startQuiz(btn.dataset.file));
+    btn.addEventListener("click", function() {
+        const buttonType = this.getAttribute("data-file");
+        const quizFile = buttonMapping[buttonType];
+        
+        // Show appropriate instruction for the clicked button
+        instructionEl.textContent = quizInstructions[buttonType];
+        
+        startQuiz(quizFile);
+    });
 });
 
 function startQuiz(quizName) {
+    console.log("Starting quiz:", quizName);
+    
+    if (!quizPaths[quizName]) {
+        console.error("Quiz path not found:", quizName);
+        showToast(`Error: Quiz configuration not found.`);
+        return;
+    }
+    
     score = 0;
     currentQuestionIndex = 0;
     currentQuiz = quizName;
-    instructionEl.textContent = quizInstructions[quizName] || "Panuto: Sagutin ang sumusunod.";
     scoreEl.textContent = "Score: 0";
+    
     fetch(quizPaths[quizName])
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`Failed to load quiz file: ${res.status} ${res.statusText}`);
+            }
+            return res.json();
+        })
         .then(data => {
+            if (!data || !Array.isArray(data) || data.length === 0) {
+                throw new Error("Quiz data is empty or not an array");
+            }
+            
             questions = data.sort(() => 0.5 - Math.random()).slice(0, 10);
             modal.style.display = "block";
             loadQuestion();
         })
         .catch(err => {
-            console.error("Error loading quiz:", err);
-            showToast("Error loading quiz questions.");
+            console.error("Error loading quiz questions:", err);
+            showToast(`Error loading quiz. Please check if the JSON files exist.`);
         });
 }
 
@@ -974,9 +933,12 @@ function loadQuestion() {
     optionsEl.innerHTML = "";
     explanationEl.style.display = "none";
 
-    // Show Brahmmy thinking while user is answering
-    brahmmyFeedback.src = "../brahmmy-img/brahmmy-thinking.png";
-    brahmmyFeedback.style.opacity = "1";
+    // Check if options exist
+    if (!q.options || q.options.length === 0) {
+        console.error("No options available for question:", q);
+        showToast("Error: No options available for this question.");
+        return;
+    }
 
     q.options.sort(() => 0.5 - Math.random()).forEach(option => {
         const btn = document.createElement("button");
@@ -987,28 +949,20 @@ function loadQuestion() {
             nextBtn.disabled = false;
             nextBtn.style.opacity = "1";
 
-            // Hide thinking Brahmmy when answered
-            brahmmyFeedback.style.opacity = "0";
-
             if (option === q.correctOption) {
                 btn.classList.add("correct");
                 score++;
-
-                // Right answer: happy Brahmmy + confetti
-                brahmmyFeedback.src = "../brahmmy-img/brahmmy-clapping.png";
-                brahmmyFeedback.style.opacity = "1";
+                // Right answer: confetti
                 triggerConfetti();
             } else {
                 btn.classList.add("wrong");
+                // Highlight correct answer
                 Array.from(optionsEl.children).forEach(child => {
                     if (child.textContent === q.correctOption) {
                         child.classList.add("correct");
                     }
                 });
-
-                // Wrong answer: angry Brahmmy + camera shake
-                brahmmyFeedback.src = "../brahmmy-img/brahmmy-sad.png";
-                brahmmyFeedback.style.opacity = "1";
+                // Wrong answer: camera shake
                 quizContent.classList.add("camera-shake");
                 setTimeout(() => quizContent.classList.remove("camera-shake"), 600);
             }
@@ -1029,132 +983,226 @@ function triggerConfetti() {
         document.body.appendChild(wrapper);
     }
 
-    const colors = ['#d4af37', 'maroon', '#ffffff', '#ff0000', '#ffd700'];
-    for(let i = 0; i < 60; i++) {
-        const c = document.createElement("div");
-        c.className = "confetti";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        c.style.animationDelay = Math.random() * 1.2 + "s";
-        c.style.width = Math.random() * 6 + 6 + "px";
-        c.style.height = c.style.width;
-        wrapper.appendChild(c);
-        setTimeout(() => c.remove(), 4000);
+    const colors = ['#d4af37', '#7a0c0c', '#ffffff', '#ff0000', '#ffd700'];
+    for(let i = 0; i < 30; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 0.5 + "s";
+        confetti.style.width = Math.random() * 8 + 5 + "px";
+        confetti.style.height = confetti.style.width;
+        wrapper.appendChild(confetti);
+    }
+
+    setTimeout(() => {
+        wrapper.innerHTML = "";
+    }, 3000);
+}
+
+nextBtn.addEventListener("click", () => {
+    currentQuestionIndex++;
+    loadQuestion();
+});
+
+document.getElementById("closeModalBtn").addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+async function saveScore() {
+    if (!studentUID || !classId) {
+        console.error("Missing student UID or class ID");
+        return;
+    }
+
+    const timestamp = new Date().toISOString().split('T')[0];
+    const quizType = currentQuiz.charAt(0).toUpperCase() + currentQuiz.slice(1);
+    const docRef = doc(db, "students", studentUID, "scores", `quiz_${Date.now()}`);
+    
+    try {
+        await setDoc(docRef, {
+            studentName: studentName,
+            studentUID: studentUID,
+            classId: classId,
+            quizType: quizType,
+            score: score,
+            total: questions.length,
+            percentage: Math.round((score / questions.length) * 100),
+            timestamp: serverTimestamp(),
+            date: timestamp
+        });
+        
+        // Update dashboard stats
+        const statsRef = doc(db, "students", studentUID);
+        await updateDoc(statsRef, {
+            lastActivity: serverTimestamp(),
+            lastQuizTaken: quizType,
+            lastQuizScore: score + "/" + questions.length
+        });
+        
+        console.log("Score saved successfully!");
+    } catch (error) {
+        console.error("Error saving score:", error);
+        showToast("Error saving score. Please check your connection.");
     }
 }
 
-async function saveScore() {
-    try {
-        const docRef = doc(db, "students", studentUID, "assessments", currentQuiz);
-        await setDoc(docRef, {
-            studentUID, studentName, classId,
-            quizType: currentQuiz, score, total: questions.length,
-            takenAt: serverTimestamp()
-        }, { merge: true });
-    } catch (err) { console.error("Error saving score:", err); }
+// Mobile Navigation
+const menuToggle = document.getElementById("menuToggle");
+const mobileOverlay = document.getElementById("mobileOverlay");
+const mobileNav = document.getElementById("mobileNav");
+
+menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("active");
+    mobileNav.classList.toggle("active");
+    mobileOverlay.classList.toggle("active");
+});
+
+mobileOverlay.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    mobileNav.classList.remove("active");
+    mobileOverlay.classList.remove("active");
+});
+
+// Mobile Action Buttons
+document.getElementById("mobileDarkModeBtn").addEventListener("click", () => {
+    document.getElementById("darkModeBtn").click();
+});
+
+document.getElementById("mobileLogoutBtn").addEventListener("click", () => {
+    document.getElementById("logoutBtn").click();
+});
+
+document.getElementById("mobileMusicToggle").addEventListener("click", () => {
+    document.getElementById("musicToggle").click();
+});
+
+// Dark Mode Toggle
+const darkModeBtn = document.getElementById("darkModeBtn");
+const storedTheme = localStorage.getItem("theme") || "light";
+
+if (storedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    darkModeBtn.textContent = "☀️";
 }
 
-/* ===================== MOBILE NAVIGATION ===================== */
-const burgerBtn = document.getElementById("burgerBtn");
-const navLinks = document.getElementById("navLinks");
+darkModeBtn.addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("dark-mode");
+    darkModeBtn.textContent = isDark ? "☀️" : "🌙";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    
+    // Update mobile button text
+    document.getElementById("mobileDarkModeBtn").textContent = 
+        isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+});
 
-burgerBtn.onclick = (e) => {
-    e.stopPropagation();
-    navLinks.classList.toggle("show");
-};
+// Music Toggle
+const musicToggle = document.getElementById("musicToggle");
+const bgMusic = document.getElementById("bgMusic");
+let isMuted = localStorage.getItem("musicMuted") === "true";
 
-// Close sidebar when clicking outside
-document.addEventListener('click', (event) => {
-    if (!burgerBtn.contains(event.target) && !navLinks.contains(event.target)) {
-        navLinks.classList.remove("show");
+if (isMuted) {
+    bgMusic.muted = true;
+    musicToggle.textContent = "🔇 Unmute Music";
+}
+
+musicToggle.addEventListener("click", () => {
+    isMuted = !isMuted;
+    bgMusic.muted = isMuted;
+    musicToggle.textContent = isMuted ? "🔇 Unmute Music" : "🔊 Mute Music";
+    localStorage.setItem("musicMuted", isMuted);
+});
+
+// Logout Functionality
+const logoutModal = document.getElementById("logoutModal");
+const confirmLogout = document.getElementById("confirmLogout");
+const cancelLogout = document.getElementById("cancelLogout");
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    logoutModal.style.display = "flex";
+});
+
+cancelLogout.addEventListener("click", () => {
+    logoutModal.style.display = "none";
+});
+
+confirmLogout.addEventListener("click", async () => {
+    try {
+        await signOut(auth);
+        sessionStorage.clear();
+        localStorage.removeItem("theme");
+        localStorage.removeItem("musicMuted");
+        
+        // Trigger drip transition
+        const dripContainer = document.getElementById("drip-container");
+        const dripLayer = document.getElementById("dripLayer");
+        dripContainer.classList.add("active");
+        
+        // Add appropriate class based on current theme
+        const isDark = document.body.classList.contains("dark-mode");
+        if (isDark) {
+            dripLayer.classList.remove("drip-light");
+        } else {
+            dripLayer.classList.add("drip-light");
+        }
+        
+        setTimeout(() => {
+            window.location.href = "../index.html";
+        }, 700);
+        
+    } catch (error) {
+        console.error("Logout error:", error);
+        showToast("Logout failed. Please try again.");
     }
 });
 
-/* ===================== LOGOUT FUNCTIONALITY ===================== */
-const logoutBtn = document.getElementById("logoutBtn");
-const logoutModal = document.getElementById("logoutModal");
-const cancelLogout = document.getElementById("cancelLogout");
-const confirmLogout = document.getElementById("confirmLogout");
-
-logoutBtn.onclick = () => { logoutModal.style.display = "flex"; };
-cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
-
-confirmLogout.onclick = async () => {
-    showToast("Logging out...");
-    try {
-        if (studentUID) {
-            const studentRef = doc(db, "students", studentUID);
-            await updateDoc(studentRef, { status: "offline", lastSeen: serverTimestamp() });
-        }
-        await signOut(auth);
-        sessionStorage.clear();
-        window.location.href = "../index.html";
-    } catch (err) { window.location.href = "../index.html"; }
-};
-
-nextBtn.onclick = () => { currentQuestionIndex++; loadQuestion(); };
-document.getElementById("closeModalBtn").onclick = () => { modal.style.display = "none"; };
-
-const bgMusic = document.getElementById("bgMusic");
-const musicToggle = document.getElementById("musicToggle");
-let isMuted = false;
-musicToggle.onclick = () => {
-    isMuted = !isMuted;
-    bgMusic.muted = isMuted;
-    musicToggle.textContent = isMuted ? "Unmute Music" : "Mute Music";
-};
-
-/* ===================== DARK MODE SWITCHER ===================== */
-const darkModeBtn = document.getElementById("darkModeBtn");
-const dripContainer = document.getElementById("drip-container");
-const dripLayer = document.getElementById("dripLayer");
-
-function updateThemeText(isDark) {
-    darkModeBtn.textContent = isDark ? "☀️" : "🌙";
-}
-
-darkModeBtn.onclick = () => {
-    const isDark = document.body.classList.contains("dark-mode");
-    
-    // Set drip color BEFORE showing it
-    if (!isDark) {
-        // Going to dark mode - set dark background
-        dripLayer.classList.remove("drip-light");
-    } else {
-        // Going to light mode - set light background
-        dripLayer.classList.add("drip-light");
-    }
-    
-    dripContainer.classList.add("active");
-
-    setTimeout(() => {
-        document.body.classList.toggle("dark-mode");
-        const nowDark = document.body.classList.contains("dark-mode");
-        updateThemeText(nowDark);
-        localStorage.setItem("theme", nowDark ? "dark" : "light");
-    }, 350);
-
-    setTimeout(() => {
-        dripContainer.classList.remove("active");
-    }, 700);
-};
-
-// Initialize theme on page load
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    updateThemeText(true);
-}
-
 // Close modals when clicking outside
-window.onclick = (event) => {
-    if (event.target == logoutModal) {
-        logoutModal.style.display = "none";
-    }
-    if (event.target == modal) {
+window.addEventListener("click", (e) => {
+    if (e.target === modal) {
         modal.style.display = "none";
     }
-};
-</script>
+    if (e.target === logoutModal) {
+        logoutModal.style.display = "none";
+    }
+    if (e.target === document.getElementById("scoreResultModal")) {
+        document.getElementById("scoreResultModal").style.display = "none";
+        document.getElementById("confetti-wrapper").innerHTML = "";
+    }
+});
 
+// Keyboard shortcuts
+document.addEventListener("keydown", (e) => {
+    // Close modals with Escape
+    if (e.key === "Escape") {
+        modal.style.display = "none";
+        logoutModal.style.display = "none";
+        document.getElementById("scoreResultModal").style.display = "none";
+    }
+    
+    // Next question with Enter (when next button is enabled)
+    if (e.key === "Enter" && !nextBtn.disabled && modal.style.display === "block") {
+        nextBtn.click();
+    }
+});
+
+// Initialize mobile button text based on current state
+document.addEventListener("DOMContentLoaded", () => {
+    const isDark = document.body.classList.contains("dark-mode");
+    document.getElementById("mobileDarkModeBtn").textContent = 
+        isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+    
+    const isMutedInit = localStorage.getItem("musicMuted") === "true";
+    document.getElementById("mobileMusicToggle").textContent = 
+        isMutedInit ? "🔇 Unmute Music" : "🔊 Mute Music";
+});
+
+// Prevent music from autoplaying on mobile without user interaction
+document.addEventListener('touchstart', function() {
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic.paused) {
+        bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
+    }
+}, { once: true });
+</script>
 </body>
 </html>
