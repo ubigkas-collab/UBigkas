@@ -64,7 +64,6 @@ body {
 .swoosh-img {
     position: relative;
     width: 300px;
-    max-width: 80%;
     height: auto;
     transform: scale(0);
     z-index: 10002;
@@ -82,10 +81,9 @@ body {
 .active-swoosh .swoosh-img { animation: imgPop 0.7s 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.28) forwards; }
 
 /* --- TOAST NOTIFICATIONS --- */
-#toast-container { position: fixed; top: 25px; right: 25px; left: 25px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; pointer-events: none; }
+#toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; }
 .toast {
     min-width: 280px;
-    max-width: 100%;
     padding: 16px 24px;
     margin-bottom: 12px;
     border-radius: 8px;
@@ -97,7 +95,6 @@ body {
     align-items: center;
     animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
     border-left: 5px solid var(--gold);
-    pointer-events: auto;
 }
 .toast.success { background-color: var(--maroon); } 
 .toast.info { background-color: var(--info); }
@@ -118,33 +115,29 @@ nav {
     top: 0;
     z-index: 1000;
 }
-.logo { font-size: 1.5rem; font-weight: 800; color: var(--maroon); text-decoration: none; }
+.logo { font-size: 1.8rem; font-weight: 800; color: var(--maroon); text-decoration: none; }
 .logo span { color: var(--gold); }
 .nav-btns { display: flex; gap: 10px; align-items: center; }
-
-@media (min-width: 768px) {
-    .logo { font-size: 1.8rem; }
-}
 
 /* --- LAYOUT SECTIONS --- */
 .content-wrapper {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 60px 20px;
 }
 
 .about-section {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 .about-section h1 {
-    font-size: clamp(1.8rem, 8vw, 3rem);
+    font-size: clamp(2rem, 8vw, 3rem);
     color: var(--maroon);
     margin-bottom: 20px;
 }
 .about-section p {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: var(--text-muted);
 }
 
@@ -154,14 +147,14 @@ nav {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 
 #featureDeck { 
     position: relative; 
     width: 100%; 
     max-width: 960px;
-    min-height: 480px; /* Adjusted for mobile stack */
+    min-height: 400px;
     margin: 0 auto;
 }
 
@@ -169,26 +162,32 @@ nav {
     position: absolute;
     inset: 0;
     display: none;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    gap: 30px;
+    padding: 20px 30px;
+    gap: 50px;
+    z-index: 1;
 }
 
 .feature-card.active { 
     display: flex; 
+    z-index: 2;
     animation: fadeInHero 0.8s ease; 
 }
 
 .feature-image-container {
-    width: 100%;
-    max-width: 280px;
+    flex: 0 0 auto;
+    width: 320px;
+    max-width: 100%;
     padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
 
 .feature-image {
     width: 100%;
+    max-height: 250px; /* Prevents overlay by limiting height */
     height: auto;
     border-radius: 16px;
     box-shadow: 0 8px 24px var(--shadow);
@@ -197,29 +196,23 @@ nav {
 }
 
 .feature-content {
-    width: 100%;
-    text-align: center;
+    flex: 1;
+    min-width: 0;
+    max-width: 480px;
+    text-align: left;
 }
 
 .feature-card h2 { 
-    font-size: clamp(1.5rem, 5vw, 2.5rem); 
-    margin: 0 0 12px 0; 
+    font-size: clamp(1.8rem, 5vw, 2.8rem); 
+    margin: 0 0 16px 0; 
     color: var(--maroon);
 }
 
 .feature-card p { 
-    font-size: 1rem; 
-    line-height: 1.5;
+    font-size: 1.1rem; 
+    line-height: 1.6;
     color: var(--text-muted); 
     margin: 0;
-}
-
-/* Desktop override for Feature Deck */
-@media (min-width: 768px) {
-    #featureDeck { min-height: 380px; }
-    .feature-card { flex-direction: row; text-align: left; padding: 20px 30px; gap: 50px; }
-    .feature-image-container { max-width: 38%; }
-    .feature-content { text-align: left; max-width: 480px; }
 }
 
 @keyframes fadeInHero { 
@@ -227,16 +220,41 @@ nav {
     to { opacity: 1; transform: translateY(0); } 
 }
 
+/* Fixed Mobile Responsiveness to stop image overlay */
+@media (max-width: 768px) {
+    #featureDeck {
+        min-height: 550px; /* Tall enough for stacked content */
+    }
+    .feature-card {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        text-align: center;
+        justify-content: flex-start; /* Keeps items at top of deck area */
+    }
+    .feature-image-container {
+        width: 100%;
+        max-width: 240px;
+    }
+    .feature-image {
+        max-height: 200px;
+    }
+    .feature-content {
+        text-align: center;
+        max-width: 100%;
+    }
+}
+
 /* --- TEAM SECTION --- */
 .team-section {
     text-align: center;
-    padding: 40px 0;
+    padding: 60px 0;
 }
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
 }
 .team-item {
     background: var(--card-bg);
@@ -268,27 +286,25 @@ nav {
 .modal-content {
     background: var(--card-bg);
     max-width: 420px;
-    width: 95%; /* Responsive width */
-    margin: 40px auto;
-    padding: 30px 20px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 40px 30px;
     border-radius: 20px;
     position: relative;
     border-top: 10px solid var(--maroon);
     box-shadow: 0 20px 40px var(--shadow);
     box-sizing: border-box;
 }
-@media (min-width: 768px) {
-    .modal-content { padding: 40px 30px; }
-}
 .close {
     position: absolute;
-    right: 15px;
-    top: 10px;
+    right: 20px;
+    top: 15px;
     font-size: 28px;
     cursor: pointer;
     transition: var(--transition);
     color: var(--text-muted);
 }
+.close:hover { transform: rotate(90deg); color: var(--maroon); }
 
 /* --- FORM STYLING --- */
 .form-group { text-align: left; margin-bottom: 20px; }
@@ -301,7 +317,6 @@ nav {
     background: var(--bg);
     color: var(--text-main);
     box-sizing: border-box;
-    font-size: 16px; /* Prevents iOS zoom on focus */
 }
 .login-btn {
     background: var(--maroon);
@@ -329,15 +344,7 @@ nav {
     cursor: pointer;
 }
 
-.control-btns {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    justify-content: center;
-}
-
-.footer-credit { text-align: center; padding: 40px 20px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--input-border); }
+.footer-credit { text-align: center; padding: 40px 0; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--input-border); }
 </style>
 </head>
 
@@ -353,8 +360,8 @@ nav {
 <nav>
     <a href="#" class="logo">UB<span>igkas</span></a>
     <div class="nav-btns">
-        <button id="darkModeBtn" style="background:none; border:none; cursor:pointer; font-size:1.3rem;">🌙</button>
-        <button id="openLoginModal" class="login-btn" style="padding: 8px 18px; width: auto; font-size: 0.85rem;">Login</button>
+        <button id="darkModeBtn" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🌙</button>
+        <button id="openLoginModal" class="login-btn" style="padding: 8px 25px; width: auto; font-size: 0.9rem;">Login</button>
     </div>
 </nav>
 
@@ -396,14 +403,14 @@ nav {
                 </div>
             </div>
         </div>
-        <div class="control-btns">
-            <button id="prevFeature" class="login-btn" style="background:var(--text-muted); width: 120px; font-size: 0.85rem;">← Prev</button>
-            <button id="nextFeature" class="login-btn" style="width: 120px; font-size: 0.85rem;">Next →</button>
+        <div style="margin-top:50px; text-align:center; display: flex; gap: 20px; justify-content: center;">
+            <button id="prevFeature" class="login-btn" style="background:var(--text-muted); width: 140px;">← Previous</button>
+            <button id="nextFeature" class="login-btn" style="width: 140px;">Next →</button>
         </div>
     </main>
 
     <section class="team-section">
-        <h2 style="color:var(--maroon); font-size: 2rem;">The Team</h2>
+        <h2 style="color:var(--maroon); font-size: 2.5rem;">The Team</h2>
         <div class="team-grid">
             <div class="team-item">
                 <div class="team-img"></div>
@@ -427,7 +434,7 @@ nav {
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeLoginModal">×</span>
-        <h1 style="color: var(--maroon); text-align: center; margin-top: 0; font-size: 1.8rem;">Welcome</h1>
+        <h1 style="color: var(--maroon); text-align: center; margin-top: 0;">Welcome</h1>
         <p style="color: var(--text-muted); text-align: center; margin-bottom: 25px;">Log in to your UBigkas Account</p>
 
         <form id="loginForm">
@@ -448,7 +455,7 @@ nav {
         </button>
 
         <div style="margin-top: 25px; text-align: center;" class="extra-links">
-            <p><a href="#" id="openTeacherModal" style="color: var(--maroon); font-weight:600; text-decoration:none; font-size: 0.9rem;">Create account as teacher</a></p>
+            <p><a href="#" id="openTeacherModal" style="color: var(--maroon); font-weight:600; text-decoration:none;">Create account as teacher</a></p>
         </div>
     </div>
 </div>
@@ -456,7 +463,7 @@ nav {
 <div id="teacherModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeTeacherModal">×</span>
-        <h2 style="text-align: center; color: var(--maroon); margin-top: 0; font-size: 1.5rem;">Teacher Registration</h2>
+        <h2 style="text-align: center; color: var(--maroon); margin-top: 0;">Teacher Registration</h2>
         <form id="teacherSignupForm">
             <div class="form-group"><input type="email" id="teacherEmail" placeholder="Institutional Email (@ub.edu.ph)" required></div>
             <div class="form-group"><input type="text" id="teacherId" placeholder="Teacher ID" required></div>
