@@ -42,7 +42,7 @@
     font-weight: 500;
 }
 
-/* ===== Mobile Responsive Styles ===== */
+/* ===== MOBILE RESPONSIVE STYLES ===== */
 /* Mobile Navigation */
 .menu-toggle {
     display: none;
@@ -55,7 +55,7 @@
     cursor: pointer;
     padding: 0;
     z-index: 1001;
-    margin-right: 15px;
+    margin-left: auto;
 }
 
 .menu-toggle span {
@@ -176,7 +176,7 @@ body.dark-mode .menu-toggle span {
     background-color: #fff;
 }
 
-/* ===== Nav & Actions ===== */
+/* ===== NAV & ACTIONS ===== */
 nav {
     display: flex;
     align-items: center;
@@ -231,36 +231,29 @@ nav ul li a:hover { color: maroon !important; }
 #darkModeBtn { background-color: #333; color: #fff; }
 #musicToggle { background: #d4af37; color: #7a0c0c; }
 
-/* ===== DARK MODE STYLES (UPDATED FOR CONSISTENCY) ===== */
+/* ===== DARK MODE STYLES ===== */
 body.dark-mode { background-color: #181818; color: #e6e6e6; }
 body.dark-mode nav { background-color: #202020; }
-
-/* Nav links and UB logo text color in dark mode */
 body.dark-mode nav ul li a,
 body.dark-mode nav .logo {
     color: #ffffff !important;
 }
-
-/* Gold hover effect for Nav and Logo in dark mode */
 body.dark-mode nav ul li a:hover,
 body.dark-mode nav .logo:hover {
     color: #d4af37 !important;
 }
-
 body.dark-mode .dashboard-card, 
 body.dark-mode .modal-content { 
     background-color: #242424; 
     color: #e6e6e6; 
     border: 1px solid #333; 
 }
-
-/* FIX: Dark Mode for Logout Modal */
 body.dark-mode .modal-card { background-color: #242424; color: #fff; border: 1px solid #444; }
 body.dark-mode .modal-card h3 { color: #fff; }
 body.dark-mode .modal-card p { color: #ccc; }
 body.dark-mode .modal-btn.secondary { background-color: #444; color: #eee; }
 
-/* ===== QUIZ MODAL REFINEMENTS ===== */
+/* ===== QUIZ MODAL ===== */
 .modal {
     display: none; position: fixed; z-index: 2500; left: 0; top: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
@@ -270,8 +263,6 @@ body.dark-mode .modal-btn.secondary { background-color: #444; color: #eee; }
     max-width: 650px; width: 90%; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     max-height: 85vh; overflow-y: auto; scrollbar-width: thin;
 }
-
-/* Custom scrollbar for Chrome/Edge/Safari */
 .modal-content::-webkit-scrollbar {
     width: 8px;
 }
@@ -286,7 +277,6 @@ body.dark-mode .modal-btn.secondary { background-color: #444; color: #eee; }
 .modal-content::-webkit-scrollbar-thumb:hover {
     background: #b38f00;
 }
-
 body.dark-mode .modal-content {
     background: #242424;
     color: #e6e6e6;
@@ -312,7 +302,6 @@ body.dark-mode .sentence { color: #fff; }
     background: #f8f9fa; color: #333; text-align: left; font-weight: 500; transition: all 0.2s ease; cursor: pointer; font-family: 'Poppins', sans-serif;
 }
 .options button:hover { border-color: #d4af37; background-color: #fffdf5; }
-
 .options button.correct { background-color: #2ecc71 !important; color: white !important; border-color: #27ae60 !important; }
 .options button.wrong { background-color: #e74c3c !important; color: white !important; border-color: #c0392b !important; }
 
@@ -382,7 +371,7 @@ body.dark-mode .score-feedback { color: #ccc; }
     40%, 60% { transform: translate3d(8px, 0, 0); }
 }
 
-/* ===== Dashboard Container ===== */
+/* ===== DASHBOARD CONTAINER ===== */
 .dashboard-container {
     padding: 20px;
     max-width: 1200px;
@@ -480,7 +469,6 @@ body.dark-mode .score-feedback { color: #ccc; }
     
     .menu-toggle {
         display: flex;
-        margin-left: auto;
     }
     
     .dashboard-container {
@@ -652,7 +640,7 @@ body.dark-mode .score-feedback { color: #ccc; }
 <div id="scoreResultModal">
     <div id="confetti-wrapper"></div>
     <div class="score-card">
-        <!-- Brahmmy only shows when failed -->
+        <!-- Brahmmy shows medal when passed, sad when failed -->
         <img id="brahmmyResult" src="" alt="" style="display: none; margin: 0 auto 20px auto; width:220px;">
         <h2>Quiz Complete!</h2>
         <p>Iyong nakuha ay:</p>
@@ -793,14 +781,15 @@ async function triggerScoreModal(finalScore, total) {
     scoreDisplay.textContent = `${finalScore}/${total}`;
     feedbackEl.textContent = await getRandomFeedback(finalScore, total);
     
-    // Show sad Brahmmy only when failed (< 50%)
-    if ((finalScore / total) < 0.5) {
+    // Show Brahmmy medal when passed (≥ 50%), sad Brahmmy when failed
+    if ((finalScore / total) >= 0.5) {
+        brahmmyResult.src = "../brahmmy-img/BRAHMMY_MEDAL.PNG";
+        brahmmyResult.style.display = "block";
+        continueBtn.textContent = "Mahusay!";
+    } else {
         brahmmyResult.src = "../brahmmy-img/brahmmy-sad.png";
         brahmmyResult.style.display = "block";
         continueBtn.textContent = "Continue";
-    } else {
-        brahmmyResult.style.display = "none";
-        continueBtn.textContent = "Mahusay!";
     }
     
     modal.style.display = "flex";
@@ -1047,7 +1036,7 @@ async function saveScore() {
     }
 }
 
-// Mobile Navigation
+// ===== MOBILE NAVIGATION =====
 const menuToggle = document.getElementById("menuToggle");
 const mobileOverlay = document.getElementById("mobileOverlay");
 const mobileNav = document.getElementById("mobileNav");
@@ -1077,7 +1066,7 @@ document.getElementById("mobileMusicToggle").addEventListener("click", () => {
     document.getElementById("musicToggle").click();
 });
 
-// Dark Mode Toggle
+// ===== DARK MODE TOGGLE =====
 const darkModeBtn = document.getElementById("darkModeBtn");
 const storedTheme = localStorage.getItem("theme") || "light";
 
@@ -1096,7 +1085,7 @@ darkModeBtn.addEventListener("click", () => {
         isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
 });
 
-// Music Toggle
+// ===== MUSIC TOGGLE =====
 const musicToggle = document.getElementById("musicToggle");
 const bgMusic = document.getElementById("bgMusic");
 let isMuted = localStorage.getItem("musicMuted") === "true";
@@ -1113,7 +1102,7 @@ musicToggle.addEventListener("click", () => {
     localStorage.setItem("musicMuted", isMuted);
 });
 
-// Logout Functionality
+// ===== LOGOUT FUNCTIONALITY =====
 const logoutModal = document.getElementById("logoutModal");
 const confirmLogout = document.getElementById("confirmLogout");
 const cancelLogout = document.getElementById("cancelLogout");
@@ -1156,7 +1145,7 @@ confirmLogout.addEventListener("click", async () => {
     }
 });
 
-// Close modals when clicking outside
+// ===== MODAL CLOSING =====
 window.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.style.display = "none";
@@ -1170,7 +1159,7 @@ window.addEventListener("click", (e) => {
     }
 });
 
-// Keyboard shortcuts
+// ===== KEYBOARD SHORTCUTS =====
 document.addEventListener("keydown", (e) => {
     // Close modals with Escape
     if (e.key === "Escape") {
@@ -1185,7 +1174,7 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-// Initialize mobile button text based on current state
+// ===== INITIALIZE MOBILE BUTTONS =====
 document.addEventListener("DOMContentLoaded", () => {
     const isDark = document.body.classList.contains("dark-mode");
     document.getElementById("mobileDarkModeBtn").textContent = 
@@ -1196,7 +1185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isMutedInit ? "🔇 Unmute Music" : "🔊 Mute Music";
 });
 
-// Prevent music from autoplaying on mobile without user interaction
+// ===== MOBILE AUTOPLAY FIX =====
 document.addEventListener('touchstart', function() {
     const bgMusic = document.getElementById('bgMusic');
     if (bgMusic.paused) {
