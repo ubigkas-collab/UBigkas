@@ -42,34 +42,190 @@
     font-weight: 500;
 }
 
+/* ===== Mobile Responsive Styles ===== */
+/* Mobile Navigation */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    margin-right: 15px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: maroon;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    padding: 80px 20px 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.mobile-nav.active {
+    left: 0;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav ul li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav ul li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav ul li a:hover {
+    background-color: #f5f5f5;
+    color: maroon;
+}
+
+.mobile-nav-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-nav-actions button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode styles for mobile nav */
+body.dark-mode .mobile-nav {
+    background-color: #202020;
+}
+
+body.dark-mode .mobile-nav ul li a {
+    color: #fff;
+}
+
+body.dark-mode .mobile-nav ul li a:hover {
+    background-color: #333;
+    color: #d4af37;
+}
+
+body.dark-mode .menu-toggle span {
+    background-color: #fff;
+}
+
 /* ===== Nav & Actions ===== */
 nav {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 100;
 }
 nav .logo {
-  font-weight: 700;
-  font-size: 22px;
-  text-decoration: none;
-  color: maroon;
+    font-weight: 700;
+    font-size: 22px;
+    text-decoration: none;
+    color: maroon;
+    flex-shrink: 0;
 }
 nav .logo span { color: #d4af37; }
-nav ul { list-style: none; display: flex; gap: 15px; margin-left: 20px; }
-nav ul li a { text-decoration: none; font-weight: 500; color: #000000 !important; transition: color 0.3s ease; }
+nav ul { 
+    list-style: none; 
+    display: flex; 
+    gap: 15px; 
+    margin-left: 20px;
+}
+nav ul li a { 
+    text-decoration: none; 
+    font-weight: 500; 
+    color: #000000 !important; 
+    transition: color 0.3s ease; 
+    white-space: nowrap;
+}
 nav ul li a:hover { color: maroon !important; }
 
-.nav-actions { margin-left: auto; display: flex; flex-direction: row; gap: 10px; align-items: center; }
+.nav-actions { 
+    margin-left: auto; 
+    display: flex; 
+    flex-direction: row; 
+    gap: 10px; 
+    align-items: center;
+    flex-shrink: 0;
+}
 #logoutBtn, #musicToggle, #darkModeBtn {
-  padding: 8px 20px;
-  border-radius: 25px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  transition: all 0.3s ease;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 #logoutBtn { background-color: #d9534f; color: white; }
 #darkModeBtn { background-color: #333; color: #fff; }
@@ -168,6 +324,8 @@ body.dark-mode .explanation { background-color: #1a2633; color: #5dade2; }
 
 .score-area {
     margin-top: 30px; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #f1f1f1; padding-top: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 4000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
@@ -237,6 +395,246 @@ body.dark-mode .score-feedback { color: #ccc; }
     30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
     40%, 60% { transform: translate3d(8px, 0, 0); }
 }
+
+/* ===== Dashboard Container ===== */
+.dashboard-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.back-nav {
+    margin-bottom: 20px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: maroon;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: #f5f5f5;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.dashboard-card h1 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #e6e6e6;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.test-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 15px 25px;
+    background: maroon;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn:hover {
+    background: #7a0c0c;
+    transform: translateY(-2px);
+}
+
+.footer-credit {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+@media screen and (max-width: 992px) {
+    .dashboard-card h1 {
+        font-size: 1.8rem;
+    }
+    
+    .test-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Hide desktop nav and show mobile toggle */
+    nav ul, .nav-actions {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: flex;
+        margin-left: auto;
+    }
+    
+    .dashboard-container {
+        padding: 15px;
+    }
+    
+    .dashboard-card {
+        padding: 20px;
+    }
+    
+    .dashboard-card h1 {
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .test-buttons {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .btn {
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+    
+    /* Quiz modal adjustments */
+    .modal-content {
+        padding: 25px 20px;
+        margin: 5% auto;
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .sentence {
+        font-size: 1.2rem;
+        line-height: 1.3;
+    }
+    
+    .options button {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+    }
+    
+    .score-area {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .score-area .btn {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    /* Score modal adjustments */
+    .score-card {
+        padding: 30px 20px;
+        width: 95%;
+    }
+    
+    .score-number {
+        font-size: 2.8rem;
+    }
+    
+    #brahmmyFeedback {
+        width: 120px;
+    }
+    
+    .footer-credit {
+        padding: 15px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    nav {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .dashboard-card h1 {
+        font-size: 1.4rem;
+    }
+    
+    .subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .modal-content {
+        padding: 20px 15px;
+    }
+    
+    .sentence {
+        font-size: 1.1rem;
+    }
+    
+    .options button {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .score-number {
+        font-size: 2.5rem;
+    }
+    
+    .score-feedback {
+        font-size: 1rem;
+    }
+    
+    #brahmmyFeedback {
+        width: 100px;
+    }
+}
+
+/* Small height devices */
+@media screen and (max-height: 600px) {
+    .modal-content {
+        margin: 2% auto;
+        max-height: 96vh;
+    }
+    
+    .sentence {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .options button {
+        padding: 10px 15px;
+    }
+    
+    #brahmmyFeedback {
+        width: 100px;
+        margin: 10px auto 0;
+    }
+}
 </style>
 </head>
 
@@ -251,6 +649,29 @@ body.dark-mode .score-feedback { color: #ccc; }
       </clipPath>
     </defs>
   </svg>
+</div>
+
+<!-- Mobile Navigation Elements -->
+<button class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<div class="mobile-nav" id="mobileNav">
+    <ul>
+        <li><a href="student_dashboard.html">Home</a></li>
+        <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+        <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+        <button id="mobileLogoutBtn">Logout</button>
+        <button id="mobileMusicToggle">Mute Music</button>
+    </div>
 </div>
 
 <div id="toast-container"></div>
@@ -269,13 +690,13 @@ body.dark-mode .score-feedback { color: #ccc; }
 
 <nav>
   <a href="index.html" class="logo">UB<span>igkas</span></a>
-  <ul>
+  <ul id="desktopNav">
     <li><a href="student_dashboard.html">Home</a></li>
     <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
     <li><a href="About.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div class="nav-actions">
+  <div class="nav-actions" id="desktopActions">
     <button id="darkModeBtn">🌙</button>
     <button id="logoutBtn">Logout</button>
     <button id="musicToggle">Mute Music</button>
@@ -577,6 +998,81 @@ async function saveScore() {
     } catch (err) { console.error("Error saving score:", err); }
 }
 
+// Mobile Navigation Toggle
+const menuToggle = document.getElementById('menuToggle');
+const mobileOverlay = document.getElementById('mobileOverlay');
+const mobileNav = document.getElementById('mobileNav');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+    mobileOverlay.classList.toggle('active');
+    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+});
+
+mobileOverlay.addEventListener('click', () => {
+    menuToggle.classList.remove('active');
+    mobileNav.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Mobile navigation links
+document.querySelectorAll('.mobile-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+});
+
+// Mobile action buttons
+const mobileDarkModeBtn = document.getElementById('mobileDarkModeBtn');
+const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+const mobileMusicToggle = document.getElementById('mobileMusicToggle');
+
+// Sync mobile buttons with desktop functionality
+mobileDarkModeBtn.addEventListener('click', () => {
+    document.getElementById('darkModeBtn').click();
+    // Close mobile nav after click
+    menuToggle.classList.remove('active');
+    mobileNav.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+mobileLogoutBtn.addEventListener('click', () => {
+    document.getElementById('logoutBtn').click();
+    // Close mobile nav after click
+    menuToggle.classList.remove('active');
+    mobileNav.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+mobileMusicToggle.addEventListener('click', () => {
+    document.getElementById('musicToggle').click();
+    // Update mobile button text
+    const isMuted = document.getElementById('bgMusic').muted;
+    mobileMusicToggle.textContent = isMuted ? 'Unmute Music' : 'Mute Music';
+});
+
+// Sync dark mode button text between mobile and desktop
+const updateDarkModeButtonText = () => {
+    const isDark = document.body.classList.contains('dark-mode');
+    mobileDarkModeBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+};
+
+// Initialize mobile button text
+updateDarkModeButtonText();
+
+// Listen for dark mode changes
+const darkModeBtn = document.getElementById('darkModeBtn');
+darkModeBtn.addEventListener('click', () => {
+    setTimeout(updateDarkModeButtonText, 700); // Update after transition
+});
+
 const logoutBtn = document.getElementById("logoutBtn");
 const logoutModal = document.getElementById("logoutModal");
 const cancelLogout = document.getElementById("cancelLogout");
@@ -608,13 +1104,10 @@ musicToggle.onclick = () => {
     isMuted = !isMuted;
     bgMusic.muted = isMuted;
     musicToggle.textContent = isMuted ? "Unmute Music" : "Mute Music";
+    mobileMusicToggle.textContent = isMuted ? "Unmute Music" : "Mute Music";
 };
 
 /* ===== DRIP THEME SWITCHER ===== */
-const darkModeBtn = document.getElementById("darkModeBtn");
-const dripContainer = document.getElementById("drip-container");
-const dripLayer = document.getElementById("dripLayer");
-
 darkModeBtn.onclick = () => {
     const isDark = document.body.classList.contains("dark-mode");
     if (isDark) dripLayer.classList.add("drip-light"); 
@@ -627,6 +1120,7 @@ darkModeBtn.onclick = () => {
         const nowDark = document.body.classList.contains("dark-mode");
         darkModeBtn.textContent = nowDark ? "☀️" : "🌙";
         localStorage.setItem("theme", nowDark ? "dark" : "light");
+        updateDarkModeButtonText();
     }, 350);
 
     setTimeout(() => {
@@ -637,6 +1131,7 @@ darkModeBtn.onclick = () => {
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
     darkModeBtn.textContent = "☀️";
+    updateDarkModeButtonText();
 }
 </script>
 
