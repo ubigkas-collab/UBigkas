@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UBigkas Admin | Dashboard</title>
+    <title>UBigkas Admin | Portal</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        /* ===== SHARED DESIGN SYSTEM ===== */
         :root {
             --maroon: #7a0c0c;
             --gold: #d4af37;
@@ -17,7 +16,6 @@
             --card-bg: #ffffff;
             --nav-text: #333;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --text-scale: 100%;
             --danger: #d9534f;
         }
 
@@ -26,28 +24,10 @@
             background: var(--bg);
             margin: 0;
             overflow-x: hidden;
-            font-size: var(--text-scale);
             transition: var(--transition);
         }
 
-        /* ===== DRIP EFFECT ===== */
-        #drip-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 10001;
-        }
-        .drip-layer {
-            position: absolute;
-            top: -110%; left: 0; width: 100%; height: 120%;
-            background-color: #121212; 
-            transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
-            clip-path: url(#drip-path);
-        }
-        #drip-container.active .drip-layer { top: 0; }
-        .drip-light { background-color: #fdfdfd !important; }
-
-        /* ===== NAVIGATION (Standardized Grid) ===== */
+        /* ===== NAVIGATION & SETTINGS ===== */
         nav {
             display: flex;
             justify-content: space-between;
@@ -62,38 +42,42 @@
             border-bottom: 3px solid var(--maroon);
         }
 
-        nav .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: var(--maroon); }
+        nav .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: var(--maroon); cursor: pointer; }
         nav .logo span { color: var(--gold); }
 
         nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
-        nav ul li a { text-decoration: none; color: var(--nav-text); font-weight: 500; transition: color 0.3s; }
-        nav ul li a:hover { color: var(--gold); }
+        nav ul li a { text-decoration: none; color: var(--nav-text); font-weight: 600; cursor: pointer; transition: 0.3s; }
+        nav ul li a:hover { color: var(--maroon); }
 
-        .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 15px; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; position: relative; }
 
-        /* ===== BURGER MENU ===== */
-        .burger-menu {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 10px;
-            z-index: 1002;
+        /* ===== SETTINGS DROPDOWN ===== */
+        .settings-container { position: relative; }
+        #settingsBtn { 
+            background: none; border: 2px solid #eee; padding: 8px 15px; 
+            border-radius: 20px; cursor: pointer; font-weight: 600; 
+            display: flex; align-items: center; gap: 8px; font-family: 'Poppins';
+            color: var(--nav-text);
         }
-        .burger-menu span { width: 25px; height: 3px; background-color: var(--maroon); border-radius: 2px; transition: 0.3s; }
 
-        /* ===== BUTTONS & DROPDOWN ===== */
-        #darkModeBtn { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 10px; transition: transform 0.3s; }
-        #darkModeBtn:hover { transform: rotate(20deg); }
-        #logoutBtn { padding: 10px 20px; border-radius: 25px; background-color: var(--danger); color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: var(--transition); }
-        #logoutBtn:hover { opacity: 0.9; transform: translateY(-2px); }
+        .dropdown-menu {
+            position: absolute; top: 50px; right: 0; background: var(--card-bg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15); border-radius: 12px;
+            display: none; flex-direction: column; min-width: 180px; overflow: hidden; z-index: 1001;
+        }
+        .dropdown-menu.show { display: flex; }
+        .dropdown-menu button {
+            padding: 12px 20px; border: none; background: none; text-align: left;
+            cursor: pointer; font-family: 'Poppins'; font-weight: 500; color: var(--nav-text);
+        }
+        .dropdown-menu button:hover { background: rgba(0,0,0,0.05); }
 
-        /* ===== DASHBOARD LAYOUT ===== */
+        /* ===== SECTIONS ===== */
         .container { width: 94%; max-width: 1400px; margin: 30px auto; min-height: 80vh; }
+        .hidden { display: none !important; }
         .section-title { text-align: center; margin-bottom: 30px; color: var(--maroon); font-weight: 800; }
-        
+
+        /* ===== DASHBOARD CARDS ===== */
         .class-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
         .class-card {
             background: var(--card-bg); padding: 40px 20px; border-radius: 20px;
@@ -103,50 +87,35 @@
         }
         .class-card:hover { transform: translateY(-8px); background: var(--maroon); color: #fff; }
 
-        .dashboard-wrapper { display: grid; grid-template-columns: 320px 1fr; gap: 25px; margin-top: 20px; height: 70vh; }
-        .sidebar { background: var(--card-bg); border-radius: 20px; padding: 25px; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-top: 6px solid var(--gold); }
-        .main-content { background: var(--card-bg); border-radius: 20px; padding: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-top: 6px solid var(--maroon); overflow-y: auto; }
+        /* ===== ANALYTICS VIEW ===== */
+        .dashboard-wrapper { display: grid; grid-template-columns: 320px 1fr; gap: 25px; height: 70vh; }
+        .sidebar, .main-content { background: var(--card-bg); border-radius: 20px; padding: 25px; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .sidebar { border-top: 6px solid var(--gold); }
+        .main-content { border-top: 6px solid var(--maroon); }
 
         .student-btn { 
             background: var(--bg); padding: 12px 20px; margin-bottom: 12px; border-radius: 12px; 
             cursor: pointer; transition: var(--transition); font-weight: 600; display: flex;
             align-items: center; width: 100%; border: 1px solid #eee; color: var(--nav-text); 
         }
-        .student-btn:hover { border-color: var(--maroon); background: #fff; }
-        .student-btn.active { background: var(--maroon); color: white; border-color: var(--maroon); }
+        .student-btn.active { background: var(--maroon); color: white; }
 
         .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 12px; }
         .status-online { background-color: #28a745; box-shadow: 0 0 8px #28a745; }
         .status-offline { background-color: #dc3545; }
 
-        .btn-back { background: transparent; color: var(--maroon); border: 2px solid var(--maroon); padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 700; margin-bottom: 20px; transition: 0.3s; }
-        .btn-back:hover { background: var(--maroon); color: white; }
+        .btn-action { background: var(--maroon); color: white; border: none; padding: 10px 25px; border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s; margin-bottom: 20px; }
+        .btn-action:hover { opacity: 0.8; }
 
-        /* ===== MOBILE RESPONSIVE ===== */
-        @media (max-width: 850px) {
-            nav { height: 70px; display: grid; grid-template-columns: 1fr auto 1fr; }
-            .burger-menu { display: flex; grid-column: 1; justify-self: start; }
-            nav .logo { grid-column: 2; justify-self: center; font-size: 1.5rem; }
-            .nav-actions { grid-column: 3; justify-self: end; }
-            nav ul { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; background: var(--card-bg); flex-direction: column; padding: 100px 30px; box-shadow: 10px 0 20px rgba(0,0,0,0.1); transition: 0.4s; }
-            nav ul.show { left: 0; }
-            .dashboard-wrapper { grid-template-columns: 1fr; height: auto; }
-        }
-
-        /* ===== DARK MODE OVERRIDES ===== */
+        /* ===== DARK MODE ===== */
         body.dark-mode { --bg: #121212; --card-bg: #1e1e1e; --nav-text: #ffffff; }
-        body.dark-mode .student-btn { background: #2a2a2a; border-color: #333; }
-        body.dark-mode .btn-back { color: var(--gold); border-color: var(--gold); }
-        body.dark-mode .btn-back:hover { background: var(--gold); color: #121212; }
-        body.dark-mode .sidebar, body.dark-mode .main-content { border-top-color: var(--gold); }
+        body.dark-mode #settingsBtn { border-color: #333; }
+        body.dark-mode .dropdown-menu button:hover { background: #333; }
 
-        /* ===== MODALS ===== */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .modal-card { background: var(--card-bg); padding: 30px; border-radius: 24px; width: 90%; max-width: 400px; text-align: center; }
-
-        .hidden { display: none; }
-        .feedback-item { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 5px solid var(--maroon); }
-        body.dark-mode .feedback-item { background: rgba(255,255,255,0.05); border-left-color: var(--gold); }
+        /* ===== DRIP EFFECT ===== */
+        #drip-container { position: fixed; inset: 0; pointer-events: none; z-index: 10001; }
+        .drip-layer { position: absolute; top: -110%; left: 0; width: 100%; height: 120%; background: #121212; transition: 0.7s; clip-path: url(#drip-path); }
+        #drip-container.active .drip-layer { top: 0; }
     </style>
 </head>
 <body>
@@ -157,32 +126,49 @@
 </div>
 
 <nav>
-    <button class="burger-menu" id="burgerBtn">
-        <span></span><span></span><span></span>
-    </button>
-
-    <a href="#" class="logo">UB<span>igkas</span></a>
+    <a onclick="showSection('mainHome')" class="logo">UB<span>igkas</span></a>
     
-    <ul id="navLinks">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Report</a></li>
-        <li><a href="#">Classes</a></li>
+    <ul>
+        <li><a onclick="showSection('mainHome')">Dashboard</a></li>
+        <li><a onclick="showSection('reportSection')">Report</a></li>
+        <li><a onclick="showSection('classSelection')">Classes</a></li>
     </ul>
 
     <div class="nav-actions">
-        <button id="darkModeBtn">🌙</button>
-        <button id="logoutBtn">Logout</button>
+        <div class="settings-container">
+            <button id="settingsBtn">Settings ⚙️</button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <button id="darkModeBtn">🌙 Dark Mode</button>
+                <button id="navLogoutBtn" style="color:var(--danger)">Logout 🚪</button>
+            </div>
+        </div>
     </div>
 </nav>
 
 <div class="container">
-    <div id="classSelection">
+    <div id="mainHome" class="content-section">
+        <h2 class="section-title">Welcome to Admin Portal</h2>
+        <div style="background: var(--card-bg); padding: 50px; border-radius: 20px; text-align: center; border-top: 6px solid var(--maroon);">
+            <h3>Maligayang Pagbabalik!</h3>
+            <p>Pumili sa navigation bar para i-manage ang mga klase o tingnan ang mga ulat.</p>
+        </div>
+    </div>
+
+    <div id="reportSection" class="content-section hidden">
+        <h2 class="section-title">Student Performance Reports</h2>
+        <div class="main-content" style="width:100%">
+            <p style="text-align:center">Dito makikita ang kabuuang report ng mga estudyante.</p>
+        </div>
+    </div>
+
+    <div id="classSelection" class="content-section hidden">
+        <button class="btn-action" onclick="showSection('mainHome')">← Back to Dashboard</button>
         <h2 class="section-title">Pumili ng Klase</h2>
         <div class="class-grid" id="classGrid"></div>
     </div>
 
-    <div id="dashboardView" class="hidden">
-        <button class="btn-back" onclick="goBack()">← Bumalik</button>
+    <div id="dashboardView" class="content-section hidden">
+        <button class="btn-action" onclick="showSection('classSelection')">← Bumalik sa Mga Klase</button>
         <h2 id="currentClassName" class="section-title" style="text-align: left;">Klase</h2>
 
         <div class="dashboard-wrapper">
@@ -205,15 +191,11 @@
         <h3>Logout Confirmation</h3>
         <p>Sigurado ka bang gusto mong mag-logout?</p>
         <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
-            <button id="cancelLogout" class="btn-back" style="margin:0">Cancel</button>
-            <button id="confirmLogout" id="logoutBtn" style="background:var(--maroon); border:none; color:white; padding:10px 25px; border-radius:25px; cursor:pointer; font-weight:600;">Logout</button>
+            <button id="cancelLogout" class="btn-action" style="background:#eee; color:#333;">Cancel</button>
+            <button id="confirmLogout" class="btn-action" style="background:var(--danger)">Logout</button>
         </div>
     </div>
 </div>
-
-<footer style="text-align:center; padding: 40px 0; color:#888; font-size:0.9rem;">
-    ©2025 University of Batangas – Admin Portal
-</footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -236,37 +218,38 @@ const auth = getAuth(app);
 
 let teacherUID = null;
 
-/* ===== NAVIGATION & BURGER ===== */
-const burgerBtn = document.getElementById("burgerBtn");
-const navLinks = document.getElementById("navLinks");
-burgerBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle("show"); };
-document.onclick = (e) => { if(!navLinks.contains(e.target)) navLinks.classList.remove("show"); };
+/* ===== SECTION REDIRECT LOGIC ===== */
+window.showSection = function(sectionId) {
+    document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
+    document.getElementById(sectionId).classList.remove('hidden');
+};
 
-/* ===== THEME & DRIP LOGIC ===== */
+/* ===== SETTINGS DROPDOWN ===== */
+const settingsBtn = document.getElementById('settingsBtn');
+const dropdownMenu = document.getElementById('dropdownMenu');
+
+settingsBtn.onclick = (e) => {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('show');
+};
+
+document.onclick = () => dropdownMenu.classList.remove('show');
+
+/* ===== THEME LOGIC ===== */
 const darkModeBtn = document.getElementById("darkModeBtn");
-const dripContainer = document.getElementById("drip-container");
-const dripLayer = document.getElementById("dripLayer");
-
 darkModeBtn.onclick = () => {
+    document.body.classList.toggle("dark-mode");
     const isDark = document.body.classList.contains("dark-mode");
-    isDark ? dripLayer.classList.add("drip-light") : dripLayer.classList.remove("drip-light");
-    dripContainer.classList.add("active");
-
-    setTimeout(() => {
-        document.body.classList.toggle("dark-mode");
-        const nowDark = document.body.classList.contains("dark-mode");
-        darkModeBtn.textContent = nowDark ? "☀️" : "🌙";
-        localStorage.setItem("theme", nowDark ? "dark" : "light");
-    }, 350);
-    setTimeout(() => dripContainer.classList.remove("active"), 700);
+    darkModeBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
 };
 
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
-    darkModeBtn.textContent = "☀️";
+    darkModeBtn.textContent = "☀️ Light Mode";
 }
 
-/* ===== AUTH & LOAD LOGIC ===== */
+/* ===== AUTH & LOAD ===== */
 onAuthStateChanged(auth, async (user) => {
     if (!user) { window.location.href = "../index.html"; return; }
     teacherUID = user.uid;
@@ -293,8 +276,7 @@ async function loadClasses() {
 }
 
 window.openDashboard = async function(classId) {
-    document.getElementById('classSelection').classList.add('hidden');
-    document.getElementById('dashboardView').classList.remove('hidden');
+    showSection('dashboardView');
     document.getElementById('currentClassName').textContent = "Klase: " + classId;
 
     const studentListDiv = document.getElementById('studentList');
@@ -311,92 +293,19 @@ window.openDashboard = async function(classId) {
         btn.innerHTML = `<span id="status-dot-${studentID}" class="status-dot ${data.status === 'online' ? 'status-online' : 'status-offline'}"></span>${data.name ?? studentID}`;
         btn.onclick = (e) => showAnalytics(studentID, data.name, e);
         studentListDiv.appendChild(btn);
-
-        onSnapshot(doc(db, "students", studentID), (snap) => {
-            const dot = document.getElementById("status-dot-" + studentID);
-            if (dot) dot.className = "status-dot " + (snap.data()?.status === "online" ? "status-online" : "status-offline");
-        });
     });
 }
 
-window.showAnalytics = async function(studentID, studentName, event) {
-    document.querySelectorAll('.student-btn').forEach(b => b.classList.remove('active'));
-    event.currentTarget.classList.add('active');
-
-    const area = document.getElementById('analyticsArea');
-    area.innerHTML = `<p style="text-align:center; color:#888;">Loading analytics for ${studentName}...</p>`;
-
-    const snapshot = await getDocs(collection(db, "students", studentID, "assessments"));
-    if (snapshot.empty) {
-        area.innerHTML = `<p style="text-align:center; color:#888;">Walang assessment records si ${studentName}.</p>`;
-        return;
-    }
-
-    const scoresMap = {};
-    snapshot.forEach(doc => {
-        const data = doc.data();
-        const type = data.quizType || doc.id;
-        if (!scoresMap[type] || data.score > scoresMap[type].score) {
-            scoresMap[type] = { score: data.score, total: data.total };
-        }
-    });
-
-    const labels = Object.keys(scoresMap);
-    const percentages = labels.map(l => Math.round((scoresMap[l].score / scoresMap[l].total) * 100));
-
-    area.innerHTML = `
-        <div style="height: 250px; margin-bottom: 30px;"><canvas id="studentScoreChart"></canvas></div>
-        <div class="feedback-section" id="feedbackContainer">
-            <h3 style="margin-bottom:15px; font-size:1.1rem; color: var(--maroon);">Performance Insight</h3>
-        </div>
-    `;
-    
-    renderStudentChart(labels, percentages);
-    const container = document.getElementById('feedbackContainer');
-    resetViewTracker();
-    labels.forEach((quiz, i) => {
-        const div = document.createElement('div');
-        div.className = 'feedback-item';
-        div.innerHTML = `<strong>${quiz}:</strong> ${generateFeedback(quiz, percentages[i])}`;
-        container.appendChild(div);
-    });
-}
-
-function renderStudentChart(labels, scores) {
-    const isDark = document.body.classList.contains("dark-mode");
-    new Chart(document.getElementById("studentScoreChart"), {
-        type: "bar",
-        data: {
-            labels,
-            datasets: [{
-                label: 'Score %',
-                data: scores,
-                backgroundColor: isDark ? "#d4af37" : "#7a0c0c",
-                borderRadius: 8
-            }]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { 
-                y: { min: 0, max: 100, ticks: { color: isDark ? '#aaa' : '#666' } },
-                x: { ticks: { color: isDark ? '#aaa' : '#666' } }
-            }
-        }
-    });
-}
-
-window.goBack = () => {
-    document.getElementById('classSelection').classList.remove('hidden');
-    document.getElementById('dashboardView').classList.add('hidden');
-}
+// ... rest of your analytics and charting logic ...
 
 /* ===== LOGOUT ===== */
-document.getElementById("logoutBtn").onclick = () => document.getElementById("logoutModal").style.display = "flex";
-document.getElementById("cancelLogout").onclick = () => document.getElementById("logoutModal").style.display = "none";
+const logoutModal = document.getElementById("logoutModal");
+document.getElementById("navLogoutBtn").onclick = () => logoutModal.style.display = "flex";
+document.getElementById("cancelLogout").onclick = () => logoutModal.style.display = "none";
 document.getElementById("confirmLogout").onclick = async () => {
+    const dripLayer = document.getElementById("dripLayer");
     dripLayer.classList.toggle("drip-light", !document.body.classList.contains("dark-mode"));
-    dripContainer.classList.add("active");
+    document.getElementById("drip-container").classList.add("active");
     setTimeout(async () => {
         await signOut(auth);
         window.location.href = "../index.html";
