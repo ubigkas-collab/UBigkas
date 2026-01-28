@@ -61,7 +61,7 @@
             100% { transform: translateY(100%); }
         }
 
-        /* ===== Nav Style (Integrated) ===== */
+        /* ===== Nav Style ===== */
         nav {
             display: flex;
             align-items: center;
@@ -111,9 +111,12 @@
 
         .class-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
 
+        /* --- Updated Class Card with Delete --- */
+        .class-card-wrapper { position: relative; }
+        
         .class-card {
             background: var(--card-bg); 
-            padding: 40px 20px; 
+            padding: 45px 20px; 
             border-radius: 20px;
             text-align: center; 
             cursor: pointer; 
@@ -123,11 +126,34 @@
             color: var(--maroon);
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             border-top: 6px solid var(--maroon);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         body.dark-mode .class-card { background-color: #242424; color: #e6e6e6; border-color: var(--gold); }
-
         .class-card:hover { transform: translateY(-8px); background: var(--maroon); color: #fff; }
+
+        .class-delete-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(217, 83, 79, 0.1);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        .class-delete-btn:hover { background: var(--danger); color: white; transform: scale(1.1); }
 
         .dashboard-wrapper { 
             display: grid; 
@@ -147,6 +173,46 @@
         }
         body.dark-mode .sidebar { background: #242424; border-top-color: var(--gold); }
 
+        .student-item-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .student-btn { 
+            background: #f8f9fa; 
+            padding: 12px 20px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            transition: var(--transition); 
+            font-weight: 600; 
+            display: flex;
+            align-items: center;
+            flex: 1; 
+            border: 1px solid #eee; 
+            color: var(--text-dark); 
+            text-align: left;
+        }
+        body.dark-mode .student-btn { background: #333; color: #fff; border-color: #444; }
+        .student-btn:hover { border-color: var(--maroon); background: #fff; color: var(--maroon); }
+        .student-btn.active { background: var(--maroon); color: white; border-color: var(--maroon); }
+
+        .delete-btn {
+            background: #fff;
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body.dark-mode .delete-btn { background: #333; border-color: var(--danger); }
+        .delete-btn:hover { background: var(--danger); color: #fff; }
+
         .main-content { 
             background: #fff; 
             border-radius: 20px; 
@@ -159,24 +225,6 @@
             overflow-y: auto;
         }
         body.dark-mode .main-content { background: #242424; border-top-color: var(--maroon); }
-
-        .student-btn { 
-            background: #f8f9fa; 
-            padding: 12px 20px; 
-            margin-bottom: 12px; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            transition: var(--transition); 
-            font-weight: 600; 
-            display: flex;
-            align-items: center;
-            width: 100%; 
-            border: 1px solid #eee; 
-            color: var(--text-dark); 
-        }
-        body.dark-mode .student-btn { background: #333; color: #fff; border-color: #444; }
-        .student-btn:hover { border-color: var(--maroon); background: #fff; color: var(--maroon); }
-        .student-btn.active { background: var(--maroon); color: white; border-color: var(--maroon); }
 
         .status-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 10px; }
         .status-online { background-color: #28a745; }
@@ -215,7 +263,7 @@
         body.dark-mode .modal-card { background: #242424; color: #fff; }
         .modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
         .modal-btn { padding: 10px 25px; border-radius: 25px; border: none; font-weight: 600; cursor: pointer; }
-        .modal-btn.primary { background-color: #d9534f; color: white; }
+        .modal-btn.primary { background-color: var(--danger); color: white; }
         .modal-btn.secondary { background-color: #e9ecef; color: #333; }
 
         .feedback-section { width: 100%; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
@@ -231,7 +279,8 @@
 <nav>
     <a onclick="showNavSection('list')" class="logo">UB<span>igkas</span></a>
     <ul>
-        <li><a onclick="showNavSection('list')">Dashboard</a></li>
+        <li><a onclick="showNavSection('dashboard')">Dashboard</a></li>
+        <li><a onclick="showNavSection('list')">Class List</a></li>
         <li><a onclick="showNavSection('about')">About</a></li>
         <li><a onclick="showNavSection('contact')">Contact</a></li>
     </ul>
@@ -291,11 +340,33 @@
     </div>
 </div>
 
+<div id="removeClassModal" class="modal-overlay">
+    <div class="modal-card">
+        <h3 style="color: var(--danger);">Tanggalin ang Klase</h3>
+        <p>Sigurado ka bang gusto mong burahin ang klaseng <b id="targetClassName"></b>? Lahat ng data rito ay mawawala.</p>
+        <div class="modal-actions">
+            <button id="cancelRemoveClass" class="modal-btn secondary">Cancel</button>
+            <button id="confirmRemoveClass" class="modal-btn primary">Remove</button>
+        </div>
+    </div>
+</div>
+
+<div id="removeStudentModal" class="modal-overlay">
+    <div class="modal-card">
+        <h3 style="color: var(--danger);">Tanggalin ang Estudyante</h3>
+        <p>Sigurado ka bang gusto mong alisin si <b id="targetStudentName"></b>? Hindi na ito mababawi.</p>
+        <div class="modal-actions">
+            <button id="cancelRemove" class="modal-btn secondary">Cancel</button>
+            <button id="confirmRemove" class="modal-btn primary">Remove</button>
+        </div>
+    </div>
+</div>
+
 <div class="footer-credit">©2025 University of Batangas – Admin Portal</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { generateFeedback, resetViewTracker } from "./feedback.js";
 
@@ -313,17 +384,24 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 let teacherUID = null;
+let studentToDelete = null;
+let classToDelete = null;
 
 // ---------------- NAVIGATION LOGIC ----------------
 window.showNavSection = function(section) {
-    document.querySelectorAll('.nav-content').forEach(el => el.classList.add('hidden'));
-    
-    if (section === 'list') {
-        document.getElementById('classSelection').classList.remove('hidden');
-    } else if (section === 'about') {
-        document.getElementById('aboutSection').classList.remove('hidden');
+    if (section === 'dashboard') {
+        // Papunta sa Teacher Panel / Dashboard
+        window.location.href = "teacher_panel.html";
+    } else if (section === 'list') {
+        // Papunta sa About page
+        window.location.href = "list.html";
+    }
+    else if (section === 'about') {
+        // Papunta sa About page
+        window.location.href = "about.html";
     } else if (section === 'contact') {
-        document.getElementById('contactSection').classList.remove('hidden');
+        // Papunta sa Contact page
+        window.location.href = "contact.html";
     }
 };
 
@@ -364,6 +442,47 @@ confirmLogout.onclick = async () => {
     window.location.href = "../index.html";
 };
 
+// ---------------- REMOVE CLASS LOGIC ----------------
+const removeClassModal = document.getElementById("removeClassModal");
+const cancelRemoveClass = document.getElementById("cancelRemoveClass");
+const confirmRemoveClass = document.getElementById("confirmRemoveClass");
+const targetClassNameSpan = document.getElementById("targetClassName");
+
+cancelRemoveClass.onclick = () => { removeClassModal.style.display = "none"; };
+confirmRemoveClass.onclick = async () => {
+    if (classToDelete && teacherUID) {
+        try {
+            await deleteDoc(doc(db, "teacher_accounts", teacherUID, "classes", classToDelete));
+            removeClassModal.style.display = "none";
+            loadClasses(); // I-refresh ang grid
+        } catch (err) {
+            console.error(err);
+            alert("Error removing class.");
+        }
+    }
+};
+
+// ---------------- REMOVE STUDENT LOGIC ----------------
+const removeModal = document.getElementById("removeStudentModal");
+const cancelRemove = document.getElementById("cancelRemove");
+const confirmRemove = document.getElementById("confirmRemove");
+const targetNameSpan = document.getElementById("targetStudentName");
+
+cancelRemove.onclick = () => { removeModal.style.display = "none"; };
+confirmRemove.onclick = async () => {
+    if (studentToDelete) {
+        try {
+            await deleteDoc(doc(db, "students", studentToDelete));
+            removeModal.style.display = "none";
+            const currentClassId = document.getElementById('currentClassName').textContent.replace("Klase: ", "");
+            openDashboard(currentClassId);
+        } catch (err) {
+            console.error(err);
+            alert("Error removing student.");
+        }
+    }
+};
+
 // ---------------- AUTH + ROLE GUARD ----------------
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -373,7 +492,7 @@ onAuthStateChanged(auth, async (user) => {
     teacherUID = user.uid;
     const teacherDoc = await getDoc(doc(db, "teacher_accounts", teacherUID));
     if (!teacherDoc.exists()) {
-        alert("Access denied. Teachers only.");
+        alert("Access denied.");
         await signOut(auth);
         window.location.href = "../index.html";
         return;
@@ -388,15 +507,32 @@ async function loadClasses() {
     try {
         const classesSnap = await getDocs(collection(db, "teacher_accounts", teacherUID, "classes"));
         classesSnap.forEach(classDoc => {
+            const classId = classDoc.id;
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = 'class-card-wrapper';
+
             const card = document.createElement('div');
             card.className = 'class-card';
-            card.textContent = classDoc.id;
-            card.onclick = () => openDashboard(classDoc.id);
-            grid.appendChild(card);
+            card.textContent = classId;
+            card.onclick = () => openDashboard(classId);
+
+            const delBtn = document.createElement('button');
+            delBtn.className = 'class-delete-btn';
+            delBtn.innerHTML = '✕';
+            delBtn.title = "Delete Class";
+            delBtn.onclick = (e) => {
+                e.stopPropagation(); // Iwasan ang pag-trigger ng card click
+                classToDelete = classId;
+                targetClassNameSpan.textContent = classId;
+                removeClassModal.style.display = "flex";
+            };
+
+            wrapper.appendChild(card);
+            wrapper.appendChild(delBtn);
+            grid.appendChild(wrapper);
         });
-    } catch (err) {
-        console.error(err);
-    }
+    } catch (err) { console.error(err); }
 }
 
 window.openDashboard = async function(classId) {
@@ -416,6 +552,9 @@ window.openDashboard = async function(classId) {
             const studentName = data.name ?? studentDoc.id;
             const studentID = studentDoc.id;
 
+            const wrapper = document.createElement('div');
+            wrapper.className = 'student-item-wrapper';
+
             const btn = document.createElement('button');
             btn.className = 'student-btn';
             btn.id = "student-btn-" + studentID;
@@ -427,9 +566,22 @@ window.openDashboard = async function(classId) {
 
             const nameText = document.createTextNode(studentName);
             btn.appendChild(nameText);
-
             btn.onclick = (e) => showAnalytics(studentID, studentName, e);
-            studentListDiv.appendChild(btn);
+
+            const delBtn = document.createElement('button');
+            delBtn.className = 'delete-btn';
+            delBtn.innerHTML = '🗑️';
+            delBtn.title = "Alisin Estudyante";
+            delBtn.onclick = (e) => {
+                e.stopPropagation();
+                studentToDelete = studentID;
+                targetNameSpan.textContent = studentName;
+                removeModal.style.display = "flex";
+            };
+
+            wrapper.appendChild(btn);
+            wrapper.appendChild(delBtn);
+            studentListDiv.appendChild(wrapper);
 
             onSnapshot(doc(db, "students", studentID), (snap) => {
                 const statusDot = document.getElementById("status-dot-" + studentID);
@@ -455,7 +607,7 @@ window.showAnalytics = async function(studentID, studentName, event) {
         const snapshot = await getDocs(assessmentsRef);
 
         if (snapshot.empty) {
-            area.innerHTML = `<p class="analytics-placeholder">${studentName} has no assessment records yet.</p>`;
+            area.innerHTML = `<p class="analytics-placeholder">${studentName} has no records yet.</p>`;
             return;
         }
 
@@ -470,13 +622,8 @@ window.showAnalytics = async function(studentID, studentName, event) {
             }
         });
 
-        const labels = [];
-        const percentages = [];
-
-        for (const [quiz, val] of Object.entries(scoresMap)) {
-            labels.push(quiz);
-            percentages.push(Math.round((val.score / val.total) * 100));
-        }
+        const labels = Object.keys(scoresMap);
+        const percentages = labels.map(l => Math.round((scoresMap[l].score / scoresMap[l].total) * 100));
 
         area.innerHTML = `
             <canvas id="studentScoreChart" height="220"></canvas>
@@ -497,7 +644,6 @@ window.showAnalytics = async function(studentID, studentName, event) {
             div.innerHTML = `<strong>${quiz}:</strong> ${feedbackText}`;
             feedbackContainer.appendChild(div);
         }
-
     } catch (err) { console.error(err); }
 };
 
@@ -509,7 +655,7 @@ function renderStudentChart(labels, scores) {
         data: {
             labels,
             datasets: [{
-                label: 'Score Percentage',
+                label: 'Score %',
                 data: scores,
                 backgroundColor: ["#7a0c0c", "#d4af37", "#5c0808", "#b5651d", "#a83279"],
                 borderRadius: 10
