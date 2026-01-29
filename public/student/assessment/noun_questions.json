@@ -1,0 +1,122 @@
+[
+  {
+    "wrongSentence": "Paborito ni Jose ang aso si Putol.",
+    "wrongWord": "aso si Putol",
+    "options": [
+      "Paborito ni Jose ang asong si Putol.",
+      "Paborito ni Jose ang aso ni Putol.",
+      "Paborito ni Jose si aso Putol.",
+      "Paborito ni Jose ang mga aso si Putol."
+    ],
+    "correctOption": "Paborito ni Jose ang asong si Putol.",
+    "explanation": "When a common noun (aso) is followed by a proper name (Putol), a linker (-ng) is required to connect them."
+  },
+  {
+    "wrongSentence": "Ibinigay ni Guro ang mga premyo.",
+    "wrongWord": "ni Guro",
+    "options": [
+      "Ibinigay ng guro ang mga premyo.",
+      "Ibinigay si guro ang mga premyo.",
+      "Ibinigay kay guro ang mga premyo.",
+      "Ibinigay nina guro ang mga premyo."
+    ],
+    "correctOption": "Ibinigay ng guro ang mga premyo.",
+    "explanation": "'Guro' is a common noun and should use the marker 'ng' for the actor. Also, it should not be capitalized unless it is a title (e.g., Guro Reyes)."
+  },
+  {
+    "wrongSentence": "Pumunta ang mga magkakaibigan sa Jollibee.",
+    "wrongWord": "ang mga magkakaibigan",
+    "options": [
+      "Pumunta ang magkakaibigan sa Jollibee.",
+      "Pumunta si magkakaibigan sa Jollibee.",
+      "Pumunta nina magkakaibigan sa Jollibee.",
+      "Pumunta sina magkakaibigan sa Jollibee."
+    ],
+    "correctOption": "Pumunta ang magkakaibigan sa Jollibee.",
+    "explanation": "The word 'magkakaibigan' is already pluralized by the prefix 'mag-' and the repetition of the first syllable. Using 'mga' is redundant."
+  },
+  {
+    "wrongSentence": "Ang lapis nina Maria ay nawawala.",
+    "wrongWord": "nina Maria",
+    "options": [
+      "Ang lapis ni Maria ay nawawala.",
+      "Ang lapis nina Maria at Ana ay nawawala.",
+      "Ang lapis kay Maria ay nawawala.",
+      "Nawawala ang lapis ni Maria."
+    ],
+    "correctOption": "Ang lapis ni Maria ay nawawala.",
+    "explanation": "'Nina' is plural. If there is only one owner mentioned (Maria), the singular marker 'ni' must be used."
+  },
+  {
+    "wrongSentence": "Nakita ko ang dalawa mga bata.",
+    "wrongWord": "dalawa mga bata",
+    "options": [
+      "Nakita ko ang dalawang bata.",
+      "Nakita ko ang mga dalawang bata.",
+      "Nakita ko ang dalawa bata.",
+      "Nakita ko ang mga bata dalawa."
+    ],
+    "correctOption": "Nakita ko ang dalawang bata.",
+    "explanation": "When a specific number (dalawa) is used, 'mga' is generally omitted, and the number takes the linker '-ng'."
+  },
+  {
+    "wrongSentence": "Maglalaro sina aso at pusa.",
+    "wrongWord": "sina aso at pusa",
+    "options": [
+      "Maglalaro ang aso at pusa.",
+      "Maglalaro ang mga aso at pusa.",
+      "Maglalaro nina aso at pusa.",
+      "Maglalaro nina aso't pusa."
+    ],
+    "correctOption": "Maglalaro ang aso at pusa.",
+    "explanation": "'Sina' is only for proper names of people. Animals and objects use 'ang' (singular) or 'ang mga' (plural)."
+  },
+  {
+    "wrongSentence": "Dinala ko ang libro para kay Jose at Maria.",
+    "wrongWord": "kay Jose at Maria",
+    "options": [
+      "Dinala ko ang libro para kina Jose at Maria.",
+      "Dinala ko ang libro para sa Jose at Maria.",
+      "Dinala ko ang libro para nina Jose at Maria.",
+      "Para kina Jose at Maria ang libro."
+    ],
+    "correctOption": "Dinala ko ang libro para kina Jose at Maria.",
+    "explanation": "'Kina' is the correct plural benefactive marker for multiple proper names."
+  },
+  {
+    "wrongSentence": "Si Dr. Ramos ay isang mahusay na manggagamot.",
+    "wrongWord": "Dr. Ramos",
+    "options": [
+      "Si Dr. Ramos ay isang mahusay na manggagamot.",
+      "Ang Dr. Ramos ay isang mahusay na manggagamot.",
+      "Ni Dr. Ramos ay isang mahusay na manggagamot.",
+      "Kay Dr. Ramos ay isang mahusay na manggagamot."
+    ],
+    "correctOption": "Si Dr. Ramos ay isang mahusay na manggagamot.",
+    "explanation": "This is a trick question: the sentence is actually correct. In a quiz, identifying a correct structure among errors is a valid test of noun marker mastery."
+  },
+  {
+    "wrongSentence": "Ang mga magulang nina Lito ay masaya.",
+    "wrongWord": "nina Lito",
+    "options": [
+      "Ang mga magulang ni Lito ay masaya.",
+      "Ang mga magulang nina Lito at lolo ay masaya.",
+      "Masaya ang mga magulang ni Lito.",
+      "Ang mga magulang nina Lito ay masasaya."
+    ],
+    "correctOption": "Ang mga magulang ni Lito ay masaya.",
+    "explanation": "Even if the parents (plural) are the subject, the marker for the single owner (Lito) must be singular 'ni'."
+  },
+  {
+    "wrongSentence": "Bumili si Elena ng gatas sa tindahan ni Aling Nena.",
+    "wrongWord": "tindahan ni Aling Nena",
+    "options": [
+      "Bumili si Elena ng gatas sa tindahan ni Aling Nena.",
+      "Bumili si Elena ng gatas sa tindahan ng Aling Nena.",
+      "Bumili si Elena ng gatas kay tindahan ni Aling Nena.",
+      "Sa tindahan ni Aling Nena bumili si Elena."
+    ],
+    "correctOption": "Bumili si Elena ng gatas sa tindahan ni Aling Nena.",
+    "explanation": "Correct use of 'sa' for place and 'ni' for the owner. Quiz accuracy requires verifying possessive markers attached to location nouns."
+  }
+]
