@@ -10,25 +10,25 @@
       "Siya ay nagbigay ako ng regalo."
     ],
     "correctOption": "Ako ay nagbigay sa kanya ng regalo.",
-    "explanation": "Tamang gamit ng pronoun: dapat 'kanya' para sa layon, hindi 'siya'."
+    "explanation": "Dapat gumamit ng 'sa kanya' bilang object ng pandiwa."
   },
   {
     "id": 2,
-    "wrongSentence": "nagluto ako ng pagkain.",
-    "wrongWord": "Siya",
+    "wrongSentence": "Nagluto ako ng pagkain siya.",
+    "wrongWord": "siya",
     "options": [
       "Ako ay nagluto ng pagkain.",
-      "niluto ako ng pagkain.",
+      "Niluto ako ng pagkain.",
       "Ako nagluto siya ng pagkain.",
       "Nagluto siya ako ng pagkain."
     ],
     "correctOption": "Ako ay nagluto ng pagkain.",
-    "explanation": "'Ako' ang tamang simuno; 'siya' ay mali sa konteksto."
+    "explanation": "'Ako' ang tamang simuno; ang 'siya' ay kalabisan sa pangungusap."
   },
   {
     "id": 3,
     "wrongSentence": "Ipinadala niya sa kanya akin ang liham.",
-    "wrongWord": "ako",
+    "wrongWord": "akin",
     "options": [
       "Ipinadala niya sa kanya ang liham.",
       "Ako ipinadala niya sa kanya ang liham.",
@@ -36,12 +36,12 @@
       "Ipinadala niya ako sa kanya ang liham."
     ],
     "correctOption": "Ipinadala niya sa kanya ang liham.",
-    "explanation": "'Ako' ay hindi tamang panghalip sa layon; dapat 'ang liham'."
+    "explanation": "Ang 'akin' ay hindi kailangan kung mayroon nang 'sa kanya' bilang tatanggap."
   },
   {
     "id": 4,
     "wrongSentence": "Binigyan ko siya ang libro ko.",
-    "wrongWord": "siya",
+    "wrongWord": "ang",
     "options": [
       "Binigyan ko siya ng libro ko.",
       "Binigyan ko siya ang libro ko.",
@@ -49,20 +49,20 @@
       "Binigyan ko libro ko siya."
     ],
     "correctOption": "Binigyan ko siya ng libro ko.",
-    "explanation": "Dapat gumamit ng 'ng' sa layon: 'ng libro ko'."
+    "explanation": "Dapat gumamit ng 'ng' bilang pananda sa layon ng pandiwang 'binigyan'."
   },
   {
     "id": 5,
     "wrongSentence": "Siya ay tinulungan ko aking kaibigan.",
     "wrongWord": "Siya",
     "options": [
-      "Tinulungan ko siya ng aking kaibigan.",
+      "Tinulungan ko ang aking kaibigan.",
       "Siya ay tinulungan ko ng aking kaibigan.",
       "Tinulungan siya ang aking kaibigan.",
       "Ako ay tinulungan niya ng kaibigan."
     ],
     "correctOption": "Tinulungan ko ang aking kaibigan.",
-    "explanation": "Simuno ay 'ako', layon ay 'siya'; sundin ang tamang aktibong ayos."
+    "explanation": "Inaayos nito ang ayos ng pangungusap para maging malinaw ang layon."
   },
   {
     "id": 6,
@@ -75,20 +75,20 @@
       "Ipinakita sa akin niya ko ang larawan."
     ],
     "correctOption": "Ipinakita niya sa akin ang larawan.",
-    "explanation": "'Ni' o 'niya' ay tamang panghalip para sa simuno."
+    "explanation": "'Niya' ang tamang panghalip para sa aktor sa pangungusap na ito."
   },
   {
     "id": 7,
     "wrongSentence": "Ako ay tinanong niya sa tanong.",
-    "wrongWord": "Ako",
+    "wrongWord": "sa tanong",
     "options": [
-      "Tinanong niya ako sa tanong.",
+      "Tinanong niya ako ng isang tanong.",
       "Ako ay tinanong niya sa tanong.",
       "Siya ay tinanong ako sa tanong.",
       "Tinanong ako niya sa tanong."
     ],
-    "correctOption": "Tinanong niya ako sa tanong.",
-    "explanation": "Dapat ang simuno ay 'siya' at layon ay 'ako'."
+    "correctOption": "Tinanong niya ako ng isang tanong.",
+    "explanation": "Mas natural ang paggamit ng 'ng isang tanong' kaysa sa paulit-ulit na 'sa tanong'."
   },
   {
     "id": 8,
@@ -101,12 +101,12 @@
       "Ako ay binigyan siya ng pera."
     ],
     "correctOption": "Binigyan ko siya ng pera.",
-    "explanation": "Ang simuno ay 'ako', layon ay 'siya'."
+    "explanation": "Karaniwang ayos ng pangungusap (Pandiwa + Aktor + Layon)."
   },
   {
     "id": 9,
     "wrongSentence": "Ipinadala ko niya ang liham.",
-    "wrongWord": "niya",
+    "wrongWord": "ko",
     "options": [
       "Ipinadala niya ang liham.",
       "Ipinadala ko niya ang liham.",
@@ -114,12 +114,12 @@
       "Ipinadala ang liham niya ko."
     ],
     "correctOption": "Ipinadala niya ang liham.",
-    "explanation": "Simuno ay 'niya', hindi 'ko'."
+    "explanation": "Pumili lamang ng isang aktor (niya) para iwasan ang kalituhan."
   },
   {
     "id": 10,
     "wrongSentence": "Ako ay inutusan siya ng guro.",
-    "wrongWord": "siya",
+    "wrongWord": "Ako ay",
     "options": [
       "Inutusan siya ng guro.",
       "Ako ay inutusan siya ng guro.",
@@ -127,12 +127,12 @@
       "Inutusan ko siya ng guro."
     ],
     "correctOption": "Inutusan siya ng guro.",
-    "explanation": "Layunin ng guro: simuno ay guro (implicit), layon ay 'siya'."
+    "explanation": "Inaalis ang 'Ako ay' dahil ang guro ang siyang nag-utos kay siya."
   },
   {
     "id": 11,
     "wrongSentence": "Siya ay tinawag ko sa telepono.",
-    "wrongWord": "Siya",
+    "wrongWord": "Siya ay",
     "options": [
       "Tinawag ko siya sa telepono.",
       "Siya ay tinawag ko sa telepono.",
@@ -140,12 +140,12 @@
       "Tinawag ko sa telepono siya."
     ],
     "correctOption": "Tinawag ko siya sa telepono.",
-    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+    "explanation": "Mas mainam ang karaniwang ayos ng pangungusap sa pag-uusap."
   },
   {
     "id": 12,
     "wrongSentence": "Ako ay ipinakita niya ang aklat.",
-    "wrongWord": "Ako",
+    "wrongWord": "Ako ay",
     "options": [
       "Ipinakita niya sa akin ang aklat.",
       "Ako ay ipinakita niya ang aklat.",
@@ -153,12 +153,12 @@
       "Ipinakita ko siya ang aklat."
     ],
     "correctOption": "Ipinakita niya sa akin ang aklat.",
-    "explanation": "'Ako' bilang layon, simuno ay 'niya'."
+    "explanation": "Dapat ay 'sa akin' ang gampanin ng 'ako' bilang receiver."
   },
   {
     "id": 13,
     "wrongSentence": "Siya ay pinuntahan ko sa bahay.",
-    "wrongWord": "Siya",
+    "wrongWord": "Siya ay",
     "options": [
       "Pinuntahan ko siya sa bahay.",
       "Siya ay pinuntahan ko sa bahay.",
@@ -166,12 +166,12 @@
       "Ako ay pinuntahan siya sa bahay."
     ],
     "correctOption": "Pinuntahan ko siya sa bahay.",
-    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+    "explanation": "Direktang ayos ng pangungusap."
   },
   {
     "id": 14,
     "wrongSentence": "Ako ay tinulungan niya sa proyekto.",
-    "wrongWord": "Ako",
+    "wrongWord": "Ako ay",
     "options": [
       "Tinulungan niya ako sa proyekto.",
       "Ako ay tinulungan niya sa proyekto.",
@@ -179,25 +179,25 @@
       "Tinulungan ko siya sa proyekto."
     ],
     "correctOption": "Tinulungan niya ako sa proyekto.",
-    "explanation": "Simuno ay 'niya', layon ay 'ako'."
+    "explanation": "Mas natural ang 'Tinulungan niya ako'."
   },
   {
     "id": 15,
     "wrongSentence": "Siya ay ipinakita ko ang larawan.",
-    "wrongWord": "Siya",
+    "wrongWord": "Siya ay",
     "options": [
-      "Ipinakita ko siya ang larawan.",
+      "Ipinakita ko sa kanya ang larawan.",
       "Siya ay ipinakita ko ang larawan.",
       "Ipinakita siya ko ang larawan.",
-      "Ipinakita ko sa kanya ang larawan."
+      "Ipinakita ko ang larawan siya."
     ],
-    "correctOption": "Ipinakita ko siya ang larawan.",
-    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+    "correctOption": "Ipinakita ko sa kanya ang larawan.",
+    "explanation": "Dapat ay 'sa kanya' dahil siya ang pinakitaan."
   },
   {
     "id": 16,
     "wrongSentence": "Ako ay tinanong niya tungkol sa proyekto.",
-    "wrongWord": "Ako",
+    "wrongWord": "Ako ay",
     "options": [
       "Tinanong niya ako tungkol sa proyekto.",
       "Ako ay tinanong niya tungkol sa proyekto.",
@@ -205,12 +205,12 @@
       "Tinanong ko siya tungkol sa proyekto."
     ],
     "correctOption": "Tinanong niya ako tungkol sa proyekto.",
-    "explanation": "Simuno ay 'niya', layon ay 'ako'."
+    "explanation": "Karaniwang ayos para sa pandiwang 'tinanong'."
   },
   {
     "id": 17,
     "wrongSentence": "Siya ay pinadala ko sa opisina.",
-    "wrongWord": "Siya",
+    "wrongWord": "Siya ay",
     "options": [
       "Pinadala ko siya sa opisina.",
       "Siya ay pinadala ko sa opisina.",
@@ -218,12 +218,12 @@
       "Ako ay pinadala siya sa opisina."
     ],
     "correctOption": "Pinadala ko siya sa opisina.",
-    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+    "explanation": "Mas malinaw na ang aktor (ko) ang nagpadala sa layon (siya)."
   },
   {
     "id": 18,
     "wrongSentence": "Ako ay binigyan niya ng regalo.",
-    "wrongWord": "Ako",
+    "wrongWord": "Ako ay",
     "options": [
       "Binigyan niya ako ng regalo.",
       "Ako ay binigyan niya ng regalo.",
@@ -231,12 +231,12 @@
       "Binigyan ko siya ng regalo."
     ],
     "correctOption": "Binigyan niya ako ng regalo.",
-    "explanation": "Simuno ay 'niya', layon ay 'ako'."
+    "explanation": "Pinadaling ayos ng pangungusap."
   },
   {
     "id": 19,
     "wrongSentence": "Siya ay tinuruan ko ng bagong salita.",
-    "wrongWord": "Siya",
+    "wrongWord": "Siya ay",
     "options": [
       "Tinuruan ko siya ng bagong salita.",
       "Siya ay tinuruan ko ng bagong salita.",
@@ -244,6 +244,409 @@
       "Ako ay tinuruan siya ng bagong salita."
     ],
     "correctOption": "Tinuruan ko siya ng bagong salita.",
-    "explanation": "Simuno ay 'ako', layon ay 'siya'."
+    "explanation": "Karaniwang ayos ng pangungusap sa Filipino."
+  },
+  {
+    "id": 20,
+    "wrongSentence": "Kinain ang bata ng mangga.",
+    "wrongWord": "bata",
+    "options": [
+      "Kinain ng bata ang mangga.",
+      "Kinain ang bata ng mangga.",
+      "Ang bata kinain mangga.",
+      "Kumain ang mangga sa bata."
+    ],
+    "correctOption": "Kinain ng bata ang mangga.",
+    "explanation": "Sa 'Kinain', ang aktor ay dapat may panandang 'ng' (ng bata) at ang object ay 'ang' (ang mangga)."
+  },
+  {
+    "id": 21,
+    "wrongSentence": "Nagluto ang nanay para sa kami.",
+    "wrongWord": "kami",
+    "options": [
+      "Nagluto ang nanay para sa amin.",
+      "Nagluto ang nanay para sa kami.",
+      "Nagluto nanay para kami.",
+      "Nagluto para sa atin ang nanay."
+    ],
+    "correctOption": "Nagluto ang nanay para sa amin.",
+    "explanation": "Dapat gamitin ang 'amin' pagkatapos ng 'para sa'."
+  },
+  {
+    "id": 22,
+    "wrongSentence": "Pumunta sila sa kanya bahay.",
+    "wrongWord": "kanya",
+    "options": [
+      "Pumunta sila sa kanyang bahay.",
+      "Pumunta sila sa kanya bahay.",
+      "Sila pumunta sa bahay niya.",
+      "Pumunta sila sa bahay siya."
+    ],
+    "correctOption": "Pumunta sila sa kanyang bahay.",
+    "explanation": "Kailangang lagyan ng linker na '-ng' ang 'kanya' upang maging modifier ng 'bahay'."
+  },
+  {
+    "id": 23,
+    "wrongSentence": "Si Maria ay maganda na babae.",
+    "wrongWord": "na",
+    "options": [
+      "Si Maria ay magandang babae.",
+      "Si Maria ay maganda na babae.",
+      "Maganda na babae si Maria.",
+      "Si Maria maganda babae."
+    ],
+    "correctOption": "Si Maria ay magandang babae.",
+    "explanation": "Ang linker na 'na' ay nagiging '-ng' kapag ang sinusundang salita ay nagtatapos sa patinig."
+  },
+  {
+    "id": 24,
+    "wrongSentence": "Uminom siya ang tubig.",
+    "wrongWord": "ang",
+    "options": [
+      "Uminom siya ng tubig.",
+      "Uminom siya ang tubig.",
+      "Uminom ng tubig siya.",
+      "Uminom siya sa tubig."
+    ],
+    "correctOption": "Uminom siya ng tubig.",
+    "explanation": "Ang 'ng' ay ginagamit para sa hindi tiyak na layon (indefinite object)."
+  },
+  {
+    "id": 25,
+    "wrongSentence": "Bumili ako ng sapatos para sa mo.",
+    "wrongWord": "mo",
+    "options": [
+      "Bumili ako ng sapatos para sa iyo.",
+      "Bumili ako ng sapatos para sa mo.",
+      "Bumili ako sapatos para mo.",
+      "Bumili sapatos para sa iyo ako."
+    ],
+    "correctOption": "Bumili ako ng sapatos para sa iyo.",
+    "explanation": "Ang 'iyo' ang tamang anyo ng panghalip pagkatapos ng 'para sa'."
+  },
+  {
+    "id": 26,
+    "wrongSentence": "Nakita ko sila sa kahapon.",
+    "wrongWord": "sa",
+    "options": [
+      "Nakita ko sila kahapon.",
+      "Nakita ko sila sa kahapon.",
+      "Sila ay nakita ko sa kahapon.",
+      "Nakita ko sila noon kahapon."
+    ],
+    "correctOption": "Nakita ko sila kahapon.",
+    "explanation": "Hindi na kailangan ng 'sa' bago ang pang-abay na pamanahon na 'kahapon'."
+  },
+  {
+    "id": 27,
+    "wrongSentence": "Sila ay nag-aaral ng mabuti.",
+    "wrongWord": "ng",
+    "options": [
+      "Sila ay nag-aaral nang mabuti.",
+      "Sila ay nag-aaral ng mabuti.",
+      "Nag-aaral sila ng mabuti.",
+      "Mabuti sila nag-aaral."
+    ],
+    "correctOption": "Sila ay nag-aaral nang mabuti.",
+    "explanation": "Ginagamit ang 'nang' (hindi 'ng') para mag-ugnay ng pandiwa at pang-abay (adverb)."
+  },
+  {
+    "id": 28,
+    "wrongSentence": "Tumakbo siya mabilis.",
+    "wrongWord": "mabilis",
+    "options": [
+      "Tumakbo siya nang mabilis.",
+      "Tumakbo siya mabilis.",
+      "Siya ay tumakbo mabilis.",
+      "Tumakbo mabilis siya."
+    ],
+    "correctOption": "Tumakbo siya nang mabilis.",
+    "explanation": "Kailangan ng 'nang' upang ipakita kung paano ginawa ang kilos."
+  },
+  {
+    "id": 29,
+    "wrongSentence": "Ang mga bata ay naglalaro sa labas ng bahay nila.",
+    "wrongWord": "nila",
+    "options": [
+      "Ang mga bata ay naglalaro sa labas ng kanilang bahay.",
+      "Ang mga bata ay naglalaro sa labas ng bahay nila.",
+      "Naglalaro ang mga bata sa bahay nila.",
+      "Sila ay naglalaro sa labas."
+    ],
+    "correctOption": "Ang mga bata ay naglalaro sa labas ng kanilang bahay.",
+    "explanation": "Mas pormal ang 'kanilang bahay' kaysa 'bahay nila' sa ganitong ayos."
+  },
+  {
+    "id": 30,
+    "wrongSentence": "Kinuha ko ang lapis sa mo.",
+    "wrongWord": "mo",
+    "options": [
+      "Kinuha ko ang lapis sa iyo.",
+      "Kinuha ko ang lapis sa mo.",
+      "Kinuha ko sa mo ang lapis.",
+      "Lapis kinuha ko sa iyo."
+    ],
+    "correctOption": "Kinuha ko ang lapis sa iyo.",
+    "explanation": "Ang 'iyo' ang panuring sa pag-aari o pinagmulan pagkatapos ng 'sa'."
+  },
+  {
+    "id": 31,
+    "wrongSentence": "Maganda ang kanta na narinig ko.",
+    "wrongWord": "na",
+    "options": [
+      "Maganda ang kantang narinig ko.",
+      "Maganda ang kanta na narinig ko.",
+      "Ang kanta narinig ko ay maganda.",
+      "Maganda kanta narinig ko."
+    ],
+    "correctOption": "Maganda ang kantang narinig ko.",
+    "explanation": "Ang 'kanta' ay nagtatapos sa patinig, kaya '-ng' ang dapat gamiting linker."
+  },
+  {
+    "id": 32,
+    "wrongSentence": "Nagpunta kami sa palengke para bumili ang isda.",
+    "wrongWord": "ang",
+    "options": [
+      "Nagpunta kami sa palengke para bumili ng isda.",
+      "Nagpunta kami sa palengke para bumili ang isda.",
+      "Bumili kami ang isda sa palengke.",
+      "Kami ay bumili ang isda."
+    ],
+    "correctOption": "Nagpunta kami sa palengke para bumili ng isda.",
+    "explanation": "'Ng' ang ginagamit para sa layon (object) ng pandiwang 'bumili'."
+  },
+  {
+    "id": 33,
+    "wrongSentence": "Sulat ko ang pangalan mo.",
+    "wrongWord": "Sulat",
+    "options": [
+      "Isulat mo ang pangalan ko.",
+      "Sinulat ko ang pangalan mo.",
+      "Isusulat ko ang pangalan mo.",
+      "Lahat ng nabanggit ay maaari depende sa panahunan."
+    ],
+    "correctOption": "Sinulat ko ang pangalan mo.",
+    "explanation": "Kailangang may panlapi ang salitang-ugat na 'sulat' upang maging pandiwa."
+  },
+  {
+    "id": 34,
+    "wrongSentence": "Ang kapatid ko ay mas matangkad sa akin.",
+    "wrongWord": "sa",
+    "options": [
+      "Ang kapatid ko ay mas matangkad kaysa sa akin.",
+      "Ang kapatid ko ay mas matangkad sa akin.",
+      "Mas matangkad ang kapatid ko sa akin.",
+      "Kapatid ko ay matangkad sa akin."
+    ],
+    "correctOption": "Ang kapatid ko ay mas matangkad kaysa sa akin.",
+    "explanation": "Ginagamit ang 'kaysa sa' para sa paghahambing (comparison)."
+  },
+  {
+    "id": 35,
+    "wrongSentence": "Naghugas siya ang mga plato.",
+    "wrongWord": "ang",
+    "options": [
+      "Naghugas siya ng mga plato.",
+      "Hinugasan niya ang mga plato.",
+      "Naghugas siya ang mga plato.",
+      "Siya naghugas ang mga plato."
+    ],
+    "correctOption": "Hinugasan niya ang mga plato.",
+    "explanation": "Kung 'ang' ang gamit, dapat ay 'object-focus' ang pandiwa (hinugasan)."
+  },
+  {
+    "id": 36,
+    "wrongSentence": "Mayroon ako maraming pera.",
+    "wrongWord": "ako",
+    "options": [
+      "Mayroon akong maraming pera.",
+      "Mayroon ako maraming pera.",
+      "May marami akong pera.",
+      "Ako ay mayroon maraming pera."
+    ],
+    "correctOption": "Mayroon akong maraming pera.",
+    "explanation": "Kailangan ng linker na '-ng' sa 'ako' kapag sinusundan ng pang-uri."
+  },
+  {
+    "id": 37,
+    "wrongSentence": "Saan ka pumunta bukas?",
+    "wrongWord": "pumunta",
+    "options": [
+      "Saan ka pupunta bukas?",
+      "Saan ka pumunta bukas?",
+      "Saan ka pumupunta bukas?",
+      "Saan ka pupunta kahapon?"
+    ],
+    "correctOption": "Saan ka pupunta bukas?",
+    "explanation": "Dapat ay nasa 'future tense' (pupunta) dahil ang pananda ay 'bukas'."
+  },
+  {
+    "id": 38,
+    "wrongSentence": "Tulungan mo ako sa pag-aaral ko.",
+    "wrongWord": "sa",
+    "options": [
+      "Tulungan mo ako sa aking pag-aaral.",
+      "Tulungan mo ako sa pag-aaral ko.",
+      "Tulungan mo ako ng pag-aaral.",
+      "Ipag-aral mo ako."
+    ],
+    "correctOption": "Tulungan mo ako sa aking pag-aaral.",
+    "explanation": "Mas maayos pakinggan ang 'aking pag-aaral' kaysa sa 'pag-aaral ko' sa dulo."
+  },
+  {
+    "id": 39,
+    "wrongSentence": "Siya ay kumain sa mansanas.",
+    "wrongWord": "sa",
+    "options": [
+      "Siya ay kumain ng mansanas.",
+      "Siya ay kumain sa mansanas.",
+      "Kumain siya ang mansanas.",
+      "Kinain siya ng mansanas."
+    ],
+    "correctOption": "Siya ay kumain ng mansanas.",
+    "explanation": "'Ng' ang tamang pananda para sa kinakaing bagay."
+  },
+  {
+    "id": 40,
+    "wrongSentence": "Ang bahay namin ay malapit sa inyo bahay.",
+    "wrongWord": "inyo",
+    "options": [
+      "Ang bahay namin ay malapit sa inyong bahay.",
+      "Ang bahay namin ay malapit sa inyo bahay.",
+      "Malapit ang bahay namin sa inyo.",
+      "Bahay namin ay malapit sa bahay ninyo."
+    ],
+    "correctOption": "Ang bahay namin ay malapit sa inyong bahay.",
+    "explanation": "Kailangan ng linker na '-ng' sa 'inyo'."
+  },
+  {
+    "id": 41,
+    "wrongSentence": "Bukas ay bibisita kami sa nila.",
+    "wrongWord": "nila",
+    "options": [
+      "Bukas ay bibisita kami sa kanila.",
+      "Bukas ay bibisita kami sa nila.",
+      "Kami bibisita sa nila bukas.",
+      "Bibisita kami sa kanila bukas."
+    ],
+    "correctOption": "Bukas ay bibisita kami sa kanila.",
+    "explanation": "'Kanila' ang tamang anyo ng panghalip pagkatapos ng 'sa'."
+  },
+  {
+    "id": 42,
+    "wrongSentence": "Ito ay ang aking laroan.",
+    "wrongWord": "laroan",
+    "options": [
+      "Ito ay ang aking laruan.",
+      "Ito ay ang aking laroan.",
+      "Ito ang laro ko.",
+      "Aking laroan ito."
+    ],
+    "correctOption": "Ito ay ang aking laruan.",
+    "explanation": "Ang tamang baybay (spelling) ay 'laruan' (mula sa laro + an)."
+  },
+  {
+    "id": 43,
+    "wrongSentence": "Naglalakad siya mabilis kanina.",
+    "wrongWord": "Naglalakad",
+    "options": [
+      "Naglakad siya nang mabilis kanina.",
+      "Naglalakad siya mabilis kanina.",
+      "Lalakad siya mabilis kanina.",
+      "Siya ay naglakad mabilis."
+    ],
+    "correctOption": "Naglakad siya nang mabilis kanina.",
+    "explanation": "Dapat ay 'past tense' (naglakad) dahil sa salitang 'kanina'."
+  },
+  {
+    "id": 44,
+    "wrongSentence": "Ibigay mo ito sa siya.",
+    "wrongWord": "siya",
+    "options": [
+      "Ibigay mo ito sa kanya.",
+      "Ibigay mo ito sa siya.",
+      "Ibigay mo ito sa kaniya.",
+      "Parehong A at C ay tama."
+    ],
+    "correctOption": "Parehong A at C ay tama.",
+    "explanation": "Ang 'sa kanya' o 'sa kaniya' ang tamang anyo; hindi ginagamit ang 'siya' pagkatapos ng 'sa'."
+  },
+  {
+    "id": 45,
+    "wrongSentence": "Sila ay masaya na pamilya.",
+    "wrongWord": "na",
+    "options": [
+      "Sila ay masayang pamilya.",
+      "Sila ay masaya na pamilya.",
+      "Masayang pamilya sila.",
+      "Sila ay masayang-masaya na pamilya."
+    ],
+    "correctOption": "Sila ay masayang pamilya.",
+    "explanation": "Linker '-ng' dahil nagtatapos sa patinig ang 'masaya'."
+  },
+  {
+    "id": 46,
+    "wrongSentence": "Ang aso ay tumatakbo sa kalsada mabilis.",
+    "wrongWord": "mabilis",
+    "options": [
+      "Ang aso ay tumatakbo nang mabilis sa kalsada.",
+      "Ang aso ay tumatakbo sa kalsada mabilis.",
+      "Mabilis tumakbo ang aso sa kalsada.",
+      "Parehong A at C ay tama."
+    ],
+    "correctOption": "Parehong A at C ay tama.",
+    "explanation": "Kailangan ng 'nang' bago ang pang-abay o ilagay ang pang-abay sa unahan."
+  },
+  {
+    "id": 47,
+    "wrongSentence": "Hiniram ko ang bolpen sa mo.",
+    "wrongWord": "mo",
+    "options": [
+      "Hiniram ko ang bolpen sa iyo.",
+      "Hiniram ko ang bolpen sa mo.",
+      "Hiniram ko ang iyong bolpen.",
+      "Parehong A at C ay tama."
+    ],
+    "correctOption": "Parehong A at C ay tama.",
+    "explanation": "Maaaring 'sa iyo' o 'iyong bolpen' ang gamitin."
+  },
+  {
+    "id": 48,
+    "wrongSentence": "Nanonood kami ang telebisyon.",
+    "wrongWord": "ang",
+    "options": [
+      "Nanonood kami ng telebisyon.",
+      "Nanonood kami sa telebisyon.",
+      "Pinapanood namin ang telebisyon.",
+      "Parehong A at C ay tama."
+    ],
+    "correctOption": "Parehong A at C ay tama.",
+    "explanation": "Depende sa pokus ng pandiwa (ng telebisyon o ang telebisyon)."
+  },
+  {
+    "id": 49,
+    "wrongSentence": "Siya ay matalino na bata.",
+    "wrongWord": "na",
+    "options": [
+      "Siya ay matalinong bata.",
+      "Siya ay matalino na bata.",
+      "Matalino na bata siya.",
+      "Siya ay matalino bata."
+    ],
+    "correctOption": "Siya ay matalinong bata.",
+    "explanation": "Linker '-ng' ang kailangan dahil ang 'matalino' ay nagtatapos sa patinig."
+  },
+  {
+    "id": 50,
+    "wrongSentence": "Pupunta ako sa kanila bukas.",
+    "wrongWord": "wala (tama ito)",
+    "options": [
+      "Pumunta ako sa kanila bukas.",
+      "Pupunta ako sa kanila bukas.",
+      "Pupunta ako sa nila bukas.",
+      "Pupunta ako sa kanya bukas."
+    ],
+    "correctOption": "Pupunta ako sa kanila bukas.",
+    "explanation": "Ang orihinal na pangungusap ay tama na; ito ay isang 'control item'."
   }
 ]
