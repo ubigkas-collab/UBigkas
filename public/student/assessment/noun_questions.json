@@ -1,122 +1,52 @@
 [
-  {
-    "wrongSentence": "Paborito ni Jose ang aso si Putol.",
-    "wrongWord": "aso si Putol",
-    "options": [
-      "Paborito ni Jose ang asong si Putol.",
-      "Paborito ni Jose ang aso ni Putol.",
-      "Paborito ni Jose si aso Putol.",
-      "Paborito ni Jose ang mga aso si Putol."
-    ],
-    "correctOption": "Paborito ni Jose ang asong si Putol.",
-    "explanation": "When a common noun (aso) is followed by a proper name (Putol), a linker (-ng) is required to connect them."
-  },
-  {
-    "wrongSentence": "Ibinigay ni Guro ang mga premyo.",
-    "wrongWord": "ni Guro",
-    "options": [
-      "Ibinigay ng guro ang mga premyo.",
-      "Ibinigay si guro ang mga premyo.",
-      "Ibinigay kay guro ang mga premyo.",
-      "Ibinigay nina guro ang mga premyo."
-    ],
-    "correctOption": "Ibinigay ng guro ang mga premyo.",
-    "explanation": "'Guro' is a common noun and should use the marker 'ng' for the actor. Also, it should not be capitalized unless it is a title (e.g., Guro Reyes)."
-  },
-  {
-    "wrongSentence": "Pumunta ang mga magkakaibigan sa Jollibee.",
-    "wrongWord": "ang mga magkakaibigan",
-    "options": [
-      "Pumunta ang magkakaibigan sa Jollibee.",
-      "Pumunta si magkakaibigan sa Jollibee.",
-      "Pumunta nina magkakaibigan sa Jollibee.",
-      "Pumunta sina magkakaibigan sa Jollibee."
-    ],
-    "correctOption": "Pumunta ang magkakaibigan sa Jollibee.",
-    "explanation": "The word 'magkakaibigan' is already pluralized by the prefix 'mag-' and the repetition of the first syllable. Using 'mga' is redundant."
-  },
-  {
-    "wrongSentence": "Ang lapis nina Maria ay nawawala.",
-    "wrongWord": "nina Maria",
-    "options": [
-      "Ang lapis ni Maria ay nawawala.",
-      "Ang lapis nina Maria at Ana ay nawawala.",
-      "Ang lapis kay Maria ay nawawala.",
-      "Nawawala ang lapis ni Maria."
-    ],
-    "correctOption": "Ang lapis ni Maria ay nawawala.",
-    "explanation": "'Nina' is plural. If there is only one owner mentioned (Maria), the singular marker 'ni' must be used."
-  },
-  {
-    "wrongSentence": "Nakita ko ang dalawa mga bata.",
-    "wrongWord": "dalawa mga bata",
-    "options": [
-      "Nakita ko ang dalawang bata.",
-      "Nakita ko ang mga dalawang bata.",
-      "Nakita ko ang dalawa bata.",
-      "Nakita ko ang mga bata dalawa."
-    ],
-    "correctOption": "Nakita ko ang dalawang bata.",
-    "explanation": "When a specific number (dalawa) is used, 'mga' is generally omitted, and the number takes the linker '-ng'."
-  },
-  {
-    "wrongSentence": "Maglalaro sina aso at pusa.",
-    "wrongWord": "sina aso at pusa",
-    "options": [
-      "Maglalaro ang aso at pusa.",
-      "Maglalaro ang mga aso at pusa.",
-      "Maglalaro nina aso at pusa.",
-      "Maglalaro nina aso't pusa."
-    ],
-    "correctOption": "Maglalaro ang aso at pusa.",
-    "explanation": "'Sina' is only for proper names of people. Animals and objects use 'ang' (singular) or 'ang mga' (plural)."
-  },
-  {
-    "wrongSentence": "Dinala ko ang libro para kay Jose at Maria.",
-    "wrongWord": "kay Jose at Maria",
-    "options": [
-      "Dinala ko ang libro para kina Jose at Maria.",
-      "Dinala ko ang libro para sa Jose at Maria.",
-      "Dinala ko ang libro para nina Jose at Maria.",
-      "Para kina Jose at Maria ang libro."
-    ],
-    "correctOption": "Dinala ko ang libro para kina Jose at Maria.",
-    "explanation": "'Kina' is the correct plural benefactive marker for multiple proper names."
-  },
-  {
-    "wrongSentence": "Si Dr. Ramos ay isang mahusay na manggagamot.",
-    "wrongWord": "Dr. Ramos",
-    "options": [
-      "Si Dr. Ramos ay isang mahusay na manggagamot.",
-      "Ang Dr. Ramos ay isang mahusay na manggagamot.",
-      "Ni Dr. Ramos ay isang mahusay na manggagamot.",
-      "Kay Dr. Ramos ay isang mahusay na manggagamot."
-    ],
-    "correctOption": "Si Dr. Ramos ay isang mahusay na manggagamot.",
-    "explanation": "This is a trick question: the sentence is actually correct. In a quiz, identifying a correct structure among errors is a valid test of noun marker mastery."
-  },
-  {
-    "wrongSentence": "Ang mga magulang nina Lito ay masaya.",
-    "wrongWord": "nina Lito",
-    "options": [
-      "Ang mga magulang ni Lito ay masaya.",
-      "Ang mga magulang nina Lito at lolo ay masaya.",
-      "Masaya ang mga magulang ni Lito.",
-      "Ang mga magulang nina Lito ay masasaya."
-    ],
-    "correctOption": "Ang mga magulang ni Lito ay masaya.",
-    "explanation": "Even if the parents (plural) are the subject, the marker for the single owner (Lito) must be singular 'ni'."
-  },
-  {
-    "wrongSentence": "Bumili si Elena ng gatas sa tindahan ni Aling Nena.",
-    "wrongWord": "tindahan ni Aling Nena",
-    "options": [
-      "Bumili si Elena ng gatas sa tindahan ni Aling Nena.",
-      "Bumili si Elena ng gatas sa tindahan ng Aling Nena.",
-      "Bumili si Elena ng gatas kay tindahan ni Aling Nena.",
-      "Sa tindahan ni Aling Nena bumili si Elena."
-    ],
-    "correctOption": "Bumili si Elena ng gatas sa tindahan ni Aling Nena.",
-    "explanation": "Correct use of 'sa' for place and 'ni' for the owner. Quiz accuracy requires verifying possessive markers attached to location nouns."
-  }
+  { "id": 1, "wrongSentence": "Kumain si aso ng buto.", "wrongWord": "si aso", "options": ["Kumain ang aso ng buto.", "Kumain ni aso ang buto.", "Kumain sina aso ng buto.", "Ang aso kumain ng buto."], "correctOption": "Kumain ang aso ng buto.", "explanation": "Common nouns like 'aso' use 'ang'. 'Si' is for personal names." },
+  { "id": 2, "wrongSentence": "Ibinigay ko ang libro kay Jose at Maria.", "wrongWord": "kay Jose at Maria", "options": ["Ibinigay ko ang libro kina Jose at Maria.", "Ibinigay ko ang libro sa Jose at Maria.", "Ibinigay ko ang libro nina Jose at Maria.", "Ibinigay ko ang libro para Jose at Maria."], "correctOption": "Ibinigay ko ang libro kina Jose at Maria.", "explanation": "'Kina' is the plural of 'kay' for multiple people." },
+  { "id": 3, "wrongSentence": "Ang mga magkakapatid ay naglalaro.", "wrongWord": "mga magkakapatid", "options": ["Ang magkakapatid ay naglalaro.", "Ang mga kapatid ay naglalaro.", "Sina magkakapatid ay naglalaro.", "Naglalaro ang magkakapatid."], "correctOption": "Ang magkakapatid ay naglalaro.", "explanation": "'Magkakapatid' is already plural; 'mga' is redundant." },
+  { "id": 4, "wrongSentence": "Nakatira siya sa lungsod ng pasig.", "wrongWord": "pasig", "options": ["Nakatira siya sa Lungsod ng Pasig.", "Nakatira siya sa lungsod Pasig.", "Sa lungsod ng Pasig siya nakatira.", "Nakatira siya sa Lungsod Pasig."], "correctOption": "Nakatira siya sa Lungsod ng Pasig.", "explanation": "Proper nouns (cities) must be capitalized." },
+  { "id": 5, "wrongSentence": "Bumili si nanay ng mga saging tatlo.", "wrongWord": "mga saging tatlo", "options": ["Bumili si nanay ng tatlong saging.", "Bumili si nanay ng saging tatlo.", "Bumili si nanay tatlo saging.", "Tatlong saging ang binili ni nanay."], "correctOption": "Bumili si nanay ng tatlong saging.", "explanation": "Numbers precede the noun and use the linker '-ng'." },
+  { "id": 6, "wrongSentence": "Hinanap ko ang bag kay Sarah.", "wrongWord": "kay Sarah", "options": ["Hinanap ko ang bag ni Sarah.", "Hinanap ko ang bag nina Sarah.", "Hinanap ko ang bag sa Sarah.", "Hinanap ko ang bag kay Sarah."], "correctOption": "Hinanap ko ang bag ni Sarah.", "explanation": "Use 'ni' to show possession (Sarah's bag)." },
+  { "id": 7, "wrongSentence": "Si Dr. Jose Rizal ang Bayani.", "wrongWord": "Bayani", "options": ["Si Dr. Jose Rizal ang bayani.", "Si Dr. Jose Rizal ay bayani.", "Bayani si Dr. Jose Rizal.", "Ang bayani ay si Dr. Jose Rizal."], "correctOption": "Si Dr. Jose Rizal ang bayani.", "explanation": "Common nouns like 'bayani' (hero) are lowercase." },
+  { "id": 8, "wrongSentence": "Nagpunta kami sa SM kay nanay.", "wrongWord": "kay nanay", "options": ["Nagpunta kami sa SM kasama si nanay.", "Nagpunta kami sa SM nina nanay.", "Nagpunta kami sa SM ni nanay.", "Nagpunta kami sa SM para nanay."], "correctOption": "Nagpunta kami sa SM kasama si nanay.", "explanation": "'Kay' is a recipient marker, not a companionship marker." },
+  { "id": 9, "wrongSentence": "Ang mga Guro ay nagpupulong.", "wrongWord": "Guro", "options": ["Ang mga guro ay nagpupulong.", "Nagpupulong ang mga guro.", "Ang guro ay nagpupulong.", "Sina guro ay nagpupulong."], "correctOption": "Ang mga guro ay nagpupulong.", "explanation": "Common nouns (jobs) are lowercase." },
+  { "id": 10, "wrongSentence": "Pinunasan ni Joy ang Lamesa.", "wrongWord": "Lamesa", "options": ["Pinunasan ni Joy ang lamesa.", "Pinunasan ni Joy ang mga lamesa.", "Ang lamesa ay pinunasan ni Joy.", "Lamesa ang pinunasan ni Joy."], "correctOption": "Pinunasan ni Joy ang lamesa.", "explanation": "Common nouns (objects) are lowercase." },
+  { "id": 11, "wrongSentence": "Sina lolo ay natutulog.", "wrongWord": "Sina lolo", "options": ["Si lolo ay natutulog.", "Ang mga lolo ay natutulog.", "Natutulog si lolo.", "Si lolo natutulog."], "correctOption": "Si lolo ay natutulog.", "explanation": "'Sina' is plural; 'si' is for one person." },
+  { "id": 12, "wrongSentence": "Bumili ako ng aklat kay National Bookstore.", "wrongWord": "kay National Bookstore", "options": ["Bumili ako ng aklat sa National Bookstore.", "Bumili ako ng aklat nina National Bookstore.", "Bumili ako ng aklat ni National Bookstore.", "Sa National Bookstore ako bumili."], "correctOption": "Bumili ako ng aklat sa National Bookstore.", "explanation": "Use 'sa' for places, not 'kay'." },
+  { "id": 13, "wrongSentence": "Nagluto ang kusinera (male) ng pagkain.", "wrongWord": "kusinera", "options": ["Nagluto ang kusinero ng pagkain.", "Nagluto ang kusinera ng pagkain.", "Kusinero ang nagluto ng pagkain.", "Ang kusinero nagluto pagkain."], "correctOption": "Nagluto ang kusinero ng pagkain.", "explanation": "Male gendered nouns end in '-o'." },
+  { "id": 14, "wrongSentence": "Ang sapatos nina kuya ay malaki.", "wrongWord": "nina kuya", "options": ["Malaki ang sapatos ni kuya.", "Ang sapatos ni kuya ay malaki.", "Malaki ang sapatos nina kuya.", "Sapatos ni kuya ay malaki."], "correctOption": "Malaki ang sapatos ni kuya.", "explanation": "Use 'ni' for a single person." },
+  { "id": 15, "wrongSentence": "Nakita ko ang dalawang mga ibon.", "wrongWord": "dalawang mga", "options": ["Nakita ko ang dalawang ibon.", "Nakita ko ang mga dalawang ibon.", "Nakita ko ang dalawa ibon.", "Dalawang ibon ang nakita ko."], "correctOption": "Nakita ko ang dalawang ibon.", "explanation": "Don't use 'mga' with a specific number." },
+  { "id": 16, "wrongSentence": "Si Bb. Santos ay isang Guro.", "wrongWord": "Guro", "options": ["Si Bb. Santos ay isang guro.", "Isang guro si Bb. Santos.", "Guro si Bb. Santos.", "Bb. Santos ay guro."], "correctOption": "Si Bb. Santos ay isang guro.", "explanation": "Lowercase for occupations." },
+  { "id": 17, "wrongSentence": "Ang aso si Bantay ay matapang.", "wrongWord": "aso si Bantay", "options": ["Ang asong si Bantay ay matapang.", "Ang aso ni Bantay ay matapang.", "Si Bantay na aso ay matapang.", "Matapang ang asong si Bantay."], "correctOption": "Ang asong si Bantay ay matapang.", "explanation": "Needs linker '-ng' between noun and name." },
+  { "id": 18, "wrongSentence": "Pumunta kami sa bahay nina lola.", "wrongWord": "nina lola", "options": ["Pumunta kami sa bahay ni lola.", "Pumunta kami sa bahay nina lola.", "Sa bahay ni lola kami pumunta.", "Pumunta kami kay lola."], "correctOption": "Pumunta kami sa bahay ni lola.", "explanation": "Use 'ni' for one person." },
+  { "id": 19, "wrongSentence": "Dinala ang gamot si Lito.", "wrongWord": "si Lito", "options": ["Dinala ni Lito ang gamot.", "Dinala ang gamot ni Lito.", "Si Lito ang nagdala ng gamot.", "Ibinigay ni Lito ang gamot."], "correctOption": "Dinala ni Lito ang gamot.", "explanation": "Actor in object-focus verb uses 'ni'." },
+  { "id": 20, "wrongSentence": "Ang prutas ay para kay bata.", "wrongWord": "kay bata", "options": ["Ang prutas ay para sa bata.", "Para sa bata ang prutas.", "Ang prutas ay para kay bata.", "Gatas ay para sa bata."], "correctOption": "Ang prutas ay para sa bata.", "explanation": "Use 'sa' for common nouns." },
+  { "id": 21, "wrongSentence": "Maingay ang mga mag-aaral.", "wrongWord": "Mag-aaral", "options": ["Maingay ang mga mag-aaral.", "Ang mga mag-aaral ay maingay.", "Maingay ang mag-aaral.", "Sina mag-aaral ay maingay."], "correctOption": "Maingay ang mga mag-aaral.", "explanation": "Correct, but lowercase is essential (Common Noun)." },
+  { "id": 22, "wrongSentence": "Sina nanay at tatay ay nasa bukid.", "wrongWord": "Sina nanay", "options": ["Ang nanay at tatay ay nasa bukid.", "Sina nanay at tatay ay nasa bukid.", "Nasa bukid ang nanay at tatay.", "Ang mga magulang ay nasa bukid."], "correctOption": "Ang nanay at tatay ay nasa bukid.", "explanation": "'Sina' is for proper names; 'nanay' is a common relationship noun." },
+  { "id": 23, "wrongSentence": "Ang kaarawan niya ay sa martes.", "wrongWord": "martes", "options": ["Ang kaarawan niya ay sa Martes.", "Sa Martes ang kaarawan niya.", "Martes ang kaarawan niya.", "Kaarawan niya ay Martes."], "correctOption": "Ang kaarawan niya ay sa Martes.", "explanation": "Days of the week are proper nouns." },
+  { "id": 24, "wrongSentence": "Ibinigay ko ang pera kay tindera.", "wrongWord": "kay tindera", "options": ["Ibinigay ko ang pera sa tindera.", "Ibinigay ko ang pera ni tindera.", "Sa tindera ko ibinigay ang pera.", "Ibinigay ko ang pera kay Maria."], "correctOption": "Ibinigay ko ang pera sa tindera.", "explanation": "Use 'sa' for common nouns." },
+  { "id": 25, "wrongSentence": "Si aso ay tumatahol.", "wrongWord": "Si aso", "options": ["Ang aso ay tumatahol.", "Tumatahol ang aso.", "Ang mga aso ay tumatahol.", "Si aso tumatahol."], "correctOption": "Ang aso ay tumatahol.", "explanation": "Common nouns use 'ang'." },
+  { "id": 26, "wrongSentence": "Malabo ang Mata ni lolo.", "wrongWord": "Mata", "options": ["Malabo ang mata ni lolo.", "Ang mata ni lolo ay malabo.", "Malabo mata ni lolo.", "Mata ni lolo ay malabo."], "correctOption": "Malabo ang mata ni lolo.", "explanation": "Body parts are common nouns (lowercase)." },
+  { "id": 27, "wrongSentence": "Pumunta sila sa pilipinas.", "wrongWord": "pilipinas", "options": ["Pumunta sila sa Pilipinas.", "Sa Pilipinas sila pumunta.", "Sila ay pumunta sa Pilipinas.", "Pumunta sila Pilipinas."], "correctOption": "Pumunta sila sa Pilipinas.", "explanation": "Countries are proper nouns." },
+  { "id": 28, "wrongSentence": "Masarap ang luto ni Kusinero.", "wrongWord": "Kusinero", "options": ["Masarap ang luto ng kusinero.", "Masarap ang luto ni kusinero.", "Luto ng kusinero ay masarap.", "Masarap ang kusinero luto."], "correctOption": "Masarap ang luto ng kusinero.", "explanation": "Use 'ng' for common noun possession." },
+  { "id": 29, "wrongSentence": "Ang mga magsasaka ay nag-aani.", "wrongWord": "Magsasaka", "options": ["Ang mga magsasaka ay nag-aani.", "Nag-aani ang mga magsasaka.", "Ang magsasaka ay nag-aani.", "Magsasaka ang nag-aani."], "correctOption": "Ang mga magsasaka ay nag-aani.", "explanation": "Lowercase for occupations." },
+  { "id": 30, "wrongSentence": "Si Bb. Cruz ang aming Principal.", "wrongWord": "Principal", "options": ["Si Bb. Cruz ang aming punong-guro.", "Si Bb. Cruz ang aming principal.", "Principal namin si Bb. Cruz.", "Punong-guro si Bb. Cruz."], "correctOption": "Si Bb. Cruz ang aming principal.", "explanation": "Lowercase for titles used as common nouns." },
+  { "id": 31, "wrongSentence": "Ito ang lapis ni Juan at si Pedro.", "wrongWord": "si Pedro", "options": ["Ito ang lapis nina Juan at Pedro.", "Ito ang lapis ni Juan at Pedro.", "Lapis nina Juan at Pedro ito.", "Ito ang lapis nina Juan't Pedro."], "correctOption": "Ito ang lapis nina Juan at Pedro.", "explanation": "'Nina' covers both names; don't use 'si' after 'at'." },
+  { "id": 32, "wrongSentence": "Malamig ang tubig sa Ilog.", "wrongWord": "Ilog", "options": ["Malamig ang tubig sa ilog.", "Ang tubig sa ilog ay malamig.", "Malamig ang tubig ilog.", "Ilog tubig ay malamig."], "correctOption": "Malamig ang tubig sa ilog.", "explanation": "Lowercase for common geography." },
+  { "id": 33, "wrongSentence": "Naglaro ang mga kuting sa Sala.", "wrongWord": "Sala", "options": ["Naglaro ang mga kuting sa sala.", "Sa sala naglaro ang mga kuting.", "Ang mga kuting naglaro sa sala.", "Naglaro kuting sa sala."], "correctOption": "Naglaro ang mga kuting sa sala.", "explanation": "Lowercase for parts of a house." },
+  { "id": 34, "wrongSentence": "Ang tatlong mga mansanas ay pula.", "wrongWord": "mga", "options": ["Ang tatlong mansanas ay pula.", "Pula ang tatlong mansanas.", "Ang mga tatlong mansanas ay pula.", "Tatlong mansanas pula."], "correctOption": "Ang tatlong mansanas ay pula.", "explanation": "Remove 'mga' when a number is present." },
+  { "id": 35, "wrongSentence": "Si Maria ay isang nars (male).", "wrongWord": "nars", "options": ["Si Maria ay isang nars.", "Nars si Maria.", "Isang nars si Maria.", "Si Maria ay nars."], "correctOption": "Si Maria ay isang nars.", "explanation": "Nars is gender-neutral (no -o/-a variant needed)." },
+  { "id": 36, "wrongSentence": "Uminom si bata ng gatas.", "wrongWord": "si bata", "options": ["Uminom ang bata ng gatas.", "Uminom ng gatas ang bata.", "Ang bata ay uminom ng gatas.", "Uminom ni bata ang gatas."], "correctOption": "Uminom ang bata ng gatas.", "explanation": "Common nouns use 'ang'." },
+  { "id": 37, "wrongSentence": "Ang bulaklak ay para kay lola.", "wrongWord": "kay lola", "options": ["Ang bulaklak ay para sa lola.", "Ang bulaklak ay para kay lola.", "Para sa lola ang bulaklak.", "Para kay lola ang bulaklak."], "correctOption": "Ang bulaklak ay para sa lola.", "explanation": "Use 'sa' for common nouns." },
+  { "id": 38, "wrongSentence": "Sina lolo at lola ay narito.", "wrongWord": "Sina lolo", "options": ["Ang lolo at lola ay narito.", "Narito ang lolo at lola.", "Ang mga lolo at lola ay narito.", "Sina lolo't lola narito."], "correctOption": "Ang lolo at lola ay narito.", "explanation": "Relationship titles are common nouns." },
+  { "id": 39, "wrongSentence": "Bumili kami ng sapatos sa mall ni Henry Sy.", "wrongWord": "mall ni Henry Sy", "options": ["Bumili kami ng sapatos sa mall ni Henry Sy.", "Bumili kami ng sapatos sa mall ng Henry Sy.", "Sa mall ni Henry Sy kami bumili.", "Bumili kami sapatos mall Henry Sy."], "correctOption": "Bumili kami ng sapatos sa mall ni Henry Sy.", "explanation": "Correct possessive 'ni' for the owner." },
+  { "id": 40, "wrongSentence": "Ang bansa ay ang pilipinas.", "wrongWord": "pilipinas", "options": ["Ang bansa ay ang Pilipinas.", "Pilipinas ang bansa.", "Ang bansa ay Pilipinas.", "Ang Pilipinas ay bansa."], "correctOption": "Ang bansa ay ang Pilipinas.", "explanation": "Proper noun capitalization." },
+  { "id": 41, "wrongSentence": "Naglaba si Ate ng mga Damit.", "wrongWord": "Damit", "options": ["Naglaba si ate ng mga damit.", "Naglaba si ate ng damit.", "Ang mga damit ay nilabahan ni ate.", "Nilabahan ni ate ang mga damit."], "correctOption": "Naglaba si ate ng mga damit.", "explanation": "Lowercase for 'damit'." },
+  { "id": 42, "wrongSentence": "Si Dr. Santos nanggamot ng mga Pasyente.", "wrongWord": "Pasyente", "options": ["Si Dr. Santos nanggamot ng mga pasyente.", "Nanggamot si Dr. Santos ng mga pasyente.", "Mga pasyente ang ginamot ni Dr. Santos.", "Ginamot ni Dr. Santos ang mga pasyente."], "correctOption": "Si Dr. Santos nanggamot ng mga pasyente.", "explanation": "Lowercase for 'pasyente'." },
+  { "id": 43, "wrongSentence": "Ang asul na Kotse ay mabilis.", "wrongWord": "Kotse", "options": ["Ang asul na kotse ay mabilis.", "Mabilis ang asul na kotse.", "Ang kotse na asul ay mabilis.", "Kotse na asul ay mabilis."], "correctOption": "Ang asul na kotse ay mabilis.", "explanation": "Lowercase for 'kotse'." },
+  { "id": 44, "wrongSentence": "Masaya ang Pamilya sa parke.", "wrongWord": "Pamilya", "options": ["Masaya ang pamilya sa parke.", "Ang pamilya ay masaya sa parke.", "Sa parke masaya ang pamilya.", "Pamilya ay masaya sa parke."], "correctOption": "Masaya ang pamilya sa parke.", "explanation": "Lowercase for 'pamilya'." },
+  { "id": 45, "wrongSentence": "Ang dalawang mga aso ay naghahabulan.", "wrongWord": "mga", "options": ["Ang dalawang aso ay naghahabulan.", "Naghahabulan ang dalawang aso.", "Dalawang aso ay naghahabulan.", "Ang aso dalawa ay naghahabulan."], "correctOption": "Ang dalawang aso ay naghahabulan.", "explanation": "Remove redundancy with numbers." },
+  { "id": 46, "wrongSentence": "Dinala ko ang pagkain kay aso.", "wrongWord": "kay aso", "options": ["Dinala ko ang pagkain sa aso.", "Ang pagkain ay dinala ko sa aso.", "Sa aso ko dinala ang pagkain.", "Dinala ko ang pagkain para aso."], "correctOption": "Dinala ko ang pagkain sa aso.", "explanation": "Animals are common nouns (sa)." },
+  { "id": 47, "wrongSentence": "Matalino ang mga Mag-aaral sa aming klase.", "wrongWord": "Mag-aaral", "options": ["Matalino ang mga mag-aaral sa aming klase.", "Ang mga mag-aaral sa aming klase ay matalino.", "Matalino ang mag-aaral sa aming klase.", "Mag-aaral sa aming klase ay matalino."], "correctOption": "Matalino ang mga mag-aaral sa aming klase.", "explanation": "Lowercase for 'mag-aaral'." },
+  { "id": 48, "wrongSentence": "Ang dagat ay Malawak.", "wrongWord": "Malawak", "options": ["Ang dagat ay malawak.", "Malawak ang dagat.", "Dagat ay malawak.", "Ang dagat malawak."], "correctOption": "Ang dagat ay malawak.", "explanation": "Lowercase for adjectives/common descriptions." },
+  { "id": 49, "wrongSentence": "Ang mga ibon ay kumakain ng mga Bulate.", "wrongWord": "Bulate", "options": ["Ang mga ibon ay kumakain ng mga bulate.", "Kumakain ang mga ibon ng mga bulate.", "Ang mga ibon kumakain ng bulate.", "Bulate ang kinakain ng mga ibon."], "correctOption": "Ang mga ibon ay kumakain ng mga bulate.", "explanation": "Lowercase for animals." },
+  { "id": 50, "wrongSentence": "Si Bb. Ramos ang Guro ko.", "wrongWord": "Guro", "options": ["Si Bb. Ramos ang guro ko.", "Guro ko si Bb. Ramos.", "Bb. Ramos ang guro ko.", "Si Bb. Ramos ay guro ko."], "correctOption": "Si Bb. Ramos ang guro ko.", "explanation": "Lowercase for occupation." }
 ]
