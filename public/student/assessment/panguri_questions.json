@@ -1,0 +1,352 @@
+[
+  {
+    "wrongSentence": "Ang pula na mansanas ay matamis kaysa sa berde.",
+    "wrongWord": "matamis",
+    "options": ["matamis", "mas matamis", "pinakamatamis"],
+    "correctOption": "mas matamis",
+    "explanation": "We use 'mas' (Pahambing) when comparing two specific items like the red and green apples."
+  },
+  {
+    "wrongSentence": "Siya ang matangkad sa lahat ng mga mag-aaral.",
+    "wrongWord": "matangkad",
+    "options": ["matangkad", "mas matangkad", "pinakamatangkad"],
+    "correctOption": "pinakamatangkad",
+    "explanation": "The phrase 'sa lahat' indicates a superlative degree (Pasukdol), requiring the prefix 'pinaka-'."
+  },
+  {
+    "wrongSentence": "Maganda ang mga bulaklak sa hardin.",
+    "wrongWord": "Maganda",
+    "options": ["Maganda", "Magaganda", "Pinakamaganda"],
+    "correctOption": "Magaganda",
+    "explanation": "For plural nouns (mga bulaklak), the adjective must also be pluralized by repeating the first syllable of the root: Ma-ga-ganda."
+  },
+  {
+    "wrongSentence": "Kasing-tangkad si Ben si Jose.",
+    "wrongWord": "si",
+    "options": ["si", "ni", "kay"],
+    "correctOption": "ni",
+    "explanation": "When using 'kasing-', the person being compared to is linked by 'ni' (Kasing-tangkad ni Jose)."
+  },
+  {
+    "wrongSentence": "Mataas ang gusali na ito kaysa sa nakita natin kahapon.",
+    "wrongWord": "Mataas",
+    "options": ["Mataas", "Mas mataas", "Pinakamataas"],
+    "correctOption": "Mas mataas",
+    "explanation": "A comparison between two buildings requires the comparative marker 'mas'."
+  },
+  {
+    "wrongSentence": "Mabait-baitan ang bata kaya siya ay mahal ng lahat.",
+    "wrongWord": "Mabait-baitan",
+    "options": ["Mabait", "Mabait-baitan", "Napakamabait"],
+    "correctOption": "Mabait",
+    "explanation": "'Mabait-baitan' means pretending to be kind. Since the child is genuinely loved, 'Mabait' is the correct descriptor."
+  },
+  {
+    "wrongSentence": "Ang dalawang magkapatid ay magsing-talino.",
+    "wrongWord": "magsing-talino",
+    "options": ["magsing-talino", "magkasing-talino", "pinakatalino"],
+    "correctOption": "magkasing-talino",
+    "explanation": "'Magkasing-' is the standard formal prefix used to show equality between two subjects."
+  },
+  {
+    "wrongSentence": "Maliit ang mga aso na nakita ko.",
+    "wrongWord": "Maliit",
+    "options": ["Maliit", "Maliliit", "Pinakamaliit"],
+    "correctOption": "Maliliit",
+    "explanation": "The plural noun 'mga aso' requires the plural adjective form 'ma-li-liit'."
+  },
+  {
+    "wrongSentence": "Ubod ng matamis ang manggang ito!",
+    "wrongWord": "matamis",
+    "options": ["tamis", "matamis", "matatamis"],
+    "correctOption": "tamis",
+    "explanation": "After the intensifier 'Ubod ng', we use the root noun 'tamis' instead of the adjective 'matamis'."
+  },
+  {
+    "wrongSentence": "Si Maria ay mas maganda sa lahat.",
+    "wrongWord": "mas maganda",
+    "options": ["maganda", "mas maganda", "pinakamaganda"],
+    "correctOption": "pinakamaganda",
+    "explanation": "'Sa lahat' signals the superlative degree, so 'pinaka-' must be used."
+  },
+  {
+    "wrongSentence": "Mabilis-mabilis ang takbo ng sasakyan.",
+    "wrongWord": "Mabilis-mabilis",
+    "options": ["Mabilis", "Mabilis-bilis", "Napakamabilis"],
+    "correctOption": "Mabilis-bilis",
+    "explanation": "To indicate a moderate intensity (somewhat fast), we repeat the second part of the word: 'Mabilis-bilis'."
+  },
+  {
+    "wrongSentence": "Matalino ang mga bata sa klaseng ito.",
+    "wrongWord": "Matalino",
+    "options": ["Matalino", "Matatalino", "Mas matalino"],
+    "correctOption": "Matatalino",
+    "explanation": "Plural subjects (mga bata) require the pluralized adjective 'ma-ta-talino'."
+  },
+  {
+    "wrongSentence": "Saksakan ng maguwapo ang aktor na iyon.",
+    "wrongWord": "maguwapo",
+    "options": ["guwapo", "maguwapo", "pinakaguwapo"],
+    "correctOption": "guwapo",
+    "explanation": "The intensifier 'Saksakan ng' is followed by the root word 'guwapo'."
+  },
+  {
+    "wrongSentence": "Ang bundok na ito ay matayog kaysa sa Bulkang Taal.",
+    "wrongWord": "matayog",
+    "options": ["matayog", "mas matayog", "pinakamatayog"],
+    "correctOption": "mas matayog",
+    "explanation": "Comparing two distinct items requires the comparative word 'mas'."
+  },
+  {
+    "wrongSentence": "Si Rosa ay kasing-puti si Blanca.",
+    "wrongWord": "si",
+    "options": ["si", "ni", "ang"],
+    "correctOption": "ni",
+    "explanation": "The correct linker for equality comparison with names is 'ni'."
+  },
+  {
+    "wrongSentence": "Malaki ang mga bahay sa lungsod.",
+    "wrongWord": "Malaki",
+    "options": ["Malaki", "Malalaki", "Pinakamalaki"],
+    "correctOption": "Malalaki",
+    "explanation": "Plural noun 'mga bahay' requires the plural adjective 'ma-la-laki'."
+  },
+  {
+    "wrongSentence": "Hari ng madumi ang bakuran nila.",
+    "wrongWord": "madumi",
+    "options": ["dumi", "madumi", "madudumi"],
+    "correctOption": "dumi",
+    "explanation": "Intensifiers like 'Hari ng' are followed by the root noun 'dumi'."
+  },
+  {
+    "wrongSentence": "Maitim ang mga ulap sa langit.",
+    "wrongWord": "Maitim",
+    "options": ["Maitim", "Maititim", "Pinakamaitim"],
+    "correctOption": "Maititim",
+    "explanation": "Pluralize the adjective for plural 'mga ulap': ma-i-titim."
+  },
+  {
+    "wrongSentence": "Siya ay mas masipag sa lahat ng kapatid niya.",
+    "wrongWord": "mas masipag",
+    "options": ["masipag", "mas masipag", "pinakamasipag"],
+    "correctOption": "pinakamasipag",
+    "explanation": "Comparison among three or more people (sa lahat) requires the superlative 'pinaka-'."
+  },
+  {
+    "wrongSentence": "Magsing-layo ang Maynila at Cebu.",
+    "wrongWord": "Magsing-layo",
+    "options": ["Malayo", "Magkasing-layo", "Pinakamalayo"],
+    "correctOption": "Magkasing-layo",
+    "explanation": "'Magkasing-' is the grammatically correct prefix for comparing two things as equal."
+  },
+  {
+    "wrongSentence": "Mabango ang mga labada ni Nanay.",
+    "wrongWord": "Mabango",
+    "options": ["Mabango", "Mababango", "Pinakamabango"],
+    "correctOption": "Mababango",
+    "explanation": "Plural noun 'mga labada' requires plural adjective 'ma-ba-bango'."
+  },
+  {
+    "wrongSentence": "Ang bata ay sing-talino ang kanyang ama.",
+    "wrongWord": "ang",
+    "options": ["ang", "ng", "ni"],
+    "correctOption": "ng",
+    "explanation": "The correct phrase structure is 'sing-talino ng' when comparing to a common noun."
+  },
+  {
+    "wrongSentence": "Maliit ang mga sapatos na nabili ko.",
+    "wrongWord": "Maliit",
+    "options": ["Maliit", "Maliliit", "Pinakamaliit"],
+    "correctOption": "Maliliit",
+    "explanation": "Plural 'mga sapatos' needs the plural form 'ma-li-liit'."
+  },
+  {
+    "wrongSentence": "Si Lito ay ang matalino sa aming klase.",
+    "wrongWord": "matalino",
+    "options": ["matalino", "mas matalino", "pinakamatalino"],
+    "correctOption": "pinakamatalino",
+    "explanation": "Comparing one person to a whole group (klase) requires the superlative 'pinaka-'."
+  },
+  {
+    "wrongSentence": "Mataas ang mga puno sa gubat.",
+    "wrongWord": "Mataas",
+    "options": ["Mataas", "Matataas", "Pinakamataas"],
+    "correctOption": "Matataas",
+    "explanation": "Plural 'mga puno' requires 'ma-ta-taas'."
+  },
+  {
+    "wrongSentence": "Kasing-lalim ang dagat at ang karagatan.",
+    "wrongWord": "Kasing-lalim",
+    "options": ["Malalim", "Magkasing-lalim", "Pinakamalalalim"],
+    "correctOption": "Magkasing-lalim",
+    "explanation": "When comparing two things (dagat and karagatan), use 'Magkasing-'."
+  },
+  {
+    "wrongSentence": "Mabigat ang mga dala nilang maleta.",
+    "wrongWord": "Mabigat",
+    "options": ["Mabigat", "Mababigat", "Pinakamabigat"],
+    "correctOption": "Mababigat",
+    "explanation": "Plural 'mga maleta' requires 'ma-ba-bigat'."
+  },
+  {
+    "wrongSentence": "Ubod ng madumi ang sapatos mo.",
+    "wrongWord": "madumi",
+    "options": ["dumi", "madumi", "madudumi"],
+    "correctOption": "dumi",
+    "explanation": "Use the root 'dumi' after the intensifier 'Ubod ng'."
+  },
+  {
+    "wrongSentence": "Mabilis ang mga sasakyan sa highway.",
+    "wrongWord": "Mabilis",
+    "options": ["Mabilis", "Mabibilis", "Mas mabilis"],
+    "correctOption": "Mabibilis",
+    "explanation": "Plural 'mga sasakyan' requires 'ma-bi-bilis'."
+  },
+  {
+    "wrongSentence": "Siya ay kasing-yaman ang kanyang pinsan.",
+    "wrongWord": "ang",
+    "options": ["ang", "ng", "ni"],
+    "correctOption": "ng",
+    "explanation": "The correct comparison structure is 'kasing-yaman ng'."
+  },
+  {
+    "wrongSentence": "Masaya ang mga bata sa parke.",
+    "wrongWord": "Masaya",
+    "options": ["Masaya", "Masasaya", "Pinakamasaya"],
+    "correctOption": "Masasaya",
+    "explanation": "Plural 'mga bata' requires 'ma-sa-saya'."
+  },
+  {
+    "wrongSentence": "Ang pelikulang ito ay ang nakakatakot sa lahat.",
+    "wrongWord": "nakakatakot",
+    "options": ["nakakatakot", "mas nakakatakot", "pinakanakakatakot"],
+    "correctOption": "pinakanakakatakot",
+    "explanation": "Superlative degree for 'all films' (sa lahat) requires 'pinaka-'."
+  },
+  {
+    "wrongSentence": "Mahaba ang mga lapis sa kahon.",
+    "wrongWord": "Mahaba",
+    "options": ["Mahaba", "Mahahaba", "Pinakamahaba"],
+    "correctOption": "Mahahaba",
+    "explanation": "Plural 'mga lapis' requires 'ma-ha-haba'."
+  },
+  {
+    "wrongSentence": "Ang asukal ay saksakan ng matamis.",
+    "wrongWord": "matamis",
+    "options": ["tamis", "matamis", "matatamis"],
+    "correctOption": "tamis",
+    "explanation": "Use the root 'tamis' with 'Saksakan ng'."
+  },
+  {
+    "wrongSentence": "Matalim ang mga kutsilyo sa kusina.",
+    "wrongWord": "Matalim",
+    "options": ["Matalim", "Matatalim", "Pinakamatalim"],
+    "correctOption": "Matatalim",
+    "explanation": "Plural 'mga kutsilyo' requires 'ma-ta-talim'."
+  },
+  {
+    "wrongSentence": "Maitim ang mga tupa sa pastulan.",
+    "wrongWord": "Maitim",
+    "options": ["Maitim", "Maititim", "Mas maitim"],
+    "correctOption": "Maititim",
+    "explanation": "Plural 'mga tupa' requires 'ma-i-titim'."
+  },
+  {
+    "wrongSentence": "Mainit ang mga kalsada tuwing tanghali.",
+    "wrongWord": "Mainit",
+    "options": ["Mainit", "Maiinit", "Pinakamainit"],
+    "correctOption": "Maiinit",
+    "explanation": "Plural 'mga kalsada' requires 'ma-i-init'."
+  },
+  {
+    "wrongSentence": "Malamig ang mga inumin sa mesa.",
+    "wrongWord": "Malamig",
+    "options": ["Malamig", "Malalamig", "Mas malamig"],
+    "correctOption": "Malalamig",
+    "explanation": "Plural 'mga inumin' requires 'ma-la-lamig'."
+  },
+  {
+    "wrongSentence": "Matapang ang mga sundalo sa digmaan.",
+    "wrongWord": "Matapang",
+    "options": ["Matapang", "Matatapang", "Pinakamatapang"],
+    "correctOption": "Matatapang",
+    "explanation": "Plural 'mga sundalo' requires 'ma-ta-tapang'."
+  },
+  {
+    "wrongSentence": "Maingay ang mga bata sa labas.",
+    "wrongWord": "Maingay",
+    "options": ["Maingay", "Maiiingay", "Mas maingay"],
+    "correctOption": "Maiiingay",
+    "explanation": "Plural 'mga bata' requires 'ma-i-iingay'."
+  },
+  {
+    "wrongSentence": "Masarap ang mga pagkain sa pista.",
+    "wrongWord": "Masarap",
+    "options": ["Masarap", "Masasarap", "Pinakamasarap"],
+    "correctOption": "Masasarap",
+    "explanation": "Plural 'mga pagkain' requires 'ma-sa-sarap'."
+  },
+  {
+    "wrongSentence": "Malinis ang mga baso na hinugasan ko.",
+    "wrongWord": "Malinis",
+    "options": ["Malinis", "Malilinis", "Mas malinis"],
+    "correctOption": "Malilinis",
+    "explanation": "Plural 'mga baso' requires 'ma-li-linis'."
+  },
+  {
+    "wrongSentence": "Maliwanag ang mga bituin kagabi.",
+    "wrongWord": "Maliwanag",
+    "options": ["Maliwanag", "Maliliwanag", "Pinakamaliwanag"],
+    "correctOption": "Maliliwanag",
+    "explanation": "Plural 'mga bituin' requires 'ma-li-liwanag'."
+  },
+  {
+    "wrongSentence": "Malalim ang mga sugat niya sa binti.",
+    "wrongWord": "Malalim",
+    "options": ["Malalim", "Malalalim", "Mas malalim"],
+    "correctOption": "Malalalim",
+    "explanation": "Plural 'mga sugat' requires 'ma-la-lalim'."
+  },
+  {
+    "wrongSentence": "Mahirap ang mga pagsusulit sa kolehiyo.",
+    "wrongWord": "Mahirap",
+    "options": ["Mahirap", "Mahihirap", "Pinakamahirap"],
+    "correctOption": "Mahihirap",
+    "explanation": "Plural 'mga pagsusulit' requires 'ma-hi-hirap'."
+  },
+  {
+    "wrongSentence": "Magaan ang mga bitbit nilang bag.",
+    "wrongWord": "Magaan",
+    "options": ["Magaan", "Magagaan", "Mas magaan"],
+    "correctOption": "Magagaan",
+    "explanation": "Plural 'mga bag' requires 'ma-ga-gaan'."
+  },
+  {
+    "wrongSentence": "Malambot ang mga unan sa hotel.",
+    "wrongWord": "Malambot",
+    "options": ["Malambot", "Malalambot", "Pinakamalambot"],
+    "correctOption": "Malalambot",
+    "explanation": "Plural 'mga unan' requires 'ma-la-lambot'."
+  },
+  {
+    "wrongSentence": "Malabo ang mga mata ng matanda.",
+    "wrongWord": "Malabo",
+    "options": ["Malabo", "Malalabo", "Mas malabo"],
+    "correctOption": "Malalabo",
+    "explanation": "Plural 'mga mata' requires 'ma-la-labo'."
+  },
+  {
+    "wrongSentence": "Mabagsik ang mga leon sa gubat.",
+    "wrongWord": "Mabagsik",
+    "options": ["Mabagsik", "Mababagsik", "Pinakamabagsik"],
+    "correctOption": "Mababagsik",
+    "explanation": "Plural 'mga leon' requires 'ma-ba-bagsik'."
+  },
+  {
+    "wrongSentence": "Mataas ang mga marka ni Jose sa pagsusulit.",
+    "wrongWord": "Mataas",
+    "options": ["Mataas", "Matataas", "Mas mataas"],
+    "correctOption": "Matataas",
+    "explanation": "Plural 'mga marka' requires 'ma-ta-taas'."
+  }
+]
