@@ -150,99 +150,20 @@ nav {
     margin-bottom: 100px;
 }
 
-/* --- FIXING THE OVERLAP --- */
-#featureDeck { 
-    position: relative; 
-    width: 100%; 
-    max-width: 960px;
-    min-height: 450px; /* Increased to accommodate content without overlap */
-    margin: 0 auto;
-}
-
+#featureDeck { position: relative; width: 100%; max-width: 800px; min-height: 250px; }
 .feature-card {
     position: absolute;
     inset: 0;
     display: none;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    gap: 40px;
+    padding: 0 10px;
 }
-
-.feature-card.active { 
-    display: flex; 
-    animation: fadeInHero 0.8s ease; 
-}
-
-.feature-image-container {
-    flex: 0 0 auto;
-    width: 300px; 
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.feature-image {
-    width: 100%;
-    max-width: 280px; /* Constraints image width */
-    height: auto;
-    max-height: 300px; /* Constraints image height */
-    border-radius: 16px;
-    box-shadow: 0 8px 24px var(--shadow);
-    object-fit: contain; /* Ensures image fits without distorting */
-}
-
-.feature-content {
-    flex: 1;
-    min-width: 250px;
-    max-width: 480px;
-    text-align: left;
-}
-
-.feature-card h2 { 
-    font-size: clamp(1.8rem, 5vw, 2.8rem); 
-    margin: 0 0 16px 0; 
-    color: var(--maroon);
-}
-
-.feature-card p { 
-    font-size: 1.1rem; 
-    line-height: 1.6;
-    color: var(--text-muted); 
-    margin: 0;
-}
-
-@keyframes fadeInHero { 
-    from { opacity: 0; transform: translateY(20px); } 
-    to { opacity: 1; transform: translateY(0); } 
-}
-
-/* --- MOBILE SPECIFIC FIXES --- */
-@media (max-width: 768px) {
-    #featureDeck {
-        min-height: 580px; /* Taller area for stacked mobile layout */
-    }
-    .feature-card {
-        flex-direction: column;
-        gap: 20px;
-        padding: 10px;
-        text-align: center;
-        justify-content: flex-start;
-    }
-    .feature-image-container {
-        width: 100%;
-        max-width: 220px;
-        margin-top: 10px;
-    }
-    .feature-image {
-        max-height: 220px;
-    }
-    .feature-content {
-        text-align: center;
-        max-width: 100%;
-        min-width: unset;
-    }
-}
+.feature-card.active { display: flex; animation: fadeInHero 0.8s ease; }
+.feature-card h2 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 15px; }
+.feature-card p { font-size: 1.1rem; max-width: 600px; color: var(--text-muted); }
+@keyframes fadeInHero { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- TEAM SECTION --- */
 .team-section {
@@ -271,7 +192,7 @@ nav {
     margin: 0 auto 15px;
 }
 
-/* --- MODALS --- */
+/* --- MODALS FIXED --- */
 .modal {
     display: none;
     position: fixed;
@@ -303,6 +224,7 @@ nav {
     transition: var(--transition);
     color: var(--text-muted);
 }
+.close:hover { transform: rotate(90deg); color: var(--maroon); }
 
 /* --- FORM STYLING --- */
 .form-group { text-align: left; margin-bottom: 20px; }
@@ -343,6 +265,17 @@ nav {
 }
 
 .footer-credit { text-align: center; padding: 40px 0; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--input-border); }
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 600px) {
+    .nav-btns #openLoginModal { padding: 8px 15px !important; }
+    .hero-section { margin-bottom: 50px; }
+    #featureDeck { height: 350px; } 
+    .feature-card h2 { line-height: 1.2; }
+    .hero-section div[style*="flex"] { flex-direction: column; width: 100%; }
+    .hero-section .login-btn { width: 100% !important; }
+    .modal-content { padding: 30px 20px; }
+}
 </style>
 </head>
 
@@ -374,34 +307,19 @@ nav {
     <main class="hero-section">
         <div id="featureDeck">
             <div class="feature-card active">
-                <div class="feature-image-container">
-                    <img src="./brahmmy-img/brahmmy-quiz.png" alt="Interactive Quizzes" class="feature-image">
-                </div>
-                <div class="feature-content">
-                    <h2>Interactive Quizzes</h2>
-                    <p>Test your knowledge with sentence structure, verbs, pronouns, and more!</p>
-                </div>
+                <h2 style="color:var(--maroon)">Interactive Quizzes</h2>
+                <p>Test your knowledge with sentence structure, verbs, pronouns, and more!</p>
             </div>
             <div class="feature-card">
-                <div class="feature-image-container">
-                    <img src="./brahmmy-img/brahmmy-reading.png" alt="Grammar Correction" class="feature-image">
-                </div>
-                <div class="feature-content">
-                    <h2>Grammar Correction</h2>
-                    <p>Automatically check and correct your Filipino sentences using our AI tool.</p>
-                </div>
+                <h2 style="color:var(--maroon)">Grammar Correction</h2>
+                <p>Automatically check and correct your Filipino sentences using our AI tool.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-image-container">
-                    <img src="./brahmmy-img/brahmmy-dashboard.png" alt="Student Dashboard" class="feature-image">
-                </div>
-                <div class="feature-content">
-                    <h2>Student Dashboard</h2>
-                    <p>Track your progress, see scores, and improve continuously.</p>
-                </div>
+                <h2 style="color:var(--maroon)">Student Dashboard</h2>
+                <p>Track your progress, see scores, and improve continuously.</p>
             </div>
         </div>
-        <div style="margin-top:50px; text-align:center; display: flex; gap: 20px; justify-content: center;">
+        <div style="margin-top:40px; text-align:center; display: flex; gap: 20px;">
             <button id="prevFeature" class="login-btn" style="background:var(--text-muted); width: 140px;">← Previous</button>
             <button id="nextFeature" class="login-btn" style="width: 140px;">Next →</button>
         </div>
@@ -431,9 +349,10 @@ nav {
 
 <div id="loginModal" class="modal">
     <div class="modal-content">
-        <span class="close" id="closeLoginModal">×</span>
+        <span class="close" id="closeLoginModal">&times;</span>
         <h1 style="color: var(--maroon); text-align: center; margin-top: 0;">Welcome</h1>
         <p style="color: var(--text-muted); text-align: center; margin-bottom: 25px;">Log in to your UBigkas Account</p>
+
         <form id="loginForm">
             <div class="form-group">
                 <label>Email Address</label>
@@ -445,10 +364,12 @@ nav {
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
+
         <button type="button" class="google-btn" id="googleLoginBtn">
             <img src="../brahmmy-img/brahmmy-email.png" alt="Google" style="width:20px">
             Login with UBMail
         </button>
+
         <div style="margin-top: 25px; text-align: center;" class="extra-links">
             <p><a href="#" id="openTeacherModal" style="color: var(--maroon); font-weight:600; text-decoration:none;">Create account as teacher</a></p>
         </div>
@@ -457,14 +378,26 @@ nav {
 
 <div id="teacherModal" class="modal">
     <div class="modal-content">
-        <span class="close" id="closeTeacherModal">×</span>
+        <span class="close" id="closeTeacherModal">&times;</span>
         <h2 style="text-align: center; color: var(--maroon); margin-top: 0;">Teacher Registration</h2>
         <form id="teacherSignupForm">
-            <div class="form-group"><input type="email" id="teacherEmail" placeholder="Institutional Email (@ub.edu.ph)" required></div>
-            <div class="form-group"><input type="text" id="teacherId" placeholder="Teacher ID" required></div>
-            <div class="form-group"><input type="password" id="teacherPassword" placeholder="Password" required></div>
-            <div class="form-group"><input type="password" id="teacherConfirmPassword" placeholder="Confirm Password" required></div>
-            <button type="submit" class="login-btn">Create Account</button>
+            <div class="form-group">
+                <label>UB Institutional Email</label>
+                <input type="email" id="teacherEmail" placeholder="name@ub.edu.ph" required>
+            </div>
+            <div class="form-group">
+                <label>Teacher ID</label>
+                <input type="text" id="teacherId" placeholder="ID Number" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="teacherPassword" placeholder="Minimum 6 characters" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" id="teacherConfirmPassword" placeholder="Repeat password" required>
+            </div>
+            <button type="submit" class="login-btn">Submit Request</button>
         </form>
     </div>
 </div>
@@ -472,11 +405,15 @@ nav {
 <div class="footer-credit">© 2026 University of Batangas – Lipa City</div>
 
 <script type="module">
-// [Original JS Script Logic - No changes made here]
 import { auth, db } from "./firebase.js";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { 
+    signInWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    signInWithPopup 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, getDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+/* --- UTILITIES --- */
 function playSwoosh(callback) {
     const container = document.getElementById("swoosh-container");
     container.style.display = "flex";
@@ -496,24 +433,28 @@ function showToast(message, type = "info") {
     }, 4000);
 }
 
+/* --- DARK MODE --- */
 const darkModeBtn = document.getElementById("darkModeBtn");
 darkModeBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
     darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
 });
 
+/* --- LOGIN LOGIC --- */
 document.getElementById("loginForm").addEventListener("submit", async e => {
     e.preventDefault();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    showToast("Verifying credentials...", "info");
+    
     if (email === "admin" && password === "admin123") {
         sessionStorage.setItem("role", "admin");
         showToast("Access granted.", "success");
         playSwoosh(() => { window.location.href = "admin/admin_dashboard.html"; });
         return;
     }
+
     try {
+        showToast("Verifying credentials...", "info");
         const cred = await signInWithEmailAndPassword(auth, email, password);
         handleUserRedirect(cred.user.uid);
     } catch (err) {
@@ -521,6 +462,7 @@ document.getElementById("loginForm").addEventListener("submit", async e => {
     }
 });
 
+/* --- GOOGLE LOGIN --- */
 const googleProvider = new GoogleAuthProvider();
 document.getElementById("googleLoginBtn").addEventListener("click", async () => {
     try {
@@ -535,6 +477,7 @@ document.getElementById("googleLoginBtn").addEventListener("click", async () => 
     } catch (error) { showToast("Google Login failed.", "info"); }
 });
 
+/* --- REDIRECT HANDLER --- */
 async function handleUserRedirect(uid) {
     const studentSnap = await getDoc(doc(db, "students", uid));
     if (studentSnap.exists()) {
@@ -545,6 +488,7 @@ async function handleUserRedirect(uid) {
         playSwoosh(() => { window.location.href = "student/student_dashboard.html"; });
         return;
     }
+    
     const teacherSnap = await getDoc(doc(db, "teacher_accounts", uid));
     if (teacherSnap.exists()) {
         const teacher = teacherSnap.data();
@@ -556,22 +500,58 @@ async function handleUserRedirect(uid) {
     showToast("Profile not found.", "info");
 }
 
+/* --- FIXED TEACHER SIGNUP --- */
 document.getElementById("teacherSignupForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+    
+    // 1. Gather Data
     const email = document.getElementById("teacherEmail").value.trim();
     const tid = document.getElementById("teacherId").value.trim();
     const pass = document.getElementById("teacherPassword").value;
     const confirmPass = document.getElementById("teacherConfirmPassword").value;
-    if (!email.endsWith("@ub.edu.ph")) { showToast("Use @ub.edu.ph email.", "info"); return; }
-    if (pass !== confirmPass) { showToast("Passwords do not match.", "info"); return; }
+
+    // 2. Validation
+    if (!email.endsWith("@ub.edu.ph")) { 
+        showToast("Use @ub.edu.ph email.", "info"); 
+        return; 
+    }
+    if (pass !== confirmPass) { 
+        showToast("Passwords do not match.", "info"); 
+        return; 
+    }
+    if (pass.length < 6) {
+        showToast("Password must be at least 6 characters.", "info");
+        return;
+    }
+
     try {
-        const cred = await createUserWithEmailAndPassword(auth, email, pass);
-        await setDoc(doc(db, "teacher_accounts", cred.user.uid), { email, teacherId: tid, role: "teacher" });
-        showToast("Registration successful!", "success");
-        teacherModal.style.display = "none";
-    } catch (err) { showToast("Registration failed.", "info"); }
+        showToast("Submitting request...", "info");
+        
+        // 3. Explicitly target the pending collection
+        // We use addDoc to let Firestore generate a unique ID for the request
+        const docRef = await addDoc(collection(db, "pending_teacher_accounts"), { 
+            email: email, 
+            teacherId: tid, 
+            password: pass, 
+            role: "teacher",
+            status: "pending",
+            submittedAt: serverTimestamp() 
+        });
+
+        console.log("Document written with ID: ", docRef.id);
+        showToast("Request sent! Admin will review your account.", "success");
+        
+        // 4. UI Cleanup
+        document.getElementById("teacherModal").style.display = "none";
+        document.getElementById("teacherSignupForm").reset();
+        
+    } catch (err) { 
+        console.error("Error adding document: ", err);
+        showToast("Submission failed. Please try again.", "info"); 
+    }
 });
 
+/* --- MODAL & UI CONTROLS --- */
 const loginModal = document.getElementById("loginModal");
 const teacherModal = document.getElementById("teacherModal");
 const cards = document.querySelectorAll(".feature-card");
@@ -583,11 +563,13 @@ function showCard(index) {
 
 document.getElementById("openLoginModal").onclick = () => loginModal.style.display = "block";
 document.getElementById("closeLoginModal").onclick = () => loginModal.style.display = "none";
+
 document.getElementById("openTeacherModal").onclick = e => { 
     e.preventDefault(); 
     loginModal.style.display = "none";
     teacherModal.style.display = "block"; 
 };
+
 document.getElementById("closeTeacherModal").onclick = () => teacherModal.style.display = "none";
 
 document.getElementById("nextFeature").onclick = () => { 
