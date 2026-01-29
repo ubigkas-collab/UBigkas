@@ -9,7 +9,7 @@
       "Kumain ang mansanas si Nanay."
     ],
     "correctOption": "Kumain si Nanay ng mansanas.",
-    "explanation": "Tamang ayos sa Filipino ay VSO: Kumain (V) + si Nanay (S) + ng mansanas (O)."
+    "explanation": "Standard Filipino word order is VSO: Verb (Kumain) + Subject (si Nanay) + Object (ng mansanas)."
   },
   {
     "wrongSentence": "Ang bata naglalaro sa parke.",
@@ -21,7 +21,7 @@
       "Sa parke naglalaro ang parke."
     ],
     "correctOption": "Naglalaro ang bata sa parke.",
-    "explanation": "Dapat mauna ang pandiwa: Naglalaro (V) + ang bata (S) + sa parke (O)."
+    "explanation": "The verb must come first in common sentence structure: Verb (Naglalaro) + Subject (ang bata)."
   },
   {
     "wrongSentence": "Gulay bumili si Nanay.",
@@ -33,7 +33,7 @@
       "Gulay bumili ng si Nanay."
     ],
     "correctOption": "Bumili si Nanay ng gulay.",
-    "explanation": "Tamang ayos: Verb (Bumili) + Subject (si Nanay) + Object (ng gulay)."
+    "explanation": "The action should precede the object: Verb (Bumili) + Actor (si Nanay) + Object (ng gulay)."
   },
   {
     "wrongSentence": "Pinggan naghugas si Juan.",
@@ -45,7 +45,7 @@
       "Si Juan ay pinggan naghugas."
     ],
     "correctOption": "Naghugas si Juan ng pinggan.",
-    "explanation": "Dapat mauna ang pandiwa: Naghugas si Juan ng pinggan."
+    "explanation": "Predicate-initial order: The verb (Naghugas) must lead the sentence."
   },
   {
     "wrongSentence": "Si Maria sumayaw sa salo-salo.",
@@ -57,7 +57,7 @@
       "Sumayaw ay si Maria sa salo-salo."
     ],
     "correctOption": "Sumayaw si Maria sa salo-salo.",
-    "explanation": "Tamang VSO: Sumayaw (V) + si Maria (S) + sa salo-salo (O)."
+    "explanation": "Standard VSO syntax: The verb (Sumayaw) must come before the actor (si Maria)."
   },
   {
     "wrongSentence": "Ang guro magtuturo bukas ng aralin.",
@@ -69,7 +69,7 @@
       "Magtuturo bukas guro ang aralin."
     ],
     "correctOption": "Magtuturo ang guro ng aralin bukas.",
-    "explanation": "Verb (Magtuturo) + Subject (ang guro) + Object (ng aralin) + Time (bukas)."
+    "explanation": "The verb (Magtuturo) should lead, followed by the subject (ang guro) and then the object/time."
   },
   {
     "wrongSentence": "Si Lito binasa ang libro.",
@@ -81,7 +81,7 @@
       "Binasa ang libro ni Lito."
     ],
     "correctOption": "Binasa ni Lito ang libro.",
-    "explanation": "Tamang object-focus VSO: Binasa (V) + ni Lito (S) + ang libro (O)."
+    "explanation": "In object-focus (Binasa), the actor must use the 'ni' marker instead of 'si'."
   },
   {
     "wrongSentence": "Ang bata tumakbo sa eskwelahan.",
@@ -93,6 +93,510 @@
       "Sa eskwelahan tumakbo ang bata."
     ],
     "correctOption": "Tumakbo ang bata sa eskwelahan.",
-    "explanation": "Tamang ayos VSO: Tumakbo (V) + ang bata (S) + sa eskwelahan (O)."
+    "explanation": "Standard VSO: The action (Tumakbo) leads the actor (ang bata)."
+  },
+  {
+    "wrongSentence": "Si Itay nagtanim ng palay.",
+    "wrongWord": "Si Itay",
+    "options": [
+      "Nagtanim si Itay ng palay.",
+      "Nagtanim ng palay si Itay.",
+      "Si Itay ay nagtanim ng palay.",
+      "Palay nagtanim si Itay."
+    ],
+    "correctOption": "Nagtanim si Itay ng palay.",
+    "explanation": "The verb (Nagtanim) should be at the start of the sentence in common word order."
+  },
+  {
+    "wrongSentence": "Ang pusa uminom ng gatas.",
+    "wrongWord": "Ang pusa",
+    "options": [
+      "Uminom ang pusa ng gatas.",
+      "Ang pusa uminom gatas ng.",
+      "Uminom gatas ang pusa.",
+      "Gatas ang uminom pusa."
+    ],
+    "correctOption": "Uminom ang pusa ng gatas.",
+    "explanation": "Predicate-initial order: Verb (Uminom) + Subject (ang pusa) + Object (ng gatas)."
+  },
+  {
+    "wrongSentence": "Laruan bumili si Pedro.",
+    "wrongWord": "Laruan",
+    "options": [
+      "Bumili si Pedro ng laruan.",
+      "Bumili ng si Pedro laruan.",
+      "Si Pedro bumili ng laruan.",
+      "Laruan si Pedro bumili."
+    ],
+    "correctOption": "Bumili si Pedro ng laruan.",
+    "explanation": "The verb (Bumili) must precede the actor (si Pedro) and the object (ng laruan)."
+  },
+  {
+    "wrongSentence": "Si Dr. Santos nanggamot ng pasyente.",
+    "wrongWord": "Si Dr. Santos",
+    "options": [
+      "Nanggamot si Dr. Santos ng pasyente.",
+      "Nanggamot ng pasyente si Dr. Santos.",
+      "Si Dr. Santos ay nanggamot ng pasyente.",
+      "Pasyente nanggamot si Dr. Santos."
+    ],
+    "correctOption": "Nanggamot si Dr. Santos ng pasyente.",
+    "explanation": "Standard VSO: The verb (Nanggamot) should be placed at the beginning of the sentence."
+  },
+  {
+    "wrongSentence": "Ang kanta inawit ni Sarah.",
+    "wrongWord": "Ang kanta",
+    "options": [
+      "Inawit ni Sarah ang kanta.",
+      "Inawit ang kanta ni Sarah.",
+      "Inawit Sarah ang kanta.",
+      "Sarah inawit ang kanta."
+    ],
+    "correctOption": "Inawit ni Sarah ang kanta.",
+    "explanation": "Object-focus verb (Inawit) requires the agent (ni Sarah) to follow immediately."
+  },
+  {
+    "wrongSentence": "Si Jose naglinis ng bakuran.",
+    "wrongWord": "Si Jose",
+    "options": [
+      "Naglinis si Jose ng bakuran.",
+      "Naglinis ng bakuran si Jose.",
+      "Bakuran naglinis si Jose.",
+      "Naglinis Jose ng bakuran."
+    ],
+    "correctOption": "Naglinis si Jose ng bakuran.",
+    "explanation": "The predicate (Naglinis) must lead the subject (si Jose) in common sentence structure."
+  },
+  {
+    "wrongSentence": "Ang ulam niluto ni Nanay.",
+    "wrongWord": "Ang ulam",
+    "options": [
+      "Niluto ni Nanay ang ulam.",
+      "Niluto ang ulam ni Nanay.",
+      "Niluto Nanay ang ulam.",
+      "Nanay niluto ang ulam."
+    ],
+    "correctOption": "Niluto ni Nanay ang ulam.",
+    "explanation": "In goal-focus (Niluto), the word order is Verb + Actor (ni Nanay) + Subject (ang ulam)."
+  },
+  {
+    "wrongSentence": "Liham sumulat si Ana.",
+    "wrongWord": "Liham",
+    "options": [
+      "Sumulat si Ana ng liham.",
+      "Sumulat ng liham si Ana.",
+      "Ana sumulat ng liham.",
+      "Liham si Ana sumulat."
+    ],
+    "correctOption": "Sumulat si Ana ng liham.",
+    "explanation": "Standard word order starts with the verb (Sumulat), then the actor (si Ana)."
+  },
+  {
+    "wrongSentence": "Si Bong nagmaneho ng kotse.",
+    "wrongWord": "Si Bong",
+    "options": [
+      "Nagmaneho si Bong ng kotse.",
+      "Nagmaneho ng kotse si Bong.",
+      "Kotse nagmaneho si Bong.",
+      "Nagmaneho si Bong kotse."
+    ],
+    "correctOption": "Nagmaneho si Bong ng kotse.",
+    "explanation": "VSO pattern: Action (Nagmaneho) + Subject (si Bong) + Object (ng kotse)."
+  },
+  {
+    "wrongSentence": "Ang ibon lumipad sa langit.",
+    "wrongWord": "Ang ibon",
+    "options": [
+      "Lumipad ang ibon sa langit.",
+      "Lumipad sa langit ang ibon.",
+      "Ang ibon lumipad langit.",
+      "Sa langit lumipad ibon."
+    ],
+    "correctOption": "Lumipad ang ibon sa langit.",
+    "explanation": "Standard syntax: Verb (Lumipad) comes before the subject (ang ibon)."
+  },
+  {
+    "wrongSentence": "Siya kumuha ng susi.",
+    "wrongWord": "Siya",
+    "options": [
+      "Kumuha siya ng susi.",
+      "Kumuha ng susi siya.",
+      "Siya ay kumuha ng susi.",
+      "Kumuha susi siya."
+    ],
+    "correctOption": "Kumuha siya ng susi.",
+    "explanation": "Enclitic pronouns like 'siya' should follow the verb (Kumuha) in standard order."
+  },
+  {
+    "wrongSentence": "Bola sinipa ng bata.",
+    "wrongWord": "Bola",
+    "options": [
+      "Sinipa ng bata ang bola.",
+      "Sinipa ang bola ng bata.",
+      "Bata sinipa ang bola.",
+      "Bola ang sinipa ng bata."
+    ],
+    "correctOption": "Sinipa ng bata ang bola.",
+    "explanation": "Passive focus syntax: Verb (Sinipa) + Agent (ng bata) + Subject (ang bola)."
+  },
+  {
+    "wrongSentence": "Si Elena naglaba ng damit.",
+    "wrongWord": "Si Elena",
+    "options": [
+      "Naglaba si Elena ng damit.",
+      "Naglaba ng damit si Elena.",
+      "Elena naglaba ng damit.",
+      "Damit naglaba si Elena."
+    ],
+    "correctOption": "Naglaba si Elena ng damit.",
+    "explanation": "Predicate-initial order: The verb (Naglaba) must lead the sentence."
+  },
+  {
+    "wrongSentence": "Ang isda lumalangoy sa dagat.",
+    "wrongWord": "Ang isda",
+    "options": [
+      "Lumalangoy ang isda sa dagat.",
+      "Lumalangoy sa dagat ang isda.",
+      "Dagat lumalangoy ang isda.",
+      "Lumalangoy isda sa dagat."
+    ],
+    "correctOption": "Lumalangoy ang isda sa dagat.",
+    "explanation": "V-S Syntax: The predicate (Lumalangoy) leads the nominative subject (ang isda)."
+  },
+  {
+    "wrongSentence": "Si Ben uminom ng gamot.",
+    "wrongWord": "Si Ben",
+    "options": [
+      "Uminom si Ben ng gamot.",
+      "Uminom ng gamot si Ben.",
+      "Si Ben uminom gamot.",
+      "Gamot uminom si Ben."
+    ],
+    "correctOption": "Uminom si Ben ng gamot.",
+    "explanation": "VSO structure: Action (Uminom) + Actor (si Ben) + Object (ng gamot)."
+  },
+  {
+    "wrongSentence": "Ang titser nagsalita sa harap.",
+    "wrongWord": "Ang titser",
+    "options": [
+      "Nagsalita ang titser sa harap.",
+      "Nagsalita sa harap ang titser.",
+      "Titser nagsalita sa harap.",
+      "Sa harap nagsalita titser."
+    ],
+    "correctOption": "Nagsalita ang titser sa harap.",
+    "explanation": "Moves the action (Nagsalita) to the front to follow standard Filipino syntax."
+  },
+  {
+    "wrongSentence": "Kendi kinain ni Toto.",
+    "wrongWord": "Kendi",
+    "options": [
+      "Kinain ni Toto ang kendi.",
+      "Kinain ang kendi ni Toto.",
+      "Toto kinain ang kendi.",
+      "Kendi ni Toto kinain."
+    ],
+    "correctOption": "Kinain ni Toto ang kendi.",
+    "explanation": "Goal-focus order: Verb (Kinain) + Agent (ni Toto) + Subject (ang kendi)."
+  },
+  {
+    "wrongSentence": "Si Rosa nagdilig ng halaman.",
+    "wrongWord": "Si Rosa",
+    "options": [
+      "Nagdilig si Rosa ng halaman.",
+      "Nagdilig ng halaman si Rosa.",
+      "Halaman nagdilig si Rosa.",
+      "Rosa nagdilig ng halaman."
+    ],
+    "correctOption": "Nagdilig si Rosa ng halaman.",
+    "explanation": "Predicate-initial order: The verb (Nagdilig) must be the first word."
+  },
+  {
+    "wrongSentence": "Ang araw sumisikat sa silangan.",
+    "wrongWord": "Ang araw",
+    "options": [
+      "Sumisikat ang araw sa silangan.",
+      "Sumisikat sa silangan ang araw.",
+      "Silangan sumisikat ang araw.",
+      "Araw sumisikat silangan."
+    ],
+    "correctOption": "Sumisikat ang araw sa silangan.",
+    "explanation": "V-S order: The verb (Sumisikat) precedes the subject (ang araw)."
+  },
+  {
+    "wrongSentence": "Larawan iginuhit ni Mark.",
+    "wrongWord": "Larawan",
+    "options": [
+      "Iginuhit ni Mark ang larawan.",
+      "Iginuhit ang larawan ni Mark.",
+      "Mark iginuhit ang larawan.",
+      "Larawan ni Mark iginuhit."
+    ],
+    "correctOption": "Iginuhit ni Mark ang larawan.",
+    "explanation": "Syntax correction: Verb (Iginuhit) must precede the agent (ni Mark)."
+  },
+  {
+    "wrongSentence": "Si kuya nag-ayos ng radyo.",
+    "wrongWord": "Si kuya",
+    "options": [
+      "Nag-ayos si kuya ng radyo.",
+      "Nag-ayos ng radyo si kuya.",
+      "Si kuya nag-ayos radyo.",
+      "Radyo nag-ayos si kuya."
+    ],
+    "correctOption": "Nag-ayos si kuya ng radyo.",
+    "explanation": "Standard order: The verb (Nag-ayos) leads the subject (si kuya)."
+  },
+  {
+    "wrongSentence": "Ang ulan pumatak sa bubong.",
+    "wrongWord": "Ang ulan",
+    "options": [
+      "Pumatak ang ulan sa bubong.",
+      "Pumatak sa bubong ang ulan.",
+      "Bubong pumatak ang ulan.",
+      "Ulan pumatak bubong."
+    ],
+    "correctOption": "Pumatak ang ulan sa bubong.",
+    "explanation": "V-S pattern: The action (Pumatak) is placed before the subject (ang ulan)."
+  },
+  {
+    "wrongSentence": "Sapatos hinanap ni Carla.",
+    "wrongWord": "Sapatos",
+    "options": [
+      "Hinanap ni Carla ang sapatos.",
+      "Hinanap ang sapatos ni Carla.",
+      "Carla hinanap ang sapatos.",
+      "Hinanap sapatos ni Carla."
+    ],
+    "correctOption": "Hinanap ni Carla ang sapatos.",
+    "explanation": "Object-focus syntax: Verb (Hinanap) + Agent (ni Carla) + Subject (ang sapatos)."
+  },
+  {
+    "wrongSentence": "Si Mang Inggo nagbungkal ng lupa.",
+    "wrongWord": "Si Mang Inggo",
+    "options": [
+      "Nagbungkal si Mang Inggo ng lupa.",
+      "Nagbungkal ng lupa si Mang Inggo.",
+      "Lupa nagbungkal si Mang Inggo.",
+      "Mang Inggo nagbungkal lupa."
+    ],
+    "correctOption": "Nagbungkal si Mang Inggo ng lupa.",
+    "explanation": "VSO order: The action (Nagbungkal) must lead the sentence."
+  },
+  {
+    "wrongSentence": "Ang aso tumahol sa gabi.",
+    "wrongWord": "Ang aso",
+    "options": [
+      "Tumahol ang aso sa gabi.",
+      "Tumahol sa gabi ang aso.",
+      "Aso tumahol sa gabi.",
+      "Gabi tumahol ang aso."
+    ],
+    "correctOption": "Tumahol ang aso sa gabi.",
+    "explanation": "Standard Syntax: The verb (Tumahol) precedes the subject (ang aso)."
+  },
+  {
+    "wrongSentence": "Lamesa pinunasan ni Joy.",
+    "wrongWord": "Lamesa",
+    "options": [
+      "Pinunasan ni Joy ang lamesa.",
+      "Pinunasan ang lamesa ni Joy.",
+      "Joy pinunasan ang lamesa.",
+      "Lamesa ni Joy pinunasan."
+    ],
+    "correctOption": "Pinunasan ni Joy ang lamesa.",
+    "explanation": "Word order: Verb (Pinunasan) + Agent (ni Joy) + Subject (ang lamesa)."
+  },
+  {
+    "wrongSentence": "Si ate nagluto ng agahan.",
+    "wrongWord": "Si ate",
+    "options": [
+      "Nagluto si ate ng agahan.",
+      "Nagluto ng agahan si ate.",
+      "Ate nagluto ng agahan.",
+      "Agahan nagluto si ate."
+    ],
+    "correctOption": "Nagluto si ate ng agahan.",
+    "explanation": "Predicate-initial order: The verb (Nagluto) must lead the sentence."
+  },
+  {
+    "wrongSentence": "Ang hangin humihip nang malakas.",
+    "wrongWord": "Ang hangin",
+    "options": [
+      "Humihip ang hangin nang malakas.",
+      "Humihip nang malakas ang hangin.",
+      "Hangin humihip nang malakas.",
+      "Malakas humihip ang hangin."
+    ],
+    "correctOption": "Humihip ang hangin nang malakas.",
+    "explanation": "Moves the verb (Humihip) to the start to satisfy standard Filipino V-S order."
+  },
+  {
+    "wrongSentence": "Pera kinuha ni Sam.",
+    "wrongWord": "Pera",
+    "options": [
+      "Kinuha ni Sam ang pera.",
+      "Kinuha ang pera ni Sam.",
+      "Sam kinuha ang pera.",
+      "Pera kinuha Sam."
+    ],
+    "correctOption": "Kinuha ni Sam ang pera.",
+    "explanation": "VSO syntax: The verb (Kinuha) leads the agent (ni Sam) and the object (ang pera)."
+  },
+  {
+    "wrongSentence": "Si Gary kumanta ng paborito niya.",
+    "wrongWord": "Si Gary",
+    "options": [
+      "Kumanta si Gary ng paborito niya.",
+      "Kumanta ng paborito niya si Gary.",
+      "Gary kumanta ng paborito niya.",
+      "Kumanta Gary paborito niya."
+    ],
+    "correctOption": "Kumanta si Gary ng paborito niya.",
+    "explanation": "VSO pattern: The verb (Kumanta) must precede the actor (si Gary)."
+  },
+  {
+    "wrongSentence": "Ang bituin kumikinang sa gabi.",
+    "wrongWord": "Ang bituin",
+    "options": [
+      "Kumikinang ang bituin sa gabi.",
+      "Kumikinang sa gabi ang bituin.",
+      "Bituin kumikinang sa gabi.",
+      "Gabi kumikinang bituin."
+    ],
+    "correctOption": "Kumikinang ang bituin sa gabi.",
+    "explanation": "Standard V-S syntax: The verb (Kumikinang) precedes the subject (ang bituin)."
+  },
+  {
+    "wrongSentence": "Damit tinupi ni Minda.",
+    "wrongWord": "Damit",
+    "options": [
+      "Tinupi ni Minda ang damit.",
+      "Tinupi ang damit ni Minda.",
+      "Minda tinupi ang damit.",
+      "Tinupi damit ni Minda."
+    ],
+    "correctOption": "Tinupi ni Minda ang damit.",
+    "explanation": "Word order correction: Verb (Tinupi) + Agent (ni Minda) + Subject (ang damit)."
+  },
+  {
+    "wrongSentence": "Si Tatay nag-ayos ng bubong.",
+    "wrongWord": "Si Tatay",
+    "options": [
+      "Nag-ayos si Tatay ng bubong.",
+      "Nag-ayos ng bubong si Tatay.",
+      "Tatay nag-ayos ng bubong.",
+      "Bubong nag-ayos si Tatay."
+    ],
+    "correctOption": "Nag-ayos si Tatay ng bubong.",
+    "explanation": "Standard order: The verb (Nag-ayos) leads the actor (si Tatay)."
+  },
+  {
+    "wrongSentence": "Ang bata umiyak kanina.",
+    "wrongWord": "Ang bata",
+    "options": [
+      "Umiyak ang bata kanina.",
+      "Umiyak kanina ang bata.",
+      "Bata umiyak kanina.",
+      "Kanina umiyak bata."
+    ],
+    "correctOption": "Umiyak ang bata kanina.",
+    "explanation": "Moves the predicate (Umiyak) to the initial position."
+  },
+  {
+    "wrongSentence": "Kwento binasa ni Gng. Ramos.",
+    "wrongWord": "Kwento",
+    "options": [
+      "Binasa ni Gng. Ramos ang kwento.",
+      "Binasa ang kwento ni Gng. Ramos.",
+      "Binasa Gng. Ramos ang kwento.",
+      "Kwento ni Gng. Ramos binasa."
+    ],
+    "correctOption": "Binasa ni Gng. Ramos ang kwento.",
+    "explanation": "Syntax correction: Verb (Binasa) + Agent (ni) + Subject (ang)."
+  },
+  {
+    "wrongSentence": "Si Leo nag-aral ng leksyon.",
+    "wrongWord": "Si Leo",
+    "options": [
+      "Nag-aral si Leo ng leksyon.",
+      "Nag-aral ng leksyon si Leo.",
+      "Leo nag-aral ng leksyon.",
+      "Leksyon nag-aral si Leo."
+    ],
+    "correctOption": "Nag-aral si Leo ng leksyon.",
+    "explanation": "Standard VSO: The verb (Nag-aral) must precede the subject (si Leo)."
+  },
+  {
+    "wrongSentence": "Ang dagat umalon nang malakas.",
+    "wrongWord": "Ang dagat",
+    "options": [
+      "Umalon ang dagat nang malakas.",
+      "Umalon nang malakas ang dagat.",
+      "Dagat umalon nang malakas.",
+      "Malakas umalon ang dagat."
+    ],
+    "correctOption": "Umalon ang dagat nang malakas.",
+    "explanation": "Moves the verb (Umalon) to the front to follow standard Filipino syntax."
+  },
+  {
+    "wrongSentence": "Basura tinapon ni Jun.",
+    "wrongWord": "Basura",
+    "options": [
+      "Tinapon ni Jun ang basura.",
+      "Tinapon ang basura ni Jun.",
+      "Jun tinapon ang basura.",
+      "Tinapon basura ni Jun."
+    ],
+    "correctOption": "Tinapon ni Jun ang basura.",
+    "explanation": "VSO order: The verb (Tinapon) leads the agent (ni Jun) and subject (ang basura)."
+  },
+  {
+    "wrongSentence": "Si lolo nagkwento ng karanasan.",
+    "wrongWord": "Si lolo",
+    "options": [
+      "Nagkwento si lolo ng karanasan.",
+      "Nagkwento ng karanasan si lolo.",
+      "Lolo nagkwento ng karanasan.",
+      "Karanasan nagkwento si lolo."
+    ],
+    "correctOption": "Nagkwento si lolo ng karanasan.",
+    "explanation": "Standard syntax: The verb (Nagkwento) leads the actor (si lolo)."
+  },
+  {
+    "wrongSentence": "Ang apoy nagliyab sa kusina.",
+    "wrongWord": "Ang apoy",
+    "options": [
+      "Nagliyab ang apoy sa kusina.",
+      "Nagliyab sa kusina ang apoy.",
+      "Apoy nagliyab sa kusina.",
+      "Kusina nagliyab apoy."
+    ],
+    "correctOption": "Nagliyab ang apoy sa kusina.",
+    "explanation": "Predicate-initial order: The verb (Nagliyab) must lead the sentence."
+  },
+  {
+    "wrongSentence": "Tubig ininom ni Bebot.",
+    "wrongWord": "Tubig",
+    "options": [
+      "Ininom ni Bebot ang tubig.",
+      "Ininom ang tubig ni Bebot.",
+      "Bebot ininom ang tubig.",
+      "Tubig ni Bebot ininom."
+    ],
+    "correctOption": "Ininom ni Bebot ang tubig.",
+    "explanation": "VSO order: The verb (Ininom) precedes the agent (ni Bebot) and the subject (ang tubig)."
+  },
+  {
+    "wrongSentence": "Si lola nagtanim ng rosas.",
+    "wrongWord": "Si lola",
+    "options": [
+      "Nagtanim si lola ng rosas.",
+      "Nagtanim ng rosas si lola.",
+      "Lola nagtanim ng rosas.",
+      "Rosas nagtanim si lola."
+    ],
+    "correctOption": "Nagtanim si lola ng rosas.",
+    "explanation": "Reorders 'Nagtanim' to the front to comply with standard Filipino word order."
   }
 ]
