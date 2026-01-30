@@ -412,27 +412,6 @@
         #toast-container { top: 70px; right: 10px; left: 10px; max-width: none; }
         .container { width: 98%; margin: 15px auto; }
         .section-title { font-size: 1.5rem; }
-
-        @media (max-width: 768px) {
-    .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%; /* Completely off-screen to the left */
-        width: 250px;
-        height: 100vh;
-        background: var(--maroon, #7a0c0c);
-        flex-direction: column;
-        padding-top: 80px;
-        transition: left 0.4s ease-in-out; /* The sliding effect */
-        z-index: 1001;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-    }
-
-    /* When JS adds the .show class, it slides to 0 */
-    .nav-links.show {
-        left: 0;
-    }
-}
     }
 </style>
 </head>
@@ -597,9 +576,10 @@ let classToDelete = null;
 let currentClassId = null;
 let currentChart = null;
 
-// ---------------- NAVIGATION LOGIC (SYNCED WITH HTML) ----------------
+// ---------------- STANDARDIZED NAVIGATION LOGIC (UPDATED) ----------------
 const burgerBtn = document.getElementById("burgerBtn");
-const navLinks = document.getElementById("navLinks"); // Matches your <ul id="navLinks">
+// This ensures it finds the menu whether you used id="navLinks" or class="mobile-nav"
+const navLinks = document.getElementById("navLinks") || document.querySelector(".mobile-nav");
 const settingsBtn = document.getElementById("settingsBtn");
 const dropdownMenu = document.getElementById("settingsDropdown");
 
@@ -617,17 +597,16 @@ if (settingsBtn && dropdownMenu) {
     };
 }
 
-// Global click listener to close menus when clicking outside
 document.addEventListener('click', (e) => {
-    if (settingsBtn && dropdownMenu && !settingsBtn.contains(e.target)) {
-        dropdownMenu.classList.remove("is-active");
+    if (settingsBtn && !settingsBtn.contains(e.target)) {
+        if (dropdownMenu) dropdownMenu.classList.remove("is-active");
     }
     if (burgerBtn && navLinks && !burgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
         navLinks.classList.remove("show");
     }
 });
 
-// Close mobile menu when a link inside it is clicked
+// Close mobile menu when clicking a link inside the mobile nav
 if (navLinks) {
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
@@ -636,7 +615,7 @@ if (navLinks) {
     });
 }
 
-// ---------------- THEME & TEXT LOGIC ----------------
+// ---------------- TEXT SIZE LOGIC ----------------
 const textSizeBtn = document.getElementById("textSizeBtn");
 const sizes = ["100%", "115%", "130%"];
 let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
@@ -657,6 +636,7 @@ if (textSizeBtn) {
 }
 updateTextSize();
 
+// ---------------- DARK MODE LOGIC ----------------
 const darkModeBtn = document.getElementById("darkModeBtn");
 const themeOverlay = document.getElementById("theme-overlay");
 
@@ -683,6 +663,8 @@ if (darkModeBtn) {
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
     if (darkModeBtn) darkModeBtn.textContent = "☀️ Light Mode";
+} else {
+    if (darkModeBtn) darkModeBtn.textContent = "🌙 Dark Mode";
 }
 
 // ---------------- LOGOUT LOGIC ----------------
@@ -707,20 +689,32 @@ if (confirmLogout) {
     };
 }
 
-// ---------------- TOAST UTILITY ----------------
+// ---------------- TOAST FUNCTION ----------------
 function showToast(message, type = "info") {
     let container = document.getElementById("toast-container");
     if (!container) {
         container = document.createElement("div");
         container.id = "toast-container";
-        container.className = "toast-container-style";
+        container.style.position = "fixed";
+        container.style.top = "80px";
+        container.style.right = "20px";
+        container.style.zIndex = "9999";
+        container.style.maxWidth = "300px";
         document.body.appendChild(container);
     }
     
     const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.textContent = message;
-    toast.style.backgroundColor = type === "success" ? "#28a745" : "#dc3545";
+    toast.style.padding = "12px 16px";
+    toast.style.marginBottom = "10px";
+    toast.style.borderRadius = "8px";
+    toast.style.color = "white";
+    toast.style.backgroundColor = type === "success" ? "#28a745" : (type === "warning" ? "#ffc107" : "#dc3545");
+    toast.style.borderLeft = "5px solid var(--gold)";
+    toast.style.fontSize = "0.9rem";
+    toast.style.animation = "slideIn 0.4s forwards";
+    
     container.appendChild(toast);
     
     setTimeout(() => {
@@ -729,24 +723,143 @@ function showToast(message, type = "info") {
     }, 4000);
 }
 
-// Inject Required Styles for Mobile Nav & Toasts
 const style = document.createElement('style');
 style.textContent = `
-    @media (max-width: 768px) {
-        #navLinks { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: #7a0c0c; z-index: 1000; }
-        #navLinks.show { display: flex; }
-    }
-    #toast-container { position: fixed; top: 80px; right: 20px; z-index: 9999; }
-    .toast { padding: 12px 16px; margin-bottom: 10px; border-radius: 8px; color: white; animation: slideIn 0.4s forwards; }
-    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    @keyframes fadeOut { to { transform: translateX(100%); opacity: 0; } }
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeOut {
+    to { transform: translateX(100%); opacity: 0; }
+}
 `;
 document.head.appendChild(style);
 
-// ---------------- DATA OPERATIONS ----------------
-// (Firebase Loaders, removeClass, editStudent, deleteStudent logic follows)
-// Note: Keeping your existing functional logic for database operations
+// ---------------- REMOVE CLASS LOGIC ----------------
+const removeClassModal = document.getElementById("removeClassModal");
+const cancelRemoveClass = document.getElementById("cancelRemoveClass");
+const confirmRemoveClass = document.getElementById("confirmRemoveClass");
+const targetClassNameSpan = document.getElementById("targetClassName");
 
+if (cancelRemoveClass) cancelRemoveClass.onclick = () => { removeClassModal.style.display = "none"; };
+if (confirmRemoveClass) {
+    confirmRemoveClass.onclick = async () => {
+        if (classToDelete && teacherUID) {
+            try {
+                await deleteDoc(doc(db, "teacher_accounts", teacherUID, "classes", classToDelete));
+                const studentsSnap = await getDocs(collection(db, "students"));
+                const deletePromises = [];
+                studentsSnap.forEach(studentDoc => {
+                    const data = studentDoc.data();
+                    if (data.classId === classToDelete) {
+                        deletePromises.push(deleteDoc(doc(db, "students", studentDoc.id)));
+                    }
+                });
+                await Promise.all(deletePromises);
+                removeClassModal.style.display = "none";
+                loadClasses();
+                showToast("Class and associated students removed successfully", "success");
+            } catch (err) {
+                console.error(err);
+                showToast("Error removing class: " + err.message, "error");
+            }
+        }
+    };
+}
+
+// ---------------- EDIT STUDENT LOGIC ----------------
+const editStudentModal = document.getElementById("editStudentModal");
+const cancelEdit = document.getElementById("cancelEdit");
+const editStudentForm = document.getElementById("editStudentForm");
+const editStudentClassSelect = document.getElementById("editStudentClass");
+
+window.editStudent = function(studentId, studentName, studentEmail, classId) {
+    sessionStorage.setItem('editStudentId', studentId);
+    sessionStorage.setItem('editStudentName', studentName);
+    sessionStorage.setItem('editStudentEmail', studentEmail);
+    sessionStorage.setItem('editStudentClass', classId);
+    
+    document.getElementById('editStudentName').value = studentName;
+    document.getElementById('editStudentEmail').value = studentEmail;
+    
+    if (editStudentClassSelect) {
+        editStudentClassSelect.innerHTML = '<option value="">Select Class</option>';
+        getDocs(collection(db, "teacher_accounts", teacherUID, "classes"))
+            .then(snapshot => {
+                snapshot.forEach(doc => {
+                    const option = document.createElement('option');
+                    option.value = doc.id;
+                    option.textContent = doc.id;
+                    if (doc.id === classId) option.selected = true;
+                    editStudentClassSelect.appendChild(option);
+                });
+            })
+            .catch(err => console.error("Error loading classes:", err));
+    }
+    editStudentModal.style.display = 'flex';
+};
+
+if (cancelEdit) {
+    cancelEdit.onclick = function() {
+        editStudentModal.style.display = 'none';
+        sessionStorage.clear();
+    };
+}
+
+if (editStudentForm) {
+    editStudentForm.onsubmit = async function(e) {
+        e.preventDefault();
+        const studentId = sessionStorage.getItem('editStudentId');
+        const newName = document.getElementById('editStudentName').value;
+        const newEmail = document.getElementById('editStudentEmail').value;
+        const newClassId = document.getElementById('editStudentClass').value;
+        
+        try {
+            await updateDoc(doc(db, "students", studentId), {
+                name: newName, email: newEmail, classId: newClassId, updatedAt: serverTimestamp()
+            });
+            showToast("Student updated successfully", "success");
+            editStudentModal.style.display = 'none';
+            if (currentClassId) openDashboard(currentClassId);
+        } catch (error) {
+            showToast("Error updating student", "error");
+        }
+    };
+}
+
+// ---------------- DELETE STUDENT LOGIC ----------------
+const removeModal = document.getElementById("removeStudentModal");
+const cancelRemove = document.getElementById("cancelRemove");
+const confirmRemove = document.getElementById("confirmRemove");
+const targetNameSpan = document.getElementById("targetStudentName");
+
+window.deleteStudent = function(studentId, studentName) {
+    studentToDelete = studentId;
+    if (targetNameSpan) targetNameSpan.textContent = studentName;
+    if (removeModal) removeModal.style.display = "flex";
+};
+
+if (cancelRemove) cancelRemove.onclick = () => { removeModal.style.display = "none"; };
+if (confirmRemove) {
+    confirmRemove.onclick = async () => {
+        if (studentToDelete) {
+            try {
+                await deleteDoc(doc(db, "students", studentToDelete));
+                const assessmentsRef = collection(db, "students", studentToDelete, "assessments");
+                const assessmentsSnap = await getDocs(assessmentsRef);
+                const deletePromises = assessmentsSnap.docs.map(doc => deleteDoc(doc.ref));
+                await Promise.all(deletePromises);
+                removeModal.style.display = "none";
+                showToast("Student removed successfully", "success");
+                if (currentClassId) openDashboard(currentClassId);
+            } catch (err) {
+                showToast("Error removing student", "error");
+            }
+        }
+    };
+}
+
+// ---------------- AUTH + ROLE GUARD ----------------
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         window.location.href = "../index.html";
@@ -762,6 +875,7 @@ onAuthStateChanged(auth, async (user) => {
     loadClasses();
 });
 
+// ---------------- FIREBASE LOADERS ----------------
 async function loadClasses() {
     const grid = document.getElementById('classGrid');
     if (!grid) return;
@@ -769,7 +883,7 @@ async function loadClasses() {
     try {
         const classesSnap = await getDocs(collection(db, "teacher_accounts", teacherUID, "classes"));
         if (classesSnap.empty) {
-            grid.innerHTML = '<p style="text-align: center; color: #666;">No classes found.</p>';
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No classes found.</p>';
             return;
         }
         classesSnap.forEach(classDoc => {
@@ -786,9 +900,7 @@ async function loadClasses() {
             delBtn.onclick = (e) => {
                 e.stopPropagation();
                 classToDelete = classId;
-                const targetClassSpan = document.getElementById("targetClassName");
-                if (targetClassSpan) targetClassSpan.textContent = classId;
-                const removeClassModal = document.getElementById("removeClassModal");
+                if (targetClassNameSpan) targetClassNameSpan.textContent = classId;
                 if (removeClassModal) removeClassModal.style.display = "flex";
             };
             wrapper.appendChild(card);
@@ -801,42 +913,175 @@ async function loadClasses() {
 window.openDashboard = async function(classId) {
     currentClassId = classId;
     document.querySelectorAll('.nav-content').forEach(el => el.classList.add('hidden'));
-    document.getElementById('dashboardView').classList.remove('hidden');
-    document.getElementById('currentClassName').textContent = "Klase: " + classId;
-    
-    const studentListDiv = document.getElementById('studentList');
-    studentListDiv.innerHTML = 'Loading...';
+    const dashView = document.getElementById('dashboardView');
+    if (dashView) dashView.classList.remove('hidden');
+    const classNameHeader = document.getElementById('currentClassName');
+    if (classNameHeader) classNameHeader.textContent = "Klase: " + classId;
 
-    const studentsSnap = await getDocs(collection(db, "students"));
+    const studentListDiv = document.getElementById('studentList');
+    if (!studentListDiv) return;
     studentListDiv.innerHTML = '';
-    studentsSnap.forEach(studentDoc => {
-        const data = studentDoc.data();
-        if (data.classId !== classId) return;
+
+    try {
+        const studentsSnap = await getDocs(collection(db, "students"));
+        let hasStudents = false;
+        studentsSnap.forEach(studentDoc => {
+            const data = studentDoc.data();
+            if (data.classId !== classId) return;
+            hasStudents = true;
+            const studentName = data.name || studentDoc.id;
+            const studentID = studentDoc.id;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'student-item-wrapper';
+            const btn = document.createElement('button');
+            btn.className = 'student-btn';
+            btn.id = "student-btn-" + studentID;
+            btn.onclick = (e) => showAnalytics(studentID, studentName, e);
+            const dot = document.createElement('span');
+            dot.className = 'status-dot ' + ((data.status === "online") ? 'status-online' : 'status-offline');
+            dot.id = "status-dot-" + studentID;
+            btn.appendChild(dot);
+            btn.appendChild(document.createTextNode(studentName));
+
+            const editBtn = document.createElement('button');
+            editBtn.className = 'edit-btn';
+            editBtn.innerHTML = '✏️';
+            editBtn.onclick = (e) => {
+                e.stopPropagation();
+                editStudent(studentID, studentName, data.email, data.classId);
+            };
+
+            const delBtn = document.createElement('button');
+            delBtn.className = 'delete-btn';
+            delBtn.innerHTML = '🗑️';
+            delBtn.onclick = (e) => {
+                e.stopPropagation();
+                deleteStudent(studentID, studentName);
+            };
+
+            wrapper.appendChild(btn);
+            wrapper.appendChild(editBtn);
+            wrapper.appendChild(delBtn);
+            studentListDiv.appendChild(wrapper);
+
+            onSnapshot(doc(db, "students", studentID), (snap) => {
+                const statusDot = document.getElementById("status-dot-" + studentID);
+                if (statusDot) {
+                    const status = snap.data()?.status || "offline";
+                    statusDot.className = "status-dot " + (status === "online" ? "status-online" : "status-offline");
+                }
+            });
+        });
+    } catch (err) { console.error(err); }
+}
+
+window.showAnalytics = async function(studentID, studentName, event) {
+    document.querySelectorAll('.student-btn').forEach(b => b.classList.remove('active'));
+    const targetBtn = event.target.closest('.student-btn');
+    if (targetBtn) targetBtn.classList.add('active');
+
+    const area = document.getElementById('analyticsArea');
+    if (!area) return;
+    area.innerHTML = `<p class="analytics-placeholder">Loading...</p>`;
+
+    try {
+        const assessmentsRef = collection(db, "students", studentID, "assessments");
+        const snapshot = await getDocs(assessmentsRef);
+        if (snapshot.empty) {
+            area.innerHTML = `<p class="analytics-placeholder">No records found.</p>`;
+            return;
+        }
+
+        const scoresMap = {};
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const quizType = data.quizType || doc.id;
+            const score = data.score ?? 0;
+            const total = data.total ?? 1;
+            if (!scoresMap[quizType] || score > scoresMap[quizType].score) {
+                scoresMap[quizType] = { score, total };
+            }
+        });
+
+        const labels = Object.keys(scoresMap);
+        const percentages = labels.map(l => Math.round((scoresMap[l].score / scoresMap[l].total) * 100));
+
+        if (currentChart) currentChart.destroy();
+
+        area.innerHTML = `
+            <div style="width: 100%; height: 250px; position: relative;"><canvas id="studentScoreChart"></canvas></div>
+            <div class="feedback-section" id="feedbackContainer">
+                <h3 style="margin-bottom:15px; font-size:1rem; color: var(--maroon);">Performance Insight</h3>
+            </div>
+        `;
         
-        const wrapper = document.createElement('div');
-        wrapper.className = 'student-item-wrapper';
-        const btn = document.createElement('button');
-        btn.className = 'student-btn';
-        btn.textContent = data.name || studentDoc.id;
-        btn.onclick = (e) => showAnalytics(studentDoc.id, btn.textContent, e);
-        
-        wrapper.appendChild(btn);
-        studentListDiv.appendChild(wrapper);
+        renderStudentChart(labels, percentages);
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        resetViewTracker(); 
+        for (const [quiz, val] of Object.entries(scoresMap)) {
+            const pct = Math.round((val.score / val.total) * 100);
+            const div = document.createElement('div');
+            div.className = 'feedback-item';
+            div.innerHTML = `<strong>${quiz}:</strong> ${generateFeedback(quiz, pct)}`;
+            feedbackContainer.appendChild(div);
+        }
+    } catch (err) { console.error(err); }
+};
+
+function renderStudentChart(labels, scores) {
+    const isDark = document.body.classList.contains("dark-mode");
+    const canvas = document.getElementById("studentScoreChart");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const isMobile = window.innerWidth < 768;
+    const fontSize = isMobile ? 10 : 12;
+    
+    currentChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                label: 'Score %',
+                data: scores,
+                backgroundColor: ["#7a0c0c", "#d4af37", "#5c0808"],
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: isDark ? '#444' : '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { 
+                y: { beginAtZero: true, min: 0, max: 100, ticks: { color: isDark ? '#fff' : '#666', callback: v => v + "%" } },
+                x: { ticks: { color: isDark ? '#fff' : '#666', font: { size: fontSize } } }
+            }
+        }
     });
 }
 
 window.goBack = function() {
-    document.getElementById('classSelection').classList.remove('hidden');
-    document.getElementById('dashboardView').classList.add('hidden');
+    if (currentChart) { currentChart.destroy(); currentChart = null; }
+    const classSel = document.getElementById('classSelection');
+    const dashView = document.getElementById('dashboardView');
+    if (classSel) classSel.classList.remove('hidden');
+    if (dashView) dashView.classList.add('hidden');
 }
 
-// Modal closing logic
 window.onclick = (event) => {
     if (event.target.classList.contains('modal-overlay')) {
         event.target.style.display = 'none';
+        sessionStorage.clear();
     }
 };
 
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { if (currentChart) currentChart.resize(); }, 250);
+});
 </script>
 </body>
 </html>
