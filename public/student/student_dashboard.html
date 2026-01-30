@@ -18,6 +18,7 @@
     --bg: #f8f9fa;
     --card-bg: #fff;
     --nav-text: #333;
+    --white: #ffffff;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --danger: #d9534f;
     --success: #28a745;
@@ -59,26 +60,26 @@
   }
   .drip-light { background-color: #fdfdfd !important; }
 
-  /* ===== STANDARDIZED NAVIGATION ===== */
+  /* ===== STANDARDIZED NAVIGATION (UPDATED TO MATCH TEACHER PANEL) ===== */
   nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 0 5%;
     height: 80px;
-    background-color: var(--card-bg);
+    background-color: var(--maroon);
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
-    border-bottom: 3px solid var(--maroon);
   }
 
   nav .logo {
     font-size: 1.8rem;
     font-weight: 800;
     text-decoration: none;
-    color: var(--maroon);
+    color: var(--white);
+    margin-right: 40px;
   }
   nav .logo span { color: var(--gold); }
 
@@ -92,15 +93,17 @@
 
   .nav-links li a {
     text-decoration: none;
-    color: var(--nav-text);
+    color: var(--white);
     font-weight: 500;
     transition: color 0.3s;
   }
+  .nav-links li a:hover { color: var(--gold); }
 
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .nav-actions { 
+    margin-left: auto; 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
   }
 
   /* ===== BURGER MENU BUTTON ===== */
@@ -113,47 +116,31 @@
     border: none;
     padding: 10px;
     z-index: 1002;
+    margin-right: 15px;
   }
   .burger-menu span {
     width: 25px;
     height: 3px;
-    background-color: var(--maroon);
+    background-color: var(--white);
     border-radius: 2px;
     transition: 0.3s;
   }
 
-  /* ===== SETTINGS DROPDOWN ===== */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  #settingsBtn {
-    padding: 10px 20px;
-    border-radius: 25px;
-    background-color: var(--maroon);
-    color: white;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
-  }
-
+  /* ===== SETTINGS DROPDOWN (UPDATED) ===== */
   .dropdown-content {
     display: none;
     position: absolute;
     right: 0;
     top: 100%;
     background-color: white;
-    min-width: 220px;
-    margin-top: 10px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    min-width: 200px;
+    margin-top: 15px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
     border-radius: 12px;
-    z-index: 1000;
+    z-index: 9999;
     overflow: hidden;
+    border: 1px solid #eee;
   }
-  .dropdown:hover .dropdown-content { display: block; }
   .dropdown-content.is-active { display: block; }
   .dropdown-content button {
     width: 100%;
@@ -162,7 +149,6 @@
     border: none;
     background: none;
     font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -170,9 +156,46 @@
     transition: background 0.2s;
     color: #333;
   }
-  .dropdown-content button:hover { background-color: #f1f1f1; }
+  .dropdown-content button:hover { background-color: #f8f9fa; }
   #logoutBtn { color: var(--danger) !important; font-weight: 700; }
   #changePasswordBtn { color: var(--maroon) !important; }
+
+  /* Mobile Side Drawer (NEW - Matches Teacher Panel) */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 100px 30px 30px;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+    transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1001;
+    margin: 0;
+    list-style: none;
+  }
+  .mobile-menu.show { left: 0; }
+  .mobile-menu li a { 
+    display: block; 
+    padding: 15px 0; 
+    text-decoration: none; 
+    color: var(--nav-text); 
+    font-weight: 500; 
+  }
+  .mobile-menu button { 
+    width: 100%; 
+    padding: 12px; 
+    margin-top: 10px; 
+    text-align: left;
+    background: #f1f1f1; 
+    border: none; 
+    border-radius: 8px; 
+    font-family: inherit; 
+    cursor: pointer;
+  }
 
   /* ===== DARK MODE STYLES ===== */
   body.dark-mode { 
@@ -182,16 +205,19 @@
     --card-bg: #1e1e1e;
     --nav-text: #ffffff;
   }
-  body.dark-mode nav { background-color: #202020; }
-  body.dark-mode nav .logo { color: #ffffff; }
-  body.dark-mode .nav-links li a { color: #ffffff; }
+  
+  body.dark-mode nav { background-color: #202020; border-bottom-color: var(--gold); }
+  body.dark-mode nav .logo { color: var(--white); }
+  body.dark-mode .nav-links li a { color: var(--white); }
   body.dark-mode .dropdown-content { 
     background-color: #242424; 
     border: 1px solid #333; 
   }
   body.dark-mode .dropdown-content button { color: #e6e6e6; }
   body.dark-mode .dropdown-content button:hover { background-color: #333; }
-  body.dark-mode .burger-menu span { background-color: #ffffff; }
+  body.dark-mode .burger-menu span { background-color: var(--white); }
+  body.dark-mode .mobile-menu { background-color: #1e1e1e; }
+  body.dark-mode .mobile-menu button { background: #2a2a2a; color: white; }
   body.dark-mode .dashboard-card, 
   body.dark-mode .assessment-section, 
   body.dark-mode .grammar-cards-section {
@@ -200,64 +226,24 @@
     border: 1px solid #333;
   }
 
-  /* ===== MOBILE RESPONSIVE ===== */
+  /* ===== MOBILE RESPONSIVE (UPDATED) ===== */
   @media (max-width: 850px) {
+    .burger-menu { display: flex; }
+    .nav-links, .nav-actions { display: none; }
+    nav .logo { margin-right: auto; }
+    
     nav {
       height: 70px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
       padding: 0 20px;
     }
 
-    .burger-menu {
-      display: flex;
-      grid-column: 1;
-      justify-self: start;
-    }
-
     nav .logo {
-      grid-column: 2;
-      justify-self: center;
       font-size: 1.5rem;
     }
 
-    .nav-actions {
-      grid-column: 3;
-      justify-self: end;
+    .dashboard-container { 
+      padding: 20px 5%; 
     }
-
-    .nav-links {
-      position: fixed;
-      top: 0;
-      left: -100%;
-      width: 280px;
-      height: 100vh;
-      background-color: var(--card-bg);
-      flex-direction: column;
-      padding: 100px 30px 30px 30px;
-      gap: 25px;
-      box-shadow: 10px 0 20px rgba(0,0,0,0.1);
-      transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-      z-index: 1001;
-    }
-
-    .nav-links.show {
-      left: 0;
-    }
-
-    .nav-links li a {
-      font-size: 1.2rem;
-      display: block;
-      width: 100%;
-    }
-
-    body.dark-mode .nav-links {
-      background-color: #202020;
-      box-shadow: 10px 0 20px rgba(0,0,0,0.4);
-    }
-
-    .dashboard-container { padding: 20px 5%; }
   }
 
   /* ===== DASHBOARD & CARDS ===== */
@@ -365,6 +351,28 @@
     font-size: 0.8rem; 
   }
   body.dark-mode .footer-credit { color: #777; }
+
+  /* Settings button styling to match teacher panel */
+  #settingsBtn {
+    padding: 8px 20px;
+    border-radius: 25px;
+    background-color: var(--white);
+    color: var(--maroon);
+    font-weight: 600;
+    border: 2px solid var(--white);
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+  #settingsBtn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  body.dark-mode #settingsBtn {
+    background-color: #2a2a2a;
+    color: var(--white);
+    border-color: #444;
+  }
   </style>
 </head>
 <body>
@@ -380,7 +388,7 @@
   </svg>
 </div>
 
-<!-- STANDARDIZED NAVIGATION -->
+<!-- UPDATED NAVIGATION TO MATCH TEACHER PANEL -->
 <nav>
   <button class="burger-menu" id="burgerBtn">
     <span></span><span></span><span></span>
@@ -388,6 +396,7 @@
 
   <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
   
+  <!-- Desktop Navigation -->
   <ul class="nav-links" id="navLinks">
     <li><a href="student_dashboard.html">Home</a></li>
     <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
@@ -396,18 +405,30 @@
   </ul>
 
   <div class="nav-actions">
-    <div class="dropdown">
-      <button id="settingsBtn">Settings ⚙️</button>
-      <div class="dropdown-content" id="settingsDropdown">
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="textSizeBtn">🔍 Text Size: 100%</button>
-        <button id="changePasswordBtn">🔐 Change Password</button>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
-        <button id="logoutBtn">🚪 Logout</button>
-      </div>
+    <button id="settingsBtn">Settings ⚙️</button>
+    <div class="dropdown-content" id="settingsDropdown">
+      <button id="darkModeBtn">🌙 Dark Mode</button>
+      <button id="textSizeBtn">🔍 Text Size: 100%</button>
+      <button id="changePasswordBtn">🔐 Change Password</button>
+      <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+      <button id="logoutBtn">🚪 Logout</button>
     </div>
   </div>
 </nav>
+
+<!-- Mobile Menu (NEW - Matches Teacher Panel) -->
+<ul class="mobile-menu" id="mobileMenu">
+  <li><a href="student_dashboard.html">Home</a></li>
+  <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <div style="margin-top:20px; border-top:1px solid #eee; padding-top:20px;">
+    <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+    <button id="mobileTextSizeBtn">🔍 Text Size: 100%</button>
+    <button id="mobileChangePasswordBtn">🔐 Change Password</button>
+    <button id="mobileLogoutBtn" style="color:var(--danger);">🚪 Logout</button>
+  </div>
+</ul>
 
 <!-- LOGOUT MODAL -->
 <div id="logoutModal" class="modal-overlay">
@@ -536,33 +557,37 @@ const classId     = sessionStorage.getItem("classId");
 document.getElementById("studentName").textContent = studentName;
 document.getElementById("classId").textContent = classId;
 
-/* ===================== NAVIGATION LOGIC ===================== */
+/* ===================== NAVIGATION LOGIC (UPDATED) ===================== */
 const burgerBtn = document.getElementById("burgerBtn");
-const navLinks = document.getElementById("navLinks");
+const mobileMenu = document.getElementById("mobileMenu");
 const settingsBtn = document.getElementById("settingsBtn");
 const dropdownMenu = document.getElementById("settingsDropdown");
 
+// Toggle Mobile Menu (Matches Teacher Panel)
 burgerBtn.onclick = (e) => {
     e.stopPropagation();
-    navLinks.classList.toggle("show");
+    mobileMenu.classList.toggle("show");
 };
 
+// Toggle Settings Dropdown
 settingsBtn.onclick = (e) => {
     e.stopPropagation();
     dropdownMenu.classList.toggle("is-active");
 };
 
+// Close menus on outside click
 document.addEventListener('click', (event) => {
     if (!settingsBtn.contains(event.target)) {
         dropdownMenu.classList.remove("is-active");
     }
-    if (!burgerBtn.contains(event.target) && !navLinks.contains(event.target)) {
-        navLinks.classList.remove("show");
+    if (!burgerBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+        mobileMenu.classList.remove("show");
     }
 });
 
 /* ===================== TEXT SIZE LOGIC ===================== */
 const textSizeBtn = document.getElementById("textSizeBtn");
+const mobileTextSizeBtn = document.getElementById("mobileTextSizeBtn");
 const sizes = ["100%", "115%", "130%"];
 let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
 if(currentSizeIndex === -1) currentSizeIndex = 0;
@@ -571,27 +596,40 @@ function updateTextSize() {
   const newSize = sizes[currentSizeIndex];
   document.documentElement.style.setProperty('--text-scale', newSize);
   textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+  mobileTextSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
   localStorage.setItem("textSize", newSize);
 }
 
+// Desktop text size button
 textSizeBtn.addEventListener('click', (e) => {
   e.stopPropagation();
   currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
   updateTextSize();
 });
+
+// Mobile text size button
+mobileTextSizeBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+  updateTextSize();
+  mobileMenu.classList.remove("show");
+});
+
 updateTextSize();
 
 /* ===================== THEME SWITCHER ===================== */
 const darkModeBtn = document.getElementById("darkModeBtn");
+const mobileDarkModeBtn = document.getElementById("mobileDarkModeBtn");
 const dripContainer = document.getElementById("drip-container");
 const dripLayer = document.getElementById("dripLayer");
 
 function updateThemeText(isDark) {
-    darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+    const text = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+    darkModeBtn.textContent = text;
+    mobileDarkModeBtn.textContent = text;
 }
 
-darkModeBtn.onclick = (e) => {
-  e.stopPropagation();
+function toggleTheme() {
   const isDark = document.body.classList.contains("dark-mode");
   if (isDark) dripLayer.classList.add("drip-light");
   else dripLayer.classList.remove("drip-light");
@@ -606,6 +644,20 @@ darkModeBtn.onclick = (e) => {
   }, 350);
 
   setTimeout(() => { dripContainer.classList.remove("active"); }, 700);
+}
+
+// Desktop theme toggle
+darkModeBtn.onclick = (e) => {
+  e.stopPropagation();
+  toggleTheme();
+  dropdownMenu.classList.remove("is-active");
+};
+
+// Mobile theme toggle
+mobileDarkModeBtn.onclick = (e) => {
+  e.stopPropagation();
+  toggleTheme();
+  mobileMenu.classList.remove("show");
 };
 
 if (localStorage.getItem("theme") === "dark") {
@@ -617,14 +669,27 @@ if (localStorage.getItem("theme") === "dark") {
 
 /* ===================== CHANGE PASSWORD LOGIC ===================== */
 const changePasswordBtn = document.getElementById("changePasswordBtn");
+const mobileChangePasswordBtn = document.getElementById("mobileChangePasswordBtn");
 const changePasswordModal = document.getElementById("changePasswordModal");
 const cancelPasswordChange = document.getElementById("cancelPasswordChange");
 const changePasswordForm = document.getElementById("changePasswordForm");
 
-changePasswordBtn.onclick = (e) => {
-    e.stopPropagation();
+function openChangePasswordModal() {
     changePasswordModal.style.display = "flex";
     dropdownMenu.classList.remove("is-active");
+    mobileMenu.classList.remove("show");
+}
+
+// Desktop change password button
+changePasswordBtn.onclick = (e) => {
+    e.stopPropagation();
+    openChangePasswordModal();
+};
+
+// Mobile change password button
+mobileChangePasswordBtn.onclick = (e) => {
+    e.stopPropagation();
+    openChangePasswordModal();
 };
 
 cancelPasswordChange.onclick = () => {
@@ -767,15 +832,29 @@ document.getElementById("quizBtn").onclick = () => { window.location.href = "gra
 
 /* ===================== LOGOUT LOGIC ===================== */
 const logoutBtn = document.getElementById("logoutBtn");
+const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
 const logoutModal = document.getElementById("logoutModal");
 const cancelLogout = document.getElementById("cancelLogout");
 const confirmLogout = document.getElementById("confirmLogout");
 
-logoutBtn.addEventListener('click', (e) => { 
-    e.stopPropagation(); 
+function openLogoutModal() {
     logoutModal.style.display = "flex";
     dropdownMenu.classList.remove("is-active");
+    mobileMenu.classList.remove("show");
+}
+
+// Desktop logout button
+logoutBtn.addEventListener('click', (e) => { 
+    e.stopPropagation(); 
+    openLogoutModal();
 });
+
+// Mobile logout button
+mobileLogoutBtn.addEventListener('click', (e) => { 
+    e.stopPropagation(); 
+    openLogoutModal();
+});
+
 cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
 
 confirmLogout.onclick = async () => {

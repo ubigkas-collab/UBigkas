@@ -5,42 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | UBigkas</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css"> 
     
     <style>
         /* ===== TEXT SCALING VARIABLE ===== */
-        :root { --text-scale: 100%; }
-        body { font-size: var(--text-scale); transition: background-color 0.3s ease; margin: 0; overflow-x: hidden; font-family: 'Poppins', sans-serif; }
+        :root {
+            --text-scale: 100%;
+            --maroon: #7a0c0c;
+            --gold: #d4af37;
+            --bg: #f8f9fa;
+            --card-bg: #fff;
+            --nav-text: #333;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --danger: #d9534f;
+            --success: #28a745;
+            --warning: #ffc107;
+        }
 
-        /* ===== DRIP EFFECT STYLES ===== */
-        #drip-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
-        .drip-layer { position: absolute; top: -110%; left: 0; width: 100%; height: 120%; background-color: #181818; transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1); clip-path: url(#drip-path); }
-        #drip-container.active .drip-layer { top: 0; }
-        .drip-light { background-color: #fdfdfd !important; }
+        body {
+            font-size: var(--text-scale);
+            transition: background-color 0.3s ease;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--nav-text);
+        }
 
-        /* ===== STANDARDIZED NAVIGATION UI ===== */
+        /* ===== DRIP EFFECT ===== */
+        #drip-container { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: 10000; 
+        }
+        .drip-layer { 
+            position: absolute; 
+            top: -110%; 
+            left: 0; 
+            width: 100%; 
+            height: 120%; 
+            background-color: #181818; 
+            transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1); 
+            clip-path: url(#drip-path); 
+        }
+        #drip-container.active .drip-layer { 
+            top: 0; 
+        }
+        .drip-light { 
+            background-color: #fdfdfd !important; 
+        }
+
+        /* ===== EXACT COPY OF STUDENT DASHBOARD NAVIGATION ===== */
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 0 5%;
             height: 80px;
-            background-color: #ffffff;
+            background-color: var(--maroon);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
         }
 
-        nav .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: #7a0c0c; }
-        nav .logo span { color: #b38f00; }
+        nav .logo { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: var(--white);
+            margin-right: 40px;
+        }
+        nav .logo span { 
+            color: var(--gold); 
+        }
 
-        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
-        nav ul li a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
 
-        .nav-actions { margin-left: auto; display: flex; align-items: center; }
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links li a:hover { color: var(--gold); }
 
-        /* ===== BURGER MENU ===== */
+        .nav-actions { 
+            margin-left: auto; 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+        }
+
+        /* ===== BURGER MENU BUTTON (EXACT SAME AS STUDENT DASHBOARD) ===== */
         .burger-menu {
             display: none;
             flex-direction: column;
@@ -50,95 +117,373 @@
             border: none;
             padding: 10px;
             z-index: 1002;
+            margin-right: 15px;
         }
-        .burger-menu span { width: 25px; height: 3px; background-color: #7a0c0c; border-radius: 2px; transition: 0.3s; }
+        .burger-menu span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
 
-        /* ===== SETTINGS DROPDOWN ===== */
-        .dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
-        #settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: #7a0c0c; color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
-        .dropdown-content { display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; transition: opacity 0.3s ease, visibility 0.3s ease; }
-        
-        @media (min-width: 851px) { .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; } }
-        .dropdown-content.is-active { opacity: 1 !important; visibility: visible !important; }
-        .dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
-        #logoutBtn { color: #d9534f !important; font-weight: 700; }
+        /* ===== SETTINGS DROPDOWN (EXACT SAME AS STUDENT DASHBOARD) ===== */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 200px;
+            margin-top: 15px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            z-index: 9999;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        .dropdown-content.is-active { display: block; }
+        .dropdown-content button {
+            width: 100%;
+            padding: 12px 16px;
+            text-align: left;
+            border: none;
+            background: none;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+            color: #333;
+        }
+        .dropdown-content button:hover { background-color: #f8f9fa; }
+        #logoutBtn { color: var(--danger) !important; font-weight: 700; }
+        #changePasswordBtn { color: var(--maroon) !important; }
 
-        /* ===== DARK MODE OVERRIDES ===== */
-        body.dark-mode { background-color: #181818; color: #e6e6e6; }
-        body.dark-mode nav { background-color: #202020; }
-        body.dark-mode nav ul li a, body.dark-mode nav .logo { color: #ffffff; }
-        body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
+        /* Mobile Side Drawer (EXACT SAME AS STUDENT DASHBOARD) */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            padding: 100px 30px 30px;
+            box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+            transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1001;
+            margin: 0;
+            list-style: none;
+        }
+        .mobile-menu.show { left: 0; }
+        .mobile-menu li a { 
+            display: block; 
+            padding: 15px 0; 
+            text-decoration: none; 
+            color: var(--nav-text); 
+            font-weight: 500; 
+        }
+        .mobile-menu button { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 10px; 
+            text-align: left;
+            background: #f1f1f1; 
+            border: none; 
+            border-radius: 8px; 
+            font-family: inherit; 
+            cursor: pointer;
+        }
+
+        /* ===== DARK MODE STYLES (EXACT SAME AS STUDENT DASHBOARD) ===== */
+        body.dark-mode { 
+            background-color: #181818; 
+            color: #ffffff; 
+            --bg: #181818;
+            --card-bg: #1e1e1e;
+            --nav-text: #ffffff;
+        }
+
+        body.dark-mode nav { background-color: #202020; border-bottom-color: var(--gold); }
+        body.dark-mode nav .logo { color: var(--white); }
+        body.dark-mode .nav-links li a { color: var(--white); }
+        body.dark-mode .dropdown-content { 
+            background-color: #242424; 
+            border: 1px solid #333; 
+        }
         body.dark-mode .dropdown-content button { color: #e6e6e6; }
-        body.dark-mode .burger-menu span { background-color: #ffffff; }
-        body.dark-mode #featureDeck { background-color: #242424; color: #fff; border: 1px solid #333; }
-
-        /* ===== MOBILE RESPONSIVE ===== */
-        @media (max-width: 850px) {
-            nav { height: 70px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
-            .burger-menu { display: flex; grid-column: 1; justify-self: start; }
-            nav .logo { grid-column: 2; justify-self: center; font-size: 1.5rem; }
-            .nav-actions { grid-column: 3; justify-self: end; }
-            nav ul { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; background-color: #ffffff; flex-direction: column; padding: 100px 30px 30px; gap: 25px; box-shadow: 10px 0 20px rgba(0,0,0,0.1); transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1001; }
-            nav ul.show { left: 0; }
-            body.dark-mode nav ul { background-color: #202020; }
-            
-            .container { margin: 30px auto; padding: 0 15px; }
-            h1 { font-size: 1.8rem !important; }
-            #featureDeck { padding: 25px 20px; min-height: 320px; }
-            .carousel-btns { flex-direction: row; width: 100%; }
+        body.dark-mode .dropdown-content button:hover { background-color: #333; }
+        body.dark-mode .burger-menu span { background-color: var(--white); }
+        body.dark-mode .mobile-menu { background-color: #1e1e1e; }
+        body.dark-mode .mobile-menu button { background: #2a2a2a; color: white; }
+        body.dark-mode .container .card,
+        body.dark-mode .modal-card {
+            background-color: #242424; 
+            color: #e6e6e6; 
+            border: 1px solid #333;
         }
 
-        /* ===== CAROUSEL & CONTENT ===== */
-        .container { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center; }
-        #featureDeck { position: relative; min-height: 250px; background: #fff; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: background 0.3s ease; }
-        .feature-card { display: none; }
-        .feature-card.active { display: block; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .carousel-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
-        .btn-action { padding: 12px 25px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: transform 0.2s; }
+        /* ===== MOBILE RESPONSIVE (EXACT SAME AS STUDENT DASHBOARD) ===== */
+        @media (max-width: 850px) {
+            .burger-menu { display: flex; }
+            .nav-links, .nav-actions { display: none; }
+            nav .logo { margin-right: auto; }
+            
+            nav {
+                height: 70px;
+                padding: 0 20px;
+            }
+
+            nav .logo {
+                font-size: 1.5rem;
+            }
+
+            .container { 
+                margin: 30px auto; 
+                padding: 0 15px; 
+            }
+            h1 { 
+                font-size: 1.8rem !important; 
+            }
+            #featureDeck { 
+                padding: 25px 20px; 
+                min-height: 320px; 
+            }
+            .carousel-btns { 
+                flex-direction: row; 
+                width: 100%; 
+            }
+        }
+
+        /* ===== CAROUSEL & CONTENT (ORIGINAL - NO CHANGES) ===== */
+        .container { 
+            max-width: 900px; 
+            margin: 60px auto; 
+            padding: 0 20px; 
+            text-align: center; 
+        }
+        #featureDeck { 
+            position: relative; 
+            min-height: 250px; 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            padding: 40px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            transition: background 0.3s ease; 
+            margin-bottom: 30px;
+        }
+        .feature-card { 
+            display: none; 
+        }
+        .feature-card.active { 
+            display: block; 
+            animation: fadeIn 0.5s ease; 
+        }
+        @keyframes fadeIn { 
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            } 
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            } 
+        }
+        .carousel-btns { 
+            margin-top: 30px; 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+        }
+        .btn-action { 
+            padding: 12px 25px; 
+            border-radius: 50px; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: transform 0.2s; 
+        }
         
-        /* Modal Styles */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .modal-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 400px; }
-        body.dark-mode .modal-card { background: #242424; color: white; border: 1px solid #333; }
+        /* Modal Styles (EXACT SAME AS STUDENT DASHBOARD) */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.7); 
+            z-index: 20000; 
+            justify-content: center; 
+            align-items: center; 
+            backdrop-filter: blur(4px); 
+        }
+        .modal-card { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            width: 90%; 
+            max-width: 400px; 
+        }
+        .modal-actions { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            margin-top: 20px; 
+        }
+        .modal-btn { 
+            padding: 10px 25px; 
+            border-radius: 25px; 
+            border: none; 
+            font-weight: 600; 
+            cursor: pointer; 
+            font-family: 'Poppins', sans-serif; 
+        }
+        .modal-btn.primary { 
+            background-color: var(--danger); 
+            color: white; 
+        }
+        .modal-btn.secondary { 
+            background-color: #e9ecef; 
+            color: #333; 
+        }
+        body.dark-mode .modal-btn.secondary { 
+            background-color: #333; 
+            color: #fff; 
+        }
+
+        .footer-credit { 
+            text-align: center; 
+            padding: 20px; 
+            color: #888; 
+            font-size: 0.8rem; 
+        }
+        body.dark-mode .footer-credit { 
+            color: #777; 
+        }
+
+        /* Settings button styling to match student dashboard (EXACT SAME) */
+        #settingsBtn {
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: var(--white);
+            color: var(--maroon);
+            font-weight: 600;
+            border: 2px solid var(--white);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        #settingsBtn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        body.dark-mode #settingsBtn {
+            background-color: #2a2a2a;
+            color: var(--white);
+            border-color: #444;
+        }
     </style>
 </head>
 <body>
 
 <div id="drip-container">
     <div id="dripLayer" class="drip-layer"></div>
-    <svg width="0" height="0"><defs><clipPath id="drip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path></clipPath></defs></svg>
+    <svg width="0" height="0">
+        <defs>
+            <clipPath id="drip-path" clipPathUnits="objectBoundingBox">
+                <path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path>
+            </clipPath>
+        </defs>
+    </svg>
 </div>
 
+<!-- EXACT COPY OF STUDENT DASHBOARD NAVIGATION -->
 <nav>
-    <button class="burger-menu" id="burgerBtn">
-        <span></span><span></span><span></span>
-    </button>
+  <button class="burger-menu" id="burgerBtn">
+    <span></span><span></span><span></span>
+  </button>
 
-    <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
-    
-    <ul id="navLinks">
-        <li><a href="student_dashboard.html">Home</a></li>
-        <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
+  <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
+  
+  <!-- Desktop Navigation -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="student_dashboard.html">Home</a></li>
+    <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+    <li><a href="about.html" style="color: var(--gold);">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 
-    <div class="nav-actions">
-        <div class="dropdown">
-            <button id="settingsBtn">Settings ⚙️</button>
-            <div class="dropdown-content" id="settingsDropdown">
-                <button id="darkModeBtn">🌙 Dark Mode</button>
-                <button id="textSizeBtn">🔍 Text Size: 100%</button>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
-                <button id="logoutBtn">🚪 Logout</button>
-            </div>
-        </div>
+  <div class="nav-actions">
+    <button id="settingsBtn">Settings ⚙️</button>
+    <div class="dropdown-content" id="settingsDropdown">
+      <button id="darkModeBtn">🌙 Dark Mode</button>
+      <button id="textSizeBtn">🔍 Text Size: 100%</button>
+      <button id="changePasswordBtn">🔐 Change Password</button>
+      <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+      <button id="logoutBtn">🚪 Logout</button>
     </div>
+  </div>
 </nav>
 
+<!-- Mobile Menu (EXACT SAME AS STUDENT DASHBOARD) -->
+<ul class="mobile-menu" id="mobileMenu">
+  <li><a href="student_dashboard.html">Home</a></li>
+  <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+  <li><a href="about.html" style="color: var(--gold);">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <div style="margin-top:20px; border-top:1px solid #eee; padding-top:20px;">
+    <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+    <button id="mobileTextSizeBtn">🔍 Text Size: 100%</button>
+    <button id="mobileChangePasswordBtn">🔐 Change Password</button>
+    <button id="mobileLogoutBtn" style="color:var(--danger);">🚪 Logout</button>
+  </div>
+</ul>
+
+<!-- LOGOUT MODAL (EXACT SAME AS STUDENT DASHBOARD) -->
+<div id="logoutModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3>Logout Confirmation</h3>
+    <p>Are you sure you want to logout?</p>
+    <div class="modal-actions">
+      <button id="cancelLogout" class="modal-btn secondary">Cancel</button>
+      <button id="confirmLogout" class="modal-btn primary">Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGE PASSWORD MODAL (EXACT SAME AS STUDENT DASHBOARD) -->
+<div id="changePasswordModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3>Change Password</h3>
+    <form id="changePasswordForm">
+      <div class="form-group">
+        <label>Current Password</label>
+        <input type="password" id="currentPassword" required>
+      </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="newPassword" required minlength="6">
+      </div>
+      <div class="form-group">
+        <label>Confirm New Password</label>
+        <input type="password" id="confirmPassword" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="cancelPasswordChange" class="modal-btn secondary">Cancel</button>
+        <button type="submit" class="modal-btn primary">Change Password</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ORIGINAL ABOUT PAGE CONTENT (NO CHANGES) -->
 <div class="container">
-    <h1 style="color:#7a0c0c; font-size: 2.5rem; margin-bottom: 10px;">About UBigkas</h1>
+    <h1 style="color:var(--maroon); font-size: 2.5rem; margin-bottom: 10px;">About UBigkas</h1>
     <p style="font-weight: 600; color: #555;" id="missionSub">Wika Natin, Pagyamanin sa Makabagong Panahon.</p>
     
     <div style="text-align: left; margin: 40px 0; line-height: 1.8;">
@@ -148,125 +493,297 @@
 
     <div id="featureDeck">
         <div class="feature-card active">
-            <h2 style="color:#7a0c0c">Comprehensive Assessments</h2>
+            <h2 style="color:var(--maroon)">Comprehensive Assessments</h2>
             <p>Our interactive quiz engine goes beyond simple multiple-choice questions. We offer modules covering <strong>Verb Conjugation</strong> and <strong>Noun Classification</strong>.</p>
         </div>
         <div class="feature-card">
-            <h2 style="color:#7a0c0c">Grammar & Speech Tools</h2>
+            <h2 style="color:var(--maroon)">Grammar & Speech Tools</h2>
             <p>Refine your language skills with our <strong>Grammar Corrector</strong> and integrated <strong>Speech-to-Text</strong> features.</p>
         </div>
         <div class="feature-card">
-            <h2 style="color:#7a0c0c">Personalized Learning Paths</h2>
+            <h2 style="color:var(--maroon)">Personalized Learning Paths</h2>
             <p>UBigkas tracks your performance over time, generating a <strong>Performance Dashboard</strong> that highlights your strengths.</p>
         </div>
     </div>
 
     <div class="carousel-btns">
         <button id="prevBtn" class="btn-action">← Previous</button>
-        <button id="nextBtn" class="btn-action" style="background:#7a0c0c; color:white;">Learn More →</button>
+        <button id="nextBtn" class="btn-action" style="background:var(--maroon); color:white;">Learn More →</button>
     </div>
 </div>
 
-<div id="logoutModal" class="modal-overlay">
-    <div class="modal-card">
-        <h3>Logout Confirmation</h3>
-        <p>Are you sure you want to logout?</p>
-        <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
-            <button id="cancelLogout" class="btn-action">Cancel</button>
-            <button id="confirmLogout" class="btn-action" style="background:#d9534f; color:white;">Logout</button>
-        </div>
-    </div>
-</div>
+<div class="footer-credit">©2025 University of Batangas – Lipa City</div>
 
 <script type="module">
-    import { auth } from "../firebase.js";
-    import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { auth, db } from "../firebase.js";
+    import { onAuthStateChanged, signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    /* ===== NAVIGATION & DROPDOWN LOGIC ===== */
+    const studentName = sessionStorage.getItem("studentName") || "Student";
+    const studentUID  = sessionStorage.getItem("studentUID");
+    const classId     = sessionStorage.getItem("classId");
+
+    /* ===================== NAVIGATION LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
     const burgerBtn = document.getElementById("burgerBtn");
-    const navLinks = document.getElementById("navLinks");
+    const mobileMenu = document.getElementById("mobileMenu");
     const settingsBtn = document.getElementById("settingsBtn");
     const dropdownMenu = document.getElementById("settingsDropdown");
 
-    burgerBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle("show"); };
-    settingsBtn.onclick = (e) => { e.stopPropagation(); dropdownMenu.classList.toggle("is-active"); };
-
-    document.addEventListener('click', (e) => {
-        if (!settingsBtn.contains(e.target)) dropdownMenu.classList.remove("is-active");
-        if (!burgerBtn.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove("show");
-    });
-
-    /* ===== DRIP THEME SWITCHER ===== */
-    const darkModeBtn = document.getElementById("darkModeBtn");
-    const dripContainer = document.getElementById("drip-container");
-    const dripLayer = document.getElementById("dripLayer");
-
-    function updateThemeText(isDark) {
-        darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-    }
-
-    darkModeBtn.onclick = (e) => {
+    // Toggle Mobile Menu (Exact same as student dashboard)
+    burgerBtn.onclick = (e) => {
         e.stopPropagation();
-        const isDark = document.body.classList.contains("dark-mode");
-        isDark ? dripLayer.classList.add("drip-light") : dripLayer.classList.remove("drip-light");
-        dripContainer.classList.add("active");
-
-        setTimeout(() => {
-            document.body.classList.toggle("dark-mode");
-            const nowDark = document.body.classList.contains("dark-mode");
-            updateThemeText(nowDark);
-            localStorage.setItem("theme", nowDark ? "dark" : "light");
-        }, 350);
-        setTimeout(() => dripContainer.classList.remove("active"), 700);
+        mobileMenu.classList.toggle("show");
     };
 
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        updateThemeText(true);
-    }
+    // Toggle Settings Dropdown (Exact same as student dashboard)
+    settingsBtn.onclick = (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("is-active");
+    };
 
-    /* ===== CAROUSEL LOGIC ===== */
-    const cards = document.querySelectorAll('.feature-card');
-    let idx = 0;
-    document.getElementById('nextBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx + 1) % cards.length; cards[idx].classList.add('active'); };
-    document.getElementById('prevBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx - 1 + cards.length) % cards.length; cards[idx].classList.add('active'); };
+    // Close menus on outside click (Exact same as student dashboard)
+    document.addEventListener('click', (event) => {
+        if (!settingsBtn.contains(event.target)) {
+            dropdownMenu.classList.remove("is-active");
+        }
+        if (!burgerBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.remove("show");
+        }
+    });
 
-    /* ===== TEXT SIZE LOGIC ===== */
+    /* ===================== TEXT SIZE LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
     const textSizeBtn = document.getElementById("textSizeBtn");
+    const mobileTextSizeBtn = document.getElementById("mobileTextSizeBtn");
     const sizes = ["100%", "115%", "130%"];
     let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
     if(currentSizeIndex === -1) currentSizeIndex = 0;
 
     function updateTextSize() {
-        const newSize = sizes[currentSizeIndex];
-        document.documentElement.style.setProperty('--text-scale', newSize);
-        textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
-        localStorage.setItem("textSize", newSize);
+      const newSize = sizes[currentSizeIndex];
+      document.documentElement.style.setProperty('--text-scale', newSize);
+      textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+      mobileTextSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+      localStorage.setItem("textSize", newSize);
     }
 
-    textSizeBtn.onclick = (e) => { e.stopPropagation(); currentSizeIndex = (currentSizeIndex + 1) % sizes.length; updateTextSize(); };
+    // Desktop text size button
+    textSizeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+      updateTextSize();
+    });
+
+    // Mobile text size button
+    mobileTextSizeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+      updateTextSize();
+      mobileMenu.classList.remove("show");
+    });
+
     updateTextSize();
 
-    /* ===== LOGOUT LOGIC ===== */
-    const logoutBtn = document.getElementById("logoutBtn");
-    const logoutModal = document.getElementById("logoutModal");
+    /* ===================== THEME SWITCHER (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+    const darkModeBtn = document.getElementById("darkModeBtn");
+    const mobileDarkModeBtn = document.getElementById("mobileDarkModeBtn");
+    const dripContainer = document.getElementById("drip-container");
+    const dripLayer = document.getElementById("dripLayer");
 
-    logoutBtn.onclick = (e) => { e.stopPropagation(); logoutModal.style.display = "flex"; };
-    document.getElementById("cancelLogout").onclick = () => logoutModal.style.display = "none";
-    
-    document.getElementById("confirmLogout").onclick = async () => {
-        dripContainer.classList.add("active");
-        const isDark = document.body.classList.contains("dark-mode");
-        isDark ? dripLayer.classList.remove("drip-light") : dripLayer.classList.add("drip-light");
-        
-        setTimeout(async () => {
-            await signOut(auth);
-            sessionStorage.clear();
-            window.location.href = "../index.html";
-        }, 700);
+    function updateThemeText(isDark) {
+        const text = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        darkModeBtn.textContent = text;
+        mobileDarkModeBtn.textContent = text;
+    }
+
+    function toggleTheme() {
+      const isDark = document.body.classList.contains("dark-mode");
+      if (isDark) dripLayer.classList.add("drip-light");
+      else dripLayer.classList.remove("drip-light");
+
+      dripContainer.classList.add("active");
+
+      setTimeout(() => {
+        document.body.classList.toggle("dark-mode");
+        const nowDark = document.body.classList.contains("dark-mode");
+        updateThemeText(nowDark);
+        localStorage.setItem("theme", nowDark ? "dark" : "light");
+      }, 350);
+
+      setTimeout(() => { dripContainer.classList.remove("active"); }, 700);
+    }
+
+    // Desktop theme toggle
+    darkModeBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleTheme();
+      dropdownMenu.classList.remove("is-active");
     };
 
-    window.onclick = (event) => { if (event.target == logoutModal) logoutModal.style.display = "none"; };
+    // Mobile theme toggle
+    mobileDarkModeBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleTheme();
+      mobileMenu.classList.remove("show");
+    };
+
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      updateThemeText(true);
+    } else {
+      updateThemeText(false);
+    }
+
+    /* ===================== CHANGE PASSWORD LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+    const changePasswordBtn = document.getElementById("changePasswordBtn");
+    const mobileChangePasswordBtn = document.getElementById("mobileChangePasswordBtn");
+    const changePasswordModal = document.getElementById("changePasswordModal");
+    const cancelPasswordChange = document.getElementById("cancelPasswordChange");
+    const changePasswordForm = document.getElementById("changePasswordForm");
+
+    function openChangePasswordModal() {
+        changePasswordModal.style.display = "flex";
+        dropdownMenu.classList.remove("is-active");
+        mobileMenu.classList.remove("show");
+    }
+
+    // Desktop change password button
+    changePasswordBtn.onclick = (e) => {
+        e.stopPropagation();
+        openChangePasswordModal();
+    };
+
+    // Mobile change password button
+    mobileChangePasswordBtn.onclick = (e) => {
+        e.stopPropagation();
+        openChangePasswordModal();
+    };
+
+    cancelPasswordChange.onclick = () => {
+        changePasswordModal.style.display = "none";
+        changePasswordForm.reset();
+    };
+
+    changePasswordForm.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        const currentPassword = document.getElementById("currentPassword").value;
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        
+        // Validation
+        if (newPassword !== confirmPassword) {
+            alert("New passwords do not match!");
+            return;
+        }
+        
+        if (newPassword.length < 6) {
+            alert("Password must be at least 6 characters long!");
+            return;
+        }
+        
+        try {
+            const user = auth.currentUser;
+            
+            if (!user.email) {
+                alert("User email not found. Please contact support.");
+                return;
+            }
+            
+            // Re-authenticate user
+            const credential = EmailAuthProvider.credential(user.email, currentPassword);
+            await reauthenticateWithCredential(user, credential);
+            
+            // Update password
+            await updatePassword(user, newPassword);
+            
+            alert("Password changed successfully!");
+            changePasswordModal.style.display = "none";
+            changePasswordForm.reset();
+            
+        } catch (error) {
+            console.error("Password change error:", error);
+            
+            if (error.code === 'auth/wrong-password') {
+                alert("Current password is incorrect!");
+            } else if (error.code === 'auth/weak-password') {
+                alert("New password is too weak. Please use a stronger password.");
+            } else {
+                alert("Error changing password: " + error.message);
+            }
+        }
+    };
+
+    /* ===================== AUTH & STATUS (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+    async function setStudentStatus(uid, status) {
+      try {
+        const studentRef = doc(db, "students", uid);
+        await updateDoc(studentRef, { status: status, lastSeen: serverTimestamp() });
+      } catch (err) { console.error("Status update failed:", err); }
+    }
+
+    onAuthStateChanged(auth, async user => {
+      if (!user || !studentUID) { window.location.href = "../index.html"; }
+      else { await setStudentStatus(studentUID, "online"); }
+    });
+
+    /* ===================== LOGOUT LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+    const logoutBtn = document.getElementById("logoutBtn");
+    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
+    const logoutModal = document.getElementById("logoutModal");
+    const cancelLogout = document.getElementById("cancelLogout");
+    const confirmLogout = document.getElementById("confirmLogout");
+
+    function openLogoutModal() {
+        logoutModal.style.display = "flex";
+        dropdownMenu.classList.remove("is-active");
+        mobileMenu.classList.remove("show");
+    }
+
+    // Desktop logout button
+    logoutBtn.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        openLogoutModal();
+    });
+
+    // Mobile logout button
+    mobileLogoutBtn.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        openLogoutModal();
+    });
+
+    cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
+
+    confirmLogout.onclick = async () => {
+      if (studentUID) await setStudentStatus(studentUID, "offline");
+      await signOut(auth);
+      sessionStorage.clear();
+      window.location.href = "../index.html";
+    };
+
+    /* ===================== CAROUSEL LOGIC (ORIGINAL - NO CHANGES) ===== */
+    const cards = document.querySelectorAll('.feature-card');
+    let idx = 0;
+    document.getElementById('nextBtn').onclick = () => { 
+        cards[idx].classList.remove('active'); 
+        idx = (idx + 1) % cards.length; 
+        cards[idx].classList.add('active'); 
+    };
+    document.getElementById('prevBtn').onclick = () => { 
+        cards[idx].classList.remove('active'); 
+        idx = (idx - 1 + cards.length) % cards.length; 
+        cards[idx].classList.add('active'); 
+    };
+
+    /* ===================== MODAL CLOSE LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+    window.onclick = (event) => { 
+        if (event.target == logoutModal) logoutModal.style.display = "none";
+        if (event.target == changePasswordModal) {
+            changePasswordModal.style.display = "none";
+            changePasswordForm.reset();
+        }
+    };
+
+    window.addEventListener("beforeunload", () => { if (studentUID) setStudentStatus(studentUID, "offline"); });
 </script>
 </body>
 </html>

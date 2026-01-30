@@ -10,6 +10,30 @@
 <link rel="stylesheet" href="grammar_quiz.css">
 
 <style>
+/* ===== TEXT SCALING VARIABLE ===== */
+:root {
+    --text-scale: 100%;
+    --maroon: #7a0c0c;
+    --gold: #d4af37;
+    --bg: #f8f9fa;
+    --card-bg: #fff;
+    --nav-text: #333;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --danger: #d9534f;
+    --success: #28a745;
+    --warning: #ffc107;
+}
+
+body {
+    font-size: var(--text-scale);
+    transition: background-color 0.3s ease;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--nav-text);
+}
+
 /* ===== DRIP EFFECT INTEGRATION ===== */
 #drip-container {
     position: fixed;
@@ -33,7 +57,7 @@
 #drip-container.active .drip-layer {
     top: 0;
 }
-.drip-light { background-color: #f8f9fa !important; }
+.drip-light { background-color: #fdfdfd !important; }
 
 .quiz-instruction {
     font-size: 0.95rem;
@@ -42,73 +66,362 @@
     font-weight: 500;
 }
 
-/* ===== Nav & Actions ===== */
+/* ===== EXACT COPY OF STUDENT DASHBOARD NAVIGATION ===== */
 nav {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 80px;
+    background-color: var(--card-bg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+    border-bottom: 3px solid var(--maroon);
 }
+
 nav .logo {
-  font-weight: 700;
-  font-size: 22px;
-  text-decoration: none;
-  color: maroon;
-  cursor: pointer;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--maroon);
 }
-nav .logo span { color: #d4af37; }
-nav ul { list-style: none; display: flex; gap: 15px; margin-left: 20px; }
-nav ul li a { text-decoration: none; font-weight: 600; color: #000000 !important; transition: color 0.3s ease; cursor: pointer; }
-nav ul li a:hover { color: maroon !important; }
+nav .logo span { color: var(--gold); }
 
-.nav-actions { margin-left: auto; display: flex; flex-direction: row; gap: 10px; align-items: center; }
-#logoutBtn, #musicToggle, #darkModeBtn {
-  padding: 8px 20px;
-  border-radius: 25px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  transition: all 0.3s ease;
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
 }
-#logoutBtn { background-color: #d9534f; color: white; }
-#darkModeBtn { background-color: #333; color: #fff; }
-#musicToggle { background: #d4af37; color: #7a0c0c; }
 
-/* ===== Dark Mode Styles ===== */
-body.dark-mode { background-color: #181818; color: #e6e6e6; }
+.nav-links li a {
+    text-decoration: none;
+    color: var(--nav-text);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ===== BURGER MENU BUTTON ===== */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    z-index: 1002;
+}
+.burger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--maroon);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* ===== SETTINGS DROPDOWN (EXACT SAME AS STUDENT DASHBOARD) ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#settingsBtn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: var(--maroon);
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    min-width: 220px;
+    margin-top: 10px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    z-index: 1000;
+    overflow: hidden;
+}
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content.is-active { display: block; }
+.dropdown-content button {
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+    border: none;
+    background: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+    color: #333;
+}
+.dropdown-content button:hover { background-color: #f1f1f1; }
+#logoutBtn { color: var(--danger) !important; font-weight: 700; }
+#changePasswordBtn { color: var(--maroon) !important; }
+
+/* Mobile Side Drawer (EXACT SAME AS STUDENT DASHBOARD) */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 100px 30px 30px;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+    transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1001;
+    margin: 0;
+    list-style: none;
+}
+.mobile-menu.show { left: 0; }
+.mobile-menu li a { 
+    display: block; 
+    padding: 15px 0; 
+    text-decoration: none; 
+    color: var(--nav-text); 
+    font-weight: 500; 
+}
+.mobile-menu button { 
+    width: 100%; 
+    padding: 12px; 
+    margin-top: 10px; 
+    text-align: left;
+    background: #f1f1f1; 
+    border: none; 
+    border-radius: 8px; 
+    font-family: inherit; 
+    cursor: pointer;
+}
+
+/* ===== DARK MODE STYLES (EXACT SAME AS STUDENT DASHBOARD) ===== */
+body.dark-mode { 
+    background-color: #181818; 
+    color: #ffffff; 
+    --bg: #181818;
+    --card-bg: #1e1e1e;
+    --nav-text: #ffffff;
+}
 body.dark-mode nav { background-color: #202020; }
-body.dark-mode .dashboard-card, body.dark-mode .modal-content { background-color: #242424; color: #e6e6e6; border: 1px solid #333; }
-body.dark-mode nav ul li a { color: #e6e6e6 !important; }
+body.dark-mode nav .logo { color: #ffffff; }
+body.dark-mode .nav-links li a { color: #ffffff; }
+body.dark-mode .dropdown-content { 
+    background-color: #242424; 
+    border: 1px solid #333; 
+}
+body.dark-mode .dropdown-content button { color: #e6e6e6; }
+body.dark-mode .dropdown-content button:hover { background-color: #333; }
+body.dark-mode .burger-menu span { background-color: #ffffff; }
+body.dark-mode .mobile-menu { background-color: #1e1e1e; }
+body.dark-mode .mobile-menu button { background: #2a2a2a; color: white; }
+body.dark-mode .dashboard-card, 
+body.dark-mode .modal-content,
+body.dark-mode .score-card {
+    background-color: #242424; 
+    color: #e6e6e6; 
+    border: 1px solid #333;
+}
 
-/* FIX: Dark Mode for Logout Modal */
-body.dark-mode .modal-card { background-color: #242424; color: #fff; border: 1px solid #444; }
-body.dark-mode .modal-card h3 { color: #fff; }
-body.dark-mode .modal-card p { color: #ccc; }
-body.dark-mode .modal-btn.secondary { background-color: #444; color: #eee; }
+/* ===== MOBILE RESPONSIVE (EXACT SAME AS STUDENT DASHBOARD) ===== */
+@media (max-width: 850px) {
+    nav {
+        height: 70px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .burger-menu {
+        display: flex;
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    nav .logo {
+        grid-column: 2;
+        justify-self: center;
+        font-size: 1.5rem;
+    }
+
+    .nav-actions {
+        grid-column: 3;
+        justify-self: end;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        background-color: var(--card-bg);
+        flex-direction: column;
+        padding: 100px 30px 30px 30px;
+        gap: 25px;
+        box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+        transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 1001;
+    }
+
+    .nav-links.show {
+        left: 0;
+    }
+
+    .nav-links li a {
+        font-size: 1.2rem;
+        display: block;
+        width: 100%;
+    }
+
+    body.dark-mode .nav-links {
+        background-color: #202020;
+        box-shadow: 10px 0 20px rgba(0,0,0,0.4);
+    }
+
+    .dashboard-container { padding: 20px 5%; }
+}
+
+/* ===== DASHBOARD & CARDS ===== */
+.dashboard-container { padding: 40px 5%; max-width: 1200px; margin: 0 auto; }
+.dashboard-card { 
+    background: var(--card-bg); 
+    padding: 30px; 
+    border-radius: 20px; 
+    margin-bottom: 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.test-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 15px 25px;
+    background: var(--maroon);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.btn:hover {
+    background: #5a0909;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(122, 12, 12, 0.2);
+}
+
+.back-nav {
+    margin-bottom: 30px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--maroon);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background: #e9ecef;
+}
 
 /* ===== QUIZ MODAL REFINEMENTS ===== */
 .modal {
-    display: none; position: fixed; z-index: 2500; left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+    display: none; 
+    position: fixed; 
+    z-index: 2500; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); 
+    backdrop-filter: blur(8px);
 }
 .modal-content {
-    background: #ffffff; margin: 5% auto; padding: 40px; border-radius: 25px;
-    max-width: 650px; width: 90%; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    background: var(--card-bg); 
+    margin: 5% auto; 
+    padding: 40px; 
+    border-radius: 25px;
+    max-width: 650px; 
+    width: 90%; 
+    position: relative; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 #qProgress {
-    font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 5px;
+    font-weight: 700; 
+    color: #d4af37; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    font-size: 0.85rem; 
+    margin-bottom: 5px;
 }
 .sentence {
-    font-size: 1.4rem; font-weight: 600; color: #2c3e50; line-height: 1.4; margin-bottom: 25px;
+    font-size: 1.4rem; 
+    font-weight: 600; 
+    color: #2c3e50; 
+    line-height: 1.4; 
+    margin-bottom: 25px;
 }
 body.dark-mode .sentence { color: #fff; }
 
 .options { display: grid; grid-template-columns: 1fr; gap: 12px; }
 .options button {
-    padding: 15px 20px; font-size: 1rem; border: 2px solid #e9ecef; border-radius: 12px;
-    background: #f8f9fa; color: #333; text-align: left; font-weight: 500; transition: all 0.2s ease; cursor: pointer; font-family: 'Poppins', sans-serif;
+    padding: 15px 20px; 
+    font-size: 1rem; 
+    border: 2px solid #e9ecef; 
+    border-radius: 12px;
+    background: #f8f9fa; 
+    color: #333; 
+    text-align: left; 
+    font-weight: 500; 
+    transition: all 0.2s ease; 
+    cursor: pointer; 
+    font-family: 'Poppins', sans-serif;
 }
 .options button:hover { border-color: #d4af37; background-color: #fffdf5; }
 
@@ -116,27 +429,101 @@ body.dark-mode .sentence { color: #fff; }
 .options button.wrong { background-color: #e74c3c !important; color: white !important; border-color: #c0392b !important; }
 
 .explanation {
-    margin-top: 25px; padding: 15px; background-color: #e8f4fd; color: #2980b9;
-    border-radius: 12px; font-size: 0.9rem; border-left: 5px solid #3498db; display: none;
+    margin-top: 25px; 
+    padding: 15px; 
+    background-color: #e8f4fd; 
+    color: #2980b9;
+    border-radius: 12px; 
+    font-size: 0.9rem; 
+    border-left: 5px solid #3498db; 
+    display: none;
 }
 body.dark-mode .explanation { background-color: #1a2633; color: #5dade2; }
 
 .score-area {
-    margin-top: 30px; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #f1f1f1; padding-top: 20px;
+    margin-top: 30px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-top: 2px solid #f1f1f1; 
+    padding-top: 20px;
 }
 
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 4000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-.modal-card { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; }
+/* Modal overlays */
+.modal-overlay { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.7); 
+    z-index: 4000; 
+    justify-content: center; 
+    align-items: center; 
+    backdrop-filter: blur(4px); 
+}
+.modal-card { 
+    background: var(--card-bg); 
+    padding: 30px; 
+    border-radius: 20px; 
+    width: 90%; 
+    max-width: 400px; 
+    text-align: center; 
+}
 .modal-actions { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
-.modal-btn { padding: 10px 25px; border-radius: 25px; border: none; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
-.modal-btn.primary { background-color: #d9534f; color: white; }
+.modal-btn { 
+    padding: 10px 25px; 
+    border-radius: 25px; 
+    border: none; 
+    font-weight: 600; 
+    cursor: pointer; 
+    font-family: 'Poppins', sans-serif; 
+}
+.modal-btn.primary { background-color: var(--danger); color: white; }
 .modal-btn.secondary { background-color: #e9ecef; color: #333; }
+body.dark-mode .modal-btn.secondary { background-color: #333; color: #fff; }
 
 /* ===== SCORE MODAL & CONFETTI ===== */
-#scoreResultModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 5000; justify-content: center; align-items: center; }
-.score-card { background: white; padding: 40px; border-radius: 30px; text-align: center; max-width: 450px; width: 90%; position: relative; z-index: 5002; }
-.score-number { font-size: 3.5rem; font-weight: 700; margin: 15px 0; color: maroon; }
-.score-feedback { font-size: 1.1rem; color: #444; font-weight: 500; margin-bottom: 25px; line-height: 1.5; min-height: 3em; display: flex; align-items: center; justify-content: center;}
+#scoreResultModal { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.85); 
+    z-index: 5000; 
+    justify-content: center; 
+    align-items: center; 
+}
+.score-card { 
+    background: var(--card-bg); 
+    padding: 40px; 
+    border-radius: 30px; 
+    text-align: center; 
+    max-width: 450px; 
+    width: 90%; 
+    position: relative; 
+    z-index: 5002; 
+}
+.score-number { 
+    font-size: 3.5rem; 
+    font-weight: 700; 
+    margin: 15px 0; 
+    color: var(--maroon); 
+}
+.score-feedback { 
+    font-size: 1.1rem; 
+    color: #444; 
+    font-weight: 500; 
+    margin-bottom: 25px; 
+    line-height: 1.5; 
+    min-height: 3em; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
 body.dark-mode .score-card { background: #242424; color: #fff; }
 body.dark-mode .score-feedback { color: #ccc; }
 
@@ -166,6 +553,14 @@ body.dark-mode .score-feedback { color: #ccc; }
         opacity: 0;
     }
 }
+
+.footer-credit { 
+    text-align: center; 
+    padding: 20px; 
+    color: #888; 
+    font-size: 0.8rem; 
+}
+body.dark-mode .footer-credit { color: #777; }
 </style>
 </head>
 
@@ -195,20 +590,51 @@ body.dark-mode .score-feedback { color: #ccc; }
     </div>
 </div>
 
+<!-- EXACT COPY OF STUDENT DASHBOARD NAVIGATION -->
 <nav>
-  <a onclick="showNavSection('dashboard')" class="logo">UB<span>igkas</span></a>
-  <ul>
-    <li><a onclick="showNavSection('dashboard')">Home</a></li>
-    <li><a onclick="showNavSection('about')">About</a></li>
-    <li><a onclick="showNavSection('contact')">Contact</a></li>
+  <button class="burger-menu" id="burgerBtn">
+    <span></span><span></span><span></span>
+  </button>
+
+  <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
+  
+  <!-- Desktop Navigation Links -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="student_dashboard.html">Home</a></li>
+    <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
+
   <div class="nav-actions">
-    <button id="darkModeBtn">🌙</button>
-    <button id="logoutBtn">Logout</button>
-    <button id="musicToggle">Mute Music</button>
+    <div class="dropdown">
+      <button id="settingsBtn">Settings ⚙️</button>
+      <div class="dropdown-content" id="settingsDropdown">
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="textSizeBtn">🔍 Text Size: 100%</button>
+        <button id="musicToggle">🔊 Mute Music</button>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+        <button id="logoutBtn">🚪 Logout</button>
+      </div>
+    </div>
   </div>
 </nav>
 
+<!-- Mobile Menu (EXACT SAME AS STUDENT DASHBOARD) -->
+<ul class="mobile-menu" id="mobileMenu">
+  <li><a href="student_dashboard.html">Home</a></li>
+  <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <div style="margin-top:20px; border-top:1px solid #eee; padding-top:20px;">
+    <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+    <button id="mobileTextSizeBtn">🔍 Text Size: 100%</button>
+    <button id="mobileMusicToggle">🔊 Mute Music</button>
+    <button id="mobileLogoutBtn" style="color:var(--danger);">🚪 Logout</button>
+  </div>
+</ul>
+
+<!-- LOGOUT MODAL -->
 <div id="logoutModal" class="modal-overlay">
   <div class="modal-card">
     <h3>Logout Confirmation</h3>
@@ -217,6 +643,31 @@ body.dark-mode .score-feedback { color: #ccc; }
       <button id="cancelLogout" class="modal-btn secondary">Cancel</button>
       <button id="confirmLogout" class="modal-btn primary">Logout</button>
     </div>
+  </div>
+</div>
+
+<!-- CHANGE PASSWORD MODAL -->
+<div id="changePasswordModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3>Change Password</h3>
+    <form id="changePasswordForm">
+      <div class="form-group">
+        <label>Current Password</label>
+        <input type="password" id="currentPassword" required>
+      </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="newPassword" required minlength="6">
+      </div>
+      <div class="form-group">
+        <label>Confirm New Password</label>
+        <input type="password" id="confirmPassword" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="cancelPasswordChange" class="modal-btn secondary">Cancel</button>
+        <button type="submit" class="modal-btn primary">Change Password</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -272,16 +723,33 @@ import { auth, db } from "../firebase.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, setDoc, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ---------------- NAVIGATION LOGIC ----------------
-window.showNavSection = function(section) {
-    if (section === 'dashboard') {
-        window.location.href = "teacher_panel.html";
-    } else if (section === 'about') {
-        window.location.href = "about.html";
-    } else if (section === 'contact') {
-        window.location.href = "contact.html";
-    }
+// ---------------- NAVIGATION LOGIC (EXACT SAME AS STUDENT DASHBOARD) ----------------
+const burgerBtn = document.getElementById("burgerBtn");
+const navLinks = document.getElementById("navLinks");
+const settingsBtn = document.getElementById("settingsBtn");
+const dropdownMenu = document.getElementById("settingsDropdown");
+const mobileMenu = document.getElementById("mobileMenu");
+
+burgerBtn.onclick = (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle("show");
+    mobileMenu.classList.toggle("show");
 };
+
+settingsBtn.onclick = (e) => {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle("is-active");
+};
+
+document.addEventListener('click', (event) => {
+    if (!settingsBtn.contains(event.target)) {
+        dropdownMenu.classList.remove("is-active");
+    }
+    if (!burgerBtn.contains(event.target) && !navLinks.contains(event.target) && !mobileMenu.contains(event.target)) {
+        navLinks.classList.remove("show");
+        mobileMenu.classList.remove("show");
+    }
+});
 
 let studentName = sessionStorage.getItem("studentName");
 let studentUID  = sessionStorage.getItem("studentUID");
@@ -370,19 +838,18 @@ const quizPaths = {
     vso: "assessment/sentence_structure.json",
     pronouns: "assessment/pronoun_questions.json",
     affixes: "assessment/affix_questions.json",
-    noun: "assessment/noun_questions.json",//
+    noun: "assessment/noun_questions.json",
     adjective: "assessment/panguri_questions.json",
-    adverb: "assessment/adverb_questions.json"//
+    adverb: "assessment/adverb_questions.json"
 };
 
 const quizInstructions = {
     vso: "Panuto: Piliin ang tamang ayos ng pangungusap (Verb–Subject–Object).",
     pronouns: "Panuto: Piliin ang tamang panghalip na angkop sa pangungusap.",
     affixes: "Panuto: Piliin ang tamang pandiwa ayon sa aspekto o panlapi.",
-    // New Topics
-    nouns: "Panuto: Tukuyin ang tamang pangngalan o pananda (si/ang/ng/ni) para sa pangungusap.",
-    adverbs: "Panuto: Piliin ang tamang pang-abay at wastong gamit ng 'ng' at 'nang'.",
-    adjectives: "Panuto: Piliin ang tamang pang-uri o antas ng hambingang angkop sa konteksto."
+    noun: "Panuto: Tukuyin ang tamang pangngalan o pananda (si/ang/ng/ni) para sa pangungusap.",
+    adjective: "Panuto: Piliin ang tamang pang-uri o antas ng hambingang angkop sa konteksto.",
+    adverb: "Panuto: Piliin ang tamang pang-abay at wastong gamit ng 'ng' at 'nang'."
 };
 
 document.querySelectorAll(".test-buttons button").forEach(btn => {
@@ -462,67 +929,237 @@ async function saveScore() {
     } catch (err) { console.error("Error saving score:", err); }
 }
 
+/* ===================== TEXT SIZE LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+const textSizeBtn = document.getElementById("textSizeBtn");
+const mobileTextSizeBtn = document.getElementById("mobileTextSizeBtn");
+const sizes = ["100%", "115%", "130%"];
+let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+if(currentSizeIndex === -1) currentSizeIndex = 0;
+
+function updateTextSize() {
+  const newSize = sizes[currentSizeIndex];
+  document.documentElement.style.setProperty('--text-scale', newSize);
+  textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+  mobileTextSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+  localStorage.setItem("textSize", newSize);
+}
+
+textSizeBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+  updateTextSize();
+});
+
+mobileTextSizeBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+  updateTextSize();
+  mobileMenu.classList.remove("show");
+});
+
+updateTextSize();
+
+/* ===================== THEME SWITCHER (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+const darkModeBtn = document.getElementById("darkModeBtn");
+const mobileDarkModeBtn = document.getElementById("mobileDarkModeBtn");
+const dripContainer = document.getElementById("drip-container");
+const dripLayer = document.getElementById("dripLayer");
+
+function updateThemeText(isDark) {
+    const text = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+    darkModeBtn.textContent = text;
+    mobileDarkModeBtn.textContent = text;
+}
+
+function toggleTheme() {
+  const isDark = document.body.classList.contains("dark-mode");
+  if (isDark) dripLayer.classList.add("drip-light");
+  else dripLayer.classList.remove("drip-light");
+
+  dripContainer.classList.add("active");
+
+  setTimeout(() => {
+    document.body.classList.toggle("dark-mode");
+    const nowDark = document.body.classList.contains("dark-mode");
+    updateThemeText(nowDark);
+    localStorage.setItem("theme", nowDark ? "dark" : "light");
+  }, 350);
+
+  setTimeout(() => { dripContainer.classList.remove("active"); }, 700);
+}
+
+darkModeBtn.onclick = (e) => {
+  e.stopPropagation();
+  toggleTheme();
+  dropdownMenu.classList.remove("is-active");
+};
+
+mobileDarkModeBtn.onclick = (e) => {
+  e.stopPropagation();
+  toggleTheme();
+  mobileMenu.classList.remove("show");
+};
+
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  updateThemeText(true);
+} else {
+  updateThemeText(false);
+}
+
+/* ===================== MUSIC TOGGLE LOGIC ===================== */
+const bgMusic = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+const mobileMusicToggle = document.getElementById("mobileMusicToggle");
+let isMuted = false;
+
+function toggleMusic() {
+    isMuted = !isMuted;
+    bgMusic.muted = isMuted;
+    musicToggle.textContent = isMuted ? "🔊 Unmute Music" : "🔇 Mute Music";
+    mobileMusicToggle.textContent = isMuted ? "🔊 Unmute Music" : "🔇 Mute Music";
+}
+
+musicToggle.onclick = (e) => {
+    e.stopPropagation();
+    toggleMusic();
+    dropdownMenu.classList.remove("is-active");
+};
+
+mobileMusicToggle.onclick = (e) => {
+    e.stopPropagation();
+    toggleMusic();
+    mobileMenu.classList.remove("show");
+};
+
+/* ===================== LOGOUT LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
 const logoutBtn = document.getElementById("logoutBtn");
+const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
 const logoutModal = document.getElementById("logoutModal");
 const cancelLogout = document.getElementById("cancelLogout");
 const confirmLogout = document.getElementById("confirmLogout");
 
-logoutBtn.onclick = () => { logoutModal.style.display = "flex"; };
+function openLogoutModal() {
+    logoutModal.style.display = "flex";
+    dropdownMenu.classList.remove("is-active");
+    mobileMenu.classList.remove("show");
+}
+
+logoutBtn.addEventListener('click', (e) => { 
+    e.stopPropagation(); 
+    openLogoutModal();
+});
+
+mobileLogoutBtn.addEventListener('click', (e) => { 
+    e.stopPropagation(); 
+    openLogoutModal();
+});
+
 cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
 
 confirmLogout.onclick = async () => {
-    showToast("Logging out...");
-    try {
-        if (studentUID) {
-            const studentRef = doc(db, "students", studentUID);
-            await updateDoc(studentRef, { status: "offline", lastSeen: serverTimestamp() });
-        }
-        await signOut(auth);
-        sessionStorage.clear();
-        window.location.href = "../index.html";
-    } catch (err) { window.location.href = "../index.html"; }
+  if (studentUID) await setStudentStatus(studentUID, "offline");
+  await signOut(auth);
+  sessionStorage.clear();
+  window.location.href = "../index.html";
 };
+
+async function setStudentStatus(uid, status) {
+  try {
+    const studentRef = doc(db, "students", uid);
+    await updateDoc(studentRef, { status: status, lastSeen: serverTimestamp() });
+  } catch (err) { console.error("Status update failed:", err); }
+}
 
 nextBtn.onclick = () => { currentQuestionIndex++; loadQuestion(); };
 document.getElementById("closeModalBtn").onclick = () => { modal.style.display = "none"; };
 
-const bgMusic = document.getElementById("bgMusic");
-const musicToggle = document.getElementById("musicToggle");
-let isMuted = false;
-musicToggle.onclick = () => {
-    isMuted = !isMuted;
-    bgMusic.muted = isMuted;
-    musicToggle.textContent = isMuted ? "Unmute Music" : "Mute Music";
-};
+/* ===================== CHANGE PASSWORD LOGIC (EXACT SAME AS STUDENT DASHBOARD) ===================== */
+const changePasswordBtn = document.getElementById("changePasswordBtn");
+const mobileChangePasswordBtn = document.getElementById("mobileChangePasswordBtn");
+const changePasswordModal = document.getElementById("changePasswordModal");
+const cancelPasswordChange = document.getElementById("cancelPasswordChange");
+const changePasswordForm = document.getElementById("changePasswordForm");
 
-/* ===== DRIP THEME SWITCHER ===== */
-const darkModeBtn = document.getElementById("darkModeBtn");
-const dripContainer = document.getElementById("drip-container");
-const dripLayer = document.getElementById("dripLayer");
-
-darkModeBtn.onclick = () => {
-    const isDark = document.body.classList.contains("dark-mode");
-    if (isDark) dripLayer.classList.add("drip-light"); 
-    else dripLayer.classList.remove("drip-light");
-
-    dripContainer.classList.add("active");
-
-    setTimeout(() => {
-        document.body.classList.toggle("dark-mode");
-        const nowDark = document.body.classList.contains("dark-mode");
-        darkModeBtn.textContent = nowDark ? "☀️" : "🌙";
-        localStorage.setItem("theme", nowDark ? "dark" : "light");
-    }, 350);
-
-    setTimeout(() => {
-        dripContainer.classList.remove("active");
-    }, 700);
-};
-
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    darkModeBtn.textContent = "☀️";
+function openChangePasswordModal() {
+    changePasswordModal.style.display = "flex";
+    dropdownMenu.classList.remove("is-active");
+    mobileMenu.classList.remove("show");
 }
+
+changePasswordBtn.onclick = (e) => {
+    e.stopPropagation();
+    openChangePasswordModal();
+};
+
+mobileChangePasswordBtn.onclick = (e) => {
+    e.stopPropagation();
+    openChangePasswordModal();
+};
+
+cancelPasswordChange.onclick = () => {
+    changePasswordModal.style.display = "none";
+    changePasswordForm.reset();
+};
+
+changePasswordForm.onsubmit = async (e) => {
+    e.preventDefault();
+    
+    const currentPassword = document.getElementById("currentPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    
+    // Validation
+    if (newPassword !== confirmPassword) {
+        alert("New passwords do not match!");
+        return;
+    }
+    
+    if (newPassword.length < 6) {
+        alert("Password must be at least 6 characters long!");
+        return;
+    }
+    
+    try {
+        const user = auth.currentUser;
+        
+        if (!user.email) {
+            alert("User email not found. Please contact support.");
+            return;
+        }
+        
+        // Re-authenticate user
+        const credential = EmailAuthProvider.credential(user.email, currentPassword);
+        await reauthenticateWithCredential(user, credential);
+        
+        // Update password
+        await updatePassword(user, newPassword);
+        
+        alert("Password changed successfully!");
+        changePasswordModal.style.display = "none";
+        changePasswordForm.reset();
+        
+    } catch (error) {
+        console.error("Password change error:", error);
+        
+        if (error.code === 'auth/wrong-password') {
+            alert("Current password is incorrect!");
+        } else if (error.code === 'auth/weak-password') {
+            alert("New password is too weak. Please use a stronger password.");
+        } else {
+            alert("Error changing password: " + error.message);
+        }
+    }
+};
+
+/* ===================== MODAL CLOSE LOGIC ===================== */
+window.onclick = (event) => { 
+    if (event.target == logoutModal) logoutModal.style.display = "none";
+    if (event.target == changePasswordModal) {
+        changePasswordModal.style.display = "none";
+        changePasswordForm.reset();
+    }
+};
 </script>
 
 </body>

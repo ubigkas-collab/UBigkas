@@ -102,7 +102,7 @@ body {
 @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes fadeOut { to { transform: translateX(100%); opacity: 0; } }
 
-/* --- STANDARDIZED NAV BAR --- */
+/* --- SIMPLIFIED NAV BAR --- */
 nav {
     display: flex;
     justify-content: space-between;
@@ -125,159 +125,76 @@ nav {
 }
 .logo span { color: var(--gold); }
 
-/* --- BURGER MENU --- */
-.burger-menu {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 10px;
-    z-index: 1002;
-}
-.burger-menu span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--maroon);
-    border-radius: 2px;
-    transition: 0.3s;
-}
-body.dark-mode .burger-menu span { background-color: #ffffff; }
-
-/* --- NAV LINKS --- */
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-}
-.nav-links li a {
-    text-decoration: none;
-    color: var(--text-main);
-    font-weight: 500;
-    transition: color 0.3s;
-}
-.nav-links li a:hover { color: var(--gold); }
-
-/* --- NAV ACTIONS & DROPDOWN --- */
+/* --- NAV ACTIONS --- */
 .nav-actions { 
     display: flex; 
     gap: 10px; 
     align-items: center; 
 }
 
-.dropdown { 
-    position: relative; 
-    display: inline-block; 
+/* Dark Mode Toggle Button - SAME SIZE AS LOGIN BUTTON */
+#darkModeBtn {
+    background: var(--maroon);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 40px;
+    transition: all 0.3s ease;
 }
-#settingsBtn { 
-    padding: 10px 20px; 
-    border-radius: 25px; 
-    background-color: var(--maroon); 
-    color: white; 
-    font-weight: 600; 
-    border: none; 
-    cursor: pointer; 
-    font-family: 'Poppins', sans-serif; 
-    transition: all 0.3s ease; 
-}
-.dropdown-content { 
-    display: none; 
-    position: absolute; 
-    right: 0; 
-    top: 100%; 
-    background-color: white; 
-    min-width: 220px; 
-    margin-top: 10px; 
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2); 
-    border-radius: 12px; 
-    z-index: 1000; 
-    overflow: hidden; 
-}
-.dropdown:hover .dropdown-content { display: block; }
-.dropdown-content button { 
-    width: 100%; 
-    padding: 12px 16px; 
-    text-align: left; 
-    border: none; 
-    background: none; 
-    font-family: 'Poppins', sans-serif; 
-    font-size: 0.9rem; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    transition: background 0.2s; 
-    color: #333; 
-}
-.dropdown-content button:hover { background-color: #f1f1f1; }
-#logoutBtn { color: var(--danger) !important; font-weight: 700; }
 
-/* --- DARK MODE OVERRIDES --- */
-body.dark-mode .dropdown-content { 
-    background-color: #242424; 
-    border: 1px solid #333; 
+#darkModeBtn:hover {
+    background: var(--gold);
+    color: var(--maroon);
 }
-body.dark-mode .dropdown-content button { color: #e6e6e6; }
-body.dark-mode .dropdown-content button:hover { background-color: #333; }
+
+/* Login Button - SAME SIZE AS DARK MODE BUTTON */
+#openLoginModal {
+    background: var(--maroon);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+#openLoginModal:hover {
+    background: var(--gold);
+    color: var(--maroon);
+}
 
 /* --- MOBILE RESPONSIVE --- */
 @media (max-width: 850px) {
     nav {
         height: 70px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
         padding: 0 20px;
     }
     
-    .burger-menu {
-        display: flex;
-        grid-column: 1;
-        justify-self: start;
-    }
-    
     .logo {
-        grid-column: 2;
-        justify-self: center;
         font-size: 1.5rem;
     }
     
-    .nav-actions {
-        grid-column: 3;
-        justify-self: end;
+    /* Make buttons slightly smaller on mobile */
+    #darkModeBtn, #openLoginModal {
+        padding: 6px 15px;
+        font-size: 0.85rem;
     }
     
-    .nav-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 280px;
-        height: 100vh;
-        background-color: var(--card-bg);
-        flex-direction: column;
-        padding: 100px 30px 30px;
-        gap: 25px;
-        box-shadow: 10px 0 20px var(--shadow);
-        transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        z-index: 1001;
-    }
-    
-    .nav-links.show {
-        left: 0;
-    }
-    
-    body.dark-mode .nav-links {
-        background-color: #1e1e1e;
-    }
-    
-    .dropdown-content {
-        position: fixed;
-        right: 20px;
-        top: 70px;
-        min-width: 200px;
+    #darkModeBtn {
+        width: 38px;
+        height: 36px;
     }
 }
 
@@ -450,32 +367,13 @@ body.dark-mode .dropdown-content button:hover { background-color: #333; }
 
 <div id="toast-container"></div>
 
-<!-- STANDARDIZED NAVIGATION -->
+<!-- SIMPLIFIED NAVIGATION - NO NAV LINKS -->
 <nav>
-    <button class="burger-menu" id="burgerBtn">
-        <span></span><span></span><span></span>
-    </button>
-    
     <a href="#" class="logo">UB<span>igkas</span></a>
-    
-    <ul class="nav-links" id="navLinks">
-        <li><a href="#about">Home</a></li>
-        <li><a href="#features">Grammar Corrector</a></li>
-        <li><a href="#team">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
 
     <div class="nav-actions">
-        <div class="dropdown">
-            <button id="settingsBtn">Settings ⚙️</button>
-            <div class="dropdown-content" id="settingsDropdown">
-                <button id="darkModeBtn">🌙 Dark Mode</button>
-                <button id="textSizeBtn">🔍 Text Size: 100%</button>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
-                <button id="logoutBtn">🚪 Logout</button>
-            </div>
-        </div>
-        <button id="openLoginModal" class="login-btn" style="padding: 8px 25px; width: auto; font-size: 0.9rem;">Login</button>
+        <button id="darkModeBtn">🌙</button>
+        <button id="openLoginModal">Login</button>
     </div>
 </nav>
 
@@ -596,36 +494,20 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, getDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-/* --- BURGER MENU LOGIC --- */
-const burgerBtn = document.getElementById("burgerBtn");
-const navLinks = document.getElementById("navLinks");
+/* --- DARK MODE FUNCTIONALITY --- */
+const darkModeBtn = document.getElementById("darkModeBtn");
 
-burgerBtn.onclick = (e) => {
-    e.stopPropagation();
-    navLinks.classList.toggle("show");
-};
-
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!burgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
-        navLinks.classList.remove("show");
-    }
+darkModeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
 });
 
-/* --- SETTINGS DROPDOWN LOGIC --- */
-const settingsBtn = document.getElementById("settingsBtn");
-const dropdownMenu = document.getElementById("settingsDropdown");
-
-settingsBtn.onclick = (e) => {
-    e.stopPropagation();
-    dropdownMenu.classList.toggle("is-active");
-};
-
-document.addEventListener('click', (e) => {
-    if (!settingsBtn.contains(e.target)) {
-        dropdownMenu.classList.remove("is-active");
-    }
-});
+// Apply saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    darkModeBtn.textContent = "☀️";
+}
 
 /* --- UTILITIES --- */
 function playSwoosh(callback) {
@@ -646,44 +528,6 @@ function showToast(message, type = "info") {
         setTimeout(() => toast.remove(), 500);
     }, 4000);
 }
-
-/* --- DARK MODE --- */
-const darkModeBtn = document.getElementById("darkModeBtn");
-darkModeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-    darkModeBtn.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
-    localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-});
-
-// Apply saved theme
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    darkModeBtn.textContent = "☀️ Light Mode";
-}
-
-/* --- TEXT SIZE --- */
-const textSizeBtn = document.getElementById("textSizeBtn");
-const sizes = ["100%", "115%", "130%"];
-let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
-
-function updateTextSize() {
-    const newSize = sizes[currentSizeIndex];
-    document.documentElement.style.setProperty('--text-scale', newSize);
-    textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
-    localStorage.setItem("textSize", newSize);
-}
-
-textSizeBtn.onclick = () => {
-    currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
-    updateTextSize();
-};
-updateTextSize();
-
-/* --- LOGOUT (for non-logged in users) --- */
-const logoutBtn = document.getElementById("logoutBtn");
-logoutBtn.onclick = () => {
-    showToast("You are not logged in", "info");
-};
 
 /* --- LOGIN LOGIC --- */
 document.getElementById("loginForm").addEventListener("submit", async e => {
@@ -837,26 +681,7 @@ window.onclick = e => {
     if(e.target === teacherModal) teacherModal.style.display = "none";
 };
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if(targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if(targetElement) {
-            // Close mobile menu if open
-            navLinks.classList.remove('show');
-            
-            // Scroll to target
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+// Remove smooth scrolling for navigation links since we removed the nav links
 </script>
 </body>
 </html>

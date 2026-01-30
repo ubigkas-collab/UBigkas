@@ -11,13 +11,17 @@
     <style>
         /* ===== TEXT SCALING VARIABLE ===== */
         :root {
+            --text-scale: 100%;
             --maroon: #7a0c0c;
             --gold: #d4af37;
             --bg: #f8f9fa;
             --card-bg: #fff;
             --nav-text: #333;
+            --white: #ffffff; /* ADDED */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --text-scale: 100%;
+            --danger: #d9534f;
+            --success: #28a745;
+            --warning: #ffc107;
         }
 
         body {
@@ -27,48 +31,79 @@
             overflow-x: hidden;
             font-size: var(--text-scale);
             transition: var(--transition);
+            color: var(--nav-text);
         }
 
         /* ===== DRIP EFFECT ===== */
         #drip-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: 10001;
+            z-index: 10000;
         }
         .drip-layer {
             position: absolute;
-            top: -110%; left: 0; width: 100%; height: 120%;
-            background-color: #121212; 
+            top: -110%;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-color: #181818;
             transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
             clip-path: url(#drip-path);
         }
         #drip-container.active .drip-layer { top: 0; }
         .drip-light { background-color: #fdfdfd !important; }
 
-        /* ===== STANDARDIZED NAVIGATION ===== */
+        /* ===== STANDARDIZED NAVIGATION (MATCHING STUDENT DASHBOARD) ===== */
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 0 5%;
             height: 80px;
-            background-color: var(--card-bg);
+            background-color: var(--maroon);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
         }
 
-        nav .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: var(--maroon); }
+        nav .logo { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: var(--white);
+            margin-right: 40px;
+        }
         nav .logo span { color: var(--gold); }
 
-        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
-        nav ul li a { text-decoration: none; color: var(--nav-text); font-weight: 500; transition: color 0.3s; }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
 
-        .nav-actions { margin-left: auto; display: flex; align-items: center; }
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links li a:hover { color: var(--gold); }
 
-        /* ===== BURGER MENU ===== */
+        .nav-actions { 
+            margin-left: auto; 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+        }
+
+        /* ===== BURGER MENU BUTTON ===== */
         .burger-menu {
             display: none;
             flex-direction: column;
@@ -78,56 +113,331 @@
             border: none;
             padding: 10px;
             z-index: 1002;
+            margin-right: 15px;
         }
-        .burger-menu span { width: 25px; height: 3px; background-color: var(--maroon); border-radius: 2px; transition: 0.3s; }
-
-        /* ===== SETTINGS DROPDOWN ===== */
-        .dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
-        #settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: var(--maroon); color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
-        .dropdown-content { display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; transition: opacity 0.3s ease, visibility 0.3s ease; }
-        
-        @media (min-width: 851px) { .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; } }
-        .dropdown-content.is-active { opacity: 1 !important; visibility: visible !important; }
-        .dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
-        #logoutBtn { color: #d9534f !important; font-weight: 700; }
-
-        /* ===== MOBILE RESPONSIVE ===== */
-        @media (max-width: 850px) {
-            nav { height: 70px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 20px; }
-            .burger-menu { display: flex; grid-column: 1; justify-self: start; }
-            nav .logo { grid-column: 2; justify-self: center; font-size: 1.5rem; }
-            .nav-actions { grid-column: 3; justify-self: end; }
-            nav ul { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; background-color: #ffffff; flex-direction: column; padding: 100px 30px 30px; gap: 25px; box-shadow: 10px 0 20px rgba(0,0,0,0.1); transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1001; }
-            nav ul.show { left: 0; }
-            body.dark-mode nav ul { background-color: #202020; }
+        .burger-menu span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            border-radius: 2px;
+            transition: 0.3s;
         }
 
-        /* ===== DARK MODE OVERRIDES ===== */
-        body.dark-mode { --bg: #121212; --card-bg: #1e1e1e; --nav-text: #ffffff; color: #e0e0e0; }
-        body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
+        /* ===== SETTINGS DROPDOWN (MATCHING DASHBOARD) ===== */
+        #settingsBtn {
+            padding: 8px 20px;
+            border-radius: 25px;
+            background-color: var(--white);
+            color: var(--maroon);
+            font-weight: 600;
+            border: 2px solid var(--white);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        #settingsBtn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 200px;
+            margin-top: 15px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            z-index: 9999;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        .dropdown-content.is-active { display: block; }
+        .dropdown-content button {
+            width: 100%;
+            padding: 12px 16px;
+            text-align: left;
+            border: none;
+            background: none;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+            color: #333;
+        }
+        .dropdown-content button:hover { background-color: #f8f9fa; }
+        #logoutBtn { color: var(--danger) !important; font-weight: 700; }
+        #changePasswordBtn { color: var(--maroon) !important; }
+
+        /* Mobile Side Drawer (Matching Student Dashboard) */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            padding: 100px 30px 30px;
+            box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+            transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1001;
+            margin: 0;
+            list-style: none;
+        }
+        .mobile-menu.show { left: 0; }
+        .mobile-menu li a { 
+            display: block; 
+            padding: 15px 0; 
+            text-decoration: none; 
+            color: var(--nav-text); 
+            font-weight: 500; 
+        }
+        .mobile-menu button { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 10px; 
+            text-align: left;
+            background: #f1f1f1; 
+            border: none; 
+            border-radius: 8px; 
+            font-family: inherit; 
+            cursor: pointer;
+        }
+
+        /* ===== DARK MODE STYLES FOR NEW NAVIGATION ===== */
+        body.dark-mode { 
+            background-color: #181818; 
+            color: #ffffff; 
+            --bg: #181818;
+            --card-bg: #1e1e1e;
+            --nav-text: #ffffff;
+        }
+        body.dark-mode nav { 
+            background-color: #202020; 
+            border-bottom-color: var(--gold); 
+        }
+        body.dark-mode nav .logo { color: var(--white); }
+        body.dark-mode .nav-links li a { color: var(--white); }
+        body.dark-mode #settingsBtn {
+            background-color: #2a2a2a;
+            color: var(--white);
+            border-color: #444;
+        }
+        body.dark-mode .dropdown-content { 
+            background-color: #242424; 
+            border: 1px solid #333; 
+        }
         body.dark-mode .dropdown-content button { color: #e6e6e6; }
-        body.dark-mode .burger-menu span { background-color: #ffffff; }
-        body.dark-mode textarea { background-color: #252525; color: #ffffff; border-color: #3d3d3d; }
+        body.dark-mode .dropdown-content button:hover { background-color: #333; }
+        body.dark-mode .burger-menu span { background-color: var(--white); }
+        body.dark-mode .mobile-menu { background-color: #1e1e1e; }
+        body.dark-mode .mobile-menu button { background: #2a2a2a; color: white; }
+        body.dark-mode .card,
+        body.dark-mode .modal-card {
+            background-color: #242424; 
+            color: #e6e6e6; 
+            border: 1px solid #333;
+        }
+
+        /* ===== MOBILE RESPONSIVE (UPDATED TO MATCH DASHBOARD) ===== */
+        @media (max-width: 850px) {
+            .burger-menu { display: flex; }
+            .nav-links, .nav-actions { display: none; }
+            nav .logo { margin-right: auto; }
+            
+            nav {
+                height: 70px;
+                padding: 0 20px;
+            }
+
+            nav .logo {
+                font-size: 1.5rem;
+            }
+
+            .container { 
+                margin: 20px auto; 
+                padding: 0 15px; 
+            }
+        }
 
         /* ===== PAGE CONTENT STYLES ===== */
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; }
-        .card { background: var(--card-bg); padding: 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        textarea { width: 100%; min-height: 120px; padding: 15px; border-radius: 10px; border: 2px solid #ccc; font-size: 1rem; font-family: 'Poppins', sans-serif; resize: vertical; box-sizing: border-box; }
-        .input-wrapper { position: relative; width: 100%; margin-top: 10px; }
-        .stt-btn { position: absolute; right: 15px; bottom: 15px; background: none; border: none; color: var(--maroon); font-size: 1.5rem; cursor: pointer; }
-        .tts-btn { background: var(--maroon); color: white; border: none; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; margin-left: 10px; }
-        #checkBtn, .desc-btn { background: var(--maroon); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: 600; margin-top: 15px; transition: var(--transition); }
-        #checkBtn:hover { background: var(--gold); color: var(--maroon); }
-        .output-card { background: #fef9f0; border-left: 6px solid var(--gold); }
-        body.dark-mode .output-card { background: #2a2419; }
-        .analysis-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .analysis-table th, .analysis-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        .analysis-table th { background: var(--maroon); color: white; }
+        .container { 
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+        .card { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05); 
+            margin-bottom: 20px; 
+        }
+        textarea { 
+            width: 100%; 
+            min-height: 120px; 
+            padding: 15px; 
+            border-radius: 10px; 
+            border: 2px solid #ccc; 
+            font-size: 1rem; 
+            font-family: 'Poppins', sans-serif; 
+            resize: vertical; 
+            box-sizing: border-box; 
+        }
+        .input-wrapper { 
+            position: relative; 
+            width: 100%; 
+            margin-top: 10px; 
+        }
+        .stt-btn { 
+            position: absolute; 
+            right: 15px; 
+            bottom: 15px; 
+            background: none; 
+            border: none; 
+            color: var(--maroon); 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+        }
+        .tts-btn { 
+            background: var(--maroon); 
+            color: white; 
+            border: none; 
+            padding: 6px 14px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 0.85rem; 
+            margin-left: 10px; 
+        }
+        #checkBtn, .desc-btn { 
+            background: var(--maroon); 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            margin-top: 15px; 
+            transition: var(--transition); 
+        }
+        #checkBtn:hover { 
+            background: var(--gold); 
+            color: var(--maroon); 
+        }
+        .output-card { 
+            background: #fef9f0; 
+            border-left: 6px solid var(--gold); 
+        }
+        body.dark-mode .output-card { 
+            background: #2a2419; 
+        }
+        .analysis-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+        }
+        .analysis-table th, .analysis-table td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        .analysis-table th { 
+            background: var(--maroon); 
+            color: white; 
+        }
         
         /* Modal Styles */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .modal-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 400px; }
-        body.dark-mode .modal-card { background: #242424; color: white; border: 1px solid #333; }
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.7); 
+            z-index: 20000; 
+            justify-content: center; 
+            align-items: center; 
+            backdrop-filter: blur(4px); 
+        }
+        .modal-card { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            width: 90%; 
+            max-width: 400px; 
+        }
+        .modal-actions { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            margin-top: 20px; 
+        }
+        .modal-btn { 
+            padding: 10px 25px; 
+            border-radius: 25px; 
+            border: none; 
+            font-weight: 600; 
+            cursor: pointer; 
+            font-family: 'Poppins', sans-serif; 
+        }
+        .modal-btn.primary { 
+            background-color: var(--danger); 
+            color: white; 
+        }
+        .modal-btn.secondary { 
+            background-color: #e9ecef; 
+            color: #333; 
+        }
+        body.dark-mode .modal-btn.secondary { 
+            background-color: #333; 
+            color: #fff; 
+        }
+
+        .footer-credit { 
+            text-align: center; 
+            padding: 20px; 
+            color: #888; 
+            font-size: 0.8rem; 
+        }
+        body.dark-mode .footer-credit { 
+            color: #777; 
+        }
+
+        /* Form styles for change password */
+        .form-group { 
+            margin-bottom: 20px; 
+            text-align: left; 
+        }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+            color: #333; 
+        }
+        body.dark-mode .form-group label { 
+            color: #e6e6e6; 
+        }
+        .form-group input { 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px solid #ddd; 
+            font-size: 1rem; 
+            box-sizing: border-box; 
+        }
+        body.dark-mode .form-group input { 
+            background: #333; 
+            color: white; 
+            border-color: #555; 
+        }
     </style>
 </head>
 
@@ -135,9 +445,16 @@
 
 <div id="drip-container">
   <div id="dripLayer" class="drip-layer"></div>
-  <svg width="0" height="0"><defs><clipPath id="drip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path></clipPath></defs></svg>
+  <svg width="0" height="0">
+    <defs>
+      <clipPath id="drip-path" clipPathUnits="objectBoundingBox">
+        <path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path>
+      </clipPath>
+    </defs>
+  </svg>
 </div>
 
+<!-- NAVIGATION MATCHING STUDENT DASHBOARD -->
 <nav>
     <button class="burger-menu" id="burgerBtn">
         <span></span><span></span><span></span>
@@ -145,7 +462,8 @@
 
     <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
     
-    <ul id="navLinks">
+    <!-- Desktop Navigation -->
+    <ul class="nav-links" id="navLinks">
         <li><a href="student_dashboard.html">Home</a></li>
         <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
         <li><a href="about.html">About</a></li>
@@ -153,26 +471,39 @@
     </ul>
 
     <div class="nav-actions">
-        <div class="dropdown">
-            <button id="settingsBtn">Settings ⚙️</button>
-            <div class="dropdown-content" id="settingsDropdown">
-                <button id="darkModeBtn">🌙 Dark Mode</button>
-                <button id="textSizeBtn">🔍 Text Size: 100%</button>
-                <button id="changePasswordBtn">🔐 Change Password</button>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
-                <button id="logoutBtn">🚪 Logout</button>
-            </div>
+        <button id="settingsBtn">Settings ⚙️</button>
+        <div class="dropdown-content" id="settingsDropdown">
+            <button id="darkModeBtn">🌙 Dark Mode</button>
+            <button id="textSizeBtn">🔍 Text Size: 100%</button>
+            <button id="changePasswordBtn">🔐 Change Password</button>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
+            <button id="logoutBtn">🚪 Logout</button>
         </div>
     </div>
 </nav>
 
+<!-- Mobile Menu (NEW - Matches Student Dashboard) -->
+<ul class="mobile-menu" id="mobileMenu">
+  <li><a href="student_dashboard.html">Home</a></li>
+  <li><a href="grammar_corrector.html">Grammar Corrector</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <div style="margin-top:20px; border-top:1px solid #eee; padding-top:20px;">
+    <button id="mobileDarkModeBtn">🌙 Dark Mode</button>
+    <button id="mobileTextSizeBtn">🔍 Text Size: 100%</button>
+    <button id="mobileChangePasswordBtn">🔐 Change Password</button>
+    <button id="mobileLogoutBtn" style="color:var(--danger);">🚪 Logout</button>
+  </div>
+</ul>
+
+<!-- LOGOUT MODAL -->
 <div id="logoutModal" class="modal-overlay">
   <div class="modal-card">
     <h3>Logout Confirmation</h3>
     <p>Are you sure you want to logout?</p>
-    <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
-      <button id="cancelLogout" style="padding:10px 20px; border-radius:20px; border:none; cursor:pointer;">Cancel</button>
-      <button id="confirmLogout" style="padding:10px 20px; border-radius:20px; border:none; cursor:pointer; background:#d9534f; color:white;">Logout</button>
+    <div class="modal-actions">
+      <button id="cancelLogout" class="modal-btn secondary">Cancel</button>
+      <button id="confirmLogout" class="modal-btn primary">Logout</button>
     </div>
   </div>
 </div>
@@ -194,9 +525,9 @@
         <label>Confirm New Password</label>
         <input type="password" id="confirmPassword" required>
       </div>
-      <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
-        <button type="button" id="cancelPasswordChange" style="padding:10px 20px; border-radius:20px; border:none; cursor:pointer;">Cancel</button>
-        <button type="submit" style="padding:10px 20px; border-radius:20px; border:none; cursor:pointer; background:#7a0c0c; color:white;">Change Password</button>
+      <div class="modal-actions">
+        <button type="button" id="cancelPasswordChange" class="modal-btn secondary">Cancel</button>
+        <button type="submit" class="modal-btn primary">Change Password</button>
       </div>
     </form>
   </div>
@@ -226,62 +557,148 @@
     </div>
 </div>
 
-<div style="text-align:center; padding:20px; color:#666;">©2025 University of Batangas – Lipa City</div>
+<div class="footer-credit">©2025 University of Batangas – Lipa City</div>
 
 <script type="module">
     import { auth, db } from "../firebase.js";
     import { signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    /* ===== NAVIGATION & DROPDOWN LOGIC ===== */
+    /* ===================== NAVIGATION LOGIC (UPDATED) ===================== */
     const burgerBtn = document.getElementById("burgerBtn");
-    const navLinks = document.getElementById("navLinks");
+    const mobileMenu = document.getElementById("mobileMenu");
     const settingsBtn = document.getElementById("settingsBtn");
     const dropdownMenu = document.getElementById("settingsDropdown");
+    const navLinks = document.getElementById("navLinks");
 
-    burgerBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle("show"); };
-    settingsBtn.onclick = (e) => { e.stopPropagation(); dropdownMenu.classList.toggle("is-active"); };
+    // Toggle Mobile Menu (Matches Student Dashboard)
+    burgerBtn.onclick = (e) => {
+        e.stopPropagation();
+        mobileMenu.classList.toggle("show");
+    };
 
-    document.addEventListener('click', (e) => {
-        if (!settingsBtn.contains(e.target)) dropdownMenu.classList.remove("is-active");
-        if (!burgerBtn.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove("show");
+    // Toggle Settings Dropdown
+    settingsBtn.onclick = (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("is-active");
+    };
+
+    // Close menus on outside click
+    document.addEventListener('click', (event) => {
+        if (!settingsBtn.contains(event.target)) {
+            dropdownMenu.classList.remove("is-active");
+        }
+        if (!burgerBtn.contains(event.target) && !mobileMenu.contains(event.target) && !navLinks.contains(event.target)) {
+            mobileMenu.classList.remove("show");
+            navLinks.classList.remove("show");
+        }
     });
 
-    /* ===== THEME & DRIP LOGIC ===== */
+    /* ===================== TEXT SIZE LOGIC ===================== */
+    const textSizeBtn = document.getElementById("textSizeBtn");
+    const mobileTextSizeBtn = document.getElementById("mobileTextSizeBtn");
+    const sizes = ["100%", "115%", "130%"];
+    let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+    if(currentSizeIndex === -1) currentSizeIndex = 0;
+
+    function updateTextSize() {
+      const newSize = sizes[currentSizeIndex];
+      document.documentElement.style.setProperty('--text-scale', newSize);
+      textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+      mobileTextSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
+      localStorage.setItem("textSize", newSize);
+    }
+
+    // Desktop text size button
+    textSizeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+      updateTextSize();
+    });
+
+    // Mobile text size button
+    mobileTextSizeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+      updateTextSize();
+      mobileMenu.classList.remove("show");
+    });
+
+    updateTextSize();
+
+    /* ===================== THEME SWITCHER ===================== */
     const darkModeBtn = document.getElementById("darkModeBtn");
+    const mobileDarkModeBtn = document.getElementById("mobileDarkModeBtn");
     const dripContainer = document.getElementById("drip-container");
     const dripLayer = document.getElementById("dripLayer");
 
-    darkModeBtn.onclick = (e) => {
-        e.stopPropagation();
-        const isDark = document.body.classList.contains("dark-mode");
-        isDark ? dripLayer.classList.add("drip-light") : dripLayer.classList.remove("drip-light");
-        dripContainer.classList.add("active");
+    function updateThemeText(isDark) {
+        const text = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        darkModeBtn.textContent = text;
+        mobileDarkModeBtn.textContent = text;
+    }
 
-        setTimeout(() => {
-            document.body.classList.toggle("dark-mode");
-            const nowDark = document.body.classList.contains("dark-mode");
-            darkModeBtn.innerHTML = nowDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-            localStorage.setItem("theme", nowDark ? "dark" : "light");
-        }, 350);
-        setTimeout(() => dripContainer.classList.remove("active"), 700);
+    function toggleTheme() {
+      const isDark = document.body.classList.contains("dark-mode");
+      if (isDark) dripLayer.classList.add("drip-light");
+      else dripLayer.classList.remove("drip-light");
+
+      dripContainer.classList.add("active");
+
+      setTimeout(() => {
+        document.body.classList.toggle("dark-mode");
+        const nowDark = document.body.classList.contains("dark-mode");
+        updateThemeText(nowDark);
+        localStorage.setItem("theme", nowDark ? "dark" : "light");
+      }, 350);
+
+      setTimeout(() => { dripContainer.classList.remove("active"); }, 700);
+    }
+
+    // Desktop theme toggle
+    darkModeBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleTheme();
+      dropdownMenu.classList.remove("is-active");
+    };
+
+    // Mobile theme toggle
+    mobileDarkModeBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleTheme();
+      mobileMenu.classList.remove("show");
     };
 
     if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        darkModeBtn.innerHTML = "☀️ Light Mode";
+      document.body.classList.add("dark-mode");
+      updateThemeText(true);
+    } else {
+      updateThemeText(false);
     }
 
-    /* ===== CHANGE PASSWORD LOGIC ===== */
+    /* ===================== CHANGE PASSWORD LOGIC ===================== */
     const changePasswordBtn = document.getElementById("changePasswordBtn");
+    const mobileChangePasswordBtn = document.getElementById("mobileChangePasswordBtn");
     const changePasswordModal = document.getElementById("changePasswordModal");
     const cancelPasswordChange = document.getElementById("cancelPasswordChange");
     const changePasswordForm = document.getElementById("changePasswordForm");
 
-    changePasswordBtn.onclick = (e) => {
-        e.stopPropagation();
+    function openChangePasswordModal() {
         changePasswordModal.style.display = "flex";
         dropdownMenu.classList.remove("is-active");
+        mobileMenu.classList.remove("show");
+    }
+
+    // Desktop change password button
+    changePasswordBtn.onclick = (e) => {
+        e.stopPropagation();
+        openChangePasswordModal();
+    };
+
+    // Mobile change password button
+    mobileChangePasswordBtn.onclick = (e) => {
+        e.stopPropagation();
+        openChangePasswordModal();
     };
 
     cancelPasswordChange.onclick = () => {
@@ -339,7 +756,7 @@
         }
     };
 
-    /* ===== GRAMMAR LOGIC (STT/TTS/NLP) ===== */
+    /* ===================== GRAMMAR LOGIC (STT/TTS/NLP) ===================== */
     const input = document.getElementById("inputSentence");
     const checkBtn = document.getElementById("checkBtn");
     const descBtn = document.getElementById("descBtn");
@@ -401,33 +818,33 @@
         } catch (err) { analysisContainer.innerHTML = "Error: " + err.message; }
     };
 
-    /* ===== TEXT SIZE & LOGOUT ===== */
-    const textSizeBtn = document.getElementById("textSizeBtn");
-    const sizes = ["100%", "115%", "130%"];
-    let currentIdx = sizes.indexOf(localStorage.getItem("textSize") || "100%");
-
-    textSizeBtn.onclick = (e) => {
-        e.stopPropagation();
-        currentIdx = (currentIdx + 1) % sizes.length;
-        document.documentElement.style.setProperty('--text-scale', sizes[currentIdx]);
-        textSizeBtn.textContent = `🔍 Text Size: ${sizes[currentIdx]}`;
-        localStorage.setItem("textSize", sizes[currentIdx]);
-    };
-
-    /* ===== LOGOUT LOGIC ===== */
+    /* ===================== LOGOUT LOGIC ===================== */
     const logoutBtn = document.getElementById("logoutBtn");
+    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
     const logoutModal = document.getElementById("logoutModal");
     const cancelLogout = document.getElementById("cancelLogout");
     const confirmLogout = document.getElementById("confirmLogout");
 
-    logoutBtn.onclick = (e) => {
-        e.stopPropagation();
+    function openLogoutModal() {
         logoutModal.style.display = "flex";
         dropdownMenu.classList.remove("is-active");
-    };
+        mobileMenu.classList.remove("show");
+    }
+
+    // Desktop logout button
+    logoutBtn.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        openLogoutModal();
+    });
+
+    // Mobile logout button
+    mobileLogoutBtn.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        openLogoutModal();
+    });
 
     cancelLogout.onclick = () => { logoutModal.style.display = "none"; };
-    
+
     confirmLogout.onclick = async () => {
         const uid = sessionStorage.getItem("studentUID");
         if (uid) await updateDoc(doc(db, "students", uid), { status: "offline", lastSeen: serverTimestamp() });
@@ -442,8 +859,8 @@
         }, 700);
     };
 
-    // Close modals when clicking outside
-    window.onclick = (event) => {
+    /* ===================== MODAL CLOSE LOGIC ===================== */
+    window.onclick = (event) => { 
         if (event.target == logoutModal) logoutModal.style.display = "none";
         if (event.target == changePasswordModal) {
             changePasswordModal.style.display = "none";
