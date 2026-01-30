@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== SHARED DESIGN SYSTEM ===== */
+        /* ===== STANDARDIZED DESIGN SYSTEM ===== */
         :root {
             --maroon: #7a0c0c;
             --gold: #d4af37;
@@ -46,32 +46,22 @@
         #drip-container.active .drip-layer { top: 0; }
         .drip-light { background-color: #fdfdfd !important; }
 
-        /* ===== NAVIGATION (Standardized Grid) ===== */
+        /* ===== STANDARDIZED NAVIGATION ===== */
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 0 5%;
             height: 80px;
             background-color: var(--card-bg);
+            border-bottom: 3px solid var(--maroon);
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
         }
 
-        nav .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: var(--maroon); }
-        nav .logo span { color: var(--gold); }
-
-        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
-        nav ul li a { text-decoration: none; color: var(--nav-text); font-weight: 500; transition: color 0.3s; }
-        nav ul li a:hover { color: var(--gold); }
-
-        .nav-actions { margin-left: auto; display: flex; align-items: center; }
-
-        /* ===== BURGER MENU ===== */
         .burger-menu {
-            display: none;
+            display: none; 
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
@@ -79,105 +69,154 @@
             border: none;
             padding: 10px;
             z-index: 1002;
+            margin-right: 15px;
         }
-        .burger-menu span { width: 25px; height: 3px; background-color: var(--maroon); border-radius: 2px; transition: 0.3s; }
+        .burger-menu span { 
+            width: 25px; height: 3px; 
+            background-color: var(--white); 
+            border-radius: 2px; 
+            transition: 0.3s; 
+        }
 
-        /* ===== SETTINGS DROPDOWN ===== */
-        .dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
-        #settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: var(--maroon); color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
-        
+        nav .logo { 
+            font-size: 1.8rem; font-weight: 800; 
+            text-decoration: none; color: var(--white); 
+            margin-right: 40px;
+        }
+        nav .logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0; padding: 0;
+        }
+        .nav-links li a {
+            text-decoration: none; color: var(--nav-text);
+            font-weight: 500; transition: color 0.3s;
+        }
+        .nav-links li a:hover { color: var(--gold); }
+
+        /* Settings Dropdown (Desktop) */
+        .nav-actions { margin-left: auto; position: relative; display: flex; align-items: center; }
         .dropdown-content { 
-            display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; 
-            background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); 
-            z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; 
-            transition: opacity 0.3s ease, visibility 0.3s ease; 
+            display: none; position: absolute; right: 0; top: 100%; 
+            background-color: white; min-width: 200px; margin-top: 15px; 
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.15); border-radius: 12px; 
+            z-index: 9999; overflow: hidden; border: 1px solid #eee;
         }
-        
-        @media (min-width: 851px) { .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; } }
-        .dropdown-content.is-active { opacity: 1 !important; visibility: visible !important; }
-        .dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
-        .dropdown-content button:hover { background-color: #f1f1f1; }
-        #logoutBtn { color: var(--danger) !important; font-weight: 700; }
+        .dropdown-content.is-active { display: block; }
+        .dropdown-content button { 
+            width: 100%; padding: 12px 16px; text-align: left; border: none; 
+            background: none; font-family: inherit; cursor: pointer;
+            display: flex; align-items: center; gap: 10px; color: #333; transition: 0.2s;
+        }
+        .dropdown-content button:hover { background-color: #f8f9fa; }
 
-        /* ===== MOBILE RESPONSIVE ===== */
+        /* Mobile Side Drawer */
+        .mobile-menu {
+            position: fixed; top: 0; left: -100%; width: 280px; height: 100vh;
+            background-color: var(--card-bg); display: flex; flex-direction: column;
+            padding: 100px 30px 30px; box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+            transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1001; margin: 0; list-style: none;
+        }
+        .mobile-menu.show { left: 0; }
+        .mobile-menu li a { display: block; padding: 15px 0; text-decoration: none; color: var(--nav-text); font-weight: 500; }
+        .mobile-menu button { 
+            width: 100%; padding: 12px; margin-top: 10px; text-align: left;
+            background: #f1f1f1; border: none; border-radius: 8px; font-family: inherit; cursor: pointer;
+        }
+
         @media (max-width: 850px) {
-            nav { height: 70px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 20px; }
-            .burger-menu { display: flex; grid-column: 1; justify-self: start; }
-            nav .logo { grid-column: 2; justify-self: center; font-size: 1.5rem; }
-            .nav-actions { grid-column: 3; justify-self: end; }
-            nav ul { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; background-color: #ffffff; flex-direction: column; padding: 100px 30px 30px; gap: 25px; box-shadow: 10px 0 20px rgba(0,0,0,0.1); transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1001; }
-            nav ul.show { left: 0; }
+            .burger-menu { display: flex; }
+            .nav-links, .nav-actions { display: none; }
+            nav .logo { margin-right: auto; }
         }
 
-        /* ===== DARK MODE OVERRIDES ===== */
-        body.dark-mode { --bg: #121212; --card-bg: #1e1e1e; --nav-text: #ffffff; color: #e0e0e0; }
-        body.dark-mode nav { background-color: #202020; }
-        body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
-        body.dark-mode .dropdown-content button { color: #e6e6e6; }
-        body.dark-mode .dropdown-content button:hover { background-color: #333; }
-        body.dark-mode .burger-menu span { background-color: #ffffff; }
-
-        /* ===== TOASTS ===== */
-        #toast-container { position: fixed; top: 25px; right: 25px; z-index: 9999; }
-        .toast { padding: 16px 24px; margin-bottom: 12px; border-radius: 8px; color: white; background: var(--maroon); border-left: 5px solid var(--gold); animation: slideIn 0.4s forwards; }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
-        /* ===== DASHBOARD CARDS ===== */
+        /* ===== DASHBOARD & FORMS ===== */
         .dashboard-container { padding: 40px 5%; max-width: 1200px; margin: 0 auto; }
-        .dashboard-card { background: var(--card-bg); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
-        .btn { padding: 12px 25px; border-radius: 30px; border: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
+        .dashboard-card { 
+            background: var(--card-bg); border-radius: 20px; padding: 2.5rem; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; margin: 20px 0;
+        }
+        .btn { padding: 12px 25px; border-radius: 30px; border: none; font-weight: 600; cursor: pointer; transition: var(--transition); font-family: inherit; }
         .btn-maroon { background: var(--maroon); color: white; }
         .btn-gold { background: var(--gold); color: white; }
 
-        /* ===== MODALS ===== */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .modal-card { background: var(--card-bg); padding: 30px; border-radius: 24px; width: 90%; max-width: 450px; }
-        input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-top: 5px; box-sizing: border-box; }
-        body.dark-mode input, body.dark-mode select { background: #252525; color: white; border-color: #444; }
+        
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--nav-text); }
+        
+        /* Fixed Input/Select sizing */
+        .form-group input, .form-group select { 
+            width: 100%; padding: 12px; border-radius: 10px; 
+            border: 1px solid #ddd; font-family: inherit; font-size: 0.95rem;
+            box-sizing: border-box; background: var(--card-bg); color: var(--nav-text);
+        }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode { --bg: #121212; --card-bg: #1e1e1e; --nav-text: #ffffff; color: #e0e0e0; }
+        body.dark-mode nav { background-color: #202020; }
+        body.dark-mode .dropdown-content { background-color: #1e1e1e; border-color: #333; }
+        body.dark-mode .dropdown-content button { color: #fff; }
+        body.dark-mode .dropdown-content button:hover { background-color: #2a2a2a; }
+        body.dark-mode .mobile-menu { background-color: #1e1e1e; }
+        body.dark-mode .mobile-menu button { background: #2a2a2a; color: white; }
+        body.dark-mode .burger-menu span { background-color: #ffffff; }
+
+        .footer-credit { text-align: center; padding: 40px 20px; color: #888; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <div id="drip-container">
-  <div id="dripLayer" class="drip-layer"></div>
-  <svg width="0" height="0"><defs><clipPath id="drip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path></clipPath></defs></svg>
+    <div id="dripLayer" class="drip-layer"></div>
+    <svg width="0" height="0"><defs><clipPath id="drip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path></clipPath></defs></svg>
 </div>
 
-<div id="toast-container"></div>
-
 <nav>
-    <button class="burger-menu" id="burgerBtn">
-        <span></span><span></span><span></span>
-    </button>
-
+    <button class="burger-menu" id="burgerBtn"><span></span><span></span><span></span></button>
     <a href="teacher_panel.html" class="logo">UB<span>igkas</span></a>
     
-    <ul id="navLinks">
-        <li><a href="teacher_panel.html">Home</a></li>
-        <li><a href="list.html">List</a></li>
+    <ul class="nav-links">
+        <li><a href="teacher_panel.html">Dashboard</a></li>
+        <li><a href="list.html">Class List</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
 
     <div class="nav-actions">
-        <div class="dropdown">
-            <button id="settingsBtn">Settings ⚙️</button>
-            <div class="dropdown-content" id="settingsDropdown">
-                <button id="darkModeBtn">🌙 Dark Mode</button>
-                <button id="textSizeBtn">🔍 Text Size: 100%</button>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
-                <button id="logoutBtn">🚪 Logout</button>
-            </div>
+        <button id="settingsBtn" class="btn btn-maroon" style="padding: 8px 20px; font-size: 0.9rem;">Settings ⚙️</button>
+        <div class="dropdown-content" id="settingsDropdown">
+            <button class="theme-toggle">🌙 Dark Mode</button>
+            <button class="size-toggle">🔍 Text Size</button>
+            <hr style="border:0; border-top:1px solid #eee; margin:0;">
+            <button class="logout-trigger" style="color:var(--danger)">🚪 Logout</button>
         </div>
     </div>
 </nav>
+
+<ul class="mobile-menu" id="mobileMenu">
+    <li><a href="teacher_panel.html">Dashboard</a></li>
+    <li><a href="list.html">Class List</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <div style="margin-top:20px; border-top:1px solid #eee; padding-top:20px;">
+        <button class="theme-toggle">🌙 Dark Mode</button>
+        <button class="size-toggle">🔍 Text Size</button>
+        <button class="logout-trigger" style="color:var(--danger);">🚪 Logout</button>
+    </div>
+</ul>
 
 <div id="logoutModal" class="modal-overlay">
     <div class="modal-card" style="text-align: center;">
         <h3>Logout Confirmation</h3>
         <p>Are you sure you want to logout?</p>
         <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
-            <button id="cancelLogout" class="btn" style="background:#eee;">Cancel</button>
+            <button id="cancelLogout" class="btn" style="background:#eee; color:#333;">Cancel</button>
             <button id="confirmLogout" class="btn btn-maroon">Logout</button>
         </div>
     </div>
@@ -185,9 +224,9 @@
 
 <main class="dashboard-container">
     <div class="dashboard-card">
-        <h1>Teacher Dashboard</h1>
-        <p style="color: #666;">Manage students, classes, and learning materials.</p>
-        <div style="display: flex; gap: 15px; margin-top: 25px; justify-content: center; flex-wrap: wrap;">
+        <h1 style="color: var(--white); margin-bottom: 15px;">Teacher Dashboard</h1>
+        <p style="margin-bottom: 30px;">Manage students, classes, and learning materials.</p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
             <button class="btn btn-maroon" id="openStudentCardBtn">Add Student</button>
             <button class="btn btn-gold" id="openClassCardBtn">Create Class</button>
         </div>
@@ -196,14 +235,17 @@
 
 <div id="studentCard" class="modal-overlay">
     <div class="modal-card">
-        <h2 style="color: var(--maroon);">Add New Student</h2>
+        <h2 style="color: var(--gold); margin-bottom: 20px;">Add New Student</h2>
         <form id="studentForm">
-            <label>Full Name</label><input id="studentNameInput" type="text" placeholder="Juan Dela Cruz" required>
-            <label>Email Address</label><input id="studentEmail" type="email" placeholder="1234567@ub.edu.ph" required>
-            <label>Temporary Password</label><input id="studentPassword" type="password" placeholder="••••••••" required>
-            <label>Assigned Class</label><select id="classSelect" required></select>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button type="button" id="closeStudentCardBtn" class="btn" style="flex: 1; background:#eee;">Cancel</button>
+            <div class="form-group"><label>Full Name</label><input type="text" placeholder="Juan Dela Cruz" required></div>
+            <div class="form-group"><label>Email Address</label><input type="email" placeholder="1234567@ub.edu.ph" required></div>
+            <div class="form-group"><label>Temporary Password</label><input type="password" placeholder="••••••••" required></div>
+            <div class="form-group">
+                <label>Assigned Class</label>
+                <select required><option value="">Select Class</option></select>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <button type="button" class="close-modal btn" style="flex: 1; background:#eee; color:#333;">Cancel</button>
                 <button type="submit" class="btn btn-maroon" style="flex: 2;">✨ Create Account</button>
             </div>
         </form>
@@ -212,180 +254,84 @@
 
 <div id="classCard" class="modal-overlay">
     <div class="modal-card">
-        <h2 style="color: var(--gold);">Create New Class</h2>
+        <h2 style="color: var(--gold); margin-bottom: 20px;">Create New Class</h2>
         <form id="classForm">
-            <label>Class Name / Section</label><input id="className" type="text" placeholder="e.g. GRADE-10-A" required>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button type="button" id="closeClassCardBtn" class="btn" style="flex: 1; background:#eee;">Cancel</button>
+            <div class="form-group">
+                <label>Class Name / Section</label>
+                <input type="text" placeholder="e.g. GRADE-10-A" required>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <button type="button" class="close-modal btn" style="flex: 1; background:#eee; color:#333;">Cancel</button>
                 <button type="submit" class="btn btn-gold" style="flex: 2;">Add Class</button>
             </div>
         </form>
     </div>
 </div>
 
-<footer class="footer-credit" style="text-align:center; padding: 40px 0; color:#888;">
-    ©2026 University of Batangas – Lipa City
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script> (function(){ emailjs.init("vRoWpjpDgjKcQPN7C"); })(); </script>
+<footer class="footer-credit">©2026 University of Batangas – Lipa City</footer>
 
 <script type="module">
-    import { auth, db } from "../firebase.js";
-    import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { doc, setDoc, serverTimestamp, collection, getDoc, onSnapshot, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { auth } from "../firebase.js";
+    import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    let teacherUID = null;
-
-    /* ===== NAVIGATION & DROPDOWN LOGIC ===== */
     const burgerBtn = document.getElementById("burgerBtn");
-    const navLinks = document.getElementById("navLinks");
+    const mobileMenu = document.getElementById("mobileMenu");
     const settingsBtn = document.getElementById("settingsBtn");
-    const dropdownMenu = document.getElementById("settingsDropdown");
+    const settingsDropdown = document.getElementById("settingsDropdown");
 
-    burgerBtn.onclick = (e) => { e.stopPropagation(); navLinks.classList.toggle("show"); };
-    settingsBtn.onclick = (e) => { e.stopPropagation(); dropdownMenu.classList.toggle("is-active"); };
+    // Toggle Burger
+    burgerBtn.onclick = (e) => { e.stopPropagation(); mobileMenu.classList.toggle("show"); };
+    // Toggle Settings
+    settingsBtn.onclick = (e) => { e.stopPropagation(); settingsDropdown.classList.toggle("is-active"); };
 
+    // Close menus on outside click
     document.addEventListener('click', (e) => {
-        if (!settingsBtn.contains(e.target)) dropdownMenu.classList.remove("is-active");
-        if (!burgerBtn.contains(e.target) && !navLinks.contains(e.target)) navLinks.classList.remove("show");
+        if (!burgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove("show");
+        if (!settingsBtn.contains(e.target)) settingsDropdown.classList.remove("is-active");
     });
 
-    /* ===== THEME & DRIP LOGIC ===== */
-    const darkModeBtn = document.getElementById("darkModeBtn");
+    // Unified Theme Logic
     const dripContainer = document.getElementById("drip-container");
     const dripLayer = document.getElementById("dripLayer");
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+        btn.onclick = () => {
+            const isDark = document.body.classList.contains("dark-mode");
+            dripLayer.classList.toggle("drip-light", isDark);
+            dripContainer.classList.add("active");
+            setTimeout(() => {
+                document.body.classList.toggle("dark-mode");
+                localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+            }, 350);
+            setTimeout(() => dripContainer.classList.remove("active"), 700);
+        };
+    });
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
 
-    darkModeBtn.onclick = (e) => {
-        e.stopPropagation();
-        const isDark = document.body.classList.contains("dark-mode");
-        isDark ? dripLayer.classList.add("drip-light") : dripLayer.classList.remove("drip-light");
-        dripContainer.classList.add("active");
-
-        setTimeout(() => {
-            document.body.classList.toggle("dark-mode");
-            const nowDark = document.body.classList.contains("dark-mode");
-            darkModeBtn.innerHTML = nowDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-            localStorage.setItem("theme", nowDark ? "dark" : "light");
-        }, 350);
-        setTimeout(() => dripContainer.classList.remove("active"), 700);
-    };
-
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        darkModeBtn.innerHTML = "☀️ Light Mode";
-    }
-
-    /* ===== TEXT SIZE LOGIC ===== */
-    const textSizeBtn = document.getElementById("textSizeBtn");
-    const sizes = ["100%", "115%", "130%"];
-    let currentIdx = sizes.indexOf(localStorage.getItem("textSize") || "100%");
-    
-    textSizeBtn.onclick = (e) => {
-        e.stopPropagation();
-        currentIdx = (currentIdx + 1) % sizes.length;
-        document.documentElement.style.setProperty('--text-scale', sizes[currentIdx]);
-        textSizeBtn.textContent = `🔍 Text Size: ${sizes[currentIdx]}`;
-        localStorage.setItem("textSize", sizes[currentIdx]);
-    };
-    document.documentElement.style.setProperty('--text-scale', sizes[currentIdx]);
-    textSizeBtn.textContent = `🔍 Text Size: ${sizes[currentIdx]}`;
-
-    /* ===== TOAST LOGIC ===== */
-    function showToast(message, type = "info") {
-        const container = document.getElementById("toast-container");
-        const toast = document.createElement("div");
-        toast.className = `toast`;
-        toast.textContent = message;
-        container.appendChild(toast);
-        setTimeout(() => toast.remove(), 4000);
-    }
-
-    /* ===== FIREBASE TEACHER LOGIC ===== */
-    onAuthStateChanged(auth, async user => {
-        if (!user) return window.location.href = "../index.html";
-        teacherUID = user.uid;
-        const teacherDoc = await getDoc(doc(db, "teacher_accounts", teacherUID));
-        if (!teacherDoc.exists()) {
-            await signOut(auth);
-            window.location.href = "../index.html";
-        }
-        listenForClasses();
+    // Text Size Logic
+    const sizes = ["100%", "110%", "120%"];
+    let sIdx = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+    document.querySelectorAll('.size-toggle').forEach(btn => {
+        btn.onclick = () => {
+            sIdx = (sIdx + 1) % sizes.length;
+            document.documentElement.style.setProperty('--text-scale', sizes[sIdx]);
+            localStorage.setItem("textSize", sizes[sIdx]);
+        };
     });
 
-    function listenForClasses() {
-        onSnapshot(collection(db, "teacher_accounts", teacherUID, "classes"), snap => {
-            const select = document.getElementById("classSelect");
-            select.innerHTML = '<option value="">Select Class</option>';
-            snap.forEach(docSnap => {
-                const opt = document.createElement("option");
-                opt.value = docSnap.id; opt.textContent = docSnap.data().name;
-                select.appendChild(opt);
-            });
-        });
-    }
+    // Modal Control
+    const openModals = (id) => document.getElementById(id).style.display = "flex";
+    const closeAllModals = () => document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = "none");
 
-    const secondaryApp = initializeApp({
-        apiKey: "AIzaSyC7woa1g1tRQKoepK1m_CQfkyjfwqMcOmc",
-        authDomain: "ubigkas-2226b.firebaseapp.com",
-        projectId: "ubigkas-2226b",
-    }, "Secondary");
-    const secondaryAuth = getAuth(secondaryApp);
+    document.getElementById("openStudentCardBtn").onclick = () => openModals("studentCard");
+    document.getElementById("openClassCardBtn").onclick = () => openModals("classCard");
+    document.querySelectorAll('.close-modal').forEach(btn => btn.onclick = closeAllModals);
 
-    document.getElementById("studentForm").onsubmit = async e => {
-        e.preventDefault();
-        const name = document.getElementById("studentNameInput").value.trim();
-        const email = document.getElementById("studentEmail").value.trim().toLowerCase();
-        const password = document.getElementById("studentPassword").value;
-        const classSelect = document.getElementById("classSelect");
-
-        if (!/^\d{7}@ub\.edu\.ph$/.test(email)) {
-            return showToast("Use 7 digits + @ub.edu.ph", "error");
-        }
-
-        try {
-            const cred = await createUserWithEmailAndPassword(secondaryAuth, email, password);
-            await setDoc(doc(db, "students", cred.user.uid), {
-                uid: cred.user.uid, name, email, classId: classSelect.value, 
-                className: classSelect.options[classSelect.selectedIndex].text,
-                teacherUID, role: "student", createdAt: serverTimestamp()
-            });
-            await emailjs.send("service_hxj7n1j", "template_wzxxy9g", {
-                student_name: name, student_email: email, student_password: password, class_name: classSelect.options[classSelect.selectedIndex].text
-            });
-            showToast("Student created successfully!", "success");
-            document.getElementById("studentCard").style.display = "none";
-            e.target.reset();
-        } catch (err) { showToast(err.message, "error"); }
-    };
-
-    document.getElementById("classForm").onsubmit = async e => {
-        e.preventDefault();
-        const name = document.getElementById("className").value.trim().toUpperCase();
-        try {
-            await setDoc(doc(db, "teacher_accounts", teacherUID, "classes", name), { name, createdAt: serverTimestamp(), createdBy: teacherUID });
-            showToast("Class created!", "success");
-            document.getElementById("classCard").style.display = "none";
-            e.target.reset();
-        } catch (err) { showToast(err.message, "error"); }
-    };
-
-    /* ===== MODAL CONTROLS ===== */
-    document.getElementById("openStudentCardBtn").onclick = () => document.getElementById("studentCard").style.display = "flex";
-    document.getElementById("closeStudentCardBtn").onclick = () => document.getElementById("studentCard").style.display = "none";
-    document.getElementById("openClassCardBtn").onclick = () => document.getElementById("classCard").style.display = "flex";
-    document.getElementById("closeClassCardBtn").onclick = () => document.getElementById("classCard").style.display = "none";
-    
-    document.getElementById("logoutBtn").onclick = (e) => { e.stopPropagation(); document.getElementById("logoutModal").style.display = "flex"; };
-    document.getElementById("cancelLogout").onclick = () => document.getElementById("logoutModal").style.display = "none";
+    // Logout
+    document.querySelectorAll('.logout-trigger').forEach(btn => btn.onclick = () => openModals("logoutModal"));
+    document.getElementById("cancelLogout").onclick = closeAllModals;
     document.getElementById("confirmLogout").onclick = async () => {
-        dripContainer.classList.add("active");
-        dripLayer.classList.toggle("drip-light", !document.body.classList.contains("dark-mode"));
-        setTimeout(async () => {
-            await signOut(auth);
-            window.location.href = "../index.html";
-        }, 700);
+        await signOut(auth);
+        window.location.href = "../index.html";
     };
 </script>
 </body>

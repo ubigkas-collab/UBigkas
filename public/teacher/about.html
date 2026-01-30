@@ -5,61 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | UBigkas</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css"> 
     
     <style>
-        /* ===== TEXT SCALING VARIABLE ===== */
-        :root { --text-scale: 100%; }
-        body { font-size: var(--text-scale); transition: background-color 0.3s ease; }
+        /* ===== STANDARDIZED DESIGN SYSTEM ===== */
+        :root {
+            --maroon: #7a0c0c;
+            --gold: #d4af37;
+            --bg: #f8f9fa;
+            --card-bg: #fff;
+            --nav-text: #333;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --text-scale: 100%;
+            --danger: #d9534f;
+        }
 
-        /* CSS shared with Dashboard for Nav & Drip */
-        #drip-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
-        .drip-layer { position: absolute; top: -110%; left: 0; width: 100%; height: 120%; background-color: #181818; transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1); clip-path: url(#drip-path); }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            overflow-x: hidden;
+            font-size: var(--text-scale);
+            transition: var(--transition);
+        }
+
+        /* ===== DRIP EFFECT ===== */
+        #drip-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10001;
+        }
+        .drip-layer {
+            position: absolute;
+            top: -110%; left: 0; width: 100%; height: 120%;
+            background-color: #121212; 
+            transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+            clip-path: url(#drip-path);
+        }
         #drip-container.active .drip-layer { top: 0; }
         .drip-light { background-color: #fdfdfd !important; }
 
-        /* ===== SETTINGS DROPDOWN (Integrated from Dashboard) ===== */
+        /* ===== NAVIGATION (FIXED LAYOUT) ===== */
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            height: 80px;
+            background-color: var(--card-bg);
+            border-bottom: 3px solid var(--maroon);
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Burger Menu - REMOVED FROM DESKTOP VIEW */
+        .burger-menu {
+            display: none; 
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            z-index: 1002;
+        }
+        .burger-menu span { width: 25px; height: 3px; background-color: #e6e6e6; border-radius: 2px; }
+
+        nav .logo { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: var(--white); 
+            flex-shrink: 0;
+            margin-right: 40px;
+        }
+        nav .logo span { color: var(--gold); }
+
+        /* Correct Nav Links (Beside Logo) */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        .nav-links li a:hover { color: var(--gold); }
+
         .nav-actions { margin-left: auto; display: flex; align-items: center; }
-        .dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
-        #settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: #7a0c0c; color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
-        .dropdown-content { display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; transition: opacity 0.3s ease, visibility 0.3s ease; transition-delay: 0.8s; }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transition-delay: 0s; }
-        .dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
-        .dropdown-content button:hover { background-color: #f1f1f1; }
-        #logoutBtn { color: #d9534f !important; font-weight: 700; }
-        
-        /* Dark Mode overrides */
-        body.dark-mode { background-color: #181818; color: #e6e6e6; }
+
+        /* Dropdown Settings */
+        .dropdown { position: relative; }
+        #settingsBtn { 
+            padding: 10px 20px; border-radius: 25px; background-color: var(--maroon); 
+            color: white; font-weight: 600; border: none; cursor: pointer;
+        }
+        .dropdown-content { 
+            display: none; position: absolute; right: 0; top: 100%; 
+            background-color: white; min-width: 200px; margin-top: 10px; 
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;
+        }
+        .dropdown-content.is-active { display: block; }
+        .dropdown-content button { 
+            width: 100%; padding: 12px; text-align: left; border: none; 
+            background: none; cursor: pointer; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* HIDDEN MOBILE DRAWER (Only shows on mobile) */
+        .mobile-menu {
+            display: none; /* COMPLETELY REMOVED FROM DESKTOP VIEW */
+        }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode { --bg: #121212; --card-bg: #1e1e1e; --nav-text: #fff; color: #e0e0e0; }
         body.dark-mode nav { background-color: #202020; }
         body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
-        body.dark-mode .dropdown-content button { color: #e6e6e6; }
-        body.dark-mode .dropdown-content button:hover { background-color: #333; }
-        body.dark-mode #featureDeck { background-color: #242424; color: #fff; border: 1px solid #333; }
-        body.dark-mode #missionSub { color: #bbb; }
+        body.dark-mode .dropdown-content button { color: #fff; }
 
-        /* Carousel Content Styles */
+        /* ===== MOBILE RESPONSIVE (Triggers at 850px) ===== */
+        @media (max-width: 850px) {
+            .nav-links { display: none; } /* Hide the beside-logo links */
+            .nav-actions { display: none; }
+            .burger-menu { display: flex; } /* Show burger */
+            
+            nav .logo { margin-right: auto; }
+
+            .mobile-menu {
+                display: flex; /* Now it's allowed to show */
+                position: fixed; top: 0; left: -100%; width: 280px; height: 100vh;
+                background-color: var(--card-bg); flex-direction: column;
+                padding: 100px 30px; box-shadow: 10px 0 20px rgba(0,0,0,0.2);
+                transition: left 0.4s ease; z-index: 1001; list-style: none; margin: 0;
+            }
+            .mobile-menu.show { left: 0; }
+            .mobile-menu li a { display: block; padding: 15px 0; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+            .mobile-menu button { width: 100%; padding: 12px; margin-top: 10px; text-align: left; border: none; border-radius: 8px; cursor: pointer; display: flex; gap: 10px; }
+        }
+
+        /* ===== ABOUT CONTENT (No changes to content structure) ===== */
         .container { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center; }
-        #featureDeck { position: relative; min-height: 250px; background: #fff; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: background 0.3s ease; }
+        #featureDeck { position: relative; min-height: 250px; background: var(--card-bg); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 40px 0; }
         .feature-card { display: none; }
         .feature-card.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .carousel-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
-        .btn-action { padding: 12px 25px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; transition: transform 0.2s; }
-        .btn-action:active { transform: scale(0.95); }
-        
-        /* Modal Styles */
+        .carousel-btns { display: flex; gap: 15px; justify-content: center; }
+        .btn-action { padding: 12px 25px; border-radius: 50px; border: none; cursor: pointer; font-weight: 600; }
+        .footer-credit { text-align: center; padding: 40px 20px; color: #888; font-size: 0.9rem; }
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .modal-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 400px; }
-        body.dark-mode .modal-card { background: #242424; color: white; border: 1px solid #333; }
-
-        /* Responsive Mobile Viewport */
-        @media (max-width: 768px) {
-            .container { margin: 30px auto; }
-            h1 { font-size: 1.8rem !important; }
-            #featureDeck { padding: 25px 20px; min-height: 320px; }
-            .carousel-btns { flex-direction: row; width: 100%; }
-            .btn-action { flex: 1; padding: 10px 15px; font-size: 0.9rem; }
-        }
+        .modal-card { background: var(--card-bg); padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 400px; }
     </style>
 </head>
 <body>
@@ -70,51 +171,67 @@
 </div>
 
 <nav>
-    <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
-    <ul>
+    <button class="burger-menu" id="burgerBtn">
+        <span></span><span></span><span></span>
+    </button>
+
+    <a href="teacher_panel.html" class="logo">UB<span>igkas</span></a>
+    
+    <ul class="nav-links">
         <li><a href="teacher_panel.html">Dashboard</a></li>
         <li><a href="list.html">Class List</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
+
     <div class="nav-actions">
         <div class="dropdown">
             <button id="settingsBtn">Settings ⚙️</button>
-            <div class="dropdown-content">
-                <button id="darkModeBtn">🌙 Dark Mode</button>
-                <button id="textSizeBtn">🔍 Text Size: 100%</button>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
-                <button id="logoutBtn">🚪 Logout</button>
+            <div class="dropdown-content" id="settingsDropdown">
+                <button class="theme-toggle">🌙 Dark Mode</button>
+                <button class="size-toggle">🔍 Text Size</button>
+                <hr style="border:0; border-top:1px solid #eee; margin:0;">
+                <button class="logout-trigger" style="color:var(--danger)">🚪 Logout</button>
             </div>
         </div>
     </div>
 </nav>
 
+<ul class="mobile-menu" id="mobileMenu">
+    <li><a href="teacher_panel.html">Dashboard</a></li>
+    <li><a href="list.html">Class List</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <div style="margin-top:20px; border-top:1px solid #eee; padding-top:20px;">
+        <button class="theme-toggle">🌙 Dark Mode</button>
+        <button class="size-toggle">🔍 Text Size</button>
+        <button class="logout-trigger" style="color:var(--danger);">🚪 Logout</button>
+    </div>
+</ul>
+
 <div class="container">
-    <h1 style="color:#7a0c0c; font-size: 2.5rem; margin-bottom: 10px;">About UBigkas</h1>
-    <p style="font-weight: 600; color: #555;" id="missionSub">Wika Natin, Pagyamanin sa Makabagong Panahon.</p>
+    <h1 style="color:rgb(204, 180, 45); font-size: 2.5rem; margin-bottom: 10px;">About UBigkas</h1>
+    <p style="font-weight: 600; color: #e6e6e6;" id="missionSub">Wika Natin, Pagyamanin sa Makabagong Panahon.</p>
     
     <div style="text-align: left; margin: 40px 0; line-height: 1.8;">
-        <p><strong>UBigkas</strong> is a dedicated language learning initiative born out of the University of Batangas. Our platform serves as a bridge between the foundational rules of Filipino grammar and the fast-paced demands of modern communication. We believe that mastery of one's native tongue is the first step toward effective global expression.</p>
-        
+        <p><strong>UBigkas</strong> is a dedicated language learning initiative born out of the University of Batangas. Our platform serves as a bridge between the foundational rules of Filipino grammar and the fast-paced demands of modern communication.</p>
         <p>Whether you are a student looking to perfect your sentence construction or an enthusiast wanting to dive deeper into the nuances of Tagalog, UBigkas provides the digital tools necessary to make learning intuitive, accurate, and engaging.</p>
     </div>
 
     <div id="featureDeck">
         <div class="feature-card active">
-            <h2 style="color:#7a0c0c">Comprehensive Assessments</h2>
-            <p>Our interactive quiz engine goes beyond simple multiple-choice questions. We offer modules covering <strong>Verb Conjugation (Pandiwa)</strong>, <strong>Noun Classification (Pangngalan)</strong>, and <strong>Syntactic Structures</strong>. Each quiz is designed to challenge your understanding and provide a feedback for improvement.</p>
+            <h2 style="color:rgb(204, 180, 45)">Comprehensive Assessments</h2>
+            <p>Our interactive quiz engine goes beyond simple multiple-choice questions. We offer modules covering <strong>Verb Conjugation (Pandiwa)</strong>, <strong>Noun Classification (Pangngalan)</strong>, and <strong>Syntactic Structures</strong>.</p>
         </div>
         
         <div class="feature-card">
             <h2 style="color:#7a0c0c">Grammar & Speech Tools</h2>
-            <p>Refine your language skills with our <strong>Grammar Corrector</strong> and integrated <strong>Speech-to-Text (STT)</strong> and <strong>Text-to-Speech (TTS)</strong> features designed for pronunciation practice.</p>
-            <p style="font-size: 0.85rem; opacity: 0.9;"><em>Note: As Filipino NLP resources are currently evolving, our AI analysis is still in development. While we strive for accuracy, users may encounter inconsistencies as we work toward a more robust Grammar focus.</em></p>
+            <p>Refine your language skills with our <strong>Grammar Corrector</strong> and integrated <strong>Speech-to-Text (STT)</strong> and <strong>Text-to-Speech (TTS)</strong> features.</p>
         </div>
 
         <div class="feature-card">
             <h2 style="color:#7a0c0c">Personalized Learning Paths</h2>
-            <p>No two students learn at the same pace. UBigkas tracks your performance over time, generating a <strong>Performance Dashboard</strong> that highlights your strengths and identifies areas that need more focus, ensuring that your study time is used efficiently.</p>
+            <p>UBigkas tracks your performance over time, generating a <strong>Performance Dashboard</strong> that highlights your strengths and identifies areas that need focus.</p>
         </div>
     </div>
 
@@ -135,9 +252,52 @@
     </div>
 </div>
 
+<footer class="footer-credit">©2026 University of Batangas – Lipa City</footer>
+
 <script type="module">
     import { auth } from "../firebase.js";
     import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const burgerBtn = document.getElementById("burgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const settingsBtn = document.getElementById("settingsBtn");
+    const settingsDropdown = document.getElementById("settingsDropdown");
+
+    burgerBtn.onclick = (e) => { e.stopPropagation(); mobileMenu.classList.toggle("show"); };
+    settingsBtn.onclick = (e) => { e.stopPropagation(); settingsDropdown.classList.toggle("is-active"); };
+
+    document.addEventListener('click', (e) => {
+        if (!burgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove("show");
+        if (!settingsBtn.contains(e.target)) settingsDropdown.classList.remove("is-active");
+    });
+
+    // Theme & Size logic (No changes to logic, just applying the fix)
+    const dripContainer = document.getElementById("drip-container");
+    const dripLayer = document.getElementById("dripLayer");
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+        btn.onclick = () => {
+            const isDark = document.body.classList.contains("dark-mode");
+            dripLayer.classList.toggle("drip-light", isDark);
+            dripContainer.classList.add("active");
+            setTimeout(() => {
+                document.body.classList.toggle("dark-mode");
+                localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+            }, 350);
+            setTimeout(() => dripContainer.classList.remove("active"), 700);
+        };
+    });
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+
+    const sizes = ["100%", "110%", "120%"];
+    let sIdx = sizes.indexOf(localStorage.getItem("textSize") || "100%");
+    document.querySelectorAll('.size-toggle').forEach(btn => {
+        btn.onclick = () => {
+            sIdx = (sIdx + 1) % sizes.length;
+            document.documentElement.style.setProperty('--text-scale', sizes[sIdx]);
+            localStorage.setItem("textSize", sizes[sIdx]);
+        };
+    });
+    document.documentElement.style.setProperty('--text-scale', sizes[sIdx] || "100%");
 
     // Carousel Logic
     const cards = document.querySelectorAll('.feature-card');
@@ -145,69 +305,13 @@
     document.getElementById('nextBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx + 1) % cards.length; cards[idx].classList.add('active'); };
     document.getElementById('prevBtn').onclick = () => { cards[idx].classList.remove('active'); idx = (idx - 1 + cards.length) % cards.length; cards[idx].classList.add('active'); };
 
-    /* ===================== TEXT SIZE LOGIC ===================== */
-    const textSizeBtn = document.getElementById("textSizeBtn");
-    const sizes = ["100%", "115%", "130%"];
-    let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
-    if(currentSizeIndex === -1) currentSizeIndex = 0;
-
-    function updateTextSize() {
-        const newSize = sizes[currentSizeIndex];
-        document.documentElement.style.setProperty('--text-scale', newSize);
-        textSizeBtn.textContent = `🔍 Text Size: ${newSize}`;
-        localStorage.setItem("textSize", newSize);
-    }
-
-    textSizeBtn.onclick = (e) => {
-        e.stopPropagation();
-        currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
-        updateTextSize();
-    };
-    updateTextSize();
-
-    /* ===================== THEME SWITCHER ===================== */
-    const darkModeBtn = document.getElementById("darkModeBtn");
-    const dripContainer = document.getElementById("drip-container");
-    const dripLayer = document.getElementById("dripLayer");
-
-    function updateThemeText(isDark) {
-        darkModeBtn.innerHTML = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-    }
-
-    darkModeBtn.onclick = (e) => {
-        e.stopPropagation();
-        const isDark = document.body.classList.contains("dark-mode");
-        isDark ? dripLayer.classList.add("drip-light") : dripLayer.classList.remove("drip-light");
-        dripContainer.classList.add("active");
-
-        setTimeout(() => {
-            document.body.classList.toggle("dark-mode");
-            const nowDark = document.body.classList.contains("dark-mode");
-            updateThemeText(nowDark);
-            localStorage.setItem("theme", nowDark ? "dark" : "light");
-        }, 350);
-        setTimeout(() => dripContainer.classList.remove("active"), 700);
-    };
-
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        updateThemeText(true);
-    }
-
-    /* ===================== LOGOUT LOGIC ===================== */
-    const logoutBtn = document.getElementById("logoutBtn");
+    // Logout
     const logoutModal = document.getElementById("logoutModal");
-
-    logoutBtn.onclick = (e) => { e.stopPropagation(); logoutModal.style.display = "flex"; };
+    document.querySelectorAll('.logout-trigger').forEach(btn => {
+        btn.onclick = () => { logoutModal.style.display = "flex"; settingsDropdown.classList.remove("is-active"); mobileMenu.classList.remove("show"); };
+    });
     document.getElementById("cancelLogout").onclick = () => logoutModal.style.display = "none";
-    
-    document.getElementById("confirmLogout").onclick = async () => {
-        await signOut(auth);
-        sessionStorage.clear();
-        window.location.href = "../index.html";
-    };
-
-    window.onclick = (event) => { if (event.target == logoutModal) logoutModal.style.display = "none"; };
+    document.getElementById("confirmLogout").onclick = async () => { await signOut(auth); window.location.href = "../index.html"; };
 </script>
 </body>
 </html>

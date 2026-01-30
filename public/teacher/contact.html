@@ -5,46 +5,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Developers | UBigkas</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    
     <style>
-        /* ===== TEXT SCALING VARIABLE ===== */
-        :root { --text-scale: 100%; }
-        body { font-size: var(--text-scale); transition: background-color 0.3s ease; }
+        /* ===== STANDARDIZED DESIGN SYSTEM ===== */
+        :root {
+            --maroon: #7a0c0c;
+            --gold: #d4af37;
+            --bg: #f8f9fa;
+            --card-bg: #fff;
+            --nav-text: #333;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --text-scale: 100%;
+            --danger: #d9534f;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            overflow-x: hidden;
+            font-size: var(--text-scale);
+            transition: var(--transition);
+        }
 
         /* ===== DRIP EFFECT ===== */
-        #drip-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10000; }
-        .drip-layer { position: absolute; top: -110%; left: 0; width: 100%; height: 120%; background-color: #181818; transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1); clip-path: url(#drip-path); }
+        #drip-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10001;
+        }
+        .drip-layer {
+            position: absolute;
+            top: -110%; left: 0; width: 100%; height: 120%;
+            background-color: #121212; 
+            transition: top 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+            clip-path: url(#drip-path);
+        }
         #drip-container.active .drip-layer { top: 0; }
         .drip-light { background-color: #fdfdfd !important; }
-        
-        /* ===== SETTINGS DROPDOWN (Integrated from Dashboard) ===== */
-        .nav-actions { margin-left: auto; display: flex; align-items: center; }
-        .dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
-        #settingsBtn { padding: 10px 20px; border-radius: 25px; background-color: #7a0c0c; color: white; font-weight: 600; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
-        .dropdown-content { display: block; opacity: 0; visibility: hidden; position: absolute; right: 0; background-color: white; min-width: 220px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10001; border-radius: 12px; overflow: hidden; margin-top: 10px; transition: opacity 0.3s ease, visibility 0.3s ease; transition-delay: 0.8s; }
-        .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transition-delay: 0s; }
-        .dropdown-content button { width: 100%; padding: 12px 16px; text-align: left; border: none; background: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s; color: #333; }
-        .dropdown-content button:hover { background-color: #f1f1f1; }
-        #logoutBtn { color: #d9534f !important; font-weight: 700; }
 
-        /* ===== DARK MODE ===== */
-        body.dark-mode { background-color: #181818; color: #e6e6e6; }
+        /* ===== STANDARDIZED NAVIGATION ===== */
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            height: 80px;
+            background-color: var(--card-bg);
+            border-bottom: 3px solid var(--maroon);
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Burger Menu - Hidden on Desktop */
+        .burger-menu {
+            display: none; 
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            z-index: 1002;
+            margin-right: 15px;
+        }
+        .burger-menu span { 
+            width: 25px; 
+            height: 3px; 
+            background-color: var(--maroon); 
+            border-radius: 2px; 
+            transition: 0.3s; 
+        }
+
+        nav .logo { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: var(--white); 
+            flex-shrink: 0;
+        }
+        nav .logo span { color: var(--gold); }
+
+        /* Nav Links - Inline for Desktop */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            margin-left: 40px;
+            position: static;
+        }
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        .nav-links li a:hover { color: var(--gold); }
+
+        .nav-actions { 
+            margin-left: auto; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+        }
+
+        /* ===== SETTINGS DROPDOWN ===== */
+        .dropdown { position: relative; display: inline-block; }
+        #settingsBtn { 
+            padding: 10px 20px; 
+            border-radius: 25px; 
+            background-color: var(--maroon); 
+            color: white; 
+            font-weight: 600; 
+            border: none; 
+            cursor: pointer; 
+            font-family: 'Poppins', sans-serif; 
+            transition: all 0.3s ease; 
+            font-size: 1rem;
+        }
+        .dropdown-content { 
+            display: none; 
+            position: absolute; 
+            right: 0; 
+            top: 100%; 
+            background-color: white; 
+            min-width: 220px; 
+            margin-top: 10px; 
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2); 
+            border-radius: 12px; 
+            z-index: 1000; 
+            overflow: hidden; 
+        }
+        .dropdown-content.is-active { display: block; }
+        .dropdown-content button { 
+            width: 100%; 
+            padding: 12px 16px; 
+            text-align: left; 
+            border: none; 
+            background: none; 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 0.9rem; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            transition: background 0.2s; 
+            color: #333; 
+        }
+        .dropdown-content button:hover { background-color: #f1f1f1; }
+        #logoutBtn { color: var(--danger) !important; font-weight: 700; }
+
+        /* ===== DARK MODE OVERRIDES ===== */
+        body.dark-mode { 
+            --bg: #121212; 
+            --card-bg: #1e1e1e; 
+            --nav-text: #ffffff; 
+            color: #e0e0e0; 
+        }
         body.dark-mode nav { background-color: #202020; }
+        body.dark-mode .nav-links li a { color: #ffffff; }
         body.dark-mode .dropdown-content { background-color: #242424; border: 1px solid #333; }
         body.dark-mode .dropdown-content button { color: #e6e6e6; }
         body.dark-mode .dropdown-content button:hover { background-color: #333; }
+        body.dark-mode .burger-menu span { background-color: #ffffff; }
         body.dark-mode .dev-card { background: #242424; border: 1px solid #333; }
 
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 850px) {
+            .burger-menu { display: flex; }
+            
+            nav .logo { font-size: 1.5rem; }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: var(--card-bg);
+                flex-direction: column;
+                padding: 100px 30px 30px;
+                gap: 25px;
+                box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+                transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1001;
+                margin-left: 0;
+            }
+            
+            .nav-links.show { left: 0; }
+        }
+
         /* ===== DEVELOPERS GRID ===== */
-        .dev-container { max-width: 1100px; margin: 60px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .dev-card { background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+        .dev-container { 
+            max-width: 1100px; 
+            margin: 60px auto; 
+            padding: 0 20px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+        .dev-card { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 20px; 
+            text-align: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            transition: transform 0.3s ease; 
+        }
         .dev-card:hover { transform: translateY(-5px); }
         .avatar { width: 100px; height: 100px; border-radius: 50%; background: #7a0c0c; margin: 0 auto 20px; }
         
         /* ===== MODAL ===== */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 20000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .modal-card { background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; }
-        body.dark-mode .modal-card { background: #242424; color: white; border: 1px solid #333; }
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.7); 
+            z-index: 20000; 
+            justify-content: center; 
+            align-items: center; 
+            backdrop-filter: blur(4px); 
+        }
+        .modal-card { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            max-width: 400px; 
+            width: 90%; 
+        }
+
+        .footer-credit { text-align: center; padding: 40px 20px; color: #888; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -55,17 +252,23 @@
 </div>
 
 <nav>
-    <a href="student_dashboard.html" class="logo">UB<span>igkas</span></a>
-    <ul>
+    <button class="burger-menu" id="burgerBtn">
+        <span></span><span></span><span></span>
+    </button>
+
+    <a href="teacher_panel.html" class="logo">UB<span>igkas</span></a>
+    
+    <ul class="nav-links" id="navLinks">
         <li><a href="teacher_panel.html">Dashboard</a></li>
         <li><a href="list.html">Class List</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
+
     <div class="nav-actions">
         <div class="dropdown">
             <button id="settingsBtn">Settings ⚙️</button>
-            <div class="dropdown-content">
+            <div class="dropdown-content" id="settingsDropdown">
                 <button id="darkModeBtn">🌙 Dark Mode</button>
                 <button id="textSizeBtn">🔍 Text Size: 100%</button>
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 5px 0;">
@@ -75,7 +278,7 @@
     </div>
 </nav>
 
-<h1 style="text-align:center; margin-top:50px; color:#7a0c0c;">The Minds Behind UBigkas</h1>
+<h1 style="text-align:center; margin-top:50px; color:rgb(204, 180, 45);">The Minds Behind UBigkas</h1>
 
 <div class="dev-container">
     <div class="dev-card">
@@ -106,11 +309,40 @@
     </div>
 </div>
 
+<footer class="footer-credit">
+    ©2026 University of Batangas – Lipa City
+</footer>
+
 <script type="module">
     import { auth } from "../firebase.js";
     import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    /* ===================== TEXT SIZE LOGIC ===================== */
+    // ---------------- NAVIGATION LOGIC ----------------
+    const burgerBtn = document.getElementById("burgerBtn");
+    const navLinks = document.getElementById("navLinks");
+    const settingsBtn = document.getElementById("settingsBtn");
+    const dropdownMenu = document.getElementById("settingsDropdown");
+
+    burgerBtn.onclick = (e) => { 
+        e.stopPropagation(); 
+        navLinks.classList.toggle("show"); 
+    };
+    
+    settingsBtn.onclick = (e) => { 
+        e.stopPropagation(); 
+        dropdownMenu.classList.toggle("is-active"); 
+    };
+
+    document.addEventListener('click', (e) => {
+        if (!settingsBtn.contains(e.target)) {
+            dropdownMenu.classList.remove("is-active");
+        }
+        if (!burgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
+            navLinks.classList.remove("show");
+        }
+    });
+
+    // ---------------- TEXT SIZE LOGIC ----------------
     const textSizeBtn = document.getElementById("textSizeBtn");
     const sizes = ["100%", "115%", "130%"];
     let currentSizeIndex = sizes.indexOf(localStorage.getItem("textSize") || "100%");
@@ -130,7 +362,7 @@
     };
     updateTextSize();
 
-    /* ===================== THEME SWITCHER ===================== */
+    // ---------------- THEME SWITCHER ----------------
     const darkModeBtn = document.getElementById("darkModeBtn");
     const dripContainer = document.getElementById("drip-container");
     const dripLayer = document.getElementById("dripLayer");
@@ -159,11 +391,16 @@
         updateThemeText(true);
     }
 
-    /* ===================== LOGOUT LOGIC ===================== */
+    // ---------------- LOGOUT LOGIC ----------------
     const logoutBtn = document.getElementById("logoutBtn");
     const logoutModal = document.getElementById("logoutModal");
 
-    logoutBtn.onclick = (e) => { e.stopPropagation(); logoutModal.style.display = "flex"; };
+    logoutBtn.onclick = (e) => { 
+        e.stopPropagation(); 
+        logoutModal.style.display = "flex"; 
+        dropdownMenu.classList.remove("is-active");
+    };
+    
     document.getElementById("cancelLogout").onclick = () => logoutModal.style.display = "none";
     
     document.getElementById("confirmLogout").onclick = async () => {
@@ -172,7 +409,9 @@
         window.location.href = "../index.html";
     };
 
-    window.onclick = (event) => { if (event.target == logoutModal) logoutModal.style.display = "none"; };
+    window.onclick = (event) => { 
+        if (event.target == logoutModal) logoutModal.style.display = "none"; 
+    };
 </script>
 </body>
 </html>
