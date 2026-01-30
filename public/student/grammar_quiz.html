@@ -378,6 +378,7 @@ body.dark-mode .close-btn:hover {
 }
 
 /* ===== QUIZ MODAL REFINEMENTS ===== */
+/* ===== QUIZ MODAL REFINEMENTS ===== */
 .modal {
     display: none; 
     position: fixed; 
@@ -388,24 +389,93 @@ body.dark-mode .close-btn:hover {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8); 
     backdrop-filter: blur(8px);
+    overflow-y: auto; /* Add this for modal scroll */
 }
+
 .modal-content {
     background: var(--card-bg); 
-    margin: 5% auto; 
+    margin: 5% auto 30px auto; /* Add bottom margin for scroll space */
     padding: 40px; 
     border-radius: 25px;
     max-width: 650px; 
     width: 90%; 
     position: relative; 
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    max-height: 85vh; /* Limit max height */
+    overflow-y: auto; /* Enable scroll inside modal */
 }
-#qProgress {
-    font-weight: 700; 
-    color: #d4af37; 
-    text-transform: uppercase; 
-    letter-spacing: 1px; 
-    font-size: 0.85rem; 
-    margin-bottom: 5px;
+
+/* Scrollbar styling for modal */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--maroon);
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #5a0909;
+}
+
+body.dark-mode .modal-content::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-mode .modal-content::-webkit-scrollbar-thumb {
+    background: var(--gold);
+}
+
+/* Adjust close button for scrollable modal */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: var(--maroon);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 11; /* Higher z-index to stay above content */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-height: 700px) {
+    .modal-content {
+        margin: 20px auto;
+        max-height: 90vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 30px 20px;
+        width: 95%;
+        margin: 10px auto;
+        max-height: 90vh;
+    }
+    
+    .close-btn {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
 }
 .sentence {
     font-size: 1.4rem; 
@@ -839,6 +909,7 @@ const nextBtn = document.getElementById("nextBtn");
 const scoreEl = document.getElementById("score");
 const instructionEl = document.getElementById("quizInstruction");
 const progressEl = document.getElementById("qProgress");
+const closeModalBtn = document.getElementById("closeModalBtn"); // Get close button
 
 const quizPaths = {
     vso: "assessment/sentence_structure.json",
@@ -858,6 +929,7 @@ const quizInstructions = {
     adverb: "Panuto: Piliin ang tamang pang-abay at wastong gamit ng 'ng' at 'nang'."
 };
 
+// ===== FIXED: PROPER EVENT LISTENERS FOR QUIZ BUTTONS =====
 document.querySelectorAll(".test-buttons button").forEach(btn => {
     btn.addEventListener("click", () => startQuiz(btn.dataset.file));
 });
@@ -1078,8 +1150,7 @@ async function setStudentStatus(uid, status) {
 }
 
 /* ===================== CHANGE PASSWORD LOGIC ===================== */
-const changePasswordBtn = document.getElementById("changePasswordBtn");
-const mobileChangePasswordBtn = document.getElementById("mobileChangePasswordBtn");
+// Note: The HTML doesn't have mobileChangePasswordBtn element, so I've removed references to it
 const changePasswordModal = document.getElementById("changePasswordModal");
 const cancelPasswordChange = document.getElementById("cancelPasswordChange");
 const changePasswordForm = document.getElementById("changePasswordForm");
@@ -1090,15 +1161,8 @@ function openChangePasswordModal() {
     mobileMenu.classList.remove("show");
 }
 
-changePasswordBtn.onclick = (e) => {
-    e.stopPropagation();
-    openChangePasswordModal();
-};
-
-mobileChangePasswordBtn.onclick = (e) => {
-    e.stopPropagation();
-    openChangePasswordModal();
-};
+// Note: The HTML doesn't have changePasswordBtn element either, so I've removed this
+// If you need this functionality, add the button to your HTML
 
 cancelPasswordChange.onclick = () => {
     changePasswordModal.style.display = "none";
@@ -1155,20 +1219,24 @@ changePasswordForm.onsubmit = async (e) => {
     }
 };
 
-// Enhanced close button functionality
-const closeModalBtn = document.getElementById("closeModalBtn");
-closeModalBtn.onclick = () => { 
-    modal.style.display = "none"; 
+/* ===================== FIXED: QUIZ MODAL BUTTONS LOGIC ===================== */
+// FIX 1: Close button functionality
+closeModalBtn.addEventListener('click', function() {
+    modal.style.display = "none";
     // Reset quiz state if user closes mid-quiz
     questions = [];
     score = 0;
     currentQuestionIndex = 0;
     answered = false;
-};
+});
 
-nextBtn.onclick = () => { currentQuestionIndex++; loadQuestion(); };
+// FIX 2: Next button functionality
+nextBtn.addEventListener('click', function() {
+    currentQuestionIndex++;
+    loadQuestion();
+});
 
-// Add escape key to close modal
+// FIX 3: Escape key to close modal
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.style.display === 'block') {
         modal.style.display = 'none';
@@ -1185,6 +1253,14 @@ window.onclick = (event) => {
     if (event.target == changePasswordModal) {
         changePasswordModal.style.display = "none";
         changePasswordForm.reset();
+    }
+    // Close quiz modal when clicking outside
+    if (event.target == modal) {
+        modal.style.display = "none";
+        questions = [];
+        score = 0;
+        currentQuestionIndex = 0;
+        answered = false;
     }
 };
 </script>
