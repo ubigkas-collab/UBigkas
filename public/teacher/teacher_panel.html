@@ -18,6 +18,7 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --text-scale: 100%;
             --danger: #d9534f;
+            --info: #1b2e4b;
         }
 
         body {
@@ -29,12 +30,26 @@
             transition: var(--transition);
         }
 
+        /* --- CUSTOM TOAST SYSTEM --- */
+        #toast-container { position: fixed; top: 25px; right: 25px; z-index: 99999; }
+        .toast {
+            min-width: 280px; padding: 16px 24px; margin-bottom: 12px;
+            border-radius: 8px; color: white; font-size: 0.9rem; font-weight: 500;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); display: flex; align-items: center;
+            animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            border-left: 5px solid var(--gold);
+        }
+        .toast.success { background-color: var(--maroon); } 
+        .toast.info { background-color: var(--info); }
+        .toast.error { background-color: #b32d2d; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { to { transform: translateX(100%); opacity: 0; } }
+
         /* ===== DRIP EFFECT ===== */
         #drip-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 10001;
+            pointer-events: none; z-index: 10001;
         }
         .drip-layer {
             position: absolute;
@@ -46,58 +61,26 @@
         #drip-container.active .drip-layer { top: 0; }
         .drip-light { background-color: #fdfdfd !important; }
 
-        /* ===== STANDARDIZED NAVIGATION ===== */
+        /* ===== NAVIGATION ===== */
         nav {
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            height: 80px;
-            background-color: var(--card-bg);
-            border-bottom: 3px solid var(--maroon);
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex; align-items: center; padding: 0 5%; height: 80px;
+            background-color: var(--card-bg); border-bottom: 3px solid var(--maroon);
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;
         }
 
         .burger-menu {
-            display: none; 
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 10px;
-            z-index: 1002;
-            margin-right: 15px;
+            display: none; flex-direction: column; gap: 5px; cursor: pointer;
+            background: none; border: none; padding: 10px; z-index: 1002; margin-right: 15px;
         }
-        .burger-menu span { 
-            width: 25px; height: 3px; 
-            background-color: var(--white); 
-            border-radius: 2px; 
-            transition: 0.3s; 
-        }
+        .burger-menu span { width: 25px; height: 3px; background-color: var(--nav-text); border-radius: 2px; transition: 0.3s; }
 
-        nav .logo { 
-            font-size: 1.8rem; font-weight: 800; 
-            text-decoration: none; color: var(--white); 
-            margin-right: 40px;
-        }
+        nav .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; color: var(--maroon); margin-right: 40px; }
         nav .logo span { color: var(--gold); }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            margin: 0; padding: 0;
-        }
-        .nav-links li a {
-            text-decoration: none; color: var(--nav-text);
-            font-weight: 500; transition: color 0.3s;
-        }
+        .nav-links { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
+        .nav-links li a { text-decoration: none; color: var(--nav-text); font-weight: 500; transition: color 0.3s; }
         .nav-links li a:hover { color: var(--gold); }
 
-        /* Settings Dropdown (Desktop) */
         .nav-actions { margin-left: auto; position: relative; display: flex; align-items: center; }
         .dropdown-content { 
             display: none; position: absolute; right: 0; top: 100%; 
@@ -123,10 +106,7 @@
         }
         .mobile-menu.show { left: 0; }
         .mobile-menu li a { display: block; padding: 15px 0; text-decoration: none; color: var(--nav-text); font-weight: 500; }
-        .mobile-menu button { 
-            width: 100%; padding: 12px; margin-top: 10px; text-align: left;
-            background: #f1f1f1; border: none; border-radius: 8px; font-family: inherit; cursor: pointer;
-        }
+        .mobile-menu button { width: 100%; padding: 12px; margin-top: 10px; text-align: left; background: #f1f1f1; border: none; border-radius: 8px; font-family: inherit; cursor: pointer; }
 
         @media (max-width: 850px) {
             .burger-menu { display: flex; }
@@ -150,7 +130,6 @@
         .form-group { margin-bottom: 20px; text-align: left; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--nav-text); }
         
-        /* Fixed Input/Select sizing */
         .form-group input, .form-group select { 
             width: 100%; padding: 12px; border-radius: 10px; 
             border: 1px solid #ddd; font-family: inherit; font-size: 0.95rem;
@@ -172,6 +151,7 @@
 </head>
 <body>
 
+<div id="toast-container"></div>
 <div id="drip-container">
     <div id="dripLayer" class="drip-layer"></div>
     <svg width="0" height="0"><defs><clipPath id="drip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 L1,0 L1,0.8 C0.9,0.95 0.85,0.7 0.75,0.85 C0.65,1 0.55,0.75 0.5,0.9 C0.45,0.75 0.35,1 0.25,0.85 C0.15,0.7 0.1,0.95 0,0.8 Z"></path></clipPath></defs></svg>
@@ -224,8 +204,8 @@
 
 <main class="dashboard-container">
     <div class="dashboard-card">
-        <h1 style="color: var(--white); margin-bottom: 15px;">Teacher Dashboard</h1>
-        <p style="margin-bottom: 30px;">Manage students, classes, and learning materials.</p>
+        <h1 style="color: var(--maroon); margin-bottom: 15px;">Teacher Dashboard</h1>
+        <p style="margin-bottom: 30px; color: var(--nav-text);">Manage students, classes, and learning materials.</p>
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
             <button class="btn btn-maroon" id="openStudentCardBtn">Add Student</button>
             <button class="btn btn-gold" id="openClassCardBtn">Create Class</button>
@@ -237,12 +217,14 @@
     <div class="modal-card">
         <h2 style="color: var(--gold); margin-bottom: 20px;">Add New Student</h2>
         <form id="studentForm">
-            <div class="form-group"><label>Full Name</label><input type="text" placeholder="Juan Dela Cruz" required></div>
-            <div class="form-group"><label>Email Address</label><input type="email" placeholder="1234567@ub.edu.ph" required></div>
-            <div class="form-group"><label>Temporary Password</label><input type="password" placeholder="••••••••" required></div>
+            <div class="form-group"><label>Full Name</label><input type="text" id="studentNameInput" placeholder="Juan Dela Cruz" required></div>
+            <div class="form-group"><label>Email Address</label><input type="email" id="studentEmail" placeholder="1234567@ub.edu.ph" required></div>
+            <div class="form-group"><label>Temporary Password</label><input type="password" id="studentPassword" placeholder="••••••••" required></div>
             <div class="form-group">
                 <label>Assigned Class</label>
-                <select required><option value="">Select Class</option></select>
+                <select id="classSelect" required>
+                    <option value="">Select Class</option>
+                </select>
             </div>
             <div style="display: flex; gap: 10px; margin-top: 30px;">
                 <button type="button" class="close-modal btn" style="flex: 1; background:#eee; color:#333;">Cancel</button>
@@ -258,7 +240,7 @@
         <form id="classForm">
             <div class="form-group">
                 <label>Class Name / Section</label>
-                <input type="text" placeholder="e.g. GRADE-10-A" required>
+                <input type="text" id="className" placeholder="e.g. GRADE-10-A" required>
             </div>
             <div style="display: flex; gap: 10px; margin-top: 30px;">
                 <button type="button" class="close-modal btn" style="flex: 1; background:#eee; color:#333;">Cancel</button>
@@ -270,29 +252,152 @@
 
 <footer class="footer-credit">©2026 University of Batangas – Lipa City</footer>
 
-<script type="module">
-    import { auth } from "../firebase.js";
-    import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script> (function(){ emailjs.init("vRoWpjpDgjKcQPN7C"); })(); </script>
 
+<script type="module">
+    import { auth, db } from "../firebase.js";
+    import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { doc, setDoc, serverTimestamp, collection, getDoc, onSnapshot, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    let teacherUID = null;
+
+    /* --- TOAST LOGIC --- */
+    function showToast(message, type = "info") {
+        const container = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = "fadeOut 0.5s ease forwards";
+            setTimeout(() => toast.remove(), 500);
+        }, 4000);
+    }
+
+    /* --- SECONDARY AUTH (To prevent teacher logout when creating student) --- */
+    const secondaryApp = initializeApp({
+        apiKey: "AIzaSyC7woa1g1tRQKoepK1m_CQfkyjfwqMcOmc",
+        authDomain: "ubigkas-2226b.firebaseapp.com",
+        projectId: "ubigkas-2226b",
+    }, "Secondary");
+    const secondaryAuth = getAuth(secondaryApp);
+
+    /* --- AUTH STATE OBSERVER --- */
+    onAuthStateChanged(auth, async user => {
+        if (!user) return window.location.href = "../index.html";
+        teacherUID = user.uid;
+        
+        // Verify teacher existence
+        const teacherDoc = await getDoc(doc(db, "teacher_accounts", teacherUID));
+        if (!teacherDoc.exists()) {
+            await signOut(auth);
+            window.location.href = "../index.html";
+            return;
+        }
+        listenForClasses();
+    });
+
+    /* --- FETCH CLASSES (REAL-TIME) --- */
+    function listenForClasses() {
+        if (!teacherUID) return;
+        const classesCol = collection(db, "teacher_accounts", teacherUID, "classes");
+        onSnapshot(classesCol, snap => {
+            const select = document.getElementById("classSelect");
+            select.innerHTML = '<option value="">Select Class</option>';
+            snap.forEach(docSnap => {
+                const opt = document.createElement("option");
+                opt.value = docSnap.id; 
+                opt.textContent = docSnap.data().name;
+                select.appendChild(opt);
+            });
+        });
+    }
+
+    /* --- CLASS CREATION LOGIC --- */
+    document.getElementById("classForm").onsubmit = async e => {
+        e.preventDefault();
+        const name = document.getElementById("className").value.trim().toUpperCase();
+        
+        try {
+            const classDocRef = doc(db, "teacher_accounts", teacherUID, "classes", name);
+            const classDoc = await getDoc(classDocRef);
+
+            if (classDoc.exists()) {
+                showToast("Class section already exists!", "error");
+                return;
+            }
+
+            await setDoc(classDocRef, { name, createdAt: serverTimestamp(), createdBy: teacherUID });
+            showToast("Class section created successfully!", "success");
+            closeAllModals();
+            e.target.reset();
+        } catch (err) { showToast(err.message, "error"); }
+    };
+
+    /* --- STUDENT CREATION LOGIC --- */
+    document.getElementById("studentForm").onsubmit = async e => {
+        e.preventDefault();
+        const name = document.getElementById("studentNameInput").value.trim();
+        const email = document.getElementById("studentEmail").value.trim().toLowerCase();
+        const password = document.getElementById("studentPassword").value;
+        const classSelect = document.getElementById("classSelect");
+
+        const ubEmailRegex = /^\d{7}@ub\.edu\.ph$/;
+        if (!ubEmailRegex.test(email)) {
+            showToast("Invalid format. Use 7 digits + @ub.edu.ph", "error");
+            return;
+        }
+
+        try {
+            // Check global duplication in students collection
+            const q = query(collection(db, "students"), where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+            if (!querySnapshot.empty) {
+                showToast("Account already exists with this email.", "error");
+                return;
+            }
+
+            // Create in Secondary Auth
+            const cred = await createUserWithEmailAndPassword(secondaryAuth, email, password);
+            
+            // Save to Firestore
+            await setDoc(doc(db, "students", cred.user.uid), {
+                uid: cred.user.uid, name, email, classId: classSelect.value, 
+                className: classSelect.options[classSelect.selectedIndex].text,
+                teacherUID, role: "student", createdAt: serverTimestamp()
+            });
+
+            // EmailJS
+            await emailjs.send("service_hxj7n1j", "template_wzxxy9g", {
+                student_name: name, student_email: email, student_password: password, class_name: classSelect.options[classSelect.selectedIndex].text
+            });
+
+            showToast("Student account created and email sent!", "success");
+            closeAllModals();
+            e.target.reset();
+        } catch (err) { 
+            showToast(err.message, "error"); 
+        }
+    };
+
+    /* --- UI & THEME CONTROLS --- */
     const burgerBtn = document.getElementById("burgerBtn");
     const mobileMenu = document.getElementById("mobileMenu");
     const settingsBtn = document.getElementById("settingsBtn");
     const settingsDropdown = document.getElementById("settingsDropdown");
+    const dripContainer = document.getElementById("drip-container");
+    const dripLayer = document.getElementById("dripLayer");
 
-    // Toggle Burger
     burgerBtn.onclick = (e) => { e.stopPropagation(); mobileMenu.classList.toggle("show"); };
-    // Toggle Settings
     settingsBtn.onclick = (e) => { e.stopPropagation(); settingsDropdown.classList.toggle("is-active"); };
 
-    // Close menus on outside click
     document.addEventListener('click', (e) => {
         if (!burgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) mobileMenu.classList.remove("show");
         if (!settingsBtn.contains(e.target)) settingsDropdown.classList.remove("is-active");
     });
 
-    // Unified Theme Logic
-    const dripContainer = document.getElementById("drip-container");
-    const dripLayer = document.getElementById("dripLayer");
     document.querySelectorAll('.theme-toggle').forEach(btn => {
         btn.onclick = () => {
             const isDark = document.body.classList.contains("dark-mode");
@@ -307,7 +412,6 @@
     });
     if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
 
-    // Text Size Logic
     const sizes = ["100%", "110%", "120%"];
     let sIdx = sizes.indexOf(localStorage.getItem("textSize") || "100%");
     document.querySelectorAll('.size-toggle').forEach(btn => {
@@ -318,7 +422,6 @@
         };
     });
 
-    // Modal Control
     const openModals = (id) => document.getElementById(id).style.display = "flex";
     const closeAllModals = () => document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = "none");
 
@@ -326,7 +429,6 @@
     document.getElementById("openClassCardBtn").onclick = () => openModals("classCard");
     document.querySelectorAll('.close-modal').forEach(btn => btn.onclick = closeAllModals);
 
-    // Logout
     document.querySelectorAll('.logout-trigger').forEach(btn => btn.onclick = () => openModals("logoutModal"));
     document.getElementById("cancelLogout").onclick = closeAllModals;
     document.getElementById("confirmLogout").onclick = async () => {
