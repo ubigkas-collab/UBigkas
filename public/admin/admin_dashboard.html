@@ -5,76 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | UBigkas</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
-    body { font-family: 'Poppins', sans-serif; padding: 30px; background: #f5f5f5; margin: 0; }
-    h1, h2 { color: #7a0c0c; margin-bottom: 20px; }
-    h1 { font-size: 1.8rem; }
+    body { font-family: 'Poppins', sans-serif; padding: 20px; background: #f5f5f5; margin: 0; color: #333; }
     
-    .section { background: #fff; padding: 20px; border-radius: 10px; margin-bottom: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    /* Header & Navigation */
+    .header-bar { 
+        display: flex; justify-content: space-between; align-items: center; 
+        margin-bottom: 30px; flex-wrap: wrap; gap: 15px;
+        background: #fff; padding: 15px 25px; border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    h1 { color: #7a0c0c; margin: 0; font-size: 1.5rem; }
+    .logout-btn { background: #7a0c0c; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+    .logout-btn:hover { background: #5c0909; transform: translateY(-2px); }
+
+    .section { background: #fff; padding: 20px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    h2 { color: #7a0c0c; font-size: 1.2rem; margin-top: 0; border-left: 5px solid #7a0c0c; padding-left: 12px; margin-bottom: 20px; }
     
-    /* Table Responsiveness */
-    .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; margin-bottom: 20px; min-width: 600px; }
-    th, td { padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: left; }
-    th { background: #7a0c0c; color: #fff; white-space: nowrap; }
-    tr:hover { background: #f9f9f9; }
+    /* Responsive Table Container */
+    .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; background: #fff; }
+    th, td { padding: 14px 15px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+    th { background: #7a0c0c; color: #fff; font-weight: 500; position: sticky; top: 0; }
+    tr:hover { background: #fcfcfc; }
     
-    button { padding: 8px 14px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 14px; margin-bottom: 5px; }
+    /* Action Buttons */
+    button { padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; font-size: 13px; }
     .approve { background: #28a745; color: white; margin-right: 5px; }
     .deny { background: #dc3545; color: white; }
-    .edit { background: #ffc107; color: #000; margin-right: 5px; }
+    .edit { background: #ffc107; color: #111; margin-right: 5px; }
     .delete { background: #dc3545; color: white; }
+    button:active { transform: scale(0.95); }
     
-    .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
-    .online { background-color: #28a745; box-shadow: 0 0 5px #28a745; }
-    .offline { background-color: #bbb; }
+    .status-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; }
+    .online { background: #28a745; box-shadow: 0 0 6px #28a745; }
+    .offline { background: #bbb; }
 
-    .class-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 30px; }
-    .class-btn { background: #7a0c0c; color: white; padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.3s; border: 2px solid transparent; font-size: 14px; }
-    .class-btn:hover { background: #5c0909; transform: translateY(-3px); }
-    .class-btn.active { border-color: #ffc107; background: #5c0909; }
+    /* Class Selection Grid */
+    .class-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-bottom: 25px; }
+    .class-btn { background: #fff; color: #7a0c0c; border: 2px solid #7a0c0c; padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; font-size: 14px; transition: 0.3s; }
+    .class-btn:hover { background: #fff5f5; }
+    .class-btn.active { background: #7a0c0c; color: white; box-shadow: 0 4px 10px rgba(122, 12, 12, 0.3); }
 
-    /* Custom Toast Notification */
+    /* Custom Toast */
     #customToast {
-        position: fixed; top: 20px; right: 20px; padding: 15px 25px;
-        border-radius: 8px; color: white; font-weight: 600; z-index: 2000;
-        transform: translateX(200%); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 80%;
+        position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(200%);
+        padding: 12px 25px; border-radius: 50px; color: white; font-weight: 600; z-index: 3000;
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        white-space: nowrap;
     }
-    #customToast.show { transform: translateX(0); }
+    #customToast.show { transform: translateX(-50%) translateY(0); }
     .toast-success { background: #28a745; }
     .toast-error { background: #dc3545; }
+    .toast-info { background: #7a0c0c; }
 
-    /* --- CUSTOM MODAL STYLES --- */
+    /* Custom Modal */
     .modal-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.5); display: none; align-items: center;
-        justify-content: center; z-index: 1500; backdrop-filter: blur(3px); padding: 20px;
-    }
-    .modal-content {
-        background: white; padding: 25px; border-radius: 15px;
-        width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        transform: scale(0.9); transition: 0.3s; box-sizing: border-box;
+        position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
+        display: none; align-items: center; justify-content: center; 
+        z-index: 2000; backdrop-filter: blur(5px); padding: 20px;
     }
     .modal-overlay.active { display: flex; }
-    .modal-overlay.active .modal-content { transform: scale(1); }
-    .modal-content h3 { color: #7a0c0c; margin-top: 0; font-size: 1.3rem; }
-    .modal-content label { font-size: 12px; font-weight: 600; color: #666; display: block; margin-top: 10px; }
-    .modal-content input {
-        width: 100%; padding: 12px; margin: 5px 0 15px 0; border: 1px solid #ddd;
-        border-radius: 8px; box-sizing: border-box; font-family: 'Poppins', sans-serif; font-size: 16px; /* Prevents iOS zoom */
+    .modal-content {
+        background: white; padding: 30px; border-radius: 18px;
+        width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        transform: scale(0.9); transition: 0.3s;
     }
-    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
-    .btn-cancel { background: #eee; color: #333; }
-    .btn-confirm { background: #7a0c0c; color: white; }
+    .modal-overlay.active .modal-content { transform: scale(1); }
+    .modal-content input {
+        width: 100%; padding: 14px; margin: 10px 0 20px 0; border: 1px solid #ddd;
+        border-radius: 10px; font-family: inherit; box-sizing: border-box; font-size: 16px;
+    }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 12px; }
+    .btn-cancel { background: #f0f0f0; color: #555; }
 
-    /* Mobile Viewpoint Adjustments */
+    /* Mobile Adaptations */
     @media (max-width: 600px) {
-        body { padding: 15px; }
-        h1 { font-size: 1.5rem; text-align: center; }
-        .section { padding: 15px; margin-bottom: 25px; }
-        .modal-content { padding: 20px; }
+        body { padding: 10px; }
+        .header-bar { padding: 15px; margin-bottom: 20px; }
+        h1 { font-size: 1.2rem; }
+        .section { padding: 15px; }
         .class-grid { grid-template-columns: repeat(2, 1fr); }
+        .modal-content { padding: 20px; }
     }
 </style>
 </head>
@@ -84,34 +97,35 @@
 
 <div class="modal-overlay" id="customModal">
     <div class="modal-content">
-        <h3 id="modalTitle">Edit Account</h3>
-        <p id="modalDescription" style="font-size: 14px; margin-bottom: 15px;"></p>
-        
-        <div id="inputContainer">
-            <label id="labelPrimary">Identifier</label>
-            <input type="text" id="modalInput" placeholder="Enter new value...">
-            
-            <div id="passwordFieldSection">
-                <label>Change Password (Optional)</label>
-                <input type="password" id="modalPasswordInput" placeholder="New password (min 6 chars)">
+        <h3 id="modalTitle" style="margin-top:0; color:#7a0c0c;">Account Action</h3>
+        <p id="modalDescription" style="font-size: 14px; color:#666;"></p>
+        <div id="modalInputContainer">
+            <label id="labelPrimary" style="font-size: 12px; font-weight:700; color:#999; text-transform:uppercase;">Identifier</label>
+            <input type="text" id="modalInput">
+            <div id="passwordSection" style="display:none;">
+                <label style="font-size: 12px; font-weight:700; color:#999; text-transform:uppercase;">New Password</label>
+                <input type="password" id="modalPasswordInput" placeholder="Unavailable (No Backend)">
+                <small style="color:#999; display:block; margin-top:5px;">Password resets require Cloud Functions.</small>
             </div>
         </div>
-
         <div class="modal-actions">
-            <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-            <button class="btn-confirm" id="modalConfirmBtn">Save Changes</button>
+            <button class="btn-cancel" onclick="closeModal(false)">Cancel</button>
+            <button id="modalConfirmBtn" class="approve">Proceed</button>
         </div>
     </div>
 </div>
 
-<h1>UBigkas System Administration</h1>
+<div class="header-bar">
+    <h1>UBigkas Administration</h1>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+</div>
 
 <div class="section">
-    <h2>Pending Teacher Accounts</h2>
+    <h2>Pending Teacher Approvals</h2>
     <div class="table-container">
-        <table id="pendingTeachersTable">
+        <table id="pendingTable">
             <thead>
-                <tr><th>Email</th><th>Teacher ID</th><th>Created At</th><th>Actions</th></tr>
+                <tr><th>Email</th><th>ID</th><th>Date</th><th>Actions</th></tr>
             </thead>
             <tbody></tbody>
         </table>
@@ -119,7 +133,7 @@
 </div>
 
 <div class="section">
-    <h2>Teachers Directory</h2>
+    <h2>Registered Teachers</h2>
     <div class="table-container">
         <table id="teachersTable">
             <thead>
@@ -131,14 +145,14 @@
 </div>
 
 <div class="section">
-    <h2>Class Directory (Students)</h2>
+    <h2>Student Directories</h2>
     <div id="classButtons" class="class-grid"></div>
-    <div id="studentListContainer" style="display:none;">
-        <h3 id="selectedClassName" style="color: #7a0c0c;"></h3>
+    <div id="studentListContainer" style="display:none; border-top: 2px solid #f5f5f5; padding-top: 25px;">
+        <h3 id="selectedClassName" style="color:#7a0c0c; font-size: 1.1rem; margin-bottom: 15px;"></h3>
         <div class="table-container">
             <table id="studentsTable">
                 <thead>
-                    <tr><th>Name</th><th>Status</th><th>Last Online</th><th>Actions</th></tr>
+                    <tr><th>Name/Email</th><th>Status</th><th>Last Seen</th><th>Actions</th></tr>
                 </thead>
                 <tbody></tbody>
             </table>
@@ -147,15 +161,15 @@
 </div>
 
 <script type="module">
-import { db } from "../firebase.js";
+import { db, auth } from "../firebase.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { collection, setDoc, doc, deleteDoc, updateDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js";
 
-const functions = getFunctions();
-const deleteUserAuth = httpsCallable(functions, 'deleteUserAuth');
-const updateUserAuth = httpsCallable(functions, 'updateUserAuth');
+// --- INITIALIZE EMAILJS ---
+// Replace "YOUR_PUBLIC_KEY" with your actual key from EmailJS Dashboard
+emailjs.init("vRoWpjpDgjKcQPN7C");
 
-// --- NOTIFICATION ---
+// --- FEEDBACK ---
 function showNotify(msg, type = 'success') {
     const toast = document.getElementById("customToast");
     toast.textContent = msg;
@@ -163,171 +177,199 @@ function showNotify(msg, type = 'success') {
     setTimeout(() => { toast.classList.remove("show"); }, 3000);
 }
 
-// --- CUSTOM MODAL LOGIC ---
-const modal = document.getElementById('customModal');
-const modalInput = document.getElementById('modalInput');
-const modalPasswordInput = document.getElementById('modalPasswordInput');
-const modalConfirmBtn = document.getElementById('modalConfirmBtn');
-const passwordSection = document.getElementById('passwordFieldSection');
+// --- LOGOUT ---
+document.getElementById('logoutBtn').onclick = async () => {
+    try {
+        await signOut(auth);
+        window.location.href = "../index.html"; 
+    } catch (e) { showNotify("Logout failed", "error"); }
+};
 
-window.openForm = (title, desc, currentVal, showPassword = false) => {
-    return new Promise((resolve) => {
+// --- MODAL CONTROLLER ---
+let activeModalResolve = null;
+const modal = document.getElementById('customModal');
+
+window.openForm = (title, desc, currentVal, showPass = false) => {
+    return new Promise(resolve => {
+        activeModalResolve = resolve;
         document.getElementById('modalTitle').textContent = title;
         document.getElementById('modalDescription').textContent = desc;
-        modalInput.value = currentVal || "";
-        modalPasswordInput.value = "";
+        document.getElementById('modalInput').value = currentVal || "";
+        document.getElementById('modalPasswordInput').value = "";
         
-        modalInput.style.display = currentVal === null ? "none" : "block";
-        document.getElementById('labelPrimary').style.display = currentVal === null ? "none" : "block";
-        passwordSection.style.display = showPassword ? "block" : "none";
+        const isDeleteMode = currentVal === null;
+        document.getElementById('modalInput').style.display = isDeleteMode ? 'none' : 'block';
+        document.getElementById('labelPrimary').style.display = isDeleteMode ? 'none' : 'block';
+        document.getElementById('passwordSection').style.display = 'none';
         
+        const confirmBtn = document.getElementById('modalConfirmBtn');
+        confirmBtn.textContent = isDeleteMode ? "Confirm Delete" : "Save Changes";
+        confirmBtn.className = isDeleteMode ? "deny" : "approve";
+
         modal.classList.add('active');
         
-        modalConfirmBtn.onclick = () => {
-            const result = {
-                primary: modalInput.value,
-                password: modalPasswordInput.value
+        confirmBtn.onclick = () => {
+            const data = { 
+                primary: document.getElementById('modalInput').value, 
+                confirmed: true 
             };
-            closeModal();
-            resolve(result);
+            modal.classList.remove('active');
+            resolve(data);
         };
     });
 };
 
 window.closeModal = () => {
     modal.classList.remove('active');
+    if(activeModalResolve) activeModalResolve(null);
 };
 
-// --- PENDING TEACHERS ---
-onSnapshot(collection(db, "pending_teacher_accounts"), (snap) => {
-    const tbody = document.querySelector("#pendingTeachersTable tbody");
-    tbody.innerHTML = "";
-    snap.forEach(docSnap => {
-        const data = docSnap.data();
+// --- EMAIL NOTIFICATION LOGIC ---
+async function sendApprovalEmail(recipientEmail) {
+    const serviceID = "service_hxj7n1j";    // Replace with your EmailJS Service ID
+    const templateID = "template_66qiwza";  // Replace with your EmailJS Template ID
+
+    const templateParams = {
+        teacher_email: recipientEmail,
+        message: "Your teacher account for UBigkas has been approved. You can now log in to your dashboard."
+    };
+
+    try {
+        await emailjs.send(serviceID, templateID, templateParams);
+        console.log("Email notification sent to " + recipientEmail);
+    } catch (error) {
+        console.error("Failed to send email:", error);
+        // We don't alert the user here so it doesn't interrupt the dashboard flow
+    }
+}
+
+// --- CORE ACTIONS ---
+window.handleDelete = async (col, id) => {
+    const res = await openForm("Delete Account", "Warning: This only removes the data from the database, not the login account.", null);
+    if (!res || !res.confirmed) return;
+
+    try {
+        showNotify("Deleting from Database...", "info");
+        await deleteDoc(doc(db, col, id));
+        showNotify("Data deleted successfully", "success");
+    } catch (e) { 
+        console.error(e);
+        showNotify("Error: " + e.message, "error"); 
+    }
+};
+
+window.handleEdit = async (col, id, current) => {
+    const res = await openForm("Edit Profile", "Update account identifier.", current, false);
+    if (!res || !res.confirmed) return;
+
+    try {
+        showNotify("Updating Database...", "info");
+        const fieldName = col === 'students' ? 'name' : 'email';
+        
+        if (res.primary && res.primary !== current) {
+            await updateDoc(doc(db, col, id), { [fieldName]: res.primary });
+        }
+        
+        showNotify("Database profile updated!");
+    } catch (e) { showNotify(e.message, "error"); }
+};
+
+// --- DATA LISTENERS ---
+onSnapshot(collection(db, "pending_teacher_accounts"), snap => {
+    const b = document.querySelector("#pendingTable tbody"); b.innerHTML = "";
+    snap.forEach(d => {
+        const data = d.data();
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${data.email}</td><td>${data.teacherId}</td>
-            <td>${data.createdAt?.toDate()?.toLocaleString() || "-"}</td>
-            <td>
-                <button class="approve">✔</button>
-                <button class="deny">✖</button>
-            </td>
+            <td>${data.createdAt?.toDate()?.toLocaleDateString() || '-'}</td>
+            <td><button class="approve">Approve</button><button class="deny">Deny</button></td>
         `;
         tr.querySelector(".approve").onclick = async () => {
             try {
-                await setDoc(doc(db, "teacher_accounts", docSnap.id), {
-                    email: data.email, teacherId: data.teacherId, role: "teacher", status: "offline", createdAt: serverTimestamp()
+                showNotify("Approving & Sending Email...", "info");
+                
+                // 1. Move data to registered accounts
+                await setDoc(doc(db, "teacher_accounts", d.id), { 
+                    email: data.email, 
+                    teacherId: data.teacherId, 
+                    status: "offline", 
+                    createdAt: serverTimestamp() 
                 });
-                await deleteDoc(doc(db, "pending_teacher_accounts", docSnap.id));
-                showNotify("Approved!");
-            } catch (e) { showNotify("Error", "error"); }
-        };
-        tr.querySelector(".deny").onclick = async () => {
-            const confirmed = await openForm("Deny Account", "Are you sure you want to deny this request?", null, false);
-            if(confirmed) {
-                await deleteDoc(doc(db, "pending_teacher_accounts", docSnap.id));
-                showNotify("Request Denied", "error");
+                
+                // 2. Remove from pending
+                await deleteDoc(doc(db, "pending_teacher_accounts", d.id));
+                
+                // 3. Trigger Email Notification
+                await sendApprovalEmail(data.email);
+                
+                showNotify("Teacher Approved & Notified");
+            } catch (err) {
+                showNotify("Error during approval", "error");
             }
-        }
-        tbody.appendChild(tr);
+        };
+        tr.querySelector(".deny").onclick = () => handleDelete("pending_teacher_accounts", d.id);
+        b.appendChild(tr);
     });
 });
 
-// --- TEACHERS & STUDENTS DIRECTORY ---
-let allStudents = [];
-onSnapshot(collection(db, "teacher_accounts"), (snap) => {
-    const tbody = document.querySelector("#teachersTable tbody");
-    tbody.innerHTML = "";
+onSnapshot(collection(db, "teacher_accounts"), snap => {
+    const b = document.querySelector("#teachersTable tbody"); b.innerHTML = "";
     snap.forEach(d => {
-        const user = d.data();
+        const u = d.data();
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${user.email}</td>
-            <td><span class="status-dot ${user.status === 'online' ? 'online' : 'offline'}"></span>${user.status || 'offline'}</td>
-            <td>
-                <button class="edit" onclick="handleEdit('teacher_accounts', '${d.id}', '${user.email}')">Edit</button>
-                <button class="delete" onclick="handleDelete('teacher_accounts', '${d.id}')">Delete</button>
-            </td>
+            <td>${u.email}</td>
+            <td><span class="status-dot ${u.status === 'online' ? 'online' : 'offline'}"></span>${u.status || 'offline'}</td>
+            <td><button class="edit">Edit</button><button class="delete">Delete</button></td>
         `;
-        tbody.appendChild(tr);
+        tr.querySelector(".edit").onclick = () => handleEdit("teacher_accounts", d.id, u.email);
+        tr.querySelector(".delete").onclick = () => handleDelete("teacher_accounts", d.id);
+        b.appendChild(tr);
     });
 });
 
-onSnapshot(collection(db, "students"), (snap) => {
-    allStudents = [];
-    const classes = new Set();
-    snap.forEach(d => {
-        const data = d.data();
-        allStudents.push({ id: d.id, ...data });
-        if (data.classId) classes.add(data.classId);
+let studentCache = [];
+onSnapshot(collection(db, "students"), snap => {
+    studentCache = []; const classSet = new Set();
+    snap.forEach(d => { 
+        const data = d.data(); 
+        studentCache.push({id: d.id, ...data}); 
+        if(data.classId) classSet.add(data.classId); 
     });
-    const btnGrid = document.getElementById("classButtons");
-    btnGrid.innerHTML = "";
-    classes.forEach(c => {
-        const btn = document.createElement("div");
-        btn.className = "class-btn"; btn.textContent = c;
-        btn.onclick = () => renderStudentList(c, btn);
-        btnGrid.appendChild(btn);
+    
+    const grid = document.getElementById("classButtons"); grid.innerHTML = "";
+    classSet.forEach(className => {
+        const btn = document.createElement("div"); btn.className = "class-btn"; btn.textContent = className;
+        btn.onclick = () => renderStudents(className, btn);
+        grid.appendChild(btn);
     });
 });
 
-function renderStudentList(className, btn) {
+function renderStudents(cName, btnElement) {
     document.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    btnElement.classList.add('active');
+    
     const container = document.getElementById("studentListContainer");
-    const tbody = document.querySelector("#studentsTable tbody");
     container.style.display = "block";
-    document.getElementById("selectedClassName").textContent = "Class: " + className;
+    document.getElementById("selectedClassName").textContent = "Viewing Class: " + cName;
+    
+    const tbody = document.querySelector("#studentsTable tbody");
     tbody.innerHTML = "";
-    allStudents.filter(s => s.classId === className).forEach(s => {
+    
+    studentCache.filter(s => s.classId === cName).forEach(s => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${s.name || s.email}</td>
             <td><span class="status-dot ${s.status === 'online' ? 'online' : 'offline'}"></span>${s.status || 'offline'}</td>
-            <td>${s.lastSeen?.toDate()?.toLocaleString() || "Never"}</td>
-            <td>
-                <button class="edit" onclick="handleEdit('students', '${s.id}', '${s.name || s.email}')">Edit</button>
-                <button class="delete" onclick="handleDelete('students', '${s.id}')">Delete</button>
-            </td>
+            <td>${s.lastSeen?.toDate()?.toLocaleString() || 'Never'}</td>
+            <td><button class="edit">Edit</button><button class="delete">Delete</button></td>
         `;
+        tr.querySelector(".edit").onclick = () => handleEdit("students", s.id, s.name || s.email);
+        tr.querySelector(".delete").onclick = () => handleDelete("students", s.id);
         tbody.appendChild(tr);
     });
 }
-
-// --- GLOBAL ACTIONS ---
-window.handleEdit = async (col, id, current) => {
-    const formResult = await openForm("Edit Account", "Update profile details or change password.", current, true);
-    
-    if (!formResult.primary && !formResult.password) return;
-
-    try {
-        if (formResult.primary && formResult.primary !== current) {
-            const field = col === 'students' ? 'name' : 'email';
-            await updateDoc(doc(db, col, id), { [field]: formResult.primary });
-            if (col === 'teacher_accounts') await updateUserAuth({ uid: id, email: formResult.primary });
-        }
-
-        if (formResult.password) {
-            if (formResult.password.length < 6) return showNotify("Password too short!", "error");
-            await updateUserAuth({ uid: id, password: formResult.password });
-        }
-
-        showNotify("Account updated successfully!");
-    } catch (e) { 
-        console.error(e);
-        showNotify("Update failed", "error"); 
-    }
-};
-
-window.handleDelete = async (col, id) => {
-    const confirmed = await openForm("Confirm Deletion", "This will permanently remove the account from the system.", null, false);
-    if (!confirmed) return;
-    try {
-        await deleteUserAuth({ uid: id });
-        await deleteDoc(doc(db, col, id));
-        showNotify("Account Deleted!", "success");
-    } catch (e) { showNotify("Error deleting account", "error"); }
-};
 </script>
 </body>
 </html>
